@@ -32,7 +32,7 @@ export function CTASection() {
   const { t } = useLanguage()
 
   return (
-    <section ref={ref} className="py-24 md:py-32 relative overflow-hidden">
+    <section ref={ref} className="py-20 md:py-24 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-accent/5 to-background" />
       
@@ -46,8 +46,15 @@ export function CTASection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
+          <div className="flex items-center gap-4 md:gap-6 mb-6">
+            <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
+              Hablemos
+            </span>
+            <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
+            <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+          </div>
           {/* Available badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-7">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
@@ -62,7 +69,7 @@ export function CTASection() {
           >
             {t("cta.title")}
           </h2>
-          <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
+          <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
             {t("cta.subtitle")}
           </p>
 
@@ -84,7 +91,7 @@ export function CTASection() {
 
         {/* Contact options */}
         <div
-          className={`mt-20 grid md:grid-cols-3 gap-6 transition-all duration-700 delay-300 ${
+          className={`mt-16 grid md:grid-cols-3 gap-6 transition-all duration-700 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >

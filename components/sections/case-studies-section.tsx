@@ -41,15 +41,22 @@ export function CaseStudiesSection() {
   const { t } = useLanguage()
 
   return (
-    <section ref={ref} className="py-20 md:py-28 relative overflow-hidden">
+    <section ref={ref} className="py-18 md:py-24 relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div
-          className={`flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-12 md:mb-16 transition-all duration-700 ${
+          className={`flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-10 md:mb-12 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           <div>
+            <div className="flex items-center gap-4 md:gap-6 mb-5">
+              <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
+                Casos destacados
+              </span>
+              <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
+              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+            </div>
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 md:mb-4 text-balance"
               style={{ fontFamily: 'var(--font-display)' }}

@@ -1,8 +1,10 @@
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/sections/hero-section"
-import { FeaturesSection } from "@/components/sections/features-section"
+import { CompanyIntroSection } from "@/components/sections/company-intro-section"
 import { StatsSection } from "@/components/sections/stats-section"
 import { CaseStudiesSection } from "@/components/sections/case-studies-section"
+import { ServicesPreviewSection } from "@/components/sections/services-preview-section"
+import { TechnologiesPreviewSection } from "@/components/sections/technologies-preview-section"
 import { StrategySection } from "@/components/sections/strategy-section"
 import { TeamSection } from "@/components/sections/team-section"
 import { PartnersSection } from "@/components/sections/partners-section"
@@ -15,12 +17,14 @@ export default function Home() {
     <main className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navigation />
       <HeroSection />
-      <FeaturesSection />
-      <StatsSection />
+      <CompanyIntroSection />
+      <ServicesPreviewSection />
       <CaseStudiesSection />
+      <TechnologiesPreviewSection />
       <StrategySection />
       <TeamSection />
       <PartnersSection />
+      <StatsSection />
       <CTASection />
       <Footer />
       <FloatingContact />

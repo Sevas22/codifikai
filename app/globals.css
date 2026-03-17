@@ -409,6 +409,7 @@
   opacity: 1;
 }
 
+/* Premium studio background for transparent portraits */
 /* Mobile-first optimizations */
 @media (max-width: 767px) {
   /* Reduce animation complexity on mobile */

@@ -36,14 +36,21 @@ export function StatsSection() {
   const { t } = useLanguage()
 
   return (
-    <section ref={ref} className="py-24 md:py-32 relative overflow-hidden bg-secondary/30">
+    <section ref={ref} className="py-20 md:py-24 relative overflow-hidden bg-secondary/30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
         <div
-          className={`text-center mb-16 transition-all duration-700 ${
+          className={`text-center mb-12 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
+          <div className="flex items-center gap-4 md:gap-6 mb-5">
+            <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
+              Resultados y confianza
+            </span>
+            <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
+            <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+          </div>
           <h2
             className="text-3xl md:text-4xl font-bold text-foreground mb-4"
             style={{ fontFamily: 'var(--font-display)' }}
@@ -57,7 +64,7 @@ export function StatsSection() {
 
         {/* Stats grid */}
         <div
-          className={`grid grid-cols-2 md:grid-cols-4 gap-8 mb-20 transition-all duration-700 delay-200 ${
+          className={`grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-16 transition-all duration-700 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
