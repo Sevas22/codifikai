@@ -10,15 +10,17 @@ const team = [
     name: "Jhoan Gomez",
     role: "CEO & Founder",
     image: "/images/team/jhoan-gomez.png",
-    bio: "Lidera la visión de Codifikai con foco en crecimiento, ejecución y soluciones digitales alineadas al negocio.",
+    bioKey: "team.jhoanBio",
     href: "/about#jhoan-gomez",
+    objectPosition: "center",
   },
   {
     name: "Jhon Ariza",
     role: "Co-Founder & Strategy Director",
     image: "/images/team/jhon-ariza.png",
-    bio: "Impulsa la estrategia, la expansión comercial y la dirección de iniciativas con impacto real y sostenible.",
+    bioKey: "team.jhonBio",
     href: "/about#jhon-ariza",
+    objectPosition: "top center",
   },
 ]
 
@@ -37,7 +39,7 @@ export function TeamSection() {
         >
           <div className="flex items-center gap-4 md:gap-6 mb-5">
             <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-              Liderazgo
+              {t("team.label")}
             </span>
             <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
             <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
@@ -70,6 +72,7 @@ export function TeamSection() {
                   alt={member.name}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  style={{ objectPosition: member.objectPosition ?? "center" }}
                   sizes="(max-width: 768px) 100vw, 320px"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/75 to-transparent p-4 text-left">
@@ -91,9 +94,9 @@ export function TeamSection() {
                 {member.name}
               </h3>
               <p className="text-accent text-sm font-medium mb-2">{member.role}</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">{member.bio}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{t(member.bioKey)}</p>
               <span className="inline-flex mt-4 text-sm font-medium text-accent group-hover:text-accent/80 transition-colors">
-                Ver perfil
+                {t("team.viewProfile")}
               </span>
             </Link>
           ))}

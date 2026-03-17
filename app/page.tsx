@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/sections/hero-section"
 import { CompanyIntroSection } from "@/components/sections/company-intro-section"
 import { StatsSection } from "@/components/sections/stats-section"
 import { CaseStudiesSection } from "@/components/sections/case-studies-section"
+import { ExportGlobeSection } from "@/components/sections/export-globe-wrapper"
 import { ServicesPreviewSection } from "@/components/sections/services-preview-section"
 import { TechnologiesPreviewSection } from "@/components/sections/technologies-preview-section"
 import { StrategySection } from "@/components/sections/strategy-section"
@@ -20,6 +21,7 @@ export default function Home() {
       <CompanyIntroSection />
       <ServicesPreviewSection />
       <CaseStudiesSection />
+      <ExportGlobeSection />
       <TechnologiesPreviewSection />
       <StrategySection />
       <TeamSection />

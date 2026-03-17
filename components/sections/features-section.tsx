@@ -5,25 +5,14 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 const features = [
-  {
-    icon: Lightbulb,
-    titleKey: "Estrategia",
-    descKey: "Diseñamos soluciones personalizadas basadas en análisis profundo de tu negocio y objetivos.",
-  },
-  {
-    icon: Target,
-    titleKey: "Planificación",
-    descKey: "Metodologías ágiles y roadmaps claros para ejecutar proyectos de forma eficiente.",
-  },
-  {
-    icon: TrendingUp,
-    titleKey: "Crecimiento",
-    descKey: "Soluciones escalables que evolucionan con tu empresa y generan resultados medibles.",
-  },
+  { icon: Lightbulb, titleKey: "features.strategy", descKey: "features.strategyDesc" },
+  { icon: Target, titleKey: "features.planning", descKey: "features.planningDesc" },
+  { icon: TrendingUp, titleKey: "features.growth", descKey: "features.growthDesc" },
 ]
 
 export function FeaturesSection() {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.2 })
+  const { t } = useLanguage()
 
   return (
     <section ref={ref} className="py-24 md:py-32 relative overflow-hidden">
@@ -52,10 +41,10 @@ export function FeaturesSection() {
                   className="text-xl font-semibold text-foreground mb-3"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  {feature.titleKey}
+                  {t(feature.titleKey)}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  {feature.descKey}
+                  {t(feature.descKey)}
                 </p>
 
                 {/* Hover line */}

@@ -44,6 +44,7 @@ export function Navigation() {
     { href: "/", label: t("nav.home") },
     { href: "/about", label: t("nav.about") },
     { href: "/services", label: t("nav.services") },
+    { href: "/casos-de-exito", label: t("nav.cases") },
   ]
 
   const isActive = (href: string) => {

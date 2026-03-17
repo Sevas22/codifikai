@@ -4,22 +4,22 @@ import Link from "next/link"
 import { Github, Linkedin, Twitter, Instagram } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
 
-const footerLinks = {
+const getFooterLinks = (t: (key: string) => string) => ({
   services: [
-    { label: "Webs AI", href: "/services#web" },
-    { label: "Apps AI", href: "/services#apps" },
-    { label: "Software AI", href: "/services#software" },
-    { label: "Marketing AI", href: "/services#marketing" },
-    { label: "Automatización", href: "/services#automation" },
+    { label: t("footer.servicesWeb"), href: "/services#web" },
+    { label: t("footer.servicesApps"), href: "/services#apps" },
+    { label: t("footer.servicesSoftware"), href: "/services#software" },
+    { label: t("footer.servicesMarketing"), href: "/services#marketing" },
+    { label: t("footer.servicesAutomation"), href: "/services#automation" },
   ],
   company: [
-    { label: "Nosotros", href: "/about" },
-    { label: "Casos de éxito", href: "/cases" },
-    { label: "Blog", href: "/blog" },
-    { label: "Carreras", href: "/careers" },
-    { label: "Contacto", href: "/contact" },
+    { label: t("footer.companyAbout"), href: "/about" },
+    { label: t("footer.companyCases"), href: "/casos-de-exito" },
+    { label: t("footer.companyBlog"), href: "/blog" },
+    { label: t("footer.companyCareers"), href: "/careers" },
+    { label: t("footer.companyContact"), href: "/contact" },
   ],
-}
+})
 
 const socialLinks = [
   { icon: Linkedin, href: "#", label: "LinkedIn" },
@@ -31,6 +31,7 @@ const socialLinks = [
 export function Footer() {
   const { t } = useLanguage()
   const currentYear = new Date().getFullYear()
+  const footerLinks = getFooterLinks(t)
 
   return (
     <footer className="relative border-t border-border/50 bg-secondary/20">

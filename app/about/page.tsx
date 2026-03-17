@@ -10,51 +10,22 @@ import { FloatingContact } from "@/components/floating-contact"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
-const benefits = [
-  "Equipo multidisciplinario con +50 años de experiencia combinada",
-  "Metodologías ágiles adaptadas a cada proyecto",
-  "Soporte continuo 24/7 post-implementación",
-  "Garantía de satisfacción en todos los proyectos",
-]
+const benefitsKeys = ["about.benefit1", "about.benefit2", "about.benefit3", "about.benefit4"]
 
-const technologies = [
-  {
-    title: "Tecnologías Frontend",
-    score: "93%",
-    description:
-      "Diseñamos interfaces digitales modernas, rápidas y orientadas a conversión. Desde experiencias web corporativas hasta productos interactivos, trabajamos el frontend con foco en rendimiento, claridad visual y experiencia de usuario.",
-    stack: "React.js - Next.js - Angular - Flutter",
-  },
-  {
-    title: "Tecnologías Backend",
-    score: "96%",
-    description:
-      "Construimos bases sólidas para productos escalables y seguros. Desarrollamos arquitecturas backend preparadas para integraciones, automatización de procesos y operación estable en entornos empresariales.",
-    stack: "Node.js - PHP - .NET - APIs REST",
-  },
-  {
-    title: "Ciencia de Datos",
-    score: "82%",
-    description:
-      "Convertimos datos en decisiones más inteligentes. Diseñamos flujos de análisis, limpieza y explotación de información que permiten descubrir oportunidades, optimizar procesos y respaldar estrategias con evidencia.",
-    stack: "Python - Pandas - ETL - Analítica predictiva",
-  },
-  {
-    title: "Gestores de Contenido",
-    score: "86%",
-    description:
-      "Implementamos plataformas de contenido pensadas para equipos que necesitan autonomía, organización y escalabilidad. Optimizamos la administración digital para que la operación diaria sea más eficiente y profesional.",
-    stack: "WordPress - Headless CMS - Webflow - Shopify",
-  },
+const technologiesConfig = [
+  { titleKey: "about.techFrontendTitle", score: "93%", descKey: "about.techFrontendDesc", stackKey: "about.techFrontendStack" },
+  { titleKey: "about.techBackendTitle", score: "96%", descKey: "about.techBackendDesc", stackKey: "about.techBackendStack" },
+  { titleKey: "about.techDataTitle", score: "82%", descKey: "about.techDataDesc", stackKey: "about.techDataStack" },
+  { titleKey: "about.techCmsTitle", score: "86%", descKey: "about.techCmsDesc", stackKey: "about.techCmsStack" },
 ]
 
 const founders = [
   {
     name: "Jhoan Gomez",
     role: "CEO & Founder",
-    label: "Visión, estrategia y crecimiento",
-    bio: "Como CEO & Founder de Codifikai, lidero una visión enfocada en construir soluciones digitales que conecten innovación, ejecución y resultados de negocio. Creo firmemente que la tecnología debe sentirse cercana, útil y capaz de impulsar una evolución real para cada empresa que confía en nosotros.",
-    quote: "No construimos solo software: construimos confianza, evolución y oportunidades reales de crecimiento.",
+    labelKey: "about.founder1Label",
+    bioKey: "about.founder1Bio",
+    quoteKey: "about.founder1Quote",
     image: "/images/team/jhoan-gomez.png",
     initials: "JG",
     imageSide: "left",
@@ -64,13 +35,13 @@ const founders = [
   {
     name: "Jhon Ariza",
     role: "Co-Founder & Strategy Director",
-    label: "Estrategia, expansión y dirección comercial",
-    bio: "Como Co-Founder & Strategy Director de Codifikai, impulso una visión enfocada en el crecimiento sostenible, la claridad estratégica y la construcción de relaciones sólidas con cada cliente. Mi enfoque está en alinear negocio, posicionamiento y ejecución para que cada solución genere impacto real y fortalezca la evolución de la marca.",
-    quote: "Una estrategia bien dirigida convierte las ideas en oportunidades y las oportunidades en crecimiento real.",
+    labelKey: "about.founder2Label",
+    bioKey: "about.founder2Bio",
+    quoteKey: "about.founder2Quote",
     image: "/images/team/jhon-ariza.png",
     initials: "JA",
     imageSide: "left",
-    objectPosition: "center",
+    objectPosition: "top center",
     imageClassName: "object-cover",
   },
 ]
@@ -100,19 +71,17 @@ export default function AboutPage() {
             }`}
           >
             <div className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
-              Agencia de desarrollo de software e IA en Colombia
+              {t("about.heroBadge")}
             </div>
             <h1
               className="mt-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground text-balance"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              Una fábrica de{" "}
-              <span className="text-gradient">transformación digital</span>
+              {t("about.heroTitle")}{" "}
+              <span className="text-gradient">{t("about.heroTitleHighlight")}</span>
             </h1>
             <p className="mx-auto mt-8 max-w-3xl text-lg md:text-xl leading-relaxed text-muted-foreground">
-              En Codifikai entendemos que las empresas necesitan algo más que tecnología: necesitan
-              visión, ejecución y soluciones que impulsen crecimiento real. Diseñamos experiencias
-              digitales que conectan estrategia, producto y resultados.
+              {t("about.heroDesc")}
             </p>
           </div>
 
@@ -123,7 +92,7 @@ export default function AboutPage() {
           >
             <div className="flex items-center gap-4 md:gap-6">
               <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                Nuestra esencia
+                {t("about.essence")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
               <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
@@ -148,25 +117,14 @@ export default function AboutPage() {
                   className="text-2xl md:text-3xl font-bold text-foreground"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  <span className="text-gradient">Historia</span>
+                  <span className="text-gradient">{t("about.history")}</span>
                 </h2>
               </div>
               <div className="h-px w-full bg-gradient-to-r from-accent/40 via-border to-transparent mb-6" />
               <div className="space-y-5 text-base md:text-lg leading-relaxed text-muted-foreground">
-                <p>
-                  Todo comenzó con una idea clara: las personas y las empresas necesitan socios
-                  tecnológicos capaces de evolucionar al ritmo del mercado y convertir los retos en
-                  oportunidades reales.
-                </p>
-                <p>
-                  Así nació Codifikai, con la intención de crear software, automatizaciones y
-                  soluciones digitales que no solo resuelvan una necesidad puntual, sino que también
-                  fortalezcan la visión de negocio de cada cliente.
-                </p>
-                <p>
-                  Nuestro enfoque combina estrategia, diseño y tecnología para construir experiencias
-                  modernas, funcionales y preparadas para escalar.
-                </p>
+                <p>{t("about.historyP1")}</p>
+                <p>{t("about.historyP2")}</p>
+                <p>{t("about.historyP3")}</p>
               </div>
             </div>
 
@@ -183,27 +141,20 @@ export default function AboutPage() {
                   className="text-2xl md:text-3xl font-bold text-foreground"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  <span className="text-gradient">Nuestra visión</span>
+                  <span className="text-gradient">{t("about.vision")}</span>
                 </h2>
               </div>
               <div className="h-px w-full bg-gradient-to-r from-accent/40 via-border to-transparent mb-6" />
               <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                Creemos en una tecnología que vaya más allá de lo funcional. Por eso construimos
-                soluciones con mentalidad de crecimiento, enfoque empresarial y una estética capaz de
-                transmitir innovación, confianza y alto nivel profesional.
+                {t("about.visionDesc")}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                {[
-                  "Innovación estratégica",
-                  "Experiencias premium",
-                  "Soluciones escalables",
-                  "Tecnología con propósito",
-                ].map((item) => (
+                {["about.innovation", "about.premium", "about.scalable", "about.purpose"].map((key) => (
                   <span
-                    key={item}
+                    key={key}
                     className="rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent"
                   >
-                    {item}
+                    {t(key)}
                   </span>
                 ))}
               </div>
@@ -218,7 +169,7 @@ export default function AboutPage() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    ¿Quieres saber más?
+                    {t("about.learnMore")}
                     <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </a>
                 </Button>
@@ -233,17 +184,16 @@ export default function AboutPage() {
           >
             <div className="flex items-center gap-3 md:gap-5">
               <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.24em] text-accent">
-                Transición de marca
+                {t("about.brandTransition")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/35 to-transparent" />
             </div>
             <div className="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-8">
               <p className="max-w-3xl text-sm md:text-base leading-relaxed text-muted-foreground">
-                De la visión estratégica pasamos al rostro que lidera la ejecución, la confianza y
-                la construcción de la marca.
+                {t("about.brandDesc")}
               </p>
               <span className="inline-flex w-fit rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
-                Liderazgo fundador
+                {t("about.founderLeadership")}
               </span>
             </div>
           </div>
@@ -262,7 +212,7 @@ export default function AboutPage() {
           >
             <div className="flex items-center gap-4 md:gap-6">
               <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                Liderazgo fundador
+                {t("about.founderLeadership")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/70 via-accent/20 to-transparent" />
             </div>
@@ -271,7 +221,7 @@ export default function AboutPage() {
                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
-                El liderazgo que convierte visión en resultados reales
+                {t("about.leadershipTitle")}
               </h2>
             </div>
           </div>
@@ -306,7 +256,7 @@ export default function AboutPage() {
                           >
                             {founder.initials}
                           </div>
-                          <p className="mt-3 text-sm text-muted-foreground">Perfil institucional</p>
+                          <p className="mt-3 text-sm text-muted-foreground">{t("about.institutionalProfile")}</p>
                         </div>
                       </div>
                     )}
@@ -323,7 +273,7 @@ export default function AboutPage() {
 
                   <div className={founder.imageSide === "right" ? "lg:col-start-1 lg:row-start-1" : ""}>
                     <div className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
-                      {founder.label}
+                      {t(founder.labelKey)}
                     </div>
                     <h3
                       className="mt-6 text-3xl md:text-4xl font-bold text-foreground"
@@ -335,14 +285,14 @@ export default function AboutPage() {
                       {founder.role}
                     </p>
                     <p className="mt-6 text-base md:text-lg leading-relaxed text-foreground/90">
-                      {founder.bio}
+                      {t(founder.bioKey)}
                     </p>
                     <div className="mt-6 rounded-2xl border border-border/50 bg-secondary/30 p-5">
                       <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">
-                        Mensaje del fundador
+                        {t("about.founderMessage")}
                       </p>
                       <p className="mt-3 text-base md:text-lg leading-relaxed text-foreground">
-                        &ldquo;{founder.quote}&rdquo;
+                        &ldquo;{t(founder.quoteKey)}&rdquo;
                       </p>
                     </div>
                   </div>
@@ -363,7 +313,7 @@ export default function AboutPage() {
           >
             <div className="flex items-center gap-4 md:gap-6">
               <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                Ventaja competitiva
+                {t("about.competitiveAdvantage")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
               <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
@@ -380,7 +330,7 @@ export default function AboutPage() {
               }`}
             >
               <span className="text-accent text-sm font-semibold tracking-wider uppercase mb-4 block">
-                Por qué elegirnos
+                {t("about.whyChoose")}
               </span>
               <div className="mb-6 flex items-center gap-4">
                 <div className="h-px flex-1 bg-gradient-to-r from-accent via-accent/40 to-transparent" />
@@ -390,19 +340,18 @@ export default function AboutPage() {
                 className="text-3xl md:text-4xl font-bold text-foreground mb-6"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
-                Experiencia de <span className="text-gradient">Confianza</span>
+                {t("about.experience")} <span className="text-gradient">{t("about.trust")}</span>
               </h2>
               <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                Más de una década de experiencia nos respalda. Hemos ayudado a empresas de todos
-                los tamaños a transformar sus operaciones con inteligencia artificial.
+                {t("about.experienceDesc")}
               </p>
 
               <div className="h-px w-full bg-gradient-to-r from-accent/50 via-border to-transparent mb-8" />
 
               <ul className="space-y-4">
-                {benefits.map((benefit, index) => (
+                {benefitsKeys.map((benefitKey, index) => (
                   <li
-                    key={benefit}
+                    key={benefitKey}
                     className={`flex items-start gap-4 rounded-2xl border border-border/40 bg-secondary/20 px-4 py-4 transition-all duration-500 hover:border-accent/30 hover:bg-accent/5 ${
                       benefitsVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
                     }`}
@@ -411,7 +360,7 @@ export default function AboutPage() {
                     <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-accent/15 shadow-[0_0_14px_oklch(0.70_0.15_180/0.18)]">
                       <div className="h-2.5 w-2.5 rounded-full bg-accent" />
                     </div>
-                    <span className="text-foreground/90 leading-relaxed">{benefit}</span>
+                    <span className="text-foreground/90 leading-relaxed">{t(benefitKey)}</span>
                   </li>
                 ))}
               </ul>
@@ -431,25 +380,25 @@ export default function AboutPage() {
                   className="text-2xl font-bold text-foreground mb-8 relative"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  Análisis Competitivo
+                  {t("about.competitiveAnalysis")}
                 </h3>
 
                 <div className="space-y-4 relative">
                   <div className="flex items-center justify-between p-4 rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
-                    <span className="text-muted-foreground">Tiempo de entrega</span>
-                    <span className="text-accent font-semibold">2x más rápido</span>
+                    <span className="text-muted-foreground">{t("about.deliveryTime")}</span>
+                    <span className="text-accent font-semibold">{t("about.deliveryValue")}</span>
                   </div>
                   <div className="flex items-center justify-between p-4 rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
-                    <span className="text-muted-foreground">Costo vs. agencias tradicionales</span>
-                    <span className="text-accent font-semibold">-40% promedio</span>
+                    <span className="text-muted-foreground">{t("about.costVsAgencies")}</span>
+                    <span className="text-accent font-semibold">{t("about.costValue")}</span>
                   </div>
                   <div className="flex items-center justify-between p-4 rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
-                    <span className="text-muted-foreground">Tasa de retención de clientes</span>
-                    <span className="text-accent font-semibold">94%</span>
+                    <span className="text-muted-foreground">{t("about.retention")}</span>
+                    <span className="text-accent font-semibold">{t("about.retentionValue")}</span>
                   </div>
                   <div className="flex items-center justify-between p-4 rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
-                    <span className="text-muted-foreground">NPS Score</span>
-                    <span className="text-accent font-semibold">78</span>
+                    <span className="text-muted-foreground">{t("about.nps")}</span>
+                    <span className="text-accent font-semibold">{t("about.npsValue")}</span>
                   </div>
                 </div>
               </div>
@@ -470,7 +419,7 @@ export default function AboutPage() {
           >
             <div className="flex items-center gap-4 md:gap-6">
               <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                Capacidad tecnológica
+                {t("about.techCapability")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
               <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
@@ -487,31 +436,19 @@ export default function AboutPage() {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
-                Tecnologías
+                {t("about.techTitle")}
               </h2>
               <div className="space-y-6 text-base md:text-lg leading-relaxed text-muted-foreground">
-                <p>
-                  En Codifikai combinamos herramientas consolidadas del ecosistema digital con
-                  tecnologías modernas orientadas a rendimiento, seguridad y escalabilidad.
-                </p>
-                <p>
-                  Elegimos cada stack en función del contexto del proyecto, la madurez técnica y los
-                  objetivos del negocio. Eso nos permite construir soluciones más sólidas, más
-                  mantenibles y mejor preparadas para crecer.
-                </p>
+                <p>{t("about.techIntro1")}</p>
+                <p>{t("about.techIntro2")}</p>
               </div>
 
               <div className="h-px w-full bg-gradient-to-r from-accent/50 via-border to-transparent my-8" />
 
               <ul className="space-y-4">
-                {[
-                  "Rendimiento optimizado desde la arquitectura hasta la experiencia final del usuario.",
-                  "Seguridad y estabilidad como base para productos confiables y escalables.",
-                  "Flexibilidad tecnológica para adaptarnos a distintos tamaños de empresa y etapas de crecimiento.",
-                  "Selección estratégica de herramientas para equilibrar velocidad, calidad y sostenibilidad.",
-                ].map((item, index) => (
+                {["about.techPerf", "about.techSecurity", "about.techFlex", "about.techSelect"].map((key, index) => (
                   <li
-                    key={item}
+                    key={key}
                     className={`flex items-start gap-4 rounded-2xl border border-border/40 bg-secondary/20 px-4 py-4 transition-all duration-500 ${
                       technologiesVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
                     }`}
@@ -520,7 +457,7 @@ export default function AboutPage() {
                     <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-accent/15 shadow-[0_0_14px_oklch(0.70_0.15_180/0.18)]">
                       <div className="h-2.5 w-2.5 rounded-full bg-accent" />
                     </div>
-                    <span className="text-foreground/90 leading-relaxed">{item}</span>
+                    <span className="text-foreground/90 leading-relaxed">{t(key)}</span>
                   </li>
                 ))}
               </ul>
@@ -531,9 +468,9 @@ export default function AboutPage() {
                 technologiesVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
               }`}
             >
-              {technologies.map((item, index) => (
+              {technologiesConfig.map((item, index) => (
                 <article
-                  key={item.title}
+                  key={item.titleKey}
                   className="rounded-3xl border border-border/50 bg-background/50 p-6 md:p-8 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.02)]"
                   style={{ transitionDelay: `${index * 100 + 180}ms` }}
                 >
@@ -542,7 +479,7 @@ export default function AboutPage() {
                       className="text-2xl md:text-3xl font-bold text-foreground"
                       style={{ fontFamily: 'var(--font-display)' }}
                     >
-                      {item.title}
+                      {t(item.titleKey)}
                     </h3>
                     <span className="text-2xl md:text-3xl font-bold text-accent">{item.score}</span>
                   </div>
@@ -560,11 +497,11 @@ export default function AboutPage() {
                   </div>
 
                   <p className="text-muted-foreground leading-relaxed mb-5">
-                    {item.description}
+                    {t(item.descKey)}
                   </p>
 
                   <div className="text-sm font-medium uppercase tracking-[0.16em] text-accent">
-                    {item.stack}
+                    {t(item.stackKey)}
                   </div>
                 </article>
               ))}
@@ -586,7 +523,7 @@ export default function AboutPage() {
           >
             <div className="flex items-center gap-4 md:gap-6">
               <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                Cierre estratégico
+                {t("about.ctaSectionLabel")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
               <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
@@ -602,11 +539,10 @@ export default function AboutPage() {
               className="text-3xl md:text-4xl font-bold text-foreground mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              Somos la Agencia IA para las Empresas
+              {t("about.ctaTitle")}
             </h2>
             <p className="text-lg text-muted-foreground mb-10">
-              Conecta con un asesor especializado y descubre cómo podemos transformar tu negocio
-              con soluciones de inteligencia artificial a medida.
+              {t("about.ctaDesc")}
             </p>
             <Button
               asChild

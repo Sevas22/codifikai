@@ -1,38 +1,78 @@
 "use client"
 
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight, Code, Megaphone, Cpu } from "lucide-react"
+import { ArrowUpRight, ExternalLink } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
+function SitePreviewIframe({ url }: { url: string }) {
+  const [shouldLoad, setShouldLoad] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setShouldLoad(true)
+      },
+      { threshold: 0.2 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref} className="absolute inset-0 pointer-events-none z-[1]">
+      {shouldLoad && (
+        <iframe
+          src={url}
+          title="Preview del sitio"
+          className="absolute top-0 left-0 w-[200%] h-[200%] origin-top-left scale-[0.5] border-0 opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+        />
+      )}
+    </div>
+  )
+}
+
 const cases = [
   {
-    category: "AI Development",
-    icon: Code,
-    title: "Plataforma E-commerce con IA",
-    description: "Sistema de recomendación inteligente que aumentó las ventas en un 45%",
-    metrics: ["+45% Ventas", "-30% Abandono"],
-    image: "/images/case-ecommerce.jpg",
-    color: "from-accent/40 to-accent/10",
+    title: "Jibala Trading",
+    subtitle: "Middle East Trade & Supply",
+    description: "Empresa de comercio enfocada en mercados del Golfo. Sourcing premium, programas FCL/LCL y coordinación logística para distribuidores y retail en UAE, Arabia Saudita y Qatar.",
+    url: "https://www.jibalamericastrading.com/",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
+    category: "Comercio · GCC",
+    tags: ["Next.js", "React", "Tailwind", "SEO"],
   },
   {
-    category: "AI Fintech",
-    icon: Megaphone,
-    title: "Dashboard Financiero Inteligente",
-    description: "Plataforma de análisis predictivo para inversiones con IA",
-    metrics: ["500+ Usuarios", "3x ROI"],
-    image: "/images/case-fintech.jpg",
-    color: "from-chart-2/40 to-chart-2/10",
+    title: "MusheTrading",
+    subtitle: "China-Focused Export & Sourcing",
+    description: "Soluciones de exportación y sourcing para el mercado chino. Sourcing con certificaciones, cumplimiento normativo y logística de extremo a extremo.",
+    url: "https://mushetrading.vercel.app/",
+    image: "https://images.unsplash.com/photo-1508807526341-e3b5c71e8c7?w=800&q=80",
+    category: "Export · China",
+    tags: ["Next.js", "React", "Vercel", "TypeScript"],
   },
   {
-    category: "AI Healthcare",
-    icon: Cpu,
-    title: "Sistema de Diagnóstico AI",
-    description: "Reducción del 60% en tiempo de diagnóstico con ML",
-    metrics: ["-60% Tiempo", "98% Precisión"],
-    image: "/images/case-healthcare.jpg",
-    color: "from-chart-4/40 to-chart-4/10",
+    title: "Agencia Contraste",
+    subtitle: "BTL Experiencial · Activaciones de Marca",
+    description: "Sitio web corporativo para agencia de marketing y publicidad. Diseño moderno con animaciones fluidas y experiencia de usuario optimizada.",
+    url: "https://www.contrasteagencia.com/",
+    image: "/images/cases/contrasteagencia.png",
+    category: "Agencia de Publicidad",
+    tags: ["React", "Next.js", "Tailwind CSS", "Animaciones"],
+  },
+  {
+    title: "TH Global",
+    subtitle: "Telehealth · Teleradiología",
+    description: "Plataforma de teleradiología que revoluciona los diagnósticos con tecnología avanzada. Estudios de tele radiología, tele cardiología y medicina nuclear con presencia nacional e internacional.",
+    url: "https://thglobal.com.co/",
+    image: "/images/cases/thglobal.png",
+    category: "Salud · Telemedicina",
+    tags: ["Next.js", "React", "TypeScript", "SEO"],
   },
 ]
 
@@ -52,7 +92,7 @@ export function CaseStudiesSection() {
           <div>
             <div className="flex items-center gap-4 md:gap-6 mb-5">
               <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                Casos destacados
+                {t("cases.label")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
               <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
@@ -68,7 +108,7 @@ export function CaseStudiesSection() {
             </p>
           </div>
           <Link
-            href="/services"
+            href="/casos-de-exito"
             className="group inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors font-medium"
           >
             {t("cases.viewAll")}
@@ -76,71 +116,81 @@ export function CaseStudiesSection() {
           </Link>
         </div>
 
-        {/* Cases grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {cases.map((caseStudy, index) => {
-            const Icon = caseStudy.icon
-            return (
-              <Link
-                key={caseStudy.title}
-                href="/services"
-                className={`group relative rounded-2xl overflow-hidden transition-all duration-700 hover-lift ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-                }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
-              >
-                {/* Image Background */}
-                <div className="relative aspect-[4/5] sm:aspect-[4/5]">
-                  <Image
-                    src={caseStudy.image || "/placeholder.svg"}
-                    alt={caseStudy.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  {/* Gradient overlay */}
-                  <div className={`absolute inset-0 bg-gradient-to-t ${caseStudy.color} opacity-60`} />
+        {/* Cases grid - mismo estilo que casos de éxito */}
+        <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
+          {cases.map((item, index) => (
+            <a
+              key={item.title}
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative block rounded-2xl overflow-hidden border border-border/50 bg-card transition-all duration-700 hover:border-accent/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${index * 80}ms` }}
+            >
+              <div className="relative aspect-[4/3] overflow-hidden bg-secondary/30">
+                <Image
+                  src={item.image}
+                  alt={`Preview de ${item.title}`}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                />
+                <SitePreviewIframe url={item.url} />
+                <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-background/90 backdrop-blur-sm text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  <ExternalLink className="h-5 w-5" />
                 </div>
+              </div>
 
-                {/* Content overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent flex flex-col justify-end p-5 md:p-6">
-                  {/* Category badge */}
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 backdrop-blur-sm w-fit mb-3 md:mb-4">
-                    <Icon className="w-3 h-3 md:w-3.5 md:h-3.5 text-accent" />
-                    <span className="text-xs font-medium text-accent">{caseStudy.category}</span>
-                  </div>
-
-                  {/* Title & description */}
-                  <h3
-                    className="text-lg md:text-xl font-semibold text-foreground mb-2 group-hover:text-accent transition-colors duration-300"
-                    style={{ fontFamily: 'var(--font-display)' }}
+              <div className="border-t border-border/50 bg-card p-5 md:p-6">
+                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">
+                  {item.category}
+                </p>
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <h2
+                    className="text-xl md:text-2xl font-bold text-foreground"
+                    style={{ fontFamily: "var(--font-display)" }}
                   >
-                    {caseStudy.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm mb-3 md:mb-4 leading-relaxed line-clamp-2">
-                    {caseStudy.description}
-                  </p>
-
-                  {/* Metrics */}
-                  <div className="flex flex-wrap gap-2">
-                    {caseStudy.metrics.map((metric) => (
-                      <span
-                        key={metric}
-                        className="px-2.5 py-1 rounded-full bg-foreground/10 backdrop-blur-sm text-xs font-medium text-foreground/90"
-                      >
-                        {metric}
-                      </span>
-                    ))}
-                  </div>
+                    {item.title}
+                  </h2>
+                  <ExternalLink className="h-5 w-5 shrink-0 text-accent opacity-70 group-hover:opacity-100 transition-opacity" />
                 </div>
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-4">
+                  {item.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 rounded-full text-xs font-medium bg-muted/60 text-muted-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <span className="inline-flex items-center gap-2 text-sm font-medium text-accent group-hover:gap-3 transition-all duration-300">
+                  {t("casesPage.visitSite")}
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
 
-                {/* Hover border effect */}
-                <div className="absolute inset-0 border border-accent/0 group-hover:border-accent/40 rounded-2xl transition-colors duration-500" />
-                
-                {/* Hover glow */}
-                <div className="absolute -inset-4 bg-accent/10 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
-              </Link>
-            )
-          })}
+        {/* CTA - Ver más casos */}
+        <div
+          className={`mt-12 md:mt-16 text-center transition-all duration-700 delay-300 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <Link
+            href="/casos-de-exito"
+            className="inline-flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-6 py-3 text-sm font-medium text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+          >
+            {t("cases.viewAll")}
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

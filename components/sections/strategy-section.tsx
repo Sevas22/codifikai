@@ -4,33 +4,17 @@ import { Check, Zap, Shield, Rocket, LineChart } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
-const strategies = [
-  {
-    icon: Zap,
-    title: "Implementación Rápida",
-    description: "Metodologías ágiles que permiten ver resultados en semanas, no meses.",
-  },
-  {
-    icon: Shield,
-    title: "Seguridad Empresarial",
-    description: "Protocolos de seguridad de nivel enterprise para proteger tus datos.",
-  },
-  {
-    icon: Rocket,
-    title: "Escalabilidad",
-    description: "Arquitecturas diseñadas para crecer con tu negocio sin límites.",
-  },
-  {
-    icon: LineChart,
-    title: "ROI Garantizado",
-    description: "Medimos y optimizamos constantemente para maximizar tu retorno.",
-  },
+const strategiesData = [
+  { icon: Zap, titleKey: "strategy.fast", descKey: "strategy.fastDesc" },
+  { icon: Shield, titleKey: "strategy.security", descKey: "strategy.securityDesc" },
+  { icon: Rocket, titleKey: "strategy.scale", descKey: "strategy.scaleDesc" },
+  { icon: LineChart, titleKey: "strategy.roi", descKey: "strategy.roiDesc" },
 ]
 
-const metrics = [
-  { value: "97%", label: "Proyectos entregados a tiempo" },
-  { value: "4.9/5", label: "Satisfacción del cliente" },
-  { value: "200+", label: "Integraciones realizadas" },
+const metricsData = [
+  { value: "97%", labelKey: "strategy.metrics1" },
+  { value: "4.9/5", labelKey: "strategy.metrics2" },
+  { value: "200+", labelKey: "strategy.metrics3" },
 ]
 
 export function StrategySection() {
@@ -49,7 +33,7 @@ export function StrategySection() {
           >
             <div className="flex items-center gap-4 md:gap-6 mb-5">
               <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                Nuestra estrategia
+                {t("strategy.label")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
               <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
@@ -58,20 +42,19 @@ export function StrategySection() {
               className="text-3xl md:text-4xl font-bold text-foreground mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              Estrategia de negocio potenciada por IA
+              {t("strategy.title")}
             </h2>
             <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-              Combinamos experiencia empresarial con tecnología de vanguardia para crear soluciones
-              que transforman operaciones y generan crecimiento sostenible.
+              {t("strategy.subtitle")}
             </p>
 
             {/* Strategy list */}
             <div className="grid sm:grid-cols-2 gap-6">
-              {strategies.map((strategy, index) => {
+              {strategiesData.map((strategy, index) => {
                 const Icon = strategy.icon
                 return (
                   <div
-                    key={strategy.title}
+                    key={strategy.titleKey}
                     className={`flex gap-4 transition-all duration-500 ${
                       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                     }`}
@@ -81,8 +64,8 @@ export function StrategySection() {
                       <Icon className="w-5 h-5 text-accent" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground mb-1">{strategy.title}</h4>
-                      <p className="text-sm text-muted-foreground">{strategy.description}</p>
+                      <h4 className="font-semibold text-foreground mb-1">{t(strategy.titleKey)}</h4>
+                      <p className="text-sm text-muted-foreground">{t(strategy.descKey)}</p>
                     </div>
                   </div>
                 )
@@ -104,19 +87,19 @@ export function StrategySection() {
                 className="text-2xl font-bold text-foreground mb-8 relative"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
-                Métricas de Éxito
+                {t("strategy.metricsTitle")}
               </h3>
 
               <div className="space-y-6 relative">
-                {metrics.map((metric, index) => (
+                {metricsData.map((metric, index) => (
                   <div
-                    key={metric.label}
+                    key={metric.labelKey}
                     className={`flex items-center justify-between p-4 rounded-xl bg-background/50 transition-all duration-500 hover-lift ${
                       isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                     }`}
                     style={{ transitionDelay: `${index * 100 + 500}ms` }}
                   >
-                    <span className="text-muted-foreground">{metric.label}</span>
+                    <span className="text-muted-foreground">{t(metric.labelKey)}</span>
                     <span
                       className="text-2xl font-bold text-gradient"
                       style={{ fontFamily: 'var(--font-display)' }}
@@ -131,15 +114,15 @@ export function StrategySection() {
               <div className="mt-8 pt-8 border-t border-border/50">
                 <div className="flex items-center gap-2 text-accent">
                   <Check className="w-5 h-5" />
-                  <span className="text-sm font-medium">ISO 27001 Certificado</span>
+                  <span className="text-sm font-medium">{t("strategy.iso")}</span>
                 </div>
                 <div className="flex items-center gap-2 text-accent mt-3">
                   <Check className="w-5 h-5" />
-                  <span className="text-sm font-medium">Google Cloud Partner</span>
+                  <span className="text-sm font-medium">{t("strategy.gcp")}</span>
                 </div>
                 <div className="flex items-center gap-2 text-accent mt-3">
                   <Check className="w-5 h-5" />
-                  <span className="text-sm font-medium">AWS Certified</span>
+                  <span className="text-sm font-medium">{t("strategy.aws")}</span>
                 </div>
               </div>
             </div>
