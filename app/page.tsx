@@ -6,7 +6,6 @@ import { CaseStudiesSection } from "@/components/sections/case-studies-section"
 import { ExportGlobeSection } from "@/components/sections/export-globe-wrapper"
 import { ServicesPreviewSection } from "@/components/sections/services-preview-section"
 import { TechnologiesPreviewSection } from "@/components/sections/technologies-preview-section"
-import { StrategySection } from "@/components/sections/strategy-section"
 import { TeamSection } from "@/components/sections/team-section"
 import { PartnersSection } from "@/components/sections/partners-section"
 import { CTASection } from "@/components/sections/cta-section"
@@ -15,7 +14,7 @@ import { FloatingContact } from "@/components/floating-contact"
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+    <main className="relative min-h-screen bg-transparent text-foreground overflow-x-hidden">
       <Navigation />
       <HeroSection />
       <CompanyIntroSection />
@@ -23,7 +22,6 @@ export default function Home() {
       <CaseStudiesSection />
       <ExportGlobeSection />
       <TechnologiesPreviewSection />
-      <StrategySection />
       <TeamSection />
       <PartnersSection />
       <StatsSection />

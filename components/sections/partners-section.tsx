@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
 
 const partners = [
   { name: "Google Cloud", abbr: "GC" },
@@ -18,7 +19,11 @@ export function PartnersSection() {
 
   return (
     <section ref={ref} className="py-16 md:py-18 relative overflow-hidden border-y border-border/50">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="pointer-events-none absolute right-6 top-10 z-0 hidden h-28 w-28 md:block md:opacity-20">
+        <Tech3DAccent variant="rings" size="sm" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div
           className={`text-center mb-10 transition-all duration-700 ${
@@ -30,12 +35,12 @@ export function PartnersSection() {
               Ecosistema
             </span>
             <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-            <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+            <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
           </div>
           <h2 className="text-lg font-medium text-muted-foreground mb-2">
             {t("partners.title")}
           </h2>
-          <p className="text-sm text-muted-foreground/70">
+          <p className="text-sm text-muted-foreground">
             {t("partners.subtitle")}
           </p>
         </div>
@@ -58,7 +63,7 @@ export function PartnersSection() {
               }}
             >
               {/* Logo placeholder - using text abbreviation styled as logo */}
-              <div className="px-6 py-4 rounded-xl bg-foreground/5 text-muted-foreground/60 font-bold text-xl tracking-wider hover:bg-accent/10 hover:text-accent transition-all duration-300 group-hover:scale-110">
+              <div className="px-6 py-4 rounded-xl bg-foreground/5 text-muted-foreground font-bold text-xl tracking-wider hover:bg-accent/10 hover:text-accent transition-all duration-300 group-hover:scale-110">
                 {partner.abbr}
               </div>
               {/* Tooltip */}

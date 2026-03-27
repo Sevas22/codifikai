@@ -5,6 +5,7 @@ import { ArrowUpRight, MonitorSmartphone, Server, Database, Layers3 } from "luci
 import { Button } from "@/components/ui/button"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/providers/language-provider"
+import { IconSquircle } from "@/components/ui/icon-squircle"
 
 const technologiesData = [
   { icon: MonitorSmartphone, titleKey: "techPreview.frontend", descKey: "techPreview.frontendDesc" },
@@ -21,7 +22,7 @@ export function TechnologiesPreviewSection() {
     <section ref={ref} className="py-20 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
           className={`flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 md:mb-12 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -33,10 +34,10 @@ export function TechnologiesPreviewSection() {
                 {t("techPreview.label")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
             </div>
             <h2
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-5 text-balance"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold heading-brand mb-5 text-balance"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               {t("techPreview.title")}
@@ -70,8 +71,8 @@ export function TechnologiesPreviewSection() {
                 }`}
                 style={{ transitionDelay: `${index * 100 + 120}ms` }}
               >
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors duration-300">
-                  <Icon className="w-6 h-6 text-accent" />
+                <div className="mb-5">
+                  <IconSquircle icon={Icon} size="lg" className="group-hover:scale-105" />
                 </div>
                 <h3
                   className="text-xl font-semibold text-foreground mb-3"

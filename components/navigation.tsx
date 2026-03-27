@@ -7,6 +7,9 @@ import { Menu, X, Sun, Moon, Globe, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "@/components/providers/theme-provider"
 import { useLanguage } from "@/components/providers/language-provider"
+import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
+import { IconSquircle } from "@/components/ui/icon-squircle"
+import { WHATSAPP_URL } from "@/lib/contact"
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -60,35 +63,12 @@ export function Navigation() {
           : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 md:h-20 items-center justify-between">
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 inset-safe-x">
+        <div className="flex h-16 md:h-20 items-center justify-between gap-2">
           {/* Logo - Futuristic Wordmark */}
-          <Link href="/" className="group flex items-center gap-0.5 relative z-50">
-            <div className="absolute -inset-4 bg-accent/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-            <span 
-              className="relative text-xl md:text-2xl font-bold tracking-tight text-foreground transition-all duration-500 group-hover:tracking-wider" 
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              {"<"}
-            </span>
-            <span 
-              className="relative text-xl md:text-2xl font-bold tracking-tight text-foreground transition-all duration-500 group-hover:tracking-wider" 
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              Codifik
-            </span>
-            <span 
-              className="relative text-xl md:text-2xl font-bold tracking-tight text-gradient transition-all duration-500" 
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              ai
-            </span>
-            <span 
-              className="relative text-xl md:text-2xl font-light tracking-tight text-muted-foreground transition-all duration-500 group-hover:text-accent" 
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              {"/>"}
-            </span>
+          <Link href="/" className="group relative z-50 flex min-w-0 shrink items-center">
+            <div className="absolute -inset-4 rounded-xl bg-accent/5 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+            <CodifikaiLogo size="md" showCode className="relative group-hover:tracking-wider" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -115,17 +95,19 @@ export function Navigation() {
           </div>
 
           {/* Desktop Controls */}
-          <div className="hidden md:flex md:items-center md:gap-2">
+          <div className="hidden lg:flex lg:items-center lg:gap-2">
             {/* Language Toggle */}
             <button
               type="button"
               onClick={() => setLanguage(language === "es" ? "en" : "es")}
-              className="group relative p-2.5 rounded-lg text-muted-foreground hover:text-foreground transition-all duration-300"
+              className="group relative rounded-lg p-1 text-muted-foreground transition-all duration-300 hover:text-foreground"
               aria-label="Change language"
             >
-              <span className="absolute inset-0 bg-accent/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300" />
-              <Globe className="h-5 w-5 relative z-10" />
-              <span className="absolute -bottom-1 -right-1 text-[10px] font-bold text-accent uppercase">
+              <span className="absolute inset-0 rounded-lg bg-accent/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span className="relative z-10 inline-flex">
+                <IconSquircle icon={Globe} size="sm" className="group-hover:scale-105" />
+              </span>
+              <span className="pointer-events-none absolute -bottom-1 -right-1 z-20 text-[10px] font-bold text-accent uppercase">
                 {language}
               </span>
             </button>
@@ -134,15 +116,17 @@ export function Navigation() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="group relative p-2.5 rounded-lg text-muted-foreground hover:text-foreground transition-all duration-300"
+              className="group relative rounded-lg p-1 text-muted-foreground transition-all duration-300 hover:text-foreground"
               aria-label="Toggle theme"
             >
-              <span className="absolute inset-0 bg-accent/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300" />
-              {theme === "dark" ? (
-                <Sun className="h-5 w-5 relative z-10 transition-transform duration-500 group-hover:rotate-180" />
-              ) : (
-                <Moon className="h-5 w-5 relative z-10 transition-transform duration-500 group-hover:-rotate-12" />
-              )}
+              <span className="absolute inset-0 rounded-lg bg-accent/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span className="relative z-10 inline-flex transition-transform duration-500 group-hover:rotate-12">
+                {theme === "dark" ? (
+                  <IconSquircle icon={Sun} size="sm" className="group-hover:scale-105" />
+                ) : (
+                  <IconSquircle icon={Moon} size="sm" className="group-hover:scale-105" />
+                )}
+              </span>
             </button>
 
             {/* CTA Button */}
@@ -150,32 +134,36 @@ export function Navigation() {
               asChild
               className="group relative overflow-hidden bg-foreground text-background hover:bg-foreground ml-2 border-0"
             >
-              <Link href="/contact">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-accent-foreground">
                   {t("nav.getStarted")}
                 </span>
                 <span className="absolute inset-0 bg-accent scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
-              </Link>
+              </a>
             </Button>
           </div>
 
-          {/* Mobile Controls */}
-          <div className="flex md:hidden items-center gap-1">
+          {/* Mobile / tablet Controls */}
+          <div className="flex lg:hidden items-center gap-0.5 sm:gap-1 shrink-0">
             <button
               type="button"
               onClick={() => setLanguage(language === "es" ? "en" : "es")}
-              className="p-2.5 text-muted-foreground hover:text-foreground transition-colors"
+              className="p-1 text-muted-foreground transition-colors hover:text-foreground"
               aria-label="Change language"
             >
-              <Globe className="h-5 w-5" />
+              <IconSquircle icon={Globe} size="sm" />
             </button>
             <button
               type="button"
               onClick={toggleTheme}
-              className="p-2.5 text-muted-foreground hover:text-foreground transition-colors"
+              className="p-1 text-muted-foreground transition-colors hover:text-foreground"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              {theme === "dark" ? (
+                <IconSquircle icon={Sun} size="sm" />
+              ) : (
+                <IconSquircle icon={Moon} size="sm" />
+              )}
             </button>
             <button
               type="button"
@@ -195,7 +183,7 @@ export function Navigation() {
 
         {/* Mobile Menu - Full Screen Overlay */}
         <div
-          className={`md:hidden fixed inset-0 z-40 transition-all duration-500 ${
+          className={`lg:hidden fixed inset-0 z-40 transition-all duration-500 ${
             isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
         >
@@ -206,13 +194,13 @@ export function Navigation() {
           />
           
           {/* Menu Content */}
-          <div className="relative h-full flex flex-col justify-center px-6 pt-20">
-            <nav className="space-y-2">
+          <div className="relative h-full flex flex-col justify-center px-5 pt-[max(5rem,env(safe-area-inset-top,0px))] pb-safe sm:px-8">
+            <nav className="space-y-1 sm:space-y-2">
               {navLinks.map((link, index) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`block text-3xl font-bold py-3 transition-all duration-500 ${
+                  className={`block text-2xl sm:text-3xl font-bold py-2.5 sm:py-3 transition-all duration-500 ${
                     isActive(link.href) ? "text-accent" : "text-foreground hover:text-accent"
                   }`}
                   style={{
@@ -242,13 +230,18 @@ export function Navigation() {
                 size="lg"
                 className="w-full group relative overflow-hidden bg-foreground text-background hover:bg-foreground py-6 text-lg"
               >
-                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   <span className="relative z-10 flex items-center justify-center gap-2 transition-colors duration-300 group-hover:text-accent-foreground">
                     {t("nav.getStarted")}
                     <ArrowRight className="w-5 h-5" />
                   </span>
                   <span className="absolute inset-0 bg-accent scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
-                </Link>
+                </a>
               </Button>
             </div>
 

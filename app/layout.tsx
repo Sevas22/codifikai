@@ -4,7 +4,10 @@ import { Inter, Space_Grotesk } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { LanguageProvider } from "@/components/providers/language-provider"
+import { MouseAmbientProvider } from "@/components/providers/mouse-ambient-provider"
+import { SiteInteractiveBackground } from "@/components/site-interactive-background"
 import { CustomCursor } from "@/components/custom-cursor"
+import { GoogleTagManager } from "@/components/google-tag-manager"
 import './globals.css'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -40,10 +43,14 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+        <GoogleTagManager />
         <ThemeProvider defaultTheme="dark">
           <LanguageProvider defaultLanguage="es">
-            <CustomCursor />
-            {children}
+            <MouseAmbientProvider>
+              <SiteInteractiveBackground />
+              <CustomCursor />
+              <div className="relative z-10 min-h-screen overflow-x-clip">{children}</div>
+            </MouseAmbientProvider>
           </LanguageProvider>
         </ThemeProvider>
         <Analytics />

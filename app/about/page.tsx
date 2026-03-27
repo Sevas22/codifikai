@@ -2,13 +2,17 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Target, Eye, Users } from "lucide-react"
+import { ArrowRight, Check, Target, Eye, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/sections/footer"
 import { FloatingContact } from "@/components/floating-contact"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { useMouseAmbient } from "@/components/providers/mouse-ambient-provider"
+import { HeroSphereVisual } from "@/components/sections/hero-sphere-visual"
+import { IconSquircle } from "@/components/ui/icon-squircle"
+import { WHATSAPP_URL } from "@/lib/contact"
 
 const benefitsKeys = ["about.benefit1", "about.benefit2", "about.benefit3", "about.benefit4"]
 
@@ -28,7 +32,6 @@ const founders = [
     quoteKey: "about.founder1Quote",
     image: "/images/team/jhoan-gomez.png",
     initials: "JG",
-    imageSide: "left",
     objectPosition: "center",
     imageClassName: "object-cover",
   },
@@ -40,7 +43,17 @@ const founders = [
     quoteKey: "about.founder2Quote",
     image: "/images/team/jhon-ariza.png",
     initials: "JA",
-    imageSide: "left",
+    objectPosition: "top center",
+    imageClassName: "object-cover",
+  },
+  {
+    name: "Victor Giron",
+    role: "Business Development Manager",
+    labelKey: "about.founder3Label",
+    bioKey: "about.founder3Bio",
+    quoteKey: "about.founder3Quote",
+    image: "/images/team/victor-giron.png",
+    initials: "VG",
     objectPosition: "top center",
     imageClassName: "object-cover",
   },
@@ -54,17 +67,24 @@ export default function AboutPage() {
   const { ref: technologiesRef, isVisible: technologiesVisible } = useScrollReveal({ threshold: 0.12 })
   const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal({ threshold: 0.2 })
 
+  const { x: aboutMouseX, y: aboutMouseY, isMobile: aboutHeroMobile } = useMouseAmbient()
+
   return (
-    <main className="relative min-h-screen bg-background text-foreground">
+    <main className="relative min-h-screen bg-transparent text-foreground">
       <Navigation />
       
-      {/* Hero Section */}
-      <section ref={heroRef} className="pt-32 pb-12 md:pt-40 md:pb-16 relative overflow-hidden">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 w-64 h-64 bg-accent/5 rounded-full blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,oklch(0.7_0.15_180/0.08),transparent_40%)]" />
+      {/* Hero: mismo lenguaje visual que el home (esfera HUD) */}
+      <section
+        ref={heroRef}
+        className="relative min-h-[min(100svh,1080px)] overflow-hidden pt-28 pb-12 md:pt-32 md:pb-16"
+      >
+        <div className="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
+          <div className="absolute -right-[12%] top-[8%] h-[min(440px,48vh)] w-[min(92vw,480px)] opacity-[0.38] sm:top-[10%] sm:opacity-45 md:-right-[6%] md:top-[12%] lg:h-[min(460px,50vh)] lg:w-[min(520px,44vw)] lg:opacity-[0.48]">
+            <HeroSphereVisual mouseX={aboutMouseX} mouseY={aboutMouseY} isMobile={aboutHeroMobile} />
+          </div>
+        </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className={`mx-auto max-w-5xl text-center transition-all duration-700 ${
               heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -74,10 +94,10 @@ export default function AboutPage() {
               {t("about.heroBadge")}
             </div>
             <h1
-              className="mt-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground text-balance"
+              className="mt-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              {t("about.heroTitle")}{" "}
+              <span className="heading-brand">{t("about.heroTitle")}</span>{" "}
               <span className="text-gradient">{t("about.heroTitleHighlight")}</span>
             </h1>
             <p className="mx-auto mt-8 max-w-3xl text-lg md:text-xl leading-relaxed text-muted-foreground">
@@ -95,14 +115,14 @@ export default function AboutPage() {
                 {t("about.essence")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
             </div>
           </div>
 
           <div className="relative mt-20 grid gap-8 lg:grid-cols-2 lg:gap-12">
             <div className="pointer-events-none absolute left-1/2 top-4 hidden h-[calc(100%-2rem)] w-px -translate-x-1/2 lg:block">
               <div className="h-full w-px bg-gradient-to-b from-transparent via-accent to-transparent opacity-90" />
-              <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 bg-background shadow-[0_0_18px_oklch(0.70_0.15_180/0.35)]" />
+              <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 bg-background shadow-[0_0_18px_oklch(0.76_0.18_195/0.35)]" />
             </div>
             <div
               className={`rounded-3xl border border-border/50 bg-background/60 p-8 md:p-10 backdrop-blur-xl transition-all duration-700 delay-200 ${
@@ -110,13 +130,8 @@ export default function AboutPage() {
               }`}
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10">
-                  <Target className="w-6 h-6 text-accent" />
-                </div>
-                <h2
-                  className="text-2xl md:text-3xl font-bold text-foreground"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
+                <IconSquircle icon={Target} size="lg" />
+                <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
                   <span className="text-gradient">{t("about.history")}</span>
                 </h2>
               </div>
@@ -134,13 +149,8 @@ export default function AboutPage() {
               }`}
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10">
-                  <Eye className="w-6 h-6 text-accent" />
-                </div>
-                <h2
-                  className="text-2xl md:text-3xl font-bold text-foreground"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
+                <IconSquircle icon={Eye} size="lg" />
+                <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
                   <span className="text-gradient">{t("about.vision")}</span>
                 </h2>
               </div>
@@ -165,7 +175,7 @@ export default function AboutPage() {
                   className="group border-accent/30 bg-accent/5 text-accent hover:bg-accent hover:text-accent-foreground"
                 >
                   <a
-                    href="https://wa.me/1234567890"
+                    href={WHATSAPP_URL}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -204,7 +214,7 @@ export default function AboutPage() {
       <section ref={foundersRef} className="pt-10 pb-12 md:pt-12 md:pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className={`max-w-4xl mx-auto mb-12 md:mb-14 transition-all duration-700 ${
               foundersVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -218,7 +228,7 @@ export default function AboutPage() {
             </div>
             <div className="mt-6 text-center">
               <h2
-                className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-balance"
+                className="text-3xl md:text-4xl lg:text-5xl font-bold heading-brand text-balance"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 {t("about.leadershipTitle")}
@@ -236,8 +246,8 @@ export default function AboutPage() {
                 }`}
                 style={{ transitionDelay: `${index * 120}ms` }}
               >
-                <div className={`grid gap-8 md:gap-10 lg:grid-cols-[320px_1fr] lg:items-center ${founder.imageSide === "right" ? "lg:grid-flow-dense" : ""}`}>
-                  <div className={`relative overflow-hidden rounded-2xl border border-border/50 bg-secondary/40 aspect-[4/5] ${founder.imageSide === "right" ? "lg:col-start-2" : ""}`}>
+                <div className="grid gap-8 md:gap-10 lg:grid-cols-[320px_1fr] lg:items-center">
+                  <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-secondary/40 aspect-[4/5]">
                     {founder.image ? (
                       <Image
                         src={founder.image}
@@ -263,7 +273,7 @@ export default function AboutPage() {
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/70 to-transparent p-5">
                       <div className="text-sm font-medium text-accent">{founder.role}</div>
                       <div
-                        className="text-2xl font-bold text-foreground"
+                        className="text-2xl font-bold heading-brand"
                         style={{ fontFamily: 'var(--font-display)' }}
                       >
                         {founder.name}
@@ -271,12 +281,12 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  <div className={founder.imageSide === "right" ? "lg:col-start-1 lg:row-start-1" : ""}>
+                  <div>
                     <div className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
                       {t(founder.labelKey)}
                     </div>
                     <h3
-                      className="mt-6 text-3xl md:text-4xl font-bold text-foreground"
+                      className="mt-6 text-3xl md:text-4xl font-bold heading-brand"
                       style={{ fontFamily: 'var(--font-display)' }}
                     >
                       {founder.name}
@@ -284,7 +294,7 @@ export default function AboutPage() {
                     <p className="mt-2 text-sm uppercase tracking-[0.18em] text-accent">
                       {founder.role}
                     </p>
-                    <p className="mt-6 text-base md:text-lg leading-relaxed text-foreground/90">
+                    <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground">
                       {t(founder.bioKey)}
                     </p>
                     <div className="mt-6 rounded-2xl border border-border/50 bg-secondary/30 p-5">
@@ -305,7 +315,7 @@ export default function AboutPage() {
 
       {/* Benefits & Competitive Advantage */}
       <section ref={benefitsRef} className="pt-8 pb-24 md:pt-10 md:pb-28 relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className={`mb-10 md:mb-12 transition-all duration-700 ${
               benefitsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -316,13 +326,13 @@ export default function AboutPage() {
                 {t("about.competitiveAdvantage")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
             </div>
           </div>
           <div className="relative grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div className="pointer-events-none absolute left-1/2 top-6 hidden h-[calc(100%-3rem)] w-px -translate-x-1/2 lg:block">
               <div className="h-full w-px bg-gradient-to-b from-transparent via-accent to-transparent opacity-80" />
-              <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 bg-background shadow-[0_0_18px_oklch(0.70_0.15_180/0.35)]" />
+              <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 bg-background shadow-[0_0_18px_oklch(0.76_0.18_195/0.35)]" />
             </div>
             <div
               className={`rounded-3xl border border-border/50 bg-background/40 p-8 md:p-10 backdrop-blur-xl transition-all duration-700 ${
@@ -334,10 +344,10 @@ export default function AboutPage() {
               </span>
               <div className="mb-6 flex items-center gap-4">
                 <div className="h-px flex-1 bg-gradient-to-r from-accent via-accent/40 to-transparent" />
-                <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+                <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
               </div>
               <h2
-                className="text-3xl md:text-4xl font-bold text-foreground mb-6"
+                className="text-3xl md:text-4xl font-bold heading-brand mb-6"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 {t("about.experience")} <span className="text-gradient">{t("about.trust")}</span>
@@ -357,10 +367,8 @@ export default function AboutPage() {
                     }`}
                     style={{ transitionDelay: `${index * 100 + 200}ms` }}
                   >
-                    <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-accent/15 shadow-[0_0_14px_oklch(0.70_0.15_180/0.18)]">
-                      <div className="h-2.5 w-2.5 rounded-full bg-accent" />
-                    </div>
-                    <span className="text-foreground/90 leading-relaxed">{t(benefitKey)}</span>
+                    <IconSquircle icon={Check} size="xs" className="mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground leading-relaxed">{t(benefitKey)}</span>
                   </li>
                 ))}
               </ul>
@@ -377,7 +385,7 @@ export default function AboutPage() {
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
                 
                 <h3
-                  className="text-2xl font-bold text-foreground mb-8 relative"
+                  className="text-2xl font-bold heading-brand mb-8 relative"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >
                   {t("about.competitiveAnalysis")}
@@ -411,7 +419,7 @@ export default function AboutPage() {
       <section id="technologies" ref={technologiesRef} className="pt-8 pb-24 md:pt-10 md:pb-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className={`mb-10 md:mb-12 transition-all duration-700 ${
               technologiesVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -422,7 +430,7 @@ export default function AboutPage() {
                 {t("about.techCapability")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
             </div>
           </div>
 
@@ -433,7 +441,7 @@ export default function AboutPage() {
               }`}
             >
               <h2
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold heading-brand mb-8"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 {t("about.techTitle")}
@@ -454,10 +462,8 @@ export default function AboutPage() {
                     }`}
                     style={{ transitionDelay: `${index * 90 + 120}ms` }}
                   >
-                    <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-accent/15 shadow-[0_0_14px_oklch(0.70_0.15_180/0.18)]">
-                      <div className="h-2.5 w-2.5 rounded-full bg-accent" />
-                    </div>
-                    <span className="text-foreground/90 leading-relaxed">{t(key)}</span>
+                    <IconSquircle icon={Check} size="xs" className="mt-0.5 flex-shrink-0" />
+                    <span className="text-muted-foreground leading-relaxed">{t(key)}</span>
                   </li>
                 ))}
               </ul>
@@ -476,7 +482,7 @@ export default function AboutPage() {
                 >
                   <div className="flex items-end justify-between gap-4 mb-5">
                     <h3
-                      className="text-2xl md:text-3xl font-bold text-foreground"
+                      className="text-2xl md:text-3xl font-bold heading-brand"
                       style={{ fontFamily: 'var(--font-display)' }}
                     >
                       {t(item.titleKey)}
@@ -491,7 +497,7 @@ export default function AboutPage() {
                       style={{ width: item.score }}
                     />
                     <div
-                      className="absolute top-1/2 h-3.5 w-3.5 -translate-y-1/2 rounded-full border border-accent/70 bg-background shadow-[0_0_16px_oklch(0.70_0.15_180/0.35)]"
+                      className="absolute top-1/2 h-3.5 w-3.5 -translate-y-1/2 rounded-full border border-accent/70 bg-background shadow-[0_0_16px_oklch(0.76_0.18_195/0.35)]"
                       style={{ left: `calc(${item.score} - 7px)` }}
                     />
                   </div>
@@ -515,7 +521,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
         <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-glow-pulse" />
         
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className={`mb-10 md:mb-12 transition-all duration-700 ${
               ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -526,7 +532,7 @@ export default function AboutPage() {
                 {t("about.ctaSectionLabel")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
             </div>
           </div>
           <div
@@ -534,9 +540,11 @@ export default function AboutPage() {
               ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <Users className="w-12 h-12 text-accent mx-auto mb-6" />
+            <div className="mb-6 flex justify-center">
+              <IconSquircle icon={Users} size="lg" />
+            </div>
             <h2
-              className="text-3xl md:text-4xl font-bold text-foreground mb-6"
+              className="text-3xl md:text-4xl font-bold heading-brand mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               {t("about.ctaTitle")}

@@ -3,6 +3,7 @@
 import { Lightbulb, Target, TrendingUp } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { IconSquircle } from "@/components/ui/icon-squircle"
 
 const features = [
   { icon: Lightbulb, titleKey: "features.strategy", descKey: "features.strategyDesc" },
@@ -19,7 +20,7 @@ export function FeaturesSection() {
       {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
       
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => {
             const Icon = feature.icon
@@ -31,9 +32,8 @@ export function FeaturesSection() {
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors duration-300">
-                  <Icon className="w-7 h-7 text-accent" />
+                <div className="mb-6">
+                  <IconSquircle icon={Icon} size="xl" className="group-hover:scale-105" />
                 </div>
                 
                 {/* Content */}

@@ -9,6 +9,7 @@ import { Footer } from "@/components/sections/footer"
 import { FloatingContact } from "@/components/floating-contact"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/providers/language-provider"
+import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
 
 function SitePreviewIframe({ url }: { url: string }) {
   const [shouldLoad, setShouldLoad] = useState(false)
@@ -44,25 +45,25 @@ const successCases = [
   {
     title: "Jibala Trading",
     subtitle: "Middle East Trade & Supply",
-    description: "Empresa de comercio enfocada en mercados del Golfo. Sourcing premium, programas FCL/LCL y coordinación logística para distribuidores y retail en UAE, Arabia Saudita y Qatar.",
+    description: "Empresa de comercio enfocada en mercados del Golfo. Sourcing premium, programas FCL/LCL y coordinaciÃ³n logÃ­stica para distribuidores y retail en UAE, Arabia Saudita y Qatar.",
     url: "https://www.jibalamericastrading.com/",
     image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
-    category: "Comercio · GCC",
+    category: "Comercio Â· GCC",
     tags: ["Next.js", "React", "Tailwind", "SEO"],
   },
   {
     title: "MusheTrading",
     subtitle: "China-Focused Export & Sourcing",
-    description: "Soluciones de exportación y sourcing para el mercado chino. Sourcing con certificaciones, cumplimiento normativo y logística de extremo a extremo para importadores y plataformas.",
+    description: "Soluciones de exportaciÃ³n y sourcing para el mercado chino. Sourcing con certificaciones, cumplimiento normativo y logÃ­stica de extremo a extremo para importadores y plataformas.",
     url: "https://mushetrading.vercel.app/",
     image: "https://images.unsplash.com/photo-1508807526341-e3b5c71e8c7?w=800&q=80",
-    category: "Export · China",
+    category: "Export Â· China",
     tags: ["Next.js", "React", "Vercel", "TypeScript"],
   },
   {
     title: "Agencia Contraste",
-    subtitle: "BTL Experiencial · Activaciones de Marca",
-    description: "Sitio web corporativo para agencia de marketing y publicidad. Diseño moderno con animaciones fluidas y experiencia de usuario optimizada.",
+    subtitle: "BTL Experiencial Â· Activaciones de Marca",
+    description: "Sitio web corporativo para agencia de marketing y publicidad. DiseÃ±o moderno con animaciones fluidas y experiencia de usuario optimizada.",
     url: "https://www.contrasteagencia.com/",
     image: "/images/cases/contrasteagencia.png",
     category: "Agencia de Publicidad",
@@ -70,48 +71,66 @@ const successCases = [
   },
   {
     title: "TH Global",
-    subtitle: "Telehealth · Teleradiología",
-    description: "Plataforma de teleradiología que revoluciona los diagnósticos con tecnología avanzada. Estudios de tele radiología, tele cardiología y medicina nuclear con presencia nacional e internacional.",
+    subtitle: "Telehealth Â· TeleradiologÃ­a",
+    description: "Plataforma de teleradiologÃ­a que revoluciona los diagnÃ³sticos con tecnologÃ­a avanzada. Estudios de tele radiologÃ­a, tele cardiologÃ­a y medicina nuclear con presencia nacional e internacional.",
     url: "https://thglobal.com.co/",
     image: "/images/cases/thglobal.png",
-    category: "Salud · Telemedicina",
+    category: "Salud Â· Telemedicina",
     tags: ["Next.js", "React", "TypeScript", "SEO"],
   },
   {
     title: "Mercaderus Trading",
     subtitle: "Food Export Logistics",
-    description: "Plataforma de logística y exportación de alimentos enfocada en el mercado estadounidense. Conexión entre proveedores, importadores y distribuidores con programas de contenedores y coordinación operativa.",
+    description: "Plataforma de logÃ­stica y exportaciÃ³n de alimentos enfocada en el mercado estadounidense. ConexiÃ³n entre proveedores, importadores y distribuidores con programas de contenedores y coordinaciÃ³n operativa.",
     url: "https://www.mercaderustrading.com/",
     image: "/images/cases/mercaderus.png",
-    category: "E-commerce · Logística",
+    category: "E-commerce Â· LogÃ­stica",
     tags: ["Next.js", "React", "TypeScript", "SEO"],
   },
   {
     title: "venextrading",
     subtitle: "Mercado Venezolano",
-    description: "Marketplace que conecta vendedores y compradores con productos de calidad en Venezuela. Soluciones de sourcing, control de calidad y logística para comercio internacional.",
+    description: "Marketplace que conecta vendedores y compradores con productos de calidad en Venezuela. Soluciones de sourcing, control de calidad y logÃ­stica para comercio internacional.",
     url: "https://www.venextrading.shop/",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
-    category: "Marketplace · E-commerce",
+    category: "Marketplace Â· E-commerce",
     tags: ["Next.js", "React", "E-commerce", "UI/UX"],
   },
   {
     title: "Logysan",
-    subtitle: "Soluciones Logísticas Integrales",
-    description: "Plataforma web para empresa de logística y transporte. Sistema completo con gestión de servicios y contacto directo con clientes.",
+    subtitle: "Soluciones LogÃ­sticas Integrales",
+    description: "Plataforma web para empresa de logÃ­stica y transporte. Sistema completo con gestiÃ³n de servicios y contacto directo con clientes.",
     url: "https://logysan.com.co/",
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80",
-    category: "Logística y Transporte",
+    category: "LogÃ­stica y Transporte",
     tags: ["Next.js", "React", "TypeScript", "SEO"],
   },
   {
     title: "Jin Global Trading",
     subtitle: "Importaciones y Exportaciones",
-    description: "Integrador estratégico: importaciones productivas, comercialización internacional, financiamiento y logística para pymes y exportadoras latinas hacia Estados Unidos, Europa, Medio Oriente y Asia.",
+    description: "Integrador estratÃ©gico: importaciones productivas, comercializaciÃ³n internacional, financiamiento y logÃ­stica para pymes y exportadoras latinas hacia Estados Unidos, Europa, Medio Oriente y Asia.",
     url: "https://jinglobaltrading.com/",
     image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&q=80",
-    category: "Importaciones · Exportaciones",
+    category: "Importaciones Â· Exportaciones",
     tags: ["Next.js", "React", "Comercio Internacional", "SEO"],
+  },
+  {
+    title: "Fibraca",
+    subtitle: "Soluciones PRFV Â· Industria",
+    description: "Sitio corporativo y tienda para productos PRFV (polÃ­mero reforzado con fibra de vidrio): barras, mallas, perfiles, rejillas, tuberÃ­a y montaje solar. IngenierÃ­a para construcciÃ³n, energÃ­a e infraestructura.",
+    url: "https://www.fibraca.com/",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+    category: "Industrial Â· E-commerce",
+    tags: ["Next.js", "React", "E-commerce", "SEO"],
+  },
+  {
+    title: "Trader Marketer",
+    subtitle: "Export Trading Company",
+    description: "Plataforma para export trading: conecta proveedores latinoamericanos con compradores internacionales, servicios de internacionalizaciÃ³n y segmentos agroindustrial, textil, muebles y mÃ¡s.",
+    url: "https://www.tradermarketer.online/",
+    image: "https://images.unsplash.com/photo-1494412519320-aa613ded778b?w=800&q=80",
+    category: "Comercio internacional Â· B2B",
+    tags: ["Next.js", "React", "Trading", "SEO"],
   },
 ]
 
@@ -120,13 +139,17 @@ export default function CasosDeExitoPage() {
   const { t } = useLanguage()
 
   return (
-    <main className="relative min-h-screen bg-background text-foreground">
+    <main className="relative min-h-screen bg-transparent text-foreground">
       <Navigation />
       <FloatingContact />
 
       <section ref={ref} className="pt-28 pb-16 md:pt-36 md:pb-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="pointer-events-none absolute right-0 top-20 z-0 hidden w-52 lg:block lg:opacity-40">
+          <Tech3DAccent variant="chip" size="md" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
           <div
             className={`mb-16 md:mb-20 transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -137,10 +160,10 @@ export default function CasosDeExitoPage() {
                 {t("casesPage.label")}
               </span>
               <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.70_0.15_180/0.35)]" />
+              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
             </div>
             <h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 text-balance max-w-4xl"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold heading-brand mb-6 text-balance max-w-4xl"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {t("casesPage.title")}
@@ -182,7 +205,7 @@ export default function CasosDeExitoPage() {
                   </p>
                   <div className="flex items-start justify-between gap-3 mb-3">
                     <h2
-                      className="text-xl md:text-2xl font-bold text-foreground"
+                      className="text-xl md:text-2xl font-bold heading-brand"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {item.title}
