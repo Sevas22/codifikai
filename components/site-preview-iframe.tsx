@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from "react"
 
 /**
- * Vista embebida del sitio (lazy al entrar en el viewport).
- * Usar solo donde haga falta preview en vivo; en la home conviene solo imagen + enlace.
+ * Vista embebida del sitio: carga el iframe al acercarse al viewport (lazy).
+ * El poster (Image debajo) solo se ve hasta que el iframe pinta.
  */
 export function SitePreviewIframe({ url }: { url: string }) {
   const [shouldLoad, setShouldLoad] = useState(false)
@@ -17,21 +17,21 @@ export function SitePreviewIframe({ url }: { url: string }) {
       ([entry]) => {
         if (entry.isIntersecting) setShouldLoad(true)
       },
-      { threshold: 0.12, rootMargin: "0px 0px 100px 0px" }
+      { threshold: 0.06, rootMargin: "0px 0px 180px 0px" }
     )
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
 
   return (
-    <div ref={ref} className="absolute inset-0 pointer-events-none z-[1]">
+    <div ref={ref} className="absolute inset-0 z-[2] pointer-events-none">
       {shouldLoad && (
         <iframe
           src={url}
           title="Preview del sitio"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="absolute top-0 left-0 w-[200%] h-[200%] origin-top-left scale-[0.5] border-0 opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+          referrerPolicy="no-referrer"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          className="absolute top-0 left-0 h-[200%] w-[200%] origin-top-left scale-[0.5] border-0 opacity-[0.97] transition-opacity duration-300 group-hover:opacity-100"
         />
       )}
     </div>

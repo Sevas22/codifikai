@@ -12,7 +12,8 @@ import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
 import { Button } from "@/components/ui/button"
 import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 import { WHATSAPP_URL } from "@/lib/contact"
-import { successCases } from "@/lib/success-cases"
+import { successCases, isLogoPosterPath } from "@/lib/success-cases"
+import { cn } from "@/lib/utils"
 
 export default function CasosDeExitoPage() {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.08 })
@@ -59,15 +60,25 @@ export default function CasosDeExitoPage() {
                 }`}
                 style={{ transitionDelay: `${index * 80}ms` }}
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-secondary/30">
+                <div
+                  className={cn(
+                    "relative aspect-[4/3] overflow-hidden",
+                    isLogoPosterPath(item.image) ? "bg-white" : "bg-secondary/30"
+                  )}
+                >
                   <Image
                     src={item.image}
                     alt={`Preview de ${item.title}`}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className={cn(
+                      "transition-transform duration-700 group-hover:scale-105",
+                      isLogoPosterPath(item.image)
+                        ? "object-contain p-8 md:p-10"
+                        : "object-cover"
+                    )}
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   />
-                  <SitePreviewIframe url={item.url} />
+                  {item.embedSitePreview !== false && <SitePreviewIframe url={item.url} />}
                   <div className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-accent/30 bg-background/90 backdrop-blur-sm text-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                     <ExternalLink className="h-5 w-5" />
                   </div>

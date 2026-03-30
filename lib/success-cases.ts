@@ -1,3 +1,8 @@
+/** Imagen de marca en `/images/partners/` — mostrar con fondo blanco y `object-contain`. */
+export function isLogoPosterPath(src: string) {
+  return src.startsWith("/images/partners/")
+}
+
 export type SuccessCase = {
   id: string
   title: string
@@ -7,6 +12,11 @@ export type SuccessCase = {
   image: string
   category: string
   tags: string[]
+  /**
+   * Si es `false`, no se incrusta el sitio en iframe (evita spinners / errores cuando el destino
+   * no se ve bien embebido, p. ej. algunos Next.js en Vercel). La tarjeta sigue enlazando al sitio real.
+   */
+  embedSitePreview?: boolean
 }
 
 /** Misma lista que la página Casos de éxito (portfolio real). */
@@ -29,7 +39,8 @@ export const successCases: SuccessCase[] = [
     description:
       "Soluciones de exportación y sourcing para el mercado chino. Sourcing con certificaciones, cumplimiento normativo y logística de extremo a extremo para importadores y plataformas.",
     url: "https://mushetrading.vercel.app/",
-    image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80",
     category: "Export · China",
     tags: ["Next.js", "React", "Vercel", "TypeScript"],
   },

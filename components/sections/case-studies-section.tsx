@@ -8,69 +8,18 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
 import { IconSquircle } from "@/components/ui/icon-squircle"
 import { SectionEyebrow } from "@/components/ui/section-eyebrow"
+import { SitePreviewIframe } from "@/components/site-preview-iframe"
+import { successCases, type SuccessCase, isLogoPosterPath } from "@/lib/success-cases"
+import { cn } from "@/lib/utils"
 
-const cases = [
-  {
-    title: "Jibala Trading",
-    subtitle: "Middle East Trade & Supply",
-    description:
-      "Empresa de comercio enfocada en mercados del Golfo. Sourcing premium, programas FCL/LCL y coordinaci\u00f3n log\u00edstica para distribuidores y retail en UAE, Arabia Saudita y Qatar.",
-    url: "https://www.jibalamericastrading.com/",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
-    category: "Comercio \u00b7 GCC",
-    tags: ["Next.js", "React", "Tailwind", "SEO"],
-  },
-  {
-    title: "MusheTrading",
-    subtitle: "China-Focused Export & Sourcing",
-    description:
-      "Soluciones de exportaci\u00f3n y sourcing para el mercado chino. Sourcing con certificaciones, cumplimiento normativo y log\u00edstica de extremo a extremo.",
-    url: "https://mushetrading.vercel.app/",
-    image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=80",
-    category: "Export \u00b7 China",
-    tags: ["Next.js", "React", "Vercel", "TypeScript"],
-  },
-  {
-    title: "Agencia Contraste",
-    subtitle: "BTL Experiencial \u00b7 Activaciones de Marca",
-    description:
-      "Sitio web corporativo para agencia de marketing y publicidad. Dise\u00f1o moderno con animaciones fluidas y experiencia de usuario optimizada.",
-    url: "https://www.contrasteagencia.com/",
-    image: "/images/cases/contrasteagencia.png",
-    category: "Agencia de Publicidad",
-    tags: ["React", "Next.js", "Tailwind CSS", "Animaciones"],
-  },
-  {
-    title: "TH Global",
-    subtitle: "Telehealth \u00b7 Teleradiolog\u00eda",
-    description:
-      "Plataforma de teleradiolog\u00eda que revoluciona los diagn\u00f3sticos con tecnolog\u00eda avanzada. Estudios de teleradiolog\u00eda, telecardiolog\u00eda y medicina nuclear con presencia nacional e internacional.",
-    url: "https://thglobal.com.co/",
-    image: "/images/cases/thglobal.png",
-    category: "Salud \u00b7 Telemedicina",
-    tags: ["Next.js", "React", "TypeScript", "SEO"],
-  },
-  {
-    title: "Fibraca",
-    subtitle: "Soluciones PRFV \u00b7 Industria",
-    description:
-      "Sitio corporativo y tienda para productos PRFV (pol\u00edmero reforzado con fibra de vidrio): barras, mallas, perfiles, rejillas, tuber\u00eda y montaje solar. Ingenier\u00eda para construcci\u00f3n, energ\u00eda e infraestructura.",
-    url: "https://www.fibraca.com/",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
-    category: "Industrial \u00b7 E-commerce",
-    tags: ["Next.js", "React", "E-commerce", "SEO"],
-  },
-  {
-    title: "Trader Marketer",
-    subtitle: "Export Trading Company",
-    description:
-      "Plataforma para export trading: conecta proveedores latinoamericanos con compradores internacionales, servicios de internacionalizaci\u00f3n y segmentos agroindustrial, textil, muebles y m\u00e1s.",
-    url: "https://www.tradermarketer.online/",
-    image: "https://images.unsplash.com/photo-1494412519320-aa613ded778b?w=800&q=80",
-    category: "Comercio internacional \u00b7 B2B",
-    tags: ["Next.js", "React", "Trading", "SEO"],
-  },
-]
+/** Solo 4 proyectos en la home; el resto sigue en /casos-de-exito */
+const HOME_CASE_IDS = ["jibal-americas", "jin-global", "contraste", "mercaderus"] as const
+
+const homeCases: SuccessCase[] = HOME_CASE_IDS.map((id) => {
+  const c = successCases.find((x) => x.id === id)
+  if (!c) throw new Error(`successCases missing id: ${id}`)
+  return c
+})
 
 export function CaseStudiesSection() {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 })
@@ -112,9 +61,9 @@ export function CaseStudiesSection() {
 
         {/* Cases grid - mismo estilo que casos de Ã©xito */}
         <div className="grid sm:grid-cols-2 gap-6 md:gap-8">
-          {cases.map((item, index) => (
+          {homeCases.map((item, index) => (
             <a
-              key={item.title}
+              key={item.id}
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
@@ -123,14 +72,25 @@ export function CaseStudiesSection() {
               }`}
               style={{ transitionDelay: `${index * 80}ms` }}
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-secondary/30">
+              <div
+                className={cn(
+                  "relative aspect-[4/3] overflow-hidden",
+                  isLogoPosterPath(item.image) ? "bg-white" : "bg-secondary/30"
+                )}
+              >
                 <Image
                   src={item.image}
                   alt={`Preview de ${item.title}`}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className={cn(
+                    "transition-transform duration-700 group-hover:scale-105",
+                    isLogoPosterPath(item.image)
+                      ? "object-contain p-6 md:p-8"
+                      : "object-cover"
+                  )}
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                 />
+                {item.embedSitePreview !== false && <SitePreviewIframe url={item.url} />}
                 <div className="absolute top-4 right-4 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <IconSquircle icon={ExternalLink} size="sm" />
                 </div>
