@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { MessageCircle, X, Send, Mail, Phone } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/components/providers/language-provider"
 import { IconSquircle } from "@/components/ui/icon-squircle"
 import { MAILTO_CONTACT, WHATSAPP_URL } from "@/lib/contact"
@@ -57,7 +56,7 @@ export function FloatingContact() {
           {/* Content */}
           <div className="relative p-6">
             {/* Header */}
-            <div className="mb-6">
+            <div className="mb-6 text-center sm:text-left">
               <h3 
                 className="text-xl font-bold heading-brand-sm mb-2"
                 style={{ fontFamily: 'var(--font-display)' }}
@@ -111,21 +110,6 @@ export function FloatingContact() {
                 </div>
                 <Send className="w-5 h-5 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 transition-all duration-300" />
               </a>
-            </div>
-
-            {/* Quick action */}
-            <div className="mt-6 pt-4 border-t border-border/50">
-              <Button
-                asChild
-                className="w-full group relative overflow-hidden bg-accent text-accent-foreground hover:bg-accent"
-              >
-                <a href="/contact">
-                  <span className="relative z-10 transition-colors duration-300">
-                    {t("contact.cta")}
-                  </span>
-                  <span className="absolute inset-0 bg-foreground scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
-                </a>
-              </Button>
             </div>
           </div>
         </div>

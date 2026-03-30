@@ -6,7 +6,8 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
 import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
 import { IconSquircle } from "@/components/ui/icon-squircle"
-import { CONTACT_EMAIL, MAILTO_CONTACT } from "@/lib/contact"
+import { Button } from "@/components/ui/button"
+import { CONTACT_EMAIL, MAILTO_CONTACT, WHATSAPP_URL } from "@/lib/contact"
 
 function TopoPattern({ className }: { className?: string }) {
   return (
@@ -132,19 +133,18 @@ export function Footer() {
               <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-transparent to-black/20" />
 
               <div className="relative flex h-full flex-row items-stretch">
-                <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 px-5 py-6 sm:gap-5 sm:px-7 sm:py-8">
+                <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 px-5 py-6 text-center sm:gap-5 sm:px-7 sm:py-8 lg:text-left">
                   <p
                     className="text-[0.65rem] font-bold uppercase leading-snug tracking-[0.16em] text-white sm:text-[0.7rem] sm:tracking-[0.18em]"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {t("footer.ctaTitle")}
                   </p>
-                  <Link
-                    href="/contact"
-                    className="inline-flex w-fit items-center justify-center rounded-md border-2 border-white/90 bg-transparent px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10 hover:border-white"
-                  >
-                    {t("footer.ctaButton")}
-                  </Link>
+                  <Button asChild variant="cta" size="cta-sm" className="mx-auto w-fit shadow-lg lg:mx-0">
+                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                      {t("footer.ctaButton")}
+                    </a>
+                  </Button>
                 </div>
                 <CtaPillStrip />
               </div>
@@ -159,7 +159,7 @@ export function Footer() {
               <Tech3DAccent variant="prism" size="sm" />
             </div>
 
-            <div className="relative grid gap-12 px-6 sm:px-8 lg:grid-cols-2 lg:gap-12 lg:px-0 xl:gap-16">
+            <div className="relative grid gap-12 px-6 text-center sm:px-8 lg:grid-cols-2 lg:gap-12 lg:px-0 lg:text-left xl:gap-16">
               <div>
                 <h3 className="mb-6 text-lg font-bold heading-brand-sm">{t("footer.linksHeading")}</h3>
                 <ul className="space-y-3.5">
@@ -201,7 +201,7 @@ export function Footer() {
                   </li>
                 </ul>
 
-                <div className="mt-8 flex flex-wrap gap-2">
+                <div className="mt-8 flex flex-wrap justify-center gap-2 lg:justify-start">
                   {socialLinks.map((social) => {
                     const Icon = social.icon
                     const isExternal = social.href.startsWith("http")

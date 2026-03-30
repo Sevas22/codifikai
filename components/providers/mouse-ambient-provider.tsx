@@ -30,14 +30,22 @@ export function MouseAmbientProvider({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     if (isMobile) return
+    let rafId: number | null = null
+    const pending = { x: 50, y: 50 }
     const onMove = (e: MouseEvent) => {
-      setMouse({
-        x: (e.clientX / Math.max(window.innerWidth, 1)) * 100,
-        y: (e.clientY / Math.max(window.innerHeight, 1)) * 100,
+      pending.x = (e.clientX / Math.max(window.innerWidth, 1)) * 100
+      pending.y = (e.clientY / Math.max(window.innerHeight, 1)) * 100
+      if (rafId != null) return
+      rafId = requestAnimationFrame(() => {
+        rafId = null
+        setMouse({ x: pending.x, y: pending.y })
       })
     }
     window.addEventListener("mousemove", onMove, { passive: true })
-    return () => window.removeEventListener("mousemove", onMove)
+    return () => {
+      window.removeEventListener("mousemove", onMove)
+      if (rafId != null) cancelAnimationFrame(rafId)
+    }
   }, [isMobile])
 
   const value = React.useMemo(() => ({ x: mouse.x, y: mouse.y, isMobile }), [mouse.x, mouse.y, isMobile])

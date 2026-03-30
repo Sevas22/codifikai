@@ -3,6 +3,7 @@
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/providers/language-provider"
 import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 
 const testimonialsData = [
   { quoteKey: "stats.testimonial1", author: "Carlos Mendoza", role: "CEO, TechVentures", avatar: "CM" },
@@ -27,13 +28,7 @@ export function StatsSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="flex items-center gap-4 md:gap-6 mb-5">
-            <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-              {t("stats.label")}
-            </span>
-            <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-            <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-          </div>
+          <SectionEyebrow label={t("stats.label")} />
           <h2
             className="text-3xl md:text-4xl font-bold heading-brand mb-4"
             style={{ fontFamily: 'var(--font-display)' }}
@@ -56,12 +51,12 @@ export function StatsSection() {
               style={{ transitionDelay: `${index * 100 + 200}ms` }}
             >
               {/* Quote */}
-              <p className="text-muted-foreground mb-6 leading-relaxed">
+              <p className="text-muted-foreground mb-6 text-center leading-relaxed md:text-left">
                 &ldquo;{t(testimonial.quoteKey)}&rdquo;
               </p>
               
               {/* Author */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center gap-4 md:justify-start">
                 <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-semibold">
                   {testimonial.avatar}
                 </div>

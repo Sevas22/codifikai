@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/providers/language-provider"
 import { IconSquircle } from "@/components/ui/icon-squircle"
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 
 const technologiesData = [
   { icon: MonitorSmartphone, titleKey: "techPreview.frontend", descKey: "techPreview.frontendDesc" },
@@ -24,18 +25,12 @@ export function TechnologiesPreviewSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
-          className={`flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10 md:mb-12 transition-all duration-700 ${
+          className={`mb-10 flex flex-col items-center gap-6 text-center md:mb-12 lg:mb-12 lg:flex-row lg:items-end lg:justify-between lg:text-left transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-4 md:gap-6 mb-5">
-              <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                {t("techPreview.label")}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-            </div>
+          <div className="mx-auto max-w-3xl lg:mx-0">
+            <SectionEyebrow label={t("techPreview.label")} />
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-bold heading-brand mb-5 text-balance"
               style={{ fontFamily: 'var(--font-display)' }}
@@ -47,14 +42,10 @@ export function TechnologiesPreviewSection() {
             </p>
           </div>
 
-          <Button
-            asChild
-            variant="outline"
-            className="group border-accent/30 bg-accent/5 text-accent hover:bg-accent hover:text-accent-foreground"
-          >
+          <Button asChild variant="cta" size="cta" className="group shrink-0">
             <Link href="/about#technologies">
               {t("techPreview.viewTools")}
-              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </Button>
         </div>
@@ -66,12 +57,12 @@ export function TechnologiesPreviewSection() {
             return (
               <article
                 key={item.titleKey}
-                className={`group rounded-2xl border border-border/50 bg-background/50 p-6 backdrop-blur-xl transition-all duration-700 hover:-translate-y-1 hover:border-accent/30 ${
+                className={`group rounded-2xl border border-border/50 bg-background/50 p-6 text-center backdrop-blur-xl transition-all duration-700 hover:-translate-y-1 hover:border-accent/30 sm:text-left ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${index * 100 + 120}ms` }}
               >
-                <div className="mb-5">
+                <div className="mb-5 flex justify-center sm:justify-start">
                   <IconSquircle icon={Icon} size="lg" className="group-hover:scale-105" />
                 </div>
                 <h3

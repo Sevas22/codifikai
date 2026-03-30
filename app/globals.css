@@ -679,6 +679,12 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Hero H1: Inter (misma familia que nav / cuerpo); .heading-brand usa display por defecto */
+.hero-title-gradient,
+.hero-title-gradient .heading-brand {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Subtítulos / cards / footer */
 .heading-brand-sm {
   font-family: var(--font-display);
@@ -771,8 +777,9 @@
     display: none;
   }
 
-  /* Touch-friendly tap targets */
-  button, a, [role="button"] {
+  /* Touch-friendly tap targets (links stay inline for centered text layouts) */
+  button:not(:disabled),
+  [role="button"] {
     min-height: 44px;
     min-width: 44px;
   }

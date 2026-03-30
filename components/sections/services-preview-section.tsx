@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useLanguage } from "@/components/providers/language-provider"
 import { IconSquircle } from "@/components/ui/icon-squircle"
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 import { WHATSAPP_URL } from "@/lib/contact"
 
 const servicesData = [
@@ -28,13 +29,10 @@ export function ServicesPreviewSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="flex items-center gap-4 md:gap-6 mb-5">
-            <span className="shrink-0 bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-xs font-semibold uppercase tracking-[0.22em] text-transparent md:text-sm">
-              {t("servicesPreview.label")}
-            </span>
-            <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-violet-400/45 to-fuchsia-500/25" />
-            <div className="h-2.5 w-2.5 rounded-full border border-violet-400/50 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.28),0_0_18px_oklch(0.68_0.22_310/0.35)]" />
-          </div>
+          <SectionEyebrow
+            label={t("servicesPreview.label")}
+            labelClassName="bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-xs font-semibold uppercase tracking-[0.22em] text-transparent md:text-sm"
+          />
           <h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold heading-brand mb-6"
             style={{ fontFamily: 'var(--font-display)' }}
@@ -99,16 +97,10 @@ export function ServicesPreviewSection() {
           >
             {t("servicesPreview.contactTitle")}
           </h3>
-          <Button
-            asChild
-            className="group relative overflow-hidden bg-foreground text-background hover:bg-foreground"
-          >
+          <Button asChild variant="cta" size="cta" className="group">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-              <span className="relative z-10 flex items-center gap-2 text-background transition-colors duration-300 group-hover:text-white">
-                {t("servicesPreview.contactCta")}
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </span>
-              <span className="absolute inset-0 origin-left scale-x-0 bg-gradient-to-r from-cyan-500 via-violet-600 to-fuchsia-600 transition-transform duration-500 group-hover:scale-x-100" />
+              {t("servicesPreview.contactCta")}
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </Button>
         </div>

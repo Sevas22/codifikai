@@ -1,5 +1,5 @@
 /** Enlace único de contacto por WhatsApp (wa.link). */
-export const WHATSAPP_URL = "https://wa.link/rjej24" as const
+export const WHATSAPP_URL = "https://wa.link/kk4nmh" as const
 
 export const CONTACT_EMAIL = "codifikai@gmail.com" as const
 

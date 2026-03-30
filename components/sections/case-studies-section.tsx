@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowUpRight, ExternalLink } from "lucide-react"
@@ -8,36 +7,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
 import { IconSquircle } from "@/components/ui/icon-squircle"
-
-function SitePreviewIframe({ url }: { url: string }) {
-  const [shouldLoad, setShouldLoad] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setShouldLoad(true)
-      },
-      { threshold: 0.2 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <div ref={ref} className="absolute inset-0 pointer-events-none z-[1]">
-      {shouldLoad && (
-        <iframe
-          src={url}
-          title="Preview del sitio"
-          className="absolute top-0 left-0 w-[200%] h-[200%] origin-top-left scale-[0.5] border-0 opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-        />
-      )}
-    </div>
-  )
-}
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 
 const cases = [
   {
@@ -56,7 +26,7 @@ const cases = [
     description:
       "Soluciones de exportaci\u00f3n y sourcing para el mercado chino. Sourcing con certificaciones, cumplimiento normativo y log\u00edstica de extremo a extremo.",
     url: "https://mushetrading.vercel.app/",
-    image: "https://images.unsplash.com/photo-1508807526341-e3b5c71e8c7?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=80",
     category: "Export \u00b7 China",
     tags: ["Next.js", "React", "Vercel", "TypeScript"],
   },
@@ -115,18 +85,12 @@ export function CaseStudiesSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div
-          className={`flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-10 md:mb-12 transition-all duration-700 ${
+          className={`mb-10 flex flex-col items-center gap-6 text-center md:mb-12 md:flex-row md:items-end md:justify-between md:text-left transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div>
-            <div className="flex items-center gap-4 md:gap-6 mb-5">
-              <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                {t("cases.label")}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-            </div>
+          <div className="mx-auto w-full max-w-xl md:mx-0 md:max-w-none">
+            <SectionEyebrow label={t("cases.label")} />
             <h2
               className="text-2xl sm:text-3xl md:text-4xl font-bold heading-brand mb-3 md:mb-4 text-balance"
               style={{ fontFamily: 'var(--font-display)' }}
@@ -139,7 +103,7 @@ export function CaseStudiesSection() {
           </div>
           <Link
             href="/casos-de-exito"
-            className="group inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors font-medium"
+            className="group inline-flex shrink-0 items-center gap-2 text-accent hover:text-accent/80 transition-colors font-medium"
           >
             {t("cases.viewAll")}
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -167,29 +131,28 @@ export function CaseStudiesSection() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                 />
-                <SitePreviewIframe url={item.url} />
                 <div className="absolute top-4 right-4 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <IconSquircle icon={ExternalLink} size="sm" />
                 </div>
               </div>
 
-              <div className="border-t border-border/50 bg-card p-5 md:p-6">
+              <div className="border-t border-border/50 bg-card p-5 text-center sm:text-left md:p-6">
                 <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">
                   {item.category}
                 </p>
-                <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="mb-3 flex flex-col items-center gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
                   <h2
                     className="text-xl md:text-2xl font-bold heading-brand-sm"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {item.title}
                   </h2>
-                  <ExternalLink className="h-5 w-5 shrink-0 text-accent opacity-70 group-hover:opacity-100 transition-opacity" />
+                  <ExternalLink className="h-5 w-5 shrink-0 text-accent opacity-70 group-hover:opacity-100 transition-opacity sm:mt-1" />
                 </div>
                 <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-4">
                   {item.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="mb-4 flex flex-wrap justify-center gap-2 sm:justify-start">
                   {item.tags.map((tag) => (
                     <span
                       key={tag}
@@ -199,7 +162,7 @@ export function CaseStudiesSection() {
                     </span>
                   ))}
                 </div>
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-accent group-hover:gap-3 transition-all duration-300">
+                <span className="mx-auto inline-flex items-center gap-2 text-sm font-medium text-accent group-hover:gap-3 transition-all duration-300 sm:mx-0">
                   {t("casesPage.visitSite")}
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>

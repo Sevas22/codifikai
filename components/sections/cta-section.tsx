@@ -1,11 +1,11 @@
 "use client"
 
-import Link from "next/link"
 import { ArrowRight, MessageCircle, Mail, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { IconSquircle } from "@/components/ui/icon-squircle"
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 import { CONTACT_EMAIL, MAILTO_CONTACT, PHONE_DISPLAY, PHONE_TEL_HREF, WHATSAPP_URL } from "@/lib/contact"
 
 const contactOptions = [
@@ -49,13 +49,7 @@ export function CTASection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="flex items-center gap-4 md:gap-6 mb-6">
-            <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-              Hablemos
-            </span>
-            <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-            <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-          </div>
+          <SectionEyebrow label="Hablemos" className="mb-6" />
           {/* Available badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-7">
             <span className="relative flex h-2 w-2">
@@ -77,18 +71,11 @@ export function CTASection() {
           </p>
 
           {/* CTA button */}
-          <Button
-            asChild
-            size="lg"
-            className="group relative overflow-hidden bg-foreground text-background hover:bg-foreground px-10 py-7 text-lg font-medium hover-lift hover-glow"
-          >
-            <Link href="/contact">
-              <span className="relative z-10 flex items-center gap-3 transition-colors duration-300 group-hover:text-accent-foreground">
-                {t("cta.button")}
-                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </span>
-              <span className="absolute inset-0 bg-accent scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
-            </Link>
+          <Button asChild variant="cta" size="cta-lg" className="group hover-lift hover-glow">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              {t("cta.button")}
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
           </Button>
         </div>
 

@@ -9,6 +9,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
 import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
 import { IconSquircle } from "@/components/ui/icon-squircle"
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 
 const pillarsData = [
   "companyIntro.pillar1",
@@ -21,7 +22,7 @@ export function CompanyIntroSection() {
   const { t } = useLanguage()
 
   return (
-    <section ref={ref} className="relative overflow-hidden py-20 md:py-24">
+    <section ref={ref} className="relative overflow-hidden pt-8 pb-16 md:py-24">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
       <div className="pointer-events-none absolute -right-4 top-24 z-0 hidden w-[200px] lg:block">
         <Tech3DAccent variant="chip" size="sm" className="opacity-80" />
@@ -29,19 +30,13 @@ export function CompanyIntroSection() {
 
       <div className="relative z-10 mx-auto grid max-w-7xl gap-8 px-4 sm:gap-10 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-14 lg:px-8">
         <div
-          className={`transition-all duration-700 ${
+          className={`text-center md:text-left transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="flex items-center gap-4 md:gap-6 mb-5">
-            <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-              {t("companyIntro.label")}
-            </span>
-            <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-            <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-          </div>
+          <SectionEyebrow label={t("companyIntro.label")} />
 
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent mx-auto md:mx-0">
             <Sparkles className="h-4 w-4" />
             {t("companyIntro.badge")}
           </span>
@@ -51,18 +46,18 @@ export function CompanyIntroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            <div className="mb-5">
+            <div className="mb-5 flex justify-center md:justify-start">
               <CodifikaiLogo size="sm" showCode className="text-xs sm:text-sm" />
             </div>
 
             <h2
-              className="max-w-3xl text-3xl font-bold heading-brand md:text-4xl lg:text-5xl text-balance"
+              className="mx-auto max-w-3xl text-3xl font-bold heading-brand md:text-4xl lg:text-5xl text-balance md:mx-0"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {t("companyIntro.title")}
             </h2>
 
-            <p className="mt-6 max-w-2xl text-base font-medium leading-relaxed text-muted-foreground md:text-lg">
+            <p className="mx-auto mt-6 max-w-2xl text-base font-medium leading-relaxed text-muted-foreground md:mx-0 md:text-lg">
               {t("companyIntro.subtitle")}
             </p>
 
@@ -70,7 +65,7 @@ export function CompanyIntroSection() {
               {pillarsData.map((pillarKey, index) => (
                 <div
                   key={pillarKey}
-                  className={`flex items-center gap-3 rounded-2xl border border-border/50 bg-background/70 px-4 py-3 backdrop-blur-xl transition-all duration-700 dark:bg-background/50 ${
+                  className={`flex flex-col items-center gap-3 rounded-2xl border border-border/50 bg-background/70 px-4 py-3 text-center backdrop-blur-xl transition-all duration-700 dark:bg-background/50 sm:flex-row sm:items-center sm:text-left ${
                     isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
                   }`}
                   style={{ transitionDelay: `${index * 120 + 120}ms` }}
@@ -84,11 +79,7 @@ export function CompanyIntroSection() {
 
           <div className="mt-10 flex w-full flex-col items-center text-center">
             <div className="flex justify-center">
-              <Button
-                asChild
-                variant="outline"
-                className="group border-accent/30 bg-accent/5 text-accent hover:bg-accent hover:text-accent-foreground"
-              >
+              <Button asChild variant="cta" size="cta" className="group">
                 <Link href="/about">
                   {t("companyIntro.cta")}
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

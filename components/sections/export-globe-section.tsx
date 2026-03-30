@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback, useMemo } from "react"
 import Globe from "react-globe.gl"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 
 // Colores de marca startup: cyan eléctrico → violeta / magenta
 const BRAND_ORIGIN = "#22d3ee"
@@ -155,30 +156,24 @@ export function ExportGlobeSection() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header de seccion */}
         <div
-          className={`mb-12 md:mb-16 transition-all duration-700 ${
+          className={`mb-12 text-center md:mb-16 md:text-left transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="flex items-center gap-4 md:gap-6 mb-5">
-            <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-              {t("globe.label")}
-            </span>
-            <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-            <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-          </div>
+          <SectionEyebrow label={t("globe.label")} />
 
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent mx-auto md:mx-0">
             {t("globe.badge")}
           </span>
 
           <h2
-            className="mt-6 max-w-3xl text-3xl font-bold heading-brand md:text-4xl lg:text-5xl text-balance"
+            className="mx-auto mt-6 max-w-3xl text-3xl font-bold heading-brand md:mx-0 md:text-4xl lg:text-5xl text-balance"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {t("globe.title")}
           </h2>
 
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:mx-0 md:text-lg">
             {t("globe.subtitle")}
           </p>
         </div>
@@ -240,12 +235,12 @@ export function ExportGlobeSection() {
 
           {/* Panel lateral */}
           <div
-            className={`rounded-2xl border border-border/50 bg-background/60 p-6 md:p-8 backdrop-blur-xl transition-all duration-700 ${
+            className={`rounded-2xl border border-border/50 bg-background/60 p-6 text-center md:p-8 md:text-left backdrop-blur-xl transition-all duration-700 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
             style={{ transitionDelay: "150ms" }}
           >
-            <div className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs text-muted-foreground sm:text-sm">
+            <div className="mb-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5 text-xs text-muted-foreground sm:text-sm md:justify-start">
               <span className="whitespace-nowrap">{t("globe.fromColombia")}</span>
               <span className="text-accent" aria-hidden>
                 {regionalFlagEmoji("CO")}
@@ -263,7 +258,7 @@ export function ExportGlobeSection() {
 
             <div className="mb-8">
               <h3
-                className="text-2xl md:text-3xl font-bold heading-brand-sm flex items-center gap-3 mb-3"
+                className="text-2xl md:text-3xl font-bold heading-brand-sm mb-3 flex flex-col items-center gap-2 sm:flex-row sm:items-center sm:gap-3 md:flex-row"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 <span aria-hidden>{regionalFlagEmoji(selected.iso)}</span>
@@ -281,7 +276,7 @@ export function ExportGlobeSection() {
                   key={dest.id}
                   type="button"
                   onClick={() => flyToCountry(dest)}
-                  className={`flex min-w-0 items-center gap-1.5 rounded-xl border px-2 py-2.5 text-left transition-all duration-300 sm:gap-2 sm:px-3 sm:py-3 ${
+                  className={`flex min-w-0 flex-col items-center justify-center gap-1 rounded-xl border px-2 py-2.5 text-center transition-all duration-300 sm:flex-row sm:items-center sm:justify-start sm:gap-2 sm:px-3 sm:py-3 sm:text-left ${
                     selectedId === dest.id
                       ? "border-accent bg-accent/10 text-accent"
                       : "border-border/50 hover:border-accent/30 hover:bg-accent/5"
@@ -304,7 +299,7 @@ export function ExportGlobeSection() {
                   1000
                 )
               }}
-              className="mt-6 text-sm text-muted-foreground hover:text-accent transition-colors"
+              className="mt-6 w-full text-center text-sm text-muted-foreground transition-colors hover:text-accent md:w-auto md:text-left"
             >
               {t("globe.centerColombia")}
             </button>

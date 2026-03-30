@@ -19,11 +19,21 @@ const buttonVariants = cva(
         ghost:
           'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
         link: 'text-primary underline-offset-4 hover:underline',
+        /** CTA principal: blanco → #55e4e3 al hover */
+        cta:
+          'rounded-full border border-zinc-200/90 bg-white font-sans font-semibold text-zinc-950 shadow-md transition-colors duration-200 hover:border-[#55e4e3] hover:bg-[#55e4e3] hover:text-zinc-950 focus-visible:border-[#55e4e3] focus-visible:ring-2 focus-visible:ring-[#55e4e3]/35 dark:border-white/25 dark:bg-white dark:text-zinc-950 dark:hover:border-[#55e4e3] dark:hover:bg-[#55e4e3] dark:hover:text-zinc-950 dark:focus-visible:ring-[#55e4e3]/40 [&_svg]:text-current',
       },
       size: {
         default: 'h-9 px-4 py-2 has-[>svg]:px-3',
         sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
         lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
+        /** Pastilla CTA estándar */
+        cta: 'h-auto min-h-10 rounded-full px-6 py-3.5 text-sm has-[>svg]:px-5 sm:px-8 sm:py-4 sm:text-base',
+        /** Hero / bloques grandes */
+        'cta-lg':
+          'h-auto min-h-12 rounded-full px-8 py-5 text-base has-[>svg]:px-6 sm:px-10 sm:py-6 sm:text-lg',
+        /** Nav / compacto */
+        'cta-sm': 'h-auto min-h-8 rounded-full px-3 py-2 text-xs has-[>svg]:px-2.5 sm:px-4 sm:text-sm',
         icon: 'size-9',
         'icon-sm': 'size-8',
         'icon-lg': 'size-10',

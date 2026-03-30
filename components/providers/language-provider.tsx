@@ -29,7 +29,6 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.getStarted": "Comenzar",
     
     // Hero
-    "hero.hudLabel": "Ilustración de sistema · interfaz",
     "hero.tagline": "Agencia de Inteligencia Artificial",
     "hero.title": "Transformamos ideas en",
     "hero.titleHighlight": "soluciones digitales",
@@ -301,10 +300,6 @@ const translations: Record<Language, Record<string, string>> = {
     "team.roleBDM": "Gerente de Desarrollo de Negocios",
     "team.victorBio": "Impulsa alianzas estratégicas, nuevas oportunidades comerciales y la expansión de Codifikai en mercados clave, alineando relaciones con clientes con la visión de producto y crecimiento.",
     
-    // Partners
-    "partners.title": "Marcas que Confían en Nosotros",
-    "partners.subtitle": "Representaciones comerciales y alianzas estratégicas",
-    
     // Case Studies
     "cases.label": "Casos destacados",
     "cases.title": "Casos de Éxito",
@@ -521,7 +516,6 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.getStarted": "Get Started",
     
     // Hero
-    "hero.hudLabel": "System illustration · interface",
     "hero.tagline": "Artificial Intelligence Agency",
     "hero.title": "We transform ideas into",
     "hero.titleHighlight": "digital solutions",
@@ -792,10 +786,6 @@ const translations: Record<Language, Record<string, string>> = {
     "team.jhonBio": "Drives strategy, commercial expansion and direction of initiatives with real and sustainable impact.",
     "team.roleBDM": "Business Development Manager",
     "team.victorBio": "Drives strategic alliances, new business opportunities and Codifikai's expansion in key markets, aligning client relationships with product vision and growth.",
-    
-    // Partners
-    "partners.title": "Brands That Trust Us",
-    "partners.subtitle": "Commercial representations and strategic alliances",
     
     // Case Studies
     "cases.label": "Featured cases",

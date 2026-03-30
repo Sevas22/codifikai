@@ -1,5 +1,6 @@
 "use client"
 
+import { memo } from "react"
 import { useMouseAmbient } from "@/components/providers/mouse-ambient-provider"
 
 const SITE_BG_NOISE =
@@ -8,7 +9,7 @@ const SITE_BG_NOISE =
 /**
  * Fondo fijo estilo Nosotros / hero: malla, rejilla, ruido, brillo que sigue al ratón (solo tema oscuro).
  */
-export function SiteInteractiveBackground() {
+function SiteInteractiveBackgroundInner() {
   const { x, y, isMobile } = useMouseAmbient()
 
   return (
@@ -52,3 +53,5 @@ export function SiteInteractiveBackground() {
     </div>
   )
 }
+
+export const SiteInteractiveBackground = memo(SiteInteractiveBackgroundInner)

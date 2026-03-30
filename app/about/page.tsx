@@ -12,6 +12,7 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useMouseAmbient } from "@/components/providers/mouse-ambient-provider"
 import { HeroSphereVisual } from "@/components/sections/hero-sphere-visual"
 import { IconSquircle } from "@/components/ui/icon-squircle"
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 import { WHATSAPP_URL } from "@/lib/contact"
 
 const benefitsKeys = ["about.benefit1", "about.benefit2", "about.benefit3", "about.benefit4"]
@@ -110,13 +111,7 @@ export default function AboutPage() {
               heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="flex items-center gap-4 md:gap-6">
-              <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                {t("about.essence")}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-            </div>
+            <SectionEyebrow label={t("about.essence")} />
           </div>
 
           <div className="relative mt-20 grid gap-8 lg:grid-cols-2 lg:gap-12">
@@ -125,11 +120,11 @@ export default function AboutPage() {
               <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 bg-background shadow-[0_0_18px_oklch(0.76_0.18_195/0.35)]" />
             </div>
             <div
-              className={`rounded-3xl border border-border/50 bg-background/60 p-8 md:p-10 backdrop-blur-xl transition-all duration-700 delay-200 ${
+              className={`rounded-3xl border border-border/50 bg-background/60 p-8 text-center md:p-10 md:text-left backdrop-blur-xl transition-all duration-700 delay-200 ${
                 heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              <div className="flex items-center gap-4 mb-6">
+              <div className="mb-6 flex flex-col items-center gap-4 sm:flex-row sm:items-center md:justify-start">
                 <IconSquircle icon={Target} size="lg" />
                 <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
                   <span className="text-gradient">{t("about.history")}</span>
@@ -144,11 +139,11 @@ export default function AboutPage() {
             </div>
 
             <div
-              className={`rounded-3xl border border-border/50 bg-background/60 p-8 md:p-10 backdrop-blur-xl transition-all duration-700 delay-300 ${
+              className={`rounded-3xl border border-border/50 bg-background/60 p-8 text-center md:p-10 md:text-left backdrop-blur-xl transition-all duration-700 delay-300 ${
                 heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
-              <div className="flex items-center gap-4 mb-6">
+              <div className="mb-6 flex flex-col items-center gap-4 sm:flex-row sm:items-center md:justify-start">
                 <IconSquircle icon={Eye} size="lg" />
                 <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
                   <span className="text-gradient">{t("about.vision")}</span>
@@ -158,7 +153,7 @@ export default function AboutPage() {
               <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
                 {t("about.visionDesc")}
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
                 {["about.innovation", "about.premium", "about.scalable", "about.purpose"].map((key) => (
                   <span
                     key={key}
@@ -168,19 +163,11 @@ export default function AboutPage() {
                   </span>
                 ))}
               </div>
-              <div className="mt-10">
-                <Button
-                  asChild
-                  variant="outline"
-                  className="group border-accent/30 bg-accent/5 text-accent hover:bg-accent hover:text-accent-foreground"
-                >
-                  <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+              <div className="mt-10 flex justify-center md:justify-start">
+                <Button asChild variant="cta" size="cta" className="group">
+                  <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
                     {t("about.learnMore")}
-                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                   </a>
                 </Button>
               </div>
@@ -192,13 +179,8 @@ export default function AboutPage() {
               heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="flex items-center gap-3 md:gap-5">
-              <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.24em] text-accent">
-                {t("about.brandTransition")}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/35 to-transparent" />
-            </div>
-            <div className="mt-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-8">
+            <SectionEyebrow label={t("about.brandTransition")} dot={false} />
+            <div className="mt-5 flex flex-col items-center gap-4 text-center md:flex-row md:items-center md:justify-between md:gap-8 md:text-left">
               <p className="max-w-3xl text-sm md:text-base leading-relaxed text-muted-foreground">
                 {t("about.brandDesc")}
               </p>
@@ -220,12 +202,7 @@ export default function AboutPage() {
               foundersVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="flex items-center gap-4 md:gap-6">
-              <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                {t("about.founderLeadership")}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-accent/70 via-accent/20 to-transparent" />
-            </div>
+            <SectionEyebrow label={t("about.founderLeadership")} dot={false} />
             <div className="mt-6 text-center">
               <h2
                 className="text-3xl md:text-4xl lg:text-5xl font-bold heading-brand text-balance"
@@ -270,7 +247,7 @@ export default function AboutPage() {
                         </div>
                       </div>
                     )}
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/70 to-transparent p-5">
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/70 to-transparent p-5 text-center sm:text-left">
                       <div className="text-sm font-medium text-accent">{founder.role}</div>
                       <div
                         className="text-2xl font-bold heading-brand"
@@ -281,8 +258,8 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  <div>
-                    <div className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent">
+                  <div className="text-center md:text-left">
+                    <div className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-sm font-medium text-accent mx-auto md:mx-0">
                       {t(founder.labelKey)}
                     </div>
                     <h3
@@ -321,13 +298,7 @@ export default function AboutPage() {
               benefitsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="flex items-center gap-4 md:gap-6">
-              <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                {t("about.competitiveAdvantage")}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-            </div>
+            <SectionEyebrow label={t("about.competitiveAdvantage")} />
           </div>
           <div className="relative grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div className="pointer-events-none absolute left-1/2 top-6 hidden h-[calc(100%-3rem)] w-px -translate-x-1/2 lg:block">
@@ -335,16 +306,16 @@ export default function AboutPage() {
               <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 bg-background shadow-[0_0_18px_oklch(0.76_0.18_195/0.35)]" />
             </div>
             <div
-              className={`rounded-3xl border border-border/50 bg-background/40 p-8 md:p-10 backdrop-blur-xl transition-all duration-700 ${
+              className={`rounded-3xl border border-border/50 bg-background/40 p-8 text-center backdrop-blur-xl transition-all duration-700 md:p-10 md:text-left ${
                 benefitsVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
               }`}
             >
-              <span className="text-accent text-sm font-semibold tracking-wider uppercase mb-4 block">
+              <span className="text-accent text-sm font-semibold tracking-wider uppercase mb-4 block md:inline-block">
                 {t("about.whyChoose")}
               </span>
-              <div className="mb-6 flex items-center gap-4">
-                <div className="h-px flex-1 bg-gradient-to-r from-accent via-accent/40 to-transparent" />
-                <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
+              <div className="mb-6 flex items-center justify-center gap-4 md:justify-start">
+                <div className="h-px w-16 bg-gradient-to-r from-accent via-accent/40 to-transparent md:w-auto md:flex-1" />
+                <div className="h-2.5 w-2.5 shrink-0 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
               </div>
               <h2
                 className="text-3xl md:text-4xl font-bold heading-brand mb-6"
@@ -362,7 +333,7 @@ export default function AboutPage() {
                 {benefitsKeys.map((benefitKey, index) => (
                   <li
                     key={benefitKey}
-                    className={`flex items-start gap-4 rounded-2xl border border-border/40 bg-secondary/20 px-4 py-4 transition-all duration-500 hover:border-accent/30 hover:bg-accent/5 ${
+                    className={`flex flex-col items-center gap-3 rounded-2xl border border-border/40 bg-secondary/20 px-4 py-4 text-center transition-all duration-500 hover:border-accent/30 hover:bg-accent/5 sm:flex-row sm:items-start sm:text-left ${
                       benefitsVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
                     }`}
                     style={{ transitionDelay: `${index * 100 + 200}ms` }}
@@ -380,7 +351,7 @@ export default function AboutPage() {
                 benefitsVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
               }`}
             >
-              <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-background/50 p-8 md:p-10 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+              <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-background/50 p-8 text-center backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.02)] md:p-10 md:text-left">
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-accent/20 rounded-full blur-3xl" />
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
                 
@@ -392,19 +363,19 @@ export default function AboutPage() {
                 </h3>
 
                 <div className="space-y-4 relative">
-                  <div className="flex items-center justify-between p-4 rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
+                  <div className="flex flex-col items-center gap-2 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
                     <span className="text-muted-foreground">{t("about.deliveryTime")}</span>
                     <span className="text-accent font-semibold">{t("about.deliveryValue")}</span>
                   </div>
-                  <div className="flex items-center justify-between p-4 rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
+                  <div className="flex flex-col items-center gap-2 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
                     <span className="text-muted-foreground">{t("about.costVsAgencies")}</span>
                     <span className="text-accent font-semibold">{t("about.costValue")}</span>
                   </div>
-                  <div className="flex items-center justify-between p-4 rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
+                  <div className="flex flex-col items-center gap-2 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
                     <span className="text-muted-foreground">{t("about.retention")}</span>
                     <span className="text-accent font-semibold">{t("about.retentionValue")}</span>
                   </div>
-                  <div className="flex items-center justify-between p-4 rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
+                  <div className="flex flex-col items-center gap-2 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
                     <span className="text-muted-foreground">{t("about.nps")}</span>
                     <span className="text-accent font-semibold">{t("about.npsValue")}</span>
                   </div>
@@ -425,18 +396,12 @@ export default function AboutPage() {
               technologiesVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="flex items-center gap-4 md:gap-6">
-              <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                {t("about.techCapability")}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-            </div>
+            <SectionEyebrow label={t("about.techCapability")} />
           </div>
 
           <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
             <div
-              className={`rounded-3xl border border-border/50 bg-background/40 p-8 md:p-10 backdrop-blur-xl transition-all duration-700 ${
+              className={`rounded-3xl border border-border/50 bg-background/40 p-8 text-center backdrop-blur-xl transition-all duration-700 md:p-10 md:text-left ${
                 technologiesVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
               }`}
             >
@@ -457,7 +422,7 @@ export default function AboutPage() {
                 {["about.techPerf", "about.techSecurity", "about.techFlex", "about.techSelect"].map((key, index) => (
                   <li
                     key={key}
-                    className={`flex items-start gap-4 rounded-2xl border border-border/40 bg-secondary/20 px-4 py-4 transition-all duration-500 ${
+                    className={`flex flex-col items-center gap-3 rounded-2xl border border-border/40 bg-secondary/20 px-4 py-4 text-center transition-all duration-500 sm:flex-row sm:items-start sm:text-left ${
                       technologiesVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
                     }`}
                     style={{ transitionDelay: `${index * 90 + 120}ms` }}
@@ -477,10 +442,10 @@ export default function AboutPage() {
               {technologiesConfig.map((item, index) => (
                 <article
                   key={item.titleKey}
-                  className="rounded-3xl border border-border/50 bg-background/50 p-6 md:p-8 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.02)]"
+                  className="rounded-3xl border border-border/50 bg-background/50 p-6 text-center backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.02)] md:p-8 md:text-left"
                   style={{ transitionDelay: `${index * 100 + 180}ms` }}
                 >
-                  <div className="flex items-end justify-between gap-4 mb-5">
+                  <div className="mb-5 flex flex-col items-center gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
                     <h3
                       className="text-2xl md:text-3xl font-bold heading-brand"
                       style={{ fontFamily: 'var(--font-display)' }}
@@ -527,13 +492,7 @@ export default function AboutPage() {
               ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="flex items-center gap-4 md:gap-6">
-              <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-                {t("about.ctaSectionLabel")}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-            </div>
+            <SectionEyebrow label={t("about.ctaSectionLabel")} />
           </div>
           <div
             className={`max-w-2xl mx-auto text-center transition-all duration-700 ${
@@ -552,18 +511,11 @@ export default function AboutPage() {
             <p className="text-lg text-muted-foreground mb-10">
               {t("about.ctaDesc")}
             </p>
-            <Button
-              asChild
-              size="lg"
-              className="group relative overflow-hidden bg-foreground text-background hover:bg-foreground px-10 py-7 text-lg font-medium hover-lift hover-glow"
-            >
-              <Link href="/contact">
-                <span className="relative z-10 flex items-center gap-3 transition-colors duration-300 group-hover:text-accent-foreground">
-                  {t("about.cta")}
-                  <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
-                <span className="absolute inset-0 bg-accent scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100" />
-              </Link>
+            <Button asChild variant="cta" size="cta-lg" className="group hover-lift hover-glow">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                {t("about.cta")}
+                <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
             </Button>
           </div>
         </div>

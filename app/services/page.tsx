@@ -27,22 +27,13 @@ import { useMouseAmbient } from "@/components/providers/mouse-ambient-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { HeroSphereVisual } from "@/components/sections/hero-sphere-visual"
 import { IconSquircle } from "@/components/ui/icon-squircle"
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 import { cn } from "@/lib/utils"
+import { WHATSAPP_URL } from "@/lib/contact"
 
 /** Misma línea divisoria cyan que el hero: etiqueta + gradiente + punto */
 function ServicesBlueDivider({ label, className }: { label: string; className?: string }) {
-  return (
-    <div className={cn("flex w-full items-center gap-4 md:gap-6", className)}>
-      <span className="max-w-[min(100%,14rem)] shrink-0 text-xs font-semibold uppercase tracking-[0.22em] text-accent sm:max-w-[min(100%,20rem)] md:text-sm">
-        {label}
-      </span>
-      <div className="h-px min-w-0 flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-      <div
-        className="h-2.5 w-2.5 shrink-0 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]"
-        aria-hidden
-      />
-    </div>
-  )
+  return <SectionEyebrow label={label} className={cn("w-full", className)} />
 }
 
 /** Título junto al icono: blanco en dark; hover lavanda (#D1C4E9). En tema claro, texto oscuro + hover violeta. */
@@ -230,13 +221,7 @@ export default function ServicesPage() {
               heroVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
             }`}
           >
-            <div className="flex items-center gap-4 md:gap-6">
-              <span className="shrink-0 text-xs font-semibold uppercase tracking-[0.22em] text-accent md:text-sm">
-                {t("services.bridgeLabel")}
-              </span>
-              <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-              <div className="h-2.5 w-2.5 shrink-0 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-            </div>
+            <SectionEyebrow label={t("services.bridgeLabel")} />
           </div>
         </div>
       </section>
@@ -282,9 +267,9 @@ export default function ServicesPage() {
             ].map((p) => (
               <div
                 key={p.title}
-                className="rounded-2xl border border-border/50 bg-background/70 p-6 text-left backdrop-blur-xl md:p-7"
+                className="rounded-2xl border border-border/50 bg-background/70 p-6 text-center backdrop-blur-xl sm:text-left md:p-7"
               >
-                <div className="mb-3 h-px w-12 bg-gradient-to-r from-accent to-transparent" />
+                <div className="mb-3 mx-auto h-px w-12 bg-gradient-to-r from-accent to-transparent sm:mx-0" />
                 <h3 className="text-lg font-semibold text-foreground md:text-xl" style={{ fontFamily: "var(--font-display)" }}>
                   {t(p.title)}
                 </h3>
@@ -338,18 +323,11 @@ export default function ServicesPage() {
             </h2>
             <p className="mt-5 text-base text-muted-foreground md:text-lg">{t("services.ctaSubtitle")}</p>
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
-              <Button
-                asChild
-                size="lg"
-                className="group relative overflow-hidden bg-foreground px-8 py-6 text-base font-medium text-background hover:bg-foreground hover-lift hover-glow"
-              >
-                <Link href="/contact">
-                  <span className="relative z-10 flex items-center justify-center gap-3 transition-colors duration-300 group-hover:text-accent-foreground">
-                    {t("services.ctaPrimary")}
-                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                  <span className="absolute inset-0 origin-left scale-x-0 bg-accent transition-transform duration-500 group-hover:scale-x-100" />
-                </Link>
+              <Button asChild variant="cta" size="cta-lg" className="group hover-lift hover-glow">
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                  {t("services.ctaPrimary")}
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </a>
               </Button>
               <Button
                 asChild

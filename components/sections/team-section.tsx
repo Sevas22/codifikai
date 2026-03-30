@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
+import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 
 const team = [
   {
@@ -54,13 +55,7 @@ export function TeamSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="flex items-center gap-4 md:gap-6 mb-5">
-            <span className="shrink-0 text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-accent">
-              {t("team.label")}
-            </span>
-            <div className="h-px flex-1 bg-gradient-to-r from-accent/80 via-accent/30 to-transparent" />
-            <div className="h-2.5 w-2.5 rounded-full border border-accent/60 bg-background shadow-[0_0_14px_oklch(0.76_0.18_195/0.35)]" />
-          </div>
+          <SectionEyebrow label={t("team.label")} />
           <h2
             className="text-3xl md:text-4xl font-bold heading-brand mb-4"
             style={{ fontFamily: 'var(--font-display)' }}
@@ -92,7 +87,7 @@ export function TeamSection() {
                   style={{ objectPosition: member.objectPosition ?? "center" }}
                   sizes="(max-width: 768px) 100vw, 320px"
                 />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/75 to-transparent p-4 text-left">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/75 to-transparent p-4 text-center sm:text-left">
                   <div className="text-xs font-medium text-accent">{memberRole(member, t)}</div>
                   <div
                     className="text-xl font-bold heading-brand-sm"
