@@ -32,6 +32,14 @@ const team = [
     href: "/about#victor-giron",
     objectPosition: "top center",
   },
+  {
+    name: "Fredy Velandia",
+    roleKey: "team.roleSalesLead",
+    image: "/images/team/jairo-gomez-sales.png",
+    bioKey: "team.jairoBio",
+    href: "/about#jairo-gomez",
+    objectPosition: "center",
+  },
 ]
 
 function memberRole(member: (typeof team)[number], t: (key: string) => string) {
@@ -68,7 +76,7 @@ export function TeamSection() {
         </div>
 
         {/* Team grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {team.map((member, index) => (
             <Link
               key={member.name}

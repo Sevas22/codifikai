@@ -3,7 +3,6 @@ import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/sections/hero-section"
 import { CompanyIntroSection } from "@/components/sections/company-intro-section"
 import { ServicesPreviewSection } from "@/components/sections/services-preview-section"
-import { ExportGlobeSection } from "@/components/sections/export-globe-wrapper"
 import { CTASection } from "@/components/sections/cta-section"
 import { Footer } from "@/components/sections/footer"
 import { FloatingContact } from "@/components/floating-contact"
@@ -40,7 +39,6 @@ export default function Home() {
       <CompanyIntroSection />
       <ServicesPreviewSection />
       <CaseStudiesSection />
-      <ExportGlobeSection />
       <TechnologiesPreviewSection />
       <TeamSection />
       <StatsSection />

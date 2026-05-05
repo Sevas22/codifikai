@@ -58,6 +58,17 @@ const founders = [
     objectPosition: "top center",
     imageClassName: "object-cover",
   },
+  {
+    name: "Fredy Velandia",
+    role: "Sales Manager",
+    labelKey: "about.founder4Label",
+    bioKey: "about.founder4Bio",
+    quoteKey: "about.founder4Quote",
+    image: "/images/team/jairo-gomez-sales.png",
+    initials: "JG",
+    objectPosition: "center",
+    imageClassName: "object-cover",
+  },
 ]
 
 export default function AboutPage() {

@@ -1,8 +1,8 @@
 "use client"
 
-import { type ReactNode } from "react"
+import { type ReactNode, useMemo, useState } from "react"
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Bot, Globe, MessageSquare, ShoppingCart, Sparkles, Workflow } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
@@ -31,12 +31,45 @@ export function HeroSection() {
   const { t } = useLanguage()
   const { x: mouseX, y: mouseY, isMobile } = useMouseAmbient()
   const { ref: contentRef, isVisible } = useScrollReveal({ threshold: 0.1 })
+  const [activeServiceId, setActiveServiceId] = useState("web")
 
   const stats = [
     { value: "150+", label: t("hero.stats.projects") },
     { value: "50+", label: t("hero.stats.clients") },
     { value: "98%", label: t("hero.stats.satisfaction") },
   ]
+
+  const serviceNodes = useMemo(
+    () => [
+      {
+        id: "web",
+        icon: Globe,
+        title: t("hero.services.web.title"),
+        blurb: t("hero.services.web.blurb"),
+      },
+      {
+        id: "ecommerce",
+        icon: ShoppingCart,
+        title: t("hero.services.ecommerce.title"),
+        blurb: t("hero.services.ecommerce.blurb"),
+      },
+      {
+        id: "automation",
+        icon: Workflow,
+        title: t("hero.services.automation.title"),
+        blurb: t("hero.services.automation.blurb"),
+      },
+      {
+        id: "chatbots",
+        icon: Bot,
+        title: t("hero.services.chatbots.title"),
+        blurb: t("hero.services.chatbots.blurb"),
+      },
+    ],
+    [t]
+  )
+
+  const activeService = serviceNodes.find((item) => item.id === activeServiceId) ?? serviceNodes[0]
 
   return (
     <section className="relative min-h-0 overflow-hidden pt-28 pb-8 md:min-h-[min(100svh,1080px)] md:pt-32 md:pb-16">
@@ -84,7 +117,72 @@ export function HeroSection() {
             </Button>
           </div>
 
-          <div className="mx-auto mt-12 grid w-full max-w-xl grid-cols-3 gap-2 sm:mt-16 sm:gap-4 md:max-w-2xl">
+          <div className="mx-auto mt-12 w-full max-w-5xl rounded-3xl border border-white/10 bg-card/30 p-4 shadow-2xl backdrop-blur-xl sm:p-6">
+            <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
+              <div className="relative min-h-[260px] rounded-2xl border border-white/10 bg-background/40 p-4">
+                <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_50%_20%,rgba(34,211,238,0.22),transparent_55%),radial-gradient(circle_at_85%_80%,rgba(217,70,239,0.18),transparent_45%)]" />
+                <div className="relative mx-auto mt-4 flex h-[190px] w-[190px] items-center justify-center rounded-full border border-accent/60 bg-background/70 shadow-[0_0_45px_rgba(34,211,238,0.25)]">
+                  <div className="absolute inset-[-18px] rounded-full border border-fuchsia-400/30 animate-[spin_18s_linear_infinite]" />
+                  <div className="absolute inset-[-34px] rounded-full border border-cyan-300/20 animate-[spin_24s_linear_infinite_reverse]" />
+                  <Sparkles className="h-10 w-10 text-accent" />
+                </div>
+
+                <div className="relative mt-6 grid grid-cols-2 gap-2 sm:gap-3">
+                  {serviceNodes.map((node) => {
+                    const Icon = node.icon
+                    const isActive = node.id === activeService.id
+                    return (
+                      <button
+                        key={node.id}
+                        type="button"
+                        onMouseEnter={() => setActiveServiceId(node.id)}
+                        onFocus={() => setActiveServiceId(node.id)}
+                        onClick={() => setActiveServiceId(node.id)}
+                        className={`group rounded-xl border px-3 py-2 text-left transition-all duration-300 ${
+                          isActive
+                            ? "border-accent/60 bg-accent/15 shadow-[0_0_20px_rgba(34,211,238,0.22)]"
+                            : "border-white/12 bg-white/[0.03] hover:border-accent/35 hover:bg-accent/10"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`rounded-md p-1.5 ${
+                              isActive ? "bg-accent/20 text-accent" : "bg-white/8 text-muted-foreground"
+                            }`}
+                          >
+                            <Icon className="h-3.5 w-3.5" />
+                          </span>
+                          <span className="text-xs font-medium sm:text-sm">{node.title}</span>
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-background/50 p-4 text-left sm:p-5">
+                <div className="inline-flex items-center gap-2 rounded-full border border-accent/35 bg-accent/10 px-3 py-1 text-[11px] font-medium text-accent sm:text-xs">
+                  <MessageSquare className="h-3.5 w-3.5" />
+                  {t("hero.interactive.label")}
+                </div>
+                <h3 className="mt-4 text-lg font-semibold text-foreground sm:text-xl">{activeService.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {activeService.blurb}
+                </p>
+
+                <div className="mt-5 space-y-3 rounded-xl border border-white/10 bg-white/[0.03] p-3 sm:p-4">
+                  <div className="max-w-[80%] rounded-2xl rounded-bl-md border border-white/10 bg-white/[0.05] px-3 py-2 text-xs text-foreground sm:text-sm">
+                    {t("hero.chat.user")}
+                  </div>
+                  <div className="ml-auto max-w-[80%] rounded-2xl rounded-br-md border border-accent/30 bg-accent/15 px-3 py-2 text-xs text-foreground sm:text-sm">
+                    {t(`hero.chat.reply.${activeService.id}`)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-auto mt-6 grid w-full max-w-xl grid-cols-3 gap-2 sm:mt-8 sm:gap-4 md:max-w-2xl">
             {stats.map((stat, index) => (
               <div
                 key={stat.label}

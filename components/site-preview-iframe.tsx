@@ -6,7 +6,13 @@ import { useState, useEffect, useRef } from "react"
  * Vista embebida del sitio: carga el iframe al acercarse al viewport (lazy).
  * El poster (Image debajo) solo se ve hasta que el iframe pinta.
  */
-export function SitePreviewIframe({ url }: { url: string }) {
+export function SitePreviewIframe({
+  url,
+  interactive = false,
+}: {
+  url: string
+  interactive?: boolean
+}) {
   const [shouldLoad, setShouldLoad] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -24,7 +30,10 @@ export function SitePreviewIframe({ url }: { url: string }) {
   }, [])
 
   return (
-    <div ref={ref} className="absolute inset-0 z-[2] pointer-events-none">
+    <div
+      ref={ref}
+      className={`absolute inset-0 z-[2] ${interactive ? "pointer-events-auto" : "pointer-events-none"}`}
+    >
       {shouldLoad && (
         <iframe
           src={url}

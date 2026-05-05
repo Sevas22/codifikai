@@ -1,9 +1,8 @@
 "use client"
 
-import { useEffect, useState, useRef, useCallback } from "react"
+import { useEffect, useState, useRef } from "react"
 
 export function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null)
   const cursorDotRef = useRef<HTMLDivElement>(null)
   const [isHovering, setIsHovering] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
@@ -27,15 +26,11 @@ export function CustomCursor() {
     // Don't run cursor logic on mobile
     if (isMobile) return
 
-    const cursor = cursorRef.current
     const cursorDot = cursorDotRef.current
-    if (!cursor || !cursorDot) return
+    if (!cursorDot) return
 
     let mouseX = 0
     let mouseY = 0
-    let cursorX = 0
-    let cursorY = 0
-    let rafId: number
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX
@@ -52,19 +47,6 @@ export function CustomCursor() {
 
     const handleMouseDown = () => setIsClicking(true)
     const handleMouseUp = () => setIsClicking(false)
-
-    // Optimized smooth follow - faster easing for immediate feel
-    const animate = () => {
-      const ease = 0.25 // Increased from 0.15 for faster response
-      cursorX += (mouseX - cursorX) * ease
-      cursorY += (mouseY - cursorY) * ease
-      
-      cursor.style.left = `${cursorX}px`
-      cursor.style.top = `${cursorY}px`
-      
-      rafId = requestAnimationFrame(animate)
-    }
-    animate()
 
     // Check for interactive elements
     const handleElementHover = (e: MouseEvent) => {
@@ -88,7 +70,6 @@ export function CustomCursor() {
     document.addEventListener("mouseup", handleMouseUp)
 
     return () => {
-      cancelAnimationFrame(rafId)
       document.removeEventListener("mousemove", handleMouseMove)
       document.removeEventListener("mousemove", handleElementHover)
       document.removeEventListener("mouseenter", handleMouseEnter)
@@ -103,21 +84,6 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Outer ring - smooth follow */}
-      <div
-        ref={cursorRef}
-        className={`fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 mix-blend-difference transition-opacity duration-200 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
-        style={{ willChange: 'left, top' }}
-      >
-        <div
-          className={`w-10 h-10 rounded-full border-2 border-foreground/80 transition-all duration-200 ease-out ${
-            isHovering ? "scale-[1.8] border-accent bg-accent/10" : ""
-          } ${isClicking ? "scale-75" : ""}`}
-        />
-      </div>
-      
       {/* Inner dot - immediate follow */}
       <div
         ref={cursorDotRef}

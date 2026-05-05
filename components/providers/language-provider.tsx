@@ -38,6 +38,20 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.stats.projects": "Proyectos Exitosos",
     "hero.stats.clients": "Clientes Globales",
     "hero.stats.satisfaction": "Satisfacción",
+    "hero.interactive.label": "Escena interactiva",
+    "hero.services.web.title": "Web",
+    "hero.services.web.blurb": "Sitios modernos con UX premium, velocidad y estructura pensada para convertir visitantes en oportunidades.",
+    "hero.services.ecommerce.title": "Ecommerce",
+    "hero.services.ecommerce.blurb": "Tiendas conectadas con pagos, inventario y automatización para vender más sin fricción operativa.",
+    "hero.services.automation.title": "Automatización",
+    "hero.services.automation.blurb": "Flujos que eliminan tareas repetitivas, integran herramientas y aceleran decisiones de negocio.",
+    "hero.services.chatbots.title": "Chatbots IA",
+    "hero.services.chatbots.blurb": "Asistentes conversacionales que califican leads, atienden clientes y activan ventas 24/7.",
+    "hero.chat.user": "Quiero impulsar mi negocio con una solución digital",
+    "hero.chat.reply.web": "Perfecto. Empecemos por una web estratégica con diseño, performance y SEO técnico listos para escalar.",
+    "hero.chat.reply.ecommerce": "Excelente. Te propongo una tienda optimizada para conversión con automatizaciones comerciales.",
+    "hero.chat.reply.automation": "Vamos a mapear tus procesos para automatizar tareas críticas y reducir costos operativos.",
+    "hero.chat.reply.chatbots": "Podemos implementar un chatbot IA para captar, filtrar y responder clientes en tiempo real.",
     
     // Services (página dedicada — alineada con Nosotros)
     "services.title": "Nuestros Servicios",
@@ -248,6 +262,9 @@ const translations: Record<Language, Record<string, string>> = {
     "about.founder3Label": "Desarrollo comercial y alianzas",
     "about.founder3Bio": "Como Business Development Manager, lidera la prospección de cuentas, la estructuración de propuestas de valor y el fortalecimiento de relaciones con partners y clientes. Su enfoque conecta necesidades de negocio con soluciones tecnológicas escalables.",
     "about.founder3Quote": "Cada relación comercial sólida es una puerta a proyectos que transforman empresas.",
+    "about.founder4Label": "Dirección comercial y cierre de ventas",
+    "about.founder4Bio": "Como Sales Manager, lidera la gestión comercial de punta a punta: calificación de oportunidades, seguimiento de pipeline y cierre de acuerdos estratégicos. Su enfoque combina escucha consultiva y ejecución para convertir prospectos en clientes de alto valor.",
+    "about.founder4Quote": "Una venta bien guiada no solo cierra un trato: abre una relación de confianza y crecimiento.",
     
     // CTA
     "cta.title": "Transforma tu negocio con IA",
@@ -299,6 +316,8 @@ const translations: Record<Language, Record<string, string>> = {
     "team.jhonBio": "Impulsa la estrategia, la expansión comercial y la dirección de iniciativas con impacto real y sostenible.",
     "team.roleBDM": "Gerente de Desarrollo de Negocios",
     "team.victorBio": "Impulsa alianzas estratégicas, nuevas oportunidades comerciales y la expansión de Codifikai en mercados clave, alineando relaciones con clientes con la visión de producto y crecimiento.",
+    "team.roleSalesLead": "Líder de Ventas",
+    "team.jairoBio": "Lidera la gestión comercial, el seguimiento de oportunidades y el cierre de acuerdos estratégicos con enfoque en crecimiento sostenible.",
     
     // Case Studies
     "cases.label": "Casos destacados",
@@ -525,6 +544,20 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.stats.projects": "Successful Projects",
     "hero.stats.clients": "Global Clients",
     "hero.stats.satisfaction": "Satisfaction",
+    "hero.interactive.label": "Interactive scene",
+    "hero.services.web.title": "Web",
+    "hero.services.web.blurb": "Modern websites with premium UX, high speed, and conversion-oriented structure.",
+    "hero.services.ecommerce.title": "Ecommerce",
+    "hero.services.ecommerce.blurb": "Stores connected to payments, inventory, and automation so you can scale sales smoothly.",
+    "hero.services.automation.title": "Automation",
+    "hero.services.automation.blurb": "Workflows that remove repetitive tasks, connect tools, and speed up business decisions.",
+    "hero.services.chatbots.title": "AI Chatbots",
+    "hero.services.chatbots.blurb": "Conversational assistants that qualify leads, support clients, and drive revenue 24/7.",
+    "hero.chat.user": "I want to grow my business with a digital solution",
+    "hero.chat.reply.web": "Great. We can start with a strategic website focused on design, performance, and technical SEO.",
+    "hero.chat.reply.ecommerce": "Perfect. I recommend a conversion-optimized store with integrated sales automation.",
+    "hero.chat.reply.automation": "Let's map your processes and automate key tasks to reduce operational overhead.",
+    "hero.chat.reply.chatbots": "We can deploy an AI chatbot to capture, qualify, and respond to clients in real time.",
     
     // Services (dedicated page — aligned with About)
     "services.title": "Our Services",
@@ -735,6 +768,9 @@ const translations: Record<Language, Record<string, string>> = {
     "about.founder3Label": "Commercial development and alliances",
     "about.founder3Bio": "As Business Development Manager, he leads account prospecting, value proposition design and strengthening relationships with partners and clients. His focus connects business needs with scalable technology solutions.",
     "about.founder3Quote": "Every solid commercial relationship is a gateway to projects that transform companies.",
+    "about.founder4Label": "Commercial leadership and sales closing",
+    "about.founder4Bio": "As Sales Manager, he leads end-to-end commercial execution: opportunity qualification, pipeline follow-up, and strategic deal closing. His approach combines consultative listening and strong execution to convert prospects into high-value clients.",
+    "about.founder4Quote": "A well-led sale does not just close a deal: it opens a long-term relationship of trust and growth.",
     
     // CTA
     "cta.title": "Transform your business with AI",
@@ -786,6 +822,8 @@ const translations: Record<Language, Record<string, string>> = {
     "team.jhonBio": "Drives strategy, commercial expansion and direction of initiatives with real and sustainable impact.",
     "team.roleBDM": "Business Development Manager",
     "team.victorBio": "Drives strategic alliances, new business opportunities and Codifikai's expansion in key markets, aligning client relationships with product vision and growth.",
+    "team.roleSalesLead": "Sales Lead",
+    "team.jairoBio": "Leads commercial management, opportunity follow-up, and strategic deal closing with a sustainable growth focus.",
     
     // Case Studies
     "cases.label": "Featured cases",
