@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
 export const metadata: Metadata = {
-  title: "Términos y condiciones",
+  title: "Terms & Conditions",
   description:
-    "Condiciones generales de uso del sitio web y de los servicios de Codifikai.",
+    "General terms of use for the CodifikAI website and services.",
   robots: {
     index: true,
     follow: true,
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     canonical: "/terms",
   },
   openGraph: {
-    title: "Términos y condiciones | Codifikai",
-    description: "Condiciones de uso del sitio y contratación de servicios.",
+    title: "Terms & Conditions | CodifikAI",
+    description: "Terms of use for the site and service engagement.",
     url: "/terms",
   },
 }

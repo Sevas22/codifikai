@@ -67,7 +67,7 @@ export function CaseStudiesSection() {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative block rounded-2xl overflow-hidden border border-border/50 bg-card transition-all duration-700 hover:border-accent/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5 ${
+              className={`group relative block rounded-2xl overflow-hidden border border-white/10 bg-black transition-all duration-700 hover:border-accent/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: `${index * 80}ms` }}
@@ -96,7 +96,7 @@ export function CaseStudiesSection() {
                 </div>
               </div>
 
-              <div className="border-t border-border/50 bg-card p-5 text-center sm:text-left md:p-6">
+              <div className="border-t border-white/10 bg-black p-5 text-center sm:text-left md:p-6">
                 <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2">
                   {item.category}
                 </p>
@@ -116,7 +116,7 @@ export function CaseStudiesSection() {
                   {item.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 rounded-full text-xs font-medium bg-muted/60 text-muted-foreground"
+                      className="rounded-full border border-white/10 bg-black px-3 py-1 text-xs font-medium text-muted-foreground"
                     >
                       {tag}
                     </span>

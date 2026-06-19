@@ -1,21 +1,22 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Casos de éxito",
+  title: "Case Studies",
   description:
-    "Proyectos entregados por Codifikai: desarrollo web, e-commerce, salud digital, industria y comercio internacional. Portafolio de clientes y resultados.",
+    "CodifikAI case studies: live enterprise platforms for global trade, logistics, marketplaces, and growth operations.",
   keywords: [
-    "portafolio desarrollo web",
-    "casos éxito software",
-    "proyectos tecnología Colombia",
+    "case studies",
+    "enterprise software",
+    "AI automation portfolio",
+    "web platform delivery",
   ],
   alternates: {
     canonical: "/casos-de-exito",
   },
   openGraph: {
-    title: "Casos de éxito | Codifikai",
+    title: "Case Studies | CodifikAI",
     description:
-      "Proyectos reales: plataformas web, comercio y soluciones digitales para empresas en varios sectores.",
+      "Real production platforms: web, commerce, and digital solutions for enterprise clients.",
     url: "/casos-de-exito",
   },
 }

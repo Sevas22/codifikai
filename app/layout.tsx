@@ -8,6 +8,7 @@ import { MouseAmbientProvider } from "@/components/providers/mouse-ambient-provi
 import { SiteInteractiveBackground } from "@/components/site-interactive-background"
 import { CustomCursor } from "@/components/custom-cursor"
 import { GoogleTagManager } from "@/components/google-tag-manager"
+import { PushleadsAgentWidget } from "@/components/pushleads-agent-widget"
 import { JsonLdRoot } from "@/components/seo/json-ld"
 import { getSiteUrl, siteName } from "@/lib/site"
 import './globals.css'
@@ -20,11 +21,11 @@ const siteUrl = getSiteUrl()
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} | Agencia de inteligencia artificial y desarrollo de software`,
+    default: `${siteName} | Enterprise AI Systems & Automation`,
     template: `%s | ${siteName}`,
   },
   description:
-    "Codifikai: agencia de IA y desarrollo de software en Colombia y LATAM. Desarrollo web, apps, automatización, marketing digital y soluciones empresariales con inteligencia artificial.",
+    "CodifikAI builds enterprise AI systems, intelligent automation, and scalable workflows for global teams. Web platforms, apps, and business automation infrastructure.",
   applicationName: siteName,
   generator: "Next.js",
   keywords: [
@@ -63,19 +64,19 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "es_CO",
-    alternateLocale: ["en_US"],
+    locale: "en_US",
+    alternateLocale: ["es_CO"],
     url: siteUrl,
     siteName,
-    title: `${siteName} | Agencia de inteligencia artificial`,
+    title: `${siteName} | Enterprise AI Systems`,
     description:
-      "Transformamos ideas en soluciones digitales: desarrollo web, software, IA y automatización para empresas.",
+      "AI systems, intelligent automation, and enterprise workflows built for scalable business operations.",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} | Agencia de inteligencia artificial`,
+    title: `${siteName} | Enterprise AI Systems`,
     description:
-      "Desarrollo web, software e IA para empresas. Colombia y Latinoamérica.",
+      "Enterprise AI, automation infrastructure, and intelligent workflows for modern teams.",
   },
   ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? {
@@ -87,10 +88,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f5f5f7' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0f' },
-  ],
+  themeColor: '#0a0a0f',
   width: 'device-width',
   initialScale: 1,
 }
@@ -101,12 +99,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <JsonLdRoot />
         <GoogleTagManager />
-        <ThemeProvider defaultTheme="dark">
-          <LanguageProvider defaultLanguage="es">
+        <ThemeProvider>
+          <LanguageProvider defaultLanguage="en">
             <MouseAmbientProvider>
               <SiteInteractiveBackground />
               <CustomCursor />
@@ -115,6 +113,7 @@ export default function RootLayout({
           </LanguageProvider>
         </ThemeProvider>
         <Analytics />
+        <PushleadsAgentWidget />
       </body>
     </html>
   )

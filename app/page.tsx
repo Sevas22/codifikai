@@ -2,6 +2,7 @@ import dynamic from "next/dynamic"
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/sections/hero-section"
 import { CompanyIntroSection } from "@/components/sections/company-intro-section"
+import { EnterprisePlatformSection } from "@/components/sections/enterprise-platform-section"
 import { ServicesPreviewSection } from "@/components/sections/services-preview-section"
 import { CTASection } from "@/components/sections/cta-section"
 import { Footer } from "@/components/sections/footer"
@@ -36,6 +37,7 @@ export default function Home() {
     <main className="relative min-h-screen bg-transparent text-foreground overflow-x-hidden">
       <Navigation />
       <HeroSection />
+      <EnterprisePlatformSection />
       <CompanyIntroSection />
       <ServicesPreviewSection />
       <CaseStudiesSection />

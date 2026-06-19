@@ -3,9 +3,8 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Sun, Moon, Globe, ArrowRight } from "lucide-react"
+import { Globe, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "@/components/providers/theme-provider"
 import { useLanguage } from "@/components/providers/language-provider"
 import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
 import { IconSquircle } from "@/components/ui/icon-squircle"
@@ -16,7 +15,6 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-  const { theme, toggleTheme } = useTheme()
   const { language, setLanguage, t } = useLanguage()
 
   useEffect(() => {
@@ -47,6 +45,7 @@ export function Navigation() {
     { href: "/about", label: t("nav.about"), highlight: false },
     { href: "/services", label: t("nav.services"), highlight: true },
     { href: "/casos-de-exito", label: t("nav.cases"), highlight: false },
+    { href: "/contact", label: t("nav.contact"), highlight: false },
   ] as const
 
   const isActive = (href: string) => {
@@ -129,22 +128,9 @@ export function Navigation() {
               type="button"
               onClick={() => setLanguage(language === "es" ? "en" : "es")}
               className="rounded-lg px-2 py-1.5 text-xs font-bold uppercase tracking-wide text-muted-foreground transition hover:bg-foreground/5 hover:text-foreground"
-              aria-label="Change language"
+              aria-label={t("nav.languageLabel")}
             >
-              {language}
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="rounded-lg p-1.5 text-muted-foreground transition hover:bg-foreground/5 hover:text-foreground"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? (
-                <IconSquircle icon={Sun} size="sm" />
-              ) : (
-                <IconSquircle icon={Moon} size="sm" />
-              )}
+              {language === "es" ? "ES" : "EN"}
             </button>
 
             <Button asChild variant="cta" size="cta-sm" className="ml-0.5 shrink-0">
@@ -188,21 +174,9 @@ export function Navigation() {
               type="button"
               onClick={() => setLanguage(language === "es" ? "en" : "es")}
               className="p-1 text-muted-foreground transition-colors hover:text-foreground"
-              aria-label="Change language"
+              aria-label={t("nav.languageLabel")}
             >
               <IconSquircle icon={Globe} size="sm" />
-            </button>
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="p-1 text-muted-foreground transition-colors hover:text-foreground"
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? (
-                <IconSquircle icon={Sun} size="sm" />
-              ) : (
-                <IconSquircle icon={Moon} size="sm" />
-              )}
             </button>
             <button
               type="button"
@@ -299,9 +273,9 @@ export function Navigation() {
               transitionDelay: "500ms",
             }}
           >
-            <span>Idioma: {language === "es" ? "Español" : "English"}</span>
-            <span>•</span>
-            <span>Tema: {theme === "dark" ? "Oscuro" : "Claro"}</span>
+            <span>
+              {t("nav.languageLabel")}: {language === "es" ? t("nav.languageEs") : t("nav.languageEn")}
+            </span>
           </div>
         </div>
       </div>

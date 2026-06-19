@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
 export const metadata: Metadata = {
-  title: "Política de privacidad",
+  title: "Privacy Policy",
   description:
-    "Información sobre el tratamiento de datos personales en Codifikai: finalidades, derechos ARCO y contacto.",
+    "How CodifikAI processes personal data: purposes, legal bases, data subject rights, and contact information.",
   robots: {
     index: true,
     follow: true,
@@ -13,8 +13,8 @@ export const metadata: Metadata = {
     canonical: "/privacy",
   },
   openGraph: {
-    title: "Política de privacidad | Codifikai",
-    description: "Tratamiento de datos personales, bases legales y derechos del titular.",
+    title: "Privacy Policy | CodifikAI",
+    description: "Personal data processing, legal bases, and data subject rights.",
     url: "/privacy",
   },
 }

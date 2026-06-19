@@ -2,24 +2,23 @@ import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
 export const metadata: Metadata = {
-  title: "Servicios",
+  title: "Solutions",
   description:
-    "Servicios Codifikai: desarrollo web y low code, software a medida, marketing digital, SEO, automatización e inteligencia artificial para empresas.",
+    "Enterprise AI infrastructure: sales systems, workflow automation, AI operations, and scalable business systems built for modern teams.",
   keywords: [
-    "desarrollo web empresas",
-    "software a medida",
-    "marketing digital SEO",
-    "automatización procesos",
-    "inteligencia artificial empresas",
-    "low code",
+    "enterprise AI",
+    "intelligent automation",
+    "AI sales systems",
+    "custom software",
+    "business automation",
   ],
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Servicios | Codifikai",
+    title: "Solutions | CodifikAI",
     description:
-      "Desarrollo, IA, marketing y automatización: catálogo de soluciones para hacer crecer tu negocio.",
+      "AI systems, automation, and enterprise workflows designed to accelerate business growth.",
     url: "/services",
   },
 }
