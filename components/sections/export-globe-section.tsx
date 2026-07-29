@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState, useEffect, useCallback, useMemo } from "react"
-import Globe from "react-globe.gl"
+import Globe, { type GlobeMethods } from "react-globe.gl"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { SectionEyebrow } from "@/components/ui/section-eyebrow"
@@ -45,7 +45,7 @@ const COLOMBIA = { lat: 4.5709, lng: -74.2973, name: "Colombia" }
 export function ExportGlobeSection() {
   const { t } = useLanguage()
   const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 })
-  const globeRef = useRef<{ pointOfView: (pov: object, duration?: number) => void } | null>(null)
+  const globeRef = useRef<GlobeMethods | undefined>(undefined)
   const containerRef = useRef<HTMLDivElement>(null)
   const [selectedId, setSelectedId] = useState<string>("usa")
   const [containerSize, setContainerSize] = useState({ width: 450, height: 450 })
@@ -156,7 +156,7 @@ export function ExportGlobeSection() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header de seccion */}
         <div
-          className={`mb-12 text-center md:mb-16 md:text-left transition-all duration-700 ${
+          className={`mb-12 text-center md:mb-16 md:text-left transition-all duration-400 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -182,7 +182,7 @@ export function ExportGlobeSection() {
           {/* Globo con colores de marca */}
           <div
             ref={containerRef}
-            className={`relative w-full aspect-square max-w-[500px] mx-auto rounded-2xl overflow-hidden border border-accent/20 bg-background/80 backdrop-blur-xl transition-all duration-700 ${
+            className={`relative w-full aspect-square max-w-[500px] mx-auto rounded-2xl overflow-hidden border border-accent/20 bg-background/80 backdrop-blur-xl transition-all duration-400 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
             }`}
           >
@@ -235,7 +235,7 @@ export function ExportGlobeSection() {
 
           {/* Panel lateral */}
           <div
-            className={`rounded-2xl border border-border/50 bg-background/60 p-6 text-center md:p-8 md:text-left backdrop-blur-xl transition-all duration-700 ${
+            className={`rounded-2xl border border-border/50 bg-background/60 p-6 text-center md:p-8 md:text-left backdrop-blur-xl transition-all duration-400 ${
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
             }`}
             style={{ transitionDelay: "150ms" }}

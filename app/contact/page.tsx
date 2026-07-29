@@ -70,7 +70,7 @@ export default function ContactPage() {
       <section className="relative pb-20 md:pb-28">
         <div
           ref={ref}
-          className={`mx-auto max-w-7xl px-4 transition-all duration-700 sm:px-6 lg:px-8 ${
+          className={`mx-auto max-w-7xl px-4 transition-all duration-400 sm:px-6 lg:px-8 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >

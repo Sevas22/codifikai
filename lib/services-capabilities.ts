@@ -1,23 +1,31 @@
-/** Visuales 3D de capacidades — /public/images/services/capabilities/ */
-export const SERVICE_CAPABILITIES = [
+import { Building2, LineChart, Workflow, Cpu } from "lucide-react"
+import type { LucideIcon } from "lucide-react"
+
+export type ServiceCapability = {
+  id: string
+  icon: LucideIcon
+  labelKey: string
+}
+
+export const SERVICE_CAPABILITIES: ServiceCapability[] = [
   {
     id: "enterprise-platform",
-    image: "/images/services/capabilities/enterprise-platform.png",
+    icon: Building2,
     labelKey: "svc.arch.1",
   },
   {
     id: "commerce-intelligence",
-    image: "/images/services/capabilities/commerce-intelligence.png",
+    icon: LineChart,
     labelKey: "svc.arch.2",
   },
   {
     id: "workflow-orchestration",
-    image: "/images/services/capabilities/workflow-orchestration.png",
+    icon: Workflow,
     labelKey: "svc.arch.3",
   },
   {
     id: "ai-automation-core",
-    image: "/images/services/capabilities/ai-automation-core.png",
+    icon: Cpu,
     labelKey: "svc.arch.4",
   },
-] as const
+]

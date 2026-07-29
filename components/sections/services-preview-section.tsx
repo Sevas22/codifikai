@@ -25,7 +25,7 @@ export function ServicesPreviewSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
-          className={`text-center max-w-4xl mx-auto mb-10 md:mb-12 transition-all duration-700 ${
+          className={`text-center max-w-4xl mx-auto mb-10 md:mb-12 transition-all duration-400 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -51,10 +51,10 @@ export function ServicesPreviewSection() {
             return (
               <article
                 key={service.titleKey}
-                className={`group relative overflow-hidden rounded-2xl border border-border/50 bg-background/60 p-8 backdrop-blur-xl transition-all duration-700 hover:-translate-y-1 hover:border-violet-500/25 hover:shadow-[0_0_40px_-12px_oklch(0.68_0.22_310/0.18)] ${
+                className={`group relative overflow-hidden rounded-2xl border border-border/50 bg-background/60 p-8 backdrop-blur-xl transition-all duration-400 hover:-translate-y-1 hover:border-violet-500/25 hover:shadow-[0_0_40px_-12px_oklch(0.68_0.22_310/0.18)] ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
-                style={{ transitionDelay: `${index * 120 + 100}ms` }}
+                style={{ transitionDelay: `${index * 60 + 60}ms` }}
               >
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 via-violet-500/45 to-transparent" />
                 <div className="absolute -top-10 left-1/2 h-24 w-24 -translate-x-1/2 rounded-full bg-gradient-to-b from-accent/15 to-violet-600/20 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
@@ -84,7 +84,7 @@ export function ServicesPreviewSection() {
         </div>
 
         <div
-          className={`mt-10 md:mt-12 rounded-3xl border border-violet-500/25 bg-gradient-to-br from-accent/[0.08] via-violet-600/[0.09] to-fuchsia-600/[0.06] px-6 py-8 md:px-10 md:py-10 text-center transition-all duration-700 delay-500 ${
+          className={`mt-10 md:mt-12 rounded-3xl border border-violet-500/25 bg-gradient-to-br from-accent/[0.08] via-violet-600/[0.09] to-fuchsia-600/[0.06] px-6 py-8 md:px-10 md:py-10 text-center transition-all duration-400 delay-500 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >

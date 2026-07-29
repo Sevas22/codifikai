@@ -25,7 +25,7 @@ export function TechnologiesPreviewSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
-          className={`mb-10 flex flex-col items-center gap-6 text-center md:mb-12 lg:mb-12 lg:flex-row lg:items-end lg:justify-between lg:text-left transition-all duration-700 ${
+          className={`mb-10 flex flex-col items-center gap-6 text-center md:mb-12 lg:mb-12 lg:flex-row lg:items-end lg:justify-between lg:text-left transition-all duration-400 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -57,10 +57,10 @@ export function TechnologiesPreviewSection() {
             return (
               <article
                 key={item.titleKey}
-                className={`group rounded-2xl border border-border/50 bg-background/50 p-6 text-center backdrop-blur-xl transition-all duration-700 hover:-translate-y-1 hover:border-accent/30 sm:text-left ${
+                className={`group rounded-2xl border border-border/50 bg-background/50 p-6 text-center backdrop-blur-xl transition-all duration-400 hover:-translate-y-1 hover:border-accent/30 sm:text-left ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
-                style={{ transitionDelay: `${index * 100 + 120}ms` }}
+                style={{ transitionDelay: `${index * 60 + 80}ms` }}
               >
                 <div className="mb-5 flex justify-center sm:justify-start">
                   <IconSquircle icon={Icon} size="lg" className="group-hover:scale-105" />

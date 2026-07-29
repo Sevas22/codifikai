@@ -98,7 +98,7 @@ export default function AboutPage() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
-            className={`mx-auto max-w-5xl text-center transition-all duration-700 ${
+            className={`mx-auto max-w-5xl text-center transition-all duration-400 ${
               heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -118,7 +118,7 @@ export default function AboutPage() {
           </div>
 
           <div
-            className={`mt-14 md:mt-16 mb-8 transition-all duration-700 delay-150 ${
+            className={`mt-14 md:mt-16 mb-8 transition-all duration-400 delay-150 ${
               heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -131,7 +131,7 @@ export default function AboutPage() {
               <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 bg-background shadow-[0_0_18px_oklch(0.76_0.18_195/0.35)]" />
             </div>
             <div
-              className={`rounded-3xl border border-border/50 bg-background/60 p-8 text-center md:p-10 md:text-left backdrop-blur-xl transition-all duration-700 delay-200 ${
+              className={`rounded-3xl border border-border/50 bg-background/60 p-8 text-center md:p-10 md:text-left backdrop-blur-xl transition-all duration-400 delay-200 ${
                 heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
@@ -150,7 +150,7 @@ export default function AboutPage() {
             </div>
 
             <div
-              className={`rounded-3xl border border-border/50 bg-background/60 p-8 text-center md:p-10 md:text-left backdrop-blur-xl transition-all duration-700 delay-300 ${
+              className={`rounded-3xl border border-border/50 bg-background/60 p-8 text-center md:p-10 md:text-left backdrop-blur-xl transition-all duration-400 delay-300 ${
                 heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
             >
@@ -186,7 +186,7 @@ export default function AboutPage() {
           </div>
 
           <div
-            className={`mt-14 md:mt-18 transition-all duration-700 delay-500 ${
+            className={`mt-14 md:mt-18 transition-all duration-400 delay-500 ${
               heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -209,7 +209,7 @@ export default function AboutPage() {
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
-            className={`max-w-4xl mx-auto mb-12 md:mb-14 transition-all duration-700 ${
+            className={`max-w-4xl mx-auto mb-12 md:mb-14 transition-all duration-400 ${
               foundersVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -229,7 +229,7 @@ export default function AboutPage() {
               <article
                 key={founder.name}
                 id={founder.name.toLowerCase().replace(/\s+/g, "-")}
-                className={`group rounded-3xl border border-border/50 bg-background/60 p-6 md:p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur-xl transition-all duration-700 hover:-translate-y-1 hover:border-accent/30 ${
+                className={`group rounded-3xl border border-border/50 bg-background/60 p-6 md:p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur-xl transition-all duration-400 hover:-translate-y-1 hover:border-accent/30 ${
                   foundersVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${index * 120}ms` }}
@@ -305,7 +305,7 @@ export default function AboutPage() {
       <section ref={benefitsRef} className="pt-8 pb-24 md:pt-10 md:pb-28 relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
-            className={`mb-10 md:mb-12 transition-all duration-700 ${
+            className={`mb-10 md:mb-12 transition-all duration-400 ${
               benefitsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -317,7 +317,7 @@ export default function AboutPage() {
               <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 bg-background shadow-[0_0_18px_oklch(0.76_0.18_195/0.35)]" />
             </div>
             <div
-              className={`rounded-3xl border border-border/50 bg-background/40 p-8 text-center backdrop-blur-xl transition-all duration-700 md:p-10 md:text-left ${
+              className={`rounded-3xl border border-border/50 bg-background/40 p-8 text-center backdrop-blur-xl transition-all duration-400 md:p-10 md:text-left ${
                 benefitsVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
               }`}
             >
@@ -358,7 +358,7 @@ export default function AboutPage() {
 
             {/* Stats card */}
             <div
-              className={`relative transition-all duration-700 delay-300 ${
+              className={`relative transition-all duration-400 delay-300 ${
                 benefitsVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
               }`}
             >
@@ -403,7 +403,7 @@ export default function AboutPage() {
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
-            className={`mb-10 md:mb-12 transition-all duration-700 ${
+            className={`mb-10 md:mb-12 transition-all duration-400 ${
               technologiesVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -412,7 +412,7 @@ export default function AboutPage() {
 
           <div className="grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
             <div
-              className={`rounded-3xl border border-border/50 bg-background/40 p-8 text-center backdrop-blur-xl transition-all duration-700 md:p-10 md:text-left ${
+              className={`rounded-3xl border border-border/50 bg-background/40 p-8 text-center backdrop-blur-xl transition-all duration-400 md:p-10 md:text-left ${
                 technologiesVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
               }`}
             >
@@ -446,7 +446,7 @@ export default function AboutPage() {
             </div>
 
             <div
-              className={`space-y-8 transition-all duration-700 delay-200 ${
+              className={`space-y-8 transition-all duration-400 delay-200 ${
                 technologiesVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
               }`}
             >
@@ -499,14 +499,14 @@ export default function AboutPage() {
         
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
-            className={`mb-10 md:mb-12 transition-all duration-700 ${
+            className={`mb-10 md:mb-12 transition-all duration-400 ${
               ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             <SectionEyebrow label={t("about.ctaSectionLabel")} />
           </div>
           <div
-            className={`max-w-2xl mx-auto text-center transition-all duration-700 ${
+            className={`max-w-2xl mx-auto text-center transition-all duration-400 ${
               ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >

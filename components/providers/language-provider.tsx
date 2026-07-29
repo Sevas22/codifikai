@@ -25,6 +25,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.about": "Empresa",
     "nav.services": "Soluciones",
     "nav.cases": "Casos de éxito",
+    "nav.blog": "Blog",
     "nav.contact": "Contacto",
     "nav.getStarted": "Agendar demo",
     "nav.languageLabel": "Idioma",
@@ -591,22 +592,6 @@ const translations: Record<Language, Record<string, string>> = {
     "techPreview.cms": "Gestores de Contenido",
     "techPreview.cmsDesc": "Plataformas flexibles para administrar y evolucionar productos digitales.",
 
-    // Company Intro
-    "companyIntro.label": "Por qué CodifikAI",
-    "companyIntro.badge": "Empresa de IA construida para ejecución enterprise",
-    "companyIntro.title": "Construimos infraestructura de automatización para equipos modernos.",
-    "companyIntro.subtitle":
-      "Desde workflows inteligentes hasta operaciones con IA, ayudamos a escalar con sistemas de alto rendimiento, claridad y ROI medible.",
-    "companyIntro.pillar1": "Sistemas de ventas con IA y orquestación de ingresos",
-    "companyIntro.pillar2": "Automatización inteligente y workflows enterprise",
-    "companyIntro.pillar3": "Infraestructura escalable de operaciones con IA",
-    "companyIntro.stats1": "entregas y despliegues acumulados",
-    "companyIntro.stats2": "sectores e industrias atendidas",
-    "companyIntro.stats3": "retención y renovación con clientes",
-    "companyIntro.cta": "Conocer la empresa",
-    "companyIntro.leadership": "Liderazgo y ejecución",
-    "companyIntro.cardTag": "Construimos soluciones que conectan tecnología, experiencia de usuario y crecimiento comercial.",
-
     // Strategy
     "strategy.label": "Nuestra estrategia",
     "strategy.title": "Estrategia de negocio potenciada por IA",
@@ -650,6 +635,18 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.companyContact": "Contacto",
 
     // Casos de éxito
+    "blogPage.label": "Blog",
+    "blogPage.heroTitle": "Ideas de IA y automatización para empresas de Cundinamarca y Boyacá",
+    "blogPage.heroSubtitle":
+      "Guías prácticas para pymes y empresas de la región que quieren vender más con menos fricción.",
+    "blogPage.empty": "Muy pronto publicaremos el primer artículo aquí.",
+    "blogPage.ctaEyebrow": "¿Listo para dar el siguiente paso?",
+    "blogPage.ctaHeadline": "Hablemos de cómo aplicar esto en tu empresa",
+    "blogPage.ctaSupport":
+      "Agenda una conversación de 20 minutos y te decimos si automatizar tiene sentido para tu negocio ahora mismo.",
+    "blogPage.ctaPrimary": "Escribir por WhatsApp",
+    "blogPage.ctaSecondary": "Ver soluciones",
+
     "casesPage.label": "Casos de éxito",
     "casesPage.heroTitle": "Software real. Impacto medible.",
     "casesPage.heroSubtitle": "Plataformas enterprise construidas para escalar operaciones y acelerar crecimiento.",
@@ -728,6 +725,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.about": "Company",
     "nav.services": "Solutions",
     "nav.cases": "Case Studies",
+    "nav.blog": "Blog",
     "nav.contact": "Contact",
     "nav.getStarted": "Book a Demo",
     "nav.languageLabel": "Language",
@@ -1294,22 +1292,6 @@ const translations: Record<Language, Record<string, string>> = {
     "techPreview.cms": "Content Management",
     "techPreview.cmsDesc": "Flexible platforms to manage and evolve digital products.",
 
-    // Company Intro
-    "companyIntro.label": "Why CodifikAI",
-    "companyIntro.badge": "AI company built for enterprise execution",
-    "companyIntro.title": "We build business automation infrastructure for modern teams.",
-    "companyIntro.subtitle":
-      "From intelligent workflows to AI operations, we help companies scale with systems designed for performance, clarity, and measurable ROI.",
-    "companyIntro.pillar1": "AI Sales Systems & revenue orchestration",
-    "companyIntro.pillar2": "Intelligent Automation & enterprise workflows",
-    "companyIntro.pillar3": "Scalable AI operations infrastructure",
-    "companyIntro.stats1": "cumulative deliveries and go-lives",
-    "companyIntro.stats2": "industries and verticals served",
-    "companyIntro.stats3": "client retention and renewal",
-    "companyIntro.cta": "Learn about the company",
-    "companyIntro.leadership": "Leadership and execution",
-    "companyIntro.cardTag": "We build solutions that connect technology, user experience and business growth.",
-
     // Strategy
     "strategy.label": "Our strategy",
     "strategy.title": "Business strategy powered by AI",
@@ -1354,6 +1336,18 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Casos de éxito
     // Casos de éxito
+    "blogPage.label": "Blog",
+    "blogPage.heroTitle": "AI and automation insights for businesses in Cundinamarca and Boyacá",
+    "blogPage.heroSubtitle":
+      "Practical guides for regional businesses that want to sell more with less friction.",
+    "blogPage.empty": "The first article will be published here soon.",
+    "blogPage.ctaEyebrow": "Ready for the next step?",
+    "blogPage.ctaHeadline": "Let's talk about how this applies to your business",
+    "blogPage.ctaSupport":
+      "Book a 20-minute conversation and we'll tell you if automation makes sense for your business right now.",
+    "blogPage.ctaPrimary": "Message us on WhatsApp",
+    "blogPage.ctaSecondary": "See solutions",
+
     "casesPage.label": "Case Studies",
     "casesPage.heroTitle": "Real software. Measurable impact.",
     "casesPage.heroSubtitle": "Enterprise platforms built to scale operations and accelerate growth.",

@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic"
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/sections/hero-section"
-import { CompanyIntroSection } from "@/components/sections/company-intro-section"
 import { EnterprisePlatformSection } from "@/components/sections/enterprise-platform-section"
 import { ServicesPreviewSection } from "@/components/sections/services-preview-section"
 import { CTASection } from "@/components/sections/cta-section"
@@ -38,7 +37,6 @@ export default function Home() {
       <Navigation />
       <HeroSection />
       <EnterprisePlatformSection />
-      <CompanyIntroSection />
       <ServicesPreviewSection />
       <CaseStudiesSection />
       <TechnologiesPreviewSection />

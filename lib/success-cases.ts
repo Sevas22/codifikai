@@ -253,7 +253,7 @@ export const successCases: SuccessCase[] = [
     problemEn: "Segmented offerings reduced clarity for global procurement teams.",
     problemEs: "Ofertas segmentadas reducían claridad para equipos de compras globales.",
     url: "https://www.tradermarketer.online/",
-    image: "https://images.unsplash.com/photo-1494412519320-aa613ded778b?w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200&q=80",
     category: "B2B Trade",
     tags: ["Next.js", "React", "Trading", "SEO"],
     filters: ["commerce", "enterprise", "automation"],

@@ -34,7 +34,7 @@ export function CaseStudiesSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div
-          className={`mb-10 flex flex-col items-center gap-6 text-center md:mb-12 md:flex-row md:items-end md:justify-between md:text-left transition-all duration-700 ${
+          className={`mb-10 flex flex-col items-center gap-6 text-center md:mb-12 md:flex-row md:items-end md:justify-between md:text-left transition-all duration-400 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -67,7 +67,7 @@ export function CaseStudiesSection() {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative block rounded-2xl overflow-hidden border border-white/10 bg-black transition-all duration-700 hover:border-accent/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5 ${
+              className={`group relative block rounded-2xl overflow-hidden border border-white/10 bg-black transition-all duration-400 hover:border-accent/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: `${index * 80}ms` }}
@@ -133,7 +133,7 @@ export function CaseStudiesSection() {
 
         {/* CTA - Ver mÃ¡s casos */}
         <div
-          className={`mt-12 md:mt-16 text-center transition-all duration-700 delay-300 ${
+          className={`mt-12 md:mt-16 text-center transition-all duration-400 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >

@@ -1,5 +1,5 @@
 /** Enlace único de contacto por WhatsApp (wa.link). */
-export const WHATSAPP_URL = "https://wa.link/kk4nmh" as const
+export const WHATSAPP_URL = "https://wa.link/8x7g3p" as const
 
 /**
  * Correo público de contacto. Por defecto usa el de dominio si está configurado

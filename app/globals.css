@@ -848,6 +848,79 @@
   overflow: hidden;
 }
 
+/* Contenido de artículos de blog (markdown renderizado a HTML) */
+.blog-prose {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--muted-foreground);
+}
+
+.blog-prose h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+}
+
+.blog-prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.blog-prose p {
+  margin-bottom: 1.25rem;
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.blog-prose ul {
+  list-style: disc;
+}
+
+.blog-prose ol {
+  list-style: decimal;
+}
+
+.blog-prose li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-prose li > p {
+  margin-bottom: 0.25rem;
+}
+
+.blog-prose strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.blog-prose a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+.blog-prose a:hover {
+  text-decoration: underline;
+}
+
+.blog-prose blockquote {
+  margin: 1.5rem 0;
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+  color: var(--foreground);
+  font-style: italic;
+}
+
 /* Safe areas: notch / home indicator (iOS, etc.) */
 @layer utilities {
   .pb-safe {

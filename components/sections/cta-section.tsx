@@ -45,7 +45,7 @@ export function CTASection() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
-          className={`max-w-3xl mx-auto text-center transition-all duration-700 ${
+          className={`max-w-3xl mx-auto text-center transition-all duration-400 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -81,7 +81,7 @@ export function CTASection() {
 
         {/* Contact options */}
         <div
-          className={`mt-16 grid md:grid-cols-3 gap-6 transition-all duration-700 delay-300 ${
+          className={`mt-16 grid md:grid-cols-3 gap-6 transition-all duration-400 delay-300 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -95,7 +95,7 @@ export function CTASection() {
                   ? { target: "_blank" as const, rel: "noopener noreferrer" }
                   : {})}
                 className="group p-6 rounded-2xl glass-card border-glow text-center hover-lift transition-all duration-500"
-                style={{ transitionDelay: `${index * 100 + 400}ms` }}
+                style={{ transitionDelay: `${index * 60 + 150}ms` }}
               >
                 <div className="mx-auto mb-4 flex justify-center">
                   <IconSquircle icon={Icon} size="lg" className="group-hover:scale-105" />

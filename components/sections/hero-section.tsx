@@ -76,7 +76,7 @@ export function HeroSection() {
           ref={ref}
           className={cn(
             "grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 xl:gap-20",
-            "transition-all duration-700",
+            "transition-all duration-400",
             isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           )}
         >

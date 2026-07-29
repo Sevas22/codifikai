@@ -40,7 +40,7 @@ export function EnterprisePlatformSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
           className={cn(
-            "mx-auto max-w-3xl text-center transition-all duration-700",
+            "mx-auto max-w-3xl text-center transition-all duration-400",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}
         >

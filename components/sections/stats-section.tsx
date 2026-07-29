@@ -24,7 +24,7 @@ export function StatsSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div
-          className={`text-center mb-12 transition-all duration-700 ${
+          className={`text-center mb-12 transition-all duration-400 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -45,10 +45,10 @@ export function StatsSection() {
           {testimonialsData.map((testimonial, index) => (
             <div
               key={testimonial.author}
-              className={`p-6 rounded-2xl glass-card border-glow transition-all duration-700 hover-lift ${
+              className={`p-6 rounded-2xl glass-card border-glow transition-all duration-400 hover-lift ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
               }`}
-              style={{ transitionDelay: `${index * 100 + 200}ms` }}
+              style={{ transitionDelay: `${index * 60 + 100}ms` }}
             >
               {/* Quote */}
               <p className="text-muted-foreground mb-6 text-center leading-relaxed md:text-left">

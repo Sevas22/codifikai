@@ -1,7 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import { FadeIn } from "@/components/ui/fade-in"
+import { IconSquircle } from "@/components/ui/icon-squircle"
 import { useLanguage } from "@/components/providers/language-provider"
 import { SERVICE_CAPABILITIES } from "@/lib/services-capabilities"
 import { cn } from "@/lib/utils"
@@ -36,15 +36,12 @@ export function ServicesArchitecture() {
                   "transition-all duration-300 hover:border-accent/25 hover:shadow-[0_24px_64px_-32px_rgba(34,211,238,0.2)]"
                 )}
               >
-                <div className="relative aspect-square overflow-hidden bg-black">
+                <div className="relative flex aspect-[2/1] items-center justify-center overflow-hidden bg-black sm:aspect-[5/2]">
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,211,238,0.08),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <Image
-                    src={cap.image}
-                    alt={t(`${cap.labelKey}.title`)}
-                    fill
-                    unoptimized
-                    className="object-contain p-6 transition-transform duration-500 group-hover:scale-[1.03] sm:p-8"
-                    sizes="(max-width: 640px) 100vw, 50vw"
+                  <IconSquircle
+                    icon={cap.icon}
+                    size="xxl"
+                    className="relative transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="flex flex-1 flex-col border-t border-white/10 p-5 md:p-6">

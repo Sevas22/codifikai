@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node /tmp/screenshot.mjs)",
+      "Bash(sed -i 's#const shots = \"/tmp\"#const shots = \"/workspaces/codifikai\"#' /workspaces/codifikai/scratchpad-screenshot.mjs)",
+      "Bash(node /workspaces/codifikai/scratchpad-screenshot.mjs)",
+      "Bash(npm uninstall *)",
+      "Bash(node /workspaces/codifikai/scratchpad-nav-check.mjs)",
+      "Bash(npx tsc *)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
+    ]
+  }
+}

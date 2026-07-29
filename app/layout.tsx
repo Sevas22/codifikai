@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/providers/theme-provider"
 import { LanguageProvider } from "@/components/providers/language-provider"
 import { MouseAmbientProvider } from "@/components/providers/mouse-ambient-provider"
 import { SiteInteractiveBackground } from "@/components/site-interactive-background"
-import { CustomCursor } from "@/components/custom-cursor"
 import { GoogleTagManager } from "@/components/google-tag-manager"
 import { PushleadsAgentWidget } from "@/components/pushleads-agent-widget"
 import { JsonLdRoot } from "@/components/seo/json-ld"
@@ -107,7 +106,6 @@ export default function RootLayout({
           <LanguageProvider defaultLanguage="en">
             <MouseAmbientProvider>
               <SiteInteractiveBackground />
-              <CustomCursor />
               <div className="relative z-10 min-h-screen overflow-x-clip">{children}</div>
             </MouseAmbientProvider>
           </LanguageProvider>

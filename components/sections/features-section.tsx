@@ -27,10 +27,10 @@ export function FeaturesSection() {
             return (
               <div
                 key={feature.titleKey}
-                className={`group relative p-8 rounded-2xl glass-card border-glow transition-all duration-700 hover-lift ${
+                className={`group relative p-8 rounded-2xl glass-card border-glow transition-all duration-400 hover-lift ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
                 }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
+                style={{ transitionDelay: `${index * 70}ms` }}
               >
                 <div className="mb-6">
                   <IconSquircle icon={Icon} size="xl" className="group-hover:scale-105" />

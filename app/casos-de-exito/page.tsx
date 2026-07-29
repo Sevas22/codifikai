@@ -31,7 +31,7 @@ export default function CasosDeExitoPage() {
           <header
             ref={headerRef}
             className={cn(
-              "mx-auto max-w-3xl text-center transition-all duration-700",
+              "mx-auto max-w-3xl text-center transition-all duration-400",
               headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
           >
@@ -54,7 +54,7 @@ export default function CasosDeExitoPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div
             className={cn(
-              "grid gap-5 transition-all duration-700 md:gap-6 lg:grid-cols-2",
+              "grid gap-5 transition-all duration-400 md:gap-6 lg:grid-cols-2",
               gridVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             )}
           >
@@ -75,7 +75,7 @@ export default function CasosDeExitoPage() {
           <div
             className={cn(
               "rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-transparent px-6 py-12 text-center backdrop-blur-md md:px-12 md:py-16",
-              "transition-all duration-700",
+              "transition-all duration-400",
               ctaVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
           >

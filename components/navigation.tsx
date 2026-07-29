@@ -45,6 +45,7 @@ export function Navigation() {
     { href: "/about", label: t("nav.about"), highlight: false },
     { href: "/services", label: t("nav.services"), highlight: true },
     { href: "/casos-de-exito", label: t("nav.cases"), highlight: false },
+    { href: "/blog", label: t("nav.blog"), highlight: false },
     { href: "/contact", label: t("nav.contact"), highlight: false },
   ] as const
 
@@ -65,6 +66,14 @@ export function Navigation() {
           isScrolled && "pt-3"
         )}
       >
+        {/* Fondo de degradado para que el contenido no se filtre por los bordes del pill al hacer scroll */}
+        <div
+          aria-hidden
+          className={cn(
+            "pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-background/85 via-background/40 to-transparent backdrop-blur-md transition-opacity duration-300",
+            isScrolled ? "opacity-100" : "opacity-0"
+          )}
+        />
         <nav
           className={cn(
             "pointer-events-auto flex max-w-[min(100%,56rem)] items-center gap-1 px-2 py-2 pl-3 sm:gap-1.5 sm:pl-4",
