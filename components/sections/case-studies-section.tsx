@@ -12,7 +12,7 @@ import { SitePreviewIframe } from "@/components/site-preview-iframe"
 import { successCases, type SuccessCase, isLogoPosterPath } from "@/lib/success-cases"
 import { cn } from "@/lib/utils"
 
-/** Solo 4 proyectos en la home; el resto sigue en /casos-de-exito */
+/** Solo 4 proyectos en la home; el resto está en /services#cases */
 const HOME_CASE_IDS = ["jibal-americas", "jin-global", "contraste", "mercaderus"] as const
 
 const homeCases: SuccessCase[] = HOME_CASE_IDS.map((id) => {
@@ -51,7 +51,7 @@ export function CaseStudiesSection() {
             </p>
           </div>
           <Link
-            href="/casos-de-exito"
+            href="/services#cases"
             className="group inline-flex shrink-0 items-center gap-2 text-accent hover:text-accent/80 transition-colors font-medium"
           >
             {t("cases.viewAll")}
@@ -138,7 +138,7 @@ export function CaseStudiesSection() {
           }`}
         >
           <Link
-            href="/casos-de-exito"
+            href="/services#cases"
             className="inline-flex items-center gap-2 rounded-xl border border-accent/30 bg-accent/10 px-6 py-3 text-sm font-medium text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
           >
             {t("cases.viewAll")}

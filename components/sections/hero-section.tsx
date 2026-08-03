@@ -121,7 +121,7 @@ export function HeroSection() {
                 size="lg"
                 className="w-full rounded-full border-border/80 bg-transparent sm:w-auto"
               >
-                <Link href="/casos-de-exito">{t("hero.cta.secondary")}</Link>
+                <Link href="/services#cases">{t("hero.cta.secondary")}</Link>
               </Button>
             </div>
 

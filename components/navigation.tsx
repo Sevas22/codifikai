@@ -44,7 +44,6 @@ export function Navigation() {
     { href: "/", label: t("nav.home"), highlight: false },
     { href: "/about", label: t("nav.about"), highlight: false },
     { href: "/services", label: t("nav.services"), highlight: true },
-    { href: "/casos-de-exito", label: t("nav.cases"), highlight: false },
     { href: "/blog", label: t("nav.blog"), highlight: false },
     { href: "/contact", label: t("nav.contact"), highlight: false },
   ] as const

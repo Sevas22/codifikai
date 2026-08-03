@@ -28,6 +28,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/casos-de-exito",
+        destination: "/services#cases",
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig

@@ -42,7 +42,7 @@ export function ServicesHero() {
                 size="lg"
                 className="w-full rounded-full border-white/15 bg-transparent sm:w-auto"
               >
-                <Link href="/casos-de-exito">{t("svc.hero.ctaSecondary")}</Link>
+                <Link href="#cases">{t("svc.hero.ctaSecondary")}</Link>
               </Button>
             </div>
           </FadeIn>
