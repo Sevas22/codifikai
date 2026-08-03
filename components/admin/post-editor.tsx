@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, useTransition } from "react"
 import { useActionState } from "react"
+import { marked } from "marked"
 import {
   savePostAction,
   publishPostAction,
@@ -52,6 +53,7 @@ export function PostEditor({ post, prefill }: { post: AdminBlogPost | null; pref
   const [contentMode, setContentMode] = useState<ContentMode>("ai")
   const [uploadFileName, setUploadFileName] = useState("")
   const [pendingCheckId, setPendingCheckId] = useState<string>()
+  const [contentView, setContentView] = useState<"edit" | "preview">("edit")
 
   const [coverUploadError, setCoverUploadError] = useState<string>()
   const [contentUploadError, setContentUploadError] = useState<string>()
@@ -74,9 +76,15 @@ export function PostEditor({ post, prefill }: { post: AdminBlogPost | null; pref
       setDescription(generateState.draft.description)
       setContent(generateState.draft.content)
       setKeywordsText(generateState.draft.keywords.join(", "))
+      setContentView("preview")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [generateState.draft])
+
+  const contentHtml = useMemo(
+    () => (marked.parse(content, { async: false }) as string) || "",
+    [content]
+  )
 
   useEffect(() => {
     if (improveState.result) {
@@ -341,26 +349,81 @@ export function PostEditor({ post, prefill }: { post: AdminBlogPost | null; pref
 
         <div>
           <div className="flex items-center justify-between">
-            <label className="block text-sm font-medium text-white/80">Contenido (Markdown)</label>
-            <label className="cursor-pointer text-xs font-medium text-cyan-400 hover:underline">
-              {isContentUploading ? "Subiendo imagen…" : "+ Insertar imagen"}
-              <input
-                type="file"
-                accept="image/*"
-                disabled={isContentUploading}
-                onChange={handleContentImagePick}
-                className="hidden"
-              />
-            </label>
+            <div className="flex items-center gap-3">
+              <label className="block text-sm font-medium text-white/80">Contenido</label>
+              <div className="flex gap-1 rounded-md bg-black/40 p-0.5">
+                <button
+                  type="button"
+                  onClick={() => setContentView("edit")}
+                  className={`rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+                    contentView === "edit" ? "bg-cyan-400 text-black" : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  Editar
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setContentView("preview")}
+                  className={`rounded px-2.5 py-1 text-xs font-medium transition-colors ${
+                    contentView === "preview" ? "bg-cyan-400 text-black" : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  Vista previa
+                </button>
+              </div>
+            </div>
+            {contentView === "edit" && (
+              <label className="cursor-pointer text-xs font-medium text-cyan-400 hover:underline">
+                {isContentUploading ? "Subiendo imagen…" : "+ Insertar imagen"}
+                <input
+                  type="file"
+                  accept="image/*"
+                  disabled={isContentUploading}
+                  onChange={handleContentImagePick}
+                  className="hidden"
+                />
+              </label>
+            )}
           </div>
           {contentUploadError && <p className="mt-1 text-xs text-red-300">{contentUploadError}</p>}
-          <textarea
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            rows={20}
-            className="mt-1 w-full rounded-md border border-white/15 bg-black/40 px-3 py-2 font-mono text-xs leading-relaxed text-white outline-none focus:border-cyan-400/60"
-          />
+
+          {contentView === "edit" ? (
+            <textarea
+              name="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              rows={20}
+              className="mt-1 w-full rounded-md border border-white/15 bg-black/40 px-3 py-2 font-mono text-xs leading-relaxed text-white outline-none focus:border-cyan-400/60"
+            />
+          ) : (
+            <>
+              <input type="hidden" name="content" value={content} />
+              <div className="mt-1 max-h-[32rem] overflow-y-auto rounded-md border border-white/15 bg-black/40 px-5 py-5">
+                {coverImage && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={coverImage}
+                    alt=""
+                    className="mb-5 aspect-[16/9] w-full rounded-md border border-white/10 object-cover"
+                  />
+                )}
+                <h1
+                  className="text-2xl font-bold text-white"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {title || "Título del artículo"}
+                </h1>
+                {description && <p className="mt-2 text-sm text-white/50">{description}</p>}
+                {content ? (
+                  <div className="blog-prose mt-6" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+                ) : (
+                  <p className="mt-6 text-sm text-white/40">
+                    Aún no hay contenido — genera un borrador con IA o escribe en la pestaña "Editar".
+                  </p>
+                )}
+              </div>
+            </>
+          )}
         </div>
 
         {saveState.error && (
