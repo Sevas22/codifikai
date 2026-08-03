@@ -6,7 +6,16 @@
       "Bash(node /workspaces/codifikai/scratchpad-screenshot.mjs)",
       "Bash(npm uninstall *)",
       "Bash(node /workspaces/codifikai/scratchpad-nav-check.mjs)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(grep -n \"mouseRadius,$\" /workspaces/codifikai/components/effects/lightfall.tsx)",
+      "Bash(python3 -)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/es)",
+      "Bash(curl -s http://localhost:3000/ -D - -o /tmp/resp.html)",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/favicon.ico)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/robots.txt)",
+      "Bash(kill 16631 16643)"
     ],
     "additionalDirectories": [
       "/tmp"
