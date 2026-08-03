@@ -1,30 +1,33 @@
 "use client"
 
+import { Lightfall } from "@/components/effects/lightfall"
+
 /**
- * Fondo fijo, estático (sin seguimiento de mouse): degradado sutil + rejilla,
- * consistente con el resto del sitio pero sin coste de render por frame.
+ * Fondo global fijo: efecto "Lightfall" (destellos de luz) sobre el mismo
+ * negro azulado del sitio, con la paleta de marca (cian, violeta, magenta)
+ * en vez de colores genéricos.
  */
 export function SiteInteractiveBackground() {
   return (
-    <div
-      className="pointer-events-none fixed inset-0 z-0 hidden overflow-hidden dark:block"
-      aria-hidden
-    >
-      <div className="absolute inset-0 bg-background" />
-      <div className="absolute inset-0 hero-diagonal-mesh opacity-20" />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 60% at 82% 10%, oklch(0.68 0.2 285 / 0.08), transparent 55%), radial-gradient(ellipse 70% 50% at 15% 90%, oklch(0.76 0.18 195 / 0.06), transparent 55%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 bg-[linear-gradient(to_right,oklch(0.98_0_0/0.022)_1px,transparent_1px),linear-gradient(to_bottom,oklch(0.98_0_0/0.022)_1px,transparent_1px)] bg-[length:min(72px,11vw)_min(72px,11vw)]"
-        style={{
-          maskImage: "radial-gradient(ellipse 88% 72% at 50% 38%, black 22%, transparent 74%)",
-          WebkitMaskImage: "radial-gradient(ellipse 88% 72% at 50% 38%, black 22%, transparent 74%)",
-        }}
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
+      <Lightfall
+        colors={["#67e8f9", "#7c3aed", "#f0abfc"]}
+        backgroundColor="#0a0a0f"
+        backgroundGlowColor="34,211,238"
+        speed={0.5}
+        streakCount={2}
+        streakWidth={1}
+        streakLength={1}
+        density={0.6}
+        twinkle={1}
+        glow={1}
+        backgroundGlow={0.35}
+        zoom={3}
+        opacity={0.9}
+        mouseInteraction
+        mouseStrength={0.5}
+        mouseRadius={1}
+        className="absolute inset-0 h-full w-full"
       />
     </div>
   )
