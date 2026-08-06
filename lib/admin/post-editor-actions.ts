@@ -71,17 +71,21 @@ export async function savePostAction(_prevState: SaveState, formData: FormData):
 }
 
 export async function publishPostAction(id: string): Promise<void> {
-  await publishPost(id)
+  const post = await publishPost(id)
   revalidatePath(`/admin/posts/${id}`)
   revalidatePath("/admin")
   revalidatePath("/blog")
+  revalidatePath(`/blog/${post.slug}`)
+  revalidatePath("/sitemap.xml")
 }
 
 export async function unpublishPostAction(id: string): Promise<void> {
-  await unpublishPost(id)
+  const post = await unpublishPost(id)
   revalidatePath(`/admin/posts/${id}`)
   revalidatePath("/admin")
   revalidatePath("/blog")
+  revalidatePath(`/blog/${post.slug}`)
+  revalidatePath("/sitemap.xml")
 }
 
 export async function deletePostAction(id: string): Promise<void> {

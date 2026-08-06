@@ -50,6 +50,14 @@ create policy "authenticated full access on posts"
   using (auth.role() = 'authenticated')
   with check (auth.role() = 'authenticated');
 
+-- El blog público lee directamente de Supabase (sin esto, un visitante
+-- anónimo no puede ver ningún post aunque esté publicado: la policy de
+-- arriba solo cubre al admin autenticado).
+drop policy if exists "public read published posts" on blog_posts;
+create policy "public read published posts"
+  on blog_posts for select
+  using (status = 'published');
+
 -- Seed: banco de temas migrado de content/blog/TOPICS.md
 insert into blog_topics (topic, city, department, keyword, status) values
   ('Automatización con IA para pymes', 'Chía y Zipaquirá', 'Cundinamarca', 'automatización IA Chía', 'publicado'),

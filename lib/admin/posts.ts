@@ -1,11 +1,6 @@
-import fs from "node:fs"
-import path from "node:path"
-import matter from "gray-matter"
 import { createClient } from "@/lib/supabase/server"
 import { slugify } from "@/lib/admin/slugify"
 import type { BlogDepartment } from "@/lib/blog"
-
-const POSTS_DIR = path.join(process.cwd(), "content", "blog", "posts")
 
 export type AdminPostStatus = "draft" | "published"
 
@@ -169,20 +164,15 @@ export async function updatePost(id: string, input: PostInput): Promise<AdminBlo
 
 export async function deletePost(id: string): Promise<void> {
   const supabase = await createClient()
-  const post = await getPost(id)
   const { error } = await supabase.from("blog_posts").delete().eq("id", id)
   if (error) throw new Error(error.message)
-
-  if (post) {
-    const filePath = path.join(POSTS_DIR, `${post.slug}.md`)
-    if (fs.existsSync(filePath)) fs.rmSync(filePath)
-  }
 }
 
 /**
- * Publica el post: lo marca como `published` en Supabase y materializa el
- * archivo Markdown en content/blog/posts, que es lo que realmente sirve el
- * blog público (estático, sin dependencia de base de datos en producción).
+ * Publica el post: lo marca como `published` en Supabase. El blog público
+ * lee directamente de Supabase (lib/blog.ts) — no se materializa ningún
+ * archivo, porque en producción (Vercel) el filesystem es de solo lectura
+ * y no persiste entre invocaciones.
  */
 export async function publishPost(id: string): Promise<AdminBlogPost> {
   const supabase = await createClient()
@@ -196,35 +186,10 @@ export async function publishPost(id: string): Promise<AdminBlogPost> {
     .single()
 
   if (error) throw new Error(error.message)
-  const post = mapRow(data as PostRow)
-
-  const frontmatter: Record<string, unknown> = {
-    title: post.title,
-    description: post.description,
-    date: post.publishedAt,
-    department: post.department,
-    city: post.city,
-    keywords: post.keywords,
-    author: post.author,
-    draft: false,
-  }
-  // js-yaml no puede serializar `undefined`: solo se incluye si hay valor.
-  if (post.coverImage) frontmatter.coverImage = post.coverImage
-
-  fs.mkdirSync(POSTS_DIR, { recursive: true })
-  fs.writeFileSync(
-    path.join(POSTS_DIR, `${post.slug}.md`),
-    matter.stringify(post.content, frontmatter),
-    "utf8"
-  )
-
-  return post
+  return mapRow(data as PostRow)
 }
 
-/**
- * Vuelve el post a `draft`: lo quita del sitio público (borra el .md
- * materializado) pero conserva el registro y el contenido en Supabase.
- */
+/** Vuelve el post a `draft`: lo quita del blog público, conserva el registro. */
 export async function unpublishPost(id: string): Promise<AdminBlogPost> {
   const supabase = await createClient()
 
@@ -236,10 +201,5 @@ export async function unpublishPost(id: string): Promise<AdminBlogPost> {
     .single()
 
   if (error) throw new Error(error.message)
-  const post = mapRow(data as PostRow)
-
-  const filePath = path.join(POSTS_DIR, `${post.slug}.md`)
-  if (fs.existsSync(filePath)) fs.rmSync(filePath)
-
-  return post
+  return mapRow(data as PostRow)
 }

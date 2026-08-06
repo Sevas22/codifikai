@@ -12,13 +12,13 @@ import { getSiteUrl, siteName } from "@/lib/site"
 
 type Props = { params: Promise<{ slug: string }> }
 
-export function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }))
+export async function generateStaticParams() {
+  return (await getAllPostSlugs()).map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getPostBySlug(slug)
   if (!post) return {}
 
   return {
@@ -48,7 +48,7 @@ function formatDate(date: string) {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
-  const post = getPostBySlug(slug)
+  const post = await getPostBySlug(slug)
   if (!post) notFound()
 
   const siteUrl = getSiteUrl()
