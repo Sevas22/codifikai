@@ -311,11 +311,7 @@ export default function AboutPage() {
           >
             <SectionEyebrow label={t("about.competitiveAdvantage")} />
           </div>
-          <div className="relative grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-            <div className="pointer-events-none absolute left-1/2 top-6 hidden h-[calc(100%-3rem)] w-px -translate-x-1/2 lg:block">
-              <div className="h-full w-px bg-gradient-to-b from-transparent via-accent to-transparent opacity-80" />
-              <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/60 bg-background shadow-[0_0_18px_oklch(0.76_0.18_195/0.35)]" />
-            </div>
+          <div className="relative mx-auto max-w-2xl">
             <div
               className={`rounded-3xl border border-border/50 bg-background/40 p-8 text-center backdrop-blur-xl transition-all duration-400 md:p-10 md:text-left ${
                 benefitsVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
@@ -354,44 +350,6 @@ export default function AboutPage() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Stats card */}
-            <div
-              className={`relative transition-all duration-400 delay-300 ${
-                benefitsVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-              }`}
-            >
-              <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-background/50 p-8 text-center backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.02)] md:p-10 md:text-left">
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-accent/20 rounded-full blur-3xl" />
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
-                
-                <h3
-                  className="text-2xl font-bold heading-brand mb-8 relative"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
-                  {t("about.competitiveAnalysis")}
-                </h3>
-
-                <div className="space-y-4 relative">
-                  <div className="flex flex-col items-center gap-2 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
-                    <span className="text-muted-foreground">{t("about.deliveryTime")}</span>
-                    <span className="text-accent font-semibold">{t("about.deliveryValue")}</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-2 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
-                    <span className="text-muted-foreground">{t("about.costVsAgencies")}</span>
-                    <span className="text-accent font-semibold">{t("about.costValue")}</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-2 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
-                    <span className="text-muted-foreground">{t("about.retention")}</span>
-                    <span className="text-accent font-semibold">{t("about.retentionValue")}</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-2 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left rounded-2xl border border-border/40 bg-background/50 transition-colors duration-300 hover:border-accent/20">
-                    <span className="text-muted-foreground">{t("about.nps")}</span>
-                    <span className="text-accent font-semibold">{t("about.npsValue")}</span>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

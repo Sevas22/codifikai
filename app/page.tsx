@@ -26,11 +26,6 @@ const TeamSection = dynamic(
   { loading: () => <div className="min-h-[28rem]" aria-hidden /> }
 )
 
-const StatsSection = dynamic(
-  () => import("@/components/sections/stats-section").then((m) => m.StatsSection),
-  { loading: () => <div className="min-h-[16rem]" aria-hidden /> }
-)
-
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-transparent text-foreground overflow-x-hidden">
@@ -41,7 +36,6 @@ export default function Home() {
       <CaseStudiesSection />
       <TechnologiesPreviewSection />
       <TeamSection />
-      <StatsSection />
       <CTASection />
       <Footer />
       <FloatingContact />
