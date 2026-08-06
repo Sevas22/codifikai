@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useMemo, useState, useTransition } from "react"
+import { useEffect, useMemo, useRef, useState, useTransition } from "react"
 import { useActionState } from "react"
 import { marked } from "marked"
+import { Bold, Italic, Heading2, Heading3, Quote, List, ListOrdered, Link2 } from "lucide-react"
 import {
   savePostAction,
   publishPostAction,
@@ -54,6 +55,7 @@ export function PostEditor({ post, prefill }: { post: AdminBlogPost | null; pref
   const [uploadFileName, setUploadFileName] = useState("")
   const [pendingCheckId, setPendingCheckId] = useState<string>()
   const [contentView, setContentView] = useState<"edit" | "preview">("edit")
+  const contentRef = useRef<HTMLTextAreaElement>(null)
 
   const [coverUploadError, setCoverUploadError] = useState<string>()
   const [contentUploadError, setContentUploadError] = useState<string>()
@@ -146,6 +148,90 @@ export function PostEditor({ post, prefill }: { post: AdminBlogPost | null; pref
       }
     })
   }
+
+  /** Envuelve la selección actual con marcadores Markdown (ej. **negrita**). */
+  function wrapSelection(before: string, after: string = before) {
+    const el = contentRef.current
+    if (!el) return
+    const start = el.selectionStart
+    const end = el.selectionEnd
+    const selected = content.slice(start, end)
+    const alreadyWrapped =
+      content.slice(start - before.length, start) === before &&
+      content.slice(end, end + after.length) === after
+
+    let newContent: string
+    let selStart: number
+    let selEnd: number
+
+    if (alreadyWrapped) {
+      newContent =
+        content.slice(0, start - before.length) + selected + content.slice(end + after.length)
+      selStart = start - before.length
+      selEnd = selStart + selected.length
+    } else {
+      newContent = content.slice(0, start) + before + selected + after + content.slice(end)
+      selStart = start + before.length
+      selEnd = selStart + selected.length
+    }
+
+    setContent(newContent)
+    requestAnimationFrame(() => {
+      el.focus()
+      el.setSelectionRange(selStart, selEnd)
+    })
+  }
+
+  /** Agrega o quita un prefijo (ej. "## ") al inicio de cada línea seleccionada. */
+  function toggleLinePrefix(prefix: string) {
+    const el = contentRef.current
+    if (!el) return
+    const start = el.selectionStart
+    const end = el.selectionEnd
+    const lineStart = content.lastIndexOf("\n", start - 1) + 1
+    const nextBreak = content.indexOf("\n", end)
+    const lineEnd = nextBreak === -1 ? content.length : nextBreak
+    const block = content.slice(lineStart, lineEnd)
+    const lines = block.split("\n")
+    const allPrefixed = lines.every((line) => line.startsWith(prefix))
+    const newLines = allPrefixed
+      ? lines.map((line) => line.slice(prefix.length))
+      : lines.map((line) => (line.startsWith(prefix) ? line : prefix + line))
+    const newBlock = newLines.join("\n")
+
+    setContent(content.slice(0, lineStart) + newBlock + content.slice(lineEnd))
+    requestAnimationFrame(() => {
+      el.focus()
+      el.setSelectionRange(lineStart, lineStart + newBlock.length)
+    })
+  }
+
+  function insertLink() {
+    const el = contentRef.current
+    if (!el) return
+    const start = el.selectionStart
+    const end = el.selectionEnd
+    const selected = content.slice(start, end) || "texto del enlace"
+    const snippet = `[${selected}](https://)`
+    const newContent = content.slice(0, start) + snippet + content.slice(end)
+    setContent(newContent)
+    requestAnimationFrame(() => {
+      el.focus()
+      const urlStart = start + selected.length + 3
+      el.setSelectionRange(urlStart, urlStart + 8)
+    })
+  }
+
+  const toolbarButtons = [
+    { icon: Bold, label: "Negrita", onClick: () => wrapSelection("**") },
+    { icon: Italic, label: "Cursiva", onClick: () => wrapSelection("_") },
+    { icon: Heading2, label: "Título (H2)", onClick: () => toggleLinePrefix("## ") },
+    { icon: Heading3, label: "Subtítulo (H3)", onClick: () => toggleLinePrefix("### ") },
+    { icon: Quote, label: "Cita", onClick: () => toggleLinePrefix("> ") },
+    { icon: List, label: "Lista", onClick: () => toggleLinePrefix("- ") },
+    { icon: ListOrdered, label: "Lista numerada", onClick: () => toggleLinePrefix("1. ") },
+    { icon: Link2, label: "Enlace", onClick: () => insertLink() },
+  ]
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
@@ -388,13 +474,33 @@ export function PostEditor({ post, prefill }: { post: AdminBlogPost | null; pref
           {contentUploadError && <p className="mt-1 text-xs text-red-300">{contentUploadError}</p>}
 
           {contentView === "edit" ? (
-            <textarea
-              name="content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              rows={20}
-              className="mt-1 w-full rounded-md border border-white/15 bg-black/40 px-3 py-2 font-mono text-xs leading-relaxed text-white outline-none focus:border-cyan-400/60"
-            />
+            <>
+              <div className="mt-1 flex flex-wrap gap-1 rounded-t-md border border-b-0 border-white/15 bg-black/60 p-1.5">
+                {toolbarButtons.map(({ icon: Icon, label, onClick }) => (
+                  <button
+                    key={label}
+                    type="button"
+                    title={label}
+                    aria-label={label}
+                    onClick={onClick}
+                    className="rounded p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </button>
+                ))}
+              </div>
+              <textarea
+                ref={contentRef}
+                name="content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                rows={20}
+                className="w-full rounded-b-md border border-white/15 bg-black/40 px-3 py-2 font-mono text-xs leading-relaxed text-white outline-none focus:border-cyan-400/60"
+              />
+              <p className="mt-1.5 text-[11px] text-white/40">
+                Formato en Markdown — selecciona texto y usa la barra, o revisa el resultado en "Vista previa".
+              </p>
+            </>
           ) : (
             <>
               <input type="hidden" name="content" value={content} />
