@@ -4,6 +4,7 @@ import matter from "gray-matter"
 import { marked } from "marked"
 import { isSupabaseConfigured } from "@/lib/supabase/server"
 import { createPublicClient } from "@/lib/supabase/public"
+import { extractFaqs, type Faq } from "@/lib/faq-extract"
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog", "posts")
 
@@ -24,6 +25,7 @@ export type BlogPostMeta = {
 
 export type BlogPost = BlogPostMeta & {
   html: string
+  faqs: Faq[]
 }
 
 function readPostFile(fileName: string): BlogPost {
@@ -43,6 +45,7 @@ function readPostFile(fileName: string): BlogPost {
     coverImage: data.coverImage || undefined,
     draft: Boolean(data.draft),
     html: marked.parse(content, { async: false }) as string,
+    faqs: extractFaqs(content),
   }
 }
 
@@ -105,6 +108,7 @@ async function getDbPosts(): Promise<BlogPost[]> {
       coverImage: row.cover_image || undefined,
       draft: false,
       html: marked.parse(row.content, { async: false }) as string,
+      faqs: extractFaqs(row.content),
     }))
   } catch (err) {
     console.error("[blog] Error inesperado leyendo posts de Supabase:", err)

@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import { ArrowLeft, MapPin } from "lucide-react"
 import { Navigation } from "@/components/navigation"
@@ -21,6 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(slug)
   if (!post) return {}
 
+  const images = post.coverImage ? [{ url: post.coverImage }] : undefined
+
   return {
     title: post.title,
     description: post.description,
@@ -34,6 +37,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       url: `/blog/${post.slug}`,
       publishedTime: post.date,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images,
     },
   }
 }
@@ -52,7 +62,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound()
 
   const siteUrl = getSiteUrl()
-  const jsonLd = {
+  const jsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
@@ -69,6 +79,20 @@ export default async function BlogPostPage({ params }: Props) {
       name: post.city || post.department,
     },
   }
+  if (post.coverImage) jsonLd.image = post.coverImage
+
+  const faqJsonLd =
+    post.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: post.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: { "@type": "Answer", text: faq.answer },
+          })),
+        }
+      : null
 
   return (
     <main className="relative min-h-screen bg-transparent text-foreground">
@@ -78,6 +102,12 @@ export default async function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       <article className="relative pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_45%_at_50%_-10%,rgba(34,211,238,0.14),transparent)]" />
@@ -110,6 +140,21 @@ export default async function BlogPostPage({ params }: Props) {
               <time dateTime={post.date}>{formatDate(post.date)}</time>
             </div>
           </FadeIn>
+
+          {post.coverImage && (
+            <FadeIn delay={0.05}>
+              <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10">
+                <Image
+                  src={post.coverImage}
+                  alt={post.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </FadeIn>
+          )}
 
           <FadeIn delay={0.1}>
             <div

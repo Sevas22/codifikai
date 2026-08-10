@@ -3,6 +3,19 @@ import { fileURLToPath } from "node:url"
 
 const projectRoot = dirname(fileURLToPath(import.meta.url))
 
+// Imágenes de portada subidas desde el admin viven en Supabase Storage —
+// next/image necesita el hostname explícito o las bloquea.
+function supabaseImageHostname() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+  if (!url) return null
+  try {
+    return new URL(url).hostname
+  } catch {
+    return null
+  }
+}
+const supabaseHostname = supabaseImageHostname()
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   turbopack: {
@@ -26,6 +39,15 @@ const nextConfig = {
         hostname: "images.unsplash.com",
         pathname: "/**",
       },
+      ...(supabaseHostname
+        ? [
+            {
+              protocol: "https",
+              hostname: supabaseHostname,
+              pathname: "/storage/v1/object/public/**",
+            },
+          ]
+        : []),
     ],
   },
   async redirects() {

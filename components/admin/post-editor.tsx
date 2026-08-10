@@ -100,9 +100,13 @@ export function PostEditor({ post, prefill }: { post: AdminBlogPost | null; pref
 
   const slug = post?.slug ?? slugify(title)
 
+  const secondaryKeywords = useMemo(
+    () => keywordsText.split(",").map((k) => k.trim()).filter(Boolean),
+    [keywordsText]
+  )
   const seoResult = useMemo(
-    () => scoreSeo({ title, description, keyword, content, slug }),
-    [title, description, keyword, content, slug]
+    () => scoreSeo({ title, description, keyword, content, slug, secondaryKeywords }),
+    [title, description, keyword, content, slug, secondaryKeywords]
   )
   const geoResult = useMemo(() => scoreGeo({ content, city }), [content, city])
 
@@ -138,11 +142,13 @@ export function PostEditor({ post, prefill }: { post: AdminBlogPost | null; pref
     const file = e.target.files?.[0]
     e.target.value = ""
     if (!file) return
+    const alt = window.prompt("Texto ALT de la imagen (describe qué muestra, para SEO/accesibilidad):", "")
+    if (alt === null) return // canceló el prompt
     setContentUploadError(undefined)
     startContentUpload(async () => {
       const result = await uploadFile(file)
       if (result.url) {
-        setContent((prev) => `${prev}${prev.endsWith("\n") ? "" : "\n"}\n![](${result.url})\n`)
+        setContent((prev) => `${prev}${prev.endsWith("\n") ? "" : "\n"}\n![${alt}](${result.url})\n`)
       } else {
         setContentUploadError(result.error ?? "No se pudo subir la imagen.")
       }

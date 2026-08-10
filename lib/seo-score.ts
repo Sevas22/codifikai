@@ -15,6 +15,7 @@ export type SeoScoreInput = {
   keyword: string
   content: string
   slug: string
+  secondaryKeywords?: string[]
 }
 
 export type SeoScoreResult = {
@@ -49,8 +50,19 @@ function headings(content: string): string[] {
     .map((line) => line.replace(/^#{2,3}\s/, "").trim())
 }
 
+function markdownImages(content: string): { alt: string; url: string }[] {
+  const matches = content.matchAll(/!\[([^\]]*)\]\(([^)]+)\)/g)
+  return Array.from(matches, (m) => ({ alt: m[1].trim(), url: m[2].trim() }))
+}
+
+function markdownLinks(content: string): { text: string; url: string }[] {
+  // Excluye imágenes (que usan la misma sintaxis con "!" delante).
+  const matches = content.matchAll(/(?<!!)\[([^\]]+)\]\(([^)]+)\)/g)
+  return Array.from(matches, (m) => ({ text: m[1].trim(), url: m[2].trim() }))
+}
+
 export function scoreSeo(input: SeoScoreInput): SeoScoreResult {
-  const { title, description, keyword, content, slug } = input
+  const { title, description, keyword, content, slug, secondaryKeywords = [] } = input
   const nTitle = normalize(title)
   const nDescription = normalize(description)
   const nKeyword = normalize(keyword)
@@ -58,6 +70,9 @@ export function scoreSeo(input: SeoScoreInput): SeoScoreResult {
   const nSlug = normalize(slug)
   const nFirstParagraph = normalize(firstParagraph(content))
   const nHeadings = headings(content).map(normalize)
+  const images = markdownImages(content)
+  const links = markdownLinks(content)
+  const cleanSecondaryKeywords = secondaryKeywords.map((k) => k.trim()).filter(Boolean)
 
   const checks: SeoCheck[] = [
     {
@@ -114,6 +129,28 @@ export function scoreSeo(input: SeoScoreInput): SeoScoreResult {
       id: "hasSubheadings",
       label: "Al menos 2 subtítulos (H2/H3)",
       passed: headings(content).length >= 2,
+    },
+    {
+      id: "secondaryKeywordsUsed",
+      label: "Al menos una keyword secundaria aparece en el cuerpo",
+      passed:
+        cleanSecondaryKeywords.length === 0 ||
+        cleanSecondaryKeywords.some((k) => nContent.includes(normalize(k))),
+    },
+    {
+      id: "hasImage",
+      label: "Al menos 1 imagen en el artículo",
+      passed: images.length > 0,
+    },
+    {
+      id: "imagesHaveAlt",
+      label: "Todas las imágenes tienen texto ALT",
+      passed: images.length > 0 && images.every((img) => img.alt.length > 0),
+    },
+    {
+      id: "hasExternalLink",
+      label: "Al menos 1 enlace externo a una fuente",
+      passed: links.some((link) => /^https?:\/\//.test(link.url) && !link.url.includes("codifikai.com")),
     },
   ]
 

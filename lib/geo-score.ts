@@ -4,6 +4,8 @@
  * artículo. Heurísticas locales sobre el Markdown fuente, sin servicios externos.
  */
 
+import { extractFaqs } from "@/lib/faq-extract"
+
 export type GeoCheck = {
   id: string
   label: string
@@ -67,6 +69,13 @@ function averageSentenceLength(content: string): number {
   return totalWords / sentences.length
 }
 
+function markdownLinks(content: string): string[] {
+  const matches = content.matchAll(/(?<!!)\[([^\]]+)\]\(([^)]+)\)/g)
+  return Array.from(matches, (m) => m[2].trim())
+}
+
+const SUMMARY_HEADING = /^##\s+(resumen|en resumen|tl;?dr|conclusi[oó]n)\s*$/i
+
 export function scoreGeo(input: GeoScoreInput): GeoScoreResult {
   const { content, city } = input
   const firstP = firstParagraph(content)
@@ -74,6 +83,7 @@ export function scoreGeo(input: GeoScoreInput): GeoScoreResult {
   const lowerHeads = heads.map((h) => h.toLowerCase())
   const lowerContent = content.toLowerCase()
   const avgSentenceLen = averageSentenceLength(content)
+  const links = markdownLinks(content)
 
   const checks: GeoCheck[] = [
     {
@@ -120,6 +130,26 @@ export function scoreGeo(input: GeoScoreInput): GeoScoreResult {
       id: "recentYear",
       label: "Menciona un año reciente (2025 o 2026)",
       passed: /202[56]/.test(content),
+    },
+    {
+      id: "hasFaqSection",
+      label: "Incluye sección de Preguntas frecuentes (## Preguntas frecuentes)",
+      passed: extractFaqs(content).length > 0,
+    },
+    {
+      id: "hasCitation",
+      label: "Cita al menos 1 fuente externa (enlace fuera de codifikai.com)",
+      passed: links.some((url) => /^https?:\/\//.test(url) && !url.includes("codifikai.com")),
+    },
+    {
+      id: "hasStatistic",
+      label: "Incluye al menos un dato o estadística (%, cifra)",
+      passed: /\d+([.,]\d+)?\s?%/.test(content) || /\b\d{2,}\b/.test(content.replace(/202[0-9]/g, "")),
+    },
+    {
+      id: "hasSummary",
+      label: "Incluye un resumen o conclusión explícita (## Resumen / ## Conclusión)",
+      passed: content.split("\n").some((line) => SUMMARY_HEADING.test(line.trim())),
     },
   ]
 

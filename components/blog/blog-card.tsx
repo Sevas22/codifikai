@@ -25,7 +25,7 @@ export function BlogCard({ post, index = 0 }: { post: BlogPostMeta; index?: numb
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={post.coverImage}
-              alt=""
+              alt={post.title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
