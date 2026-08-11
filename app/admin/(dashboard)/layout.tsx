@@ -17,6 +17,9 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
               <Link href="/admin/topics" className="transition-colors hover:text-white">
                 Temas
               </Link>
+              <Link href="/admin/analytics" className="transition-colors hover:text-white">
+                Analytics
+              </Link>
             </nav>
           </div>
           <form action={signOutAction}>
