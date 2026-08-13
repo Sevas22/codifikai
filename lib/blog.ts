@@ -15,6 +15,7 @@ export type BlogPostMeta = {
   title: string
   description: string
   date: string
+  updatedAt: string
   department: BlogDepartment
   city: string
   keywords: string[]
@@ -33,11 +34,14 @@ function readPostFile(fileName: string): BlogPost {
   const raw = fs.readFileSync(path.join(BLOG_DIR, fileName), "utf8")
   const { data, content } = matter(raw)
 
+  const date = data.date ? new Date(data.date).toISOString() : new Date().toISOString()
+
   return {
     slug,
     title: data.title ?? slug,
     description: data.description ?? "",
-    date: data.date ? new Date(data.date).toISOString() : new Date().toISOString(),
+    date,
+    updatedAt: date,
     department: (data.department as BlogDepartment) ?? "Cundinamarca",
     city: data.city ?? "",
     keywords: Array.isArray(data.keywords) ? data.keywords : [],
@@ -74,6 +78,7 @@ type DbPostRow = {
   author: string
   cover_image: string | null
   published_at: string | null
+  updated_at: string | null
 }
 
 /**
@@ -88,7 +93,7 @@ async function getDbPosts(): Promise<BlogPost[]> {
     const supabase = createPublicClient()
     const { data, error } = await supabase
       .from("blog_posts")
-      .select("slug, title, description, content, city, department, keywords, author, cover_image, published_at")
+      .select("slug, title, description, content, city, department, keywords, author, cover_image, published_at, updated_at")
       .eq("status", "published")
 
     if (error) {
@@ -101,6 +106,7 @@ async function getDbPosts(): Promise<BlogPost[]> {
       title: row.title,
       description: row.description,
       date: row.published_at ? new Date(row.published_at).toISOString() : new Date().toISOString(),
+      updatedAt: row.updated_at ? new Date(row.updated_at).toISOString() : (row.published_at ?? new Date().toISOString()),
       department: row.department,
       city: row.city,
       keywords: row.keywords ?? [],

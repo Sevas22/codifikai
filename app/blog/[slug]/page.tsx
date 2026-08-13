@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       url: `/blog/${post.slug}`,
       publishedTime: post.date,
+      modifiedTime: post.updatedAt,
       images,
     },
     twitter: {
@@ -68,7 +69,7 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    dateModified: post.date,
+    dateModified: post.updatedAt,
     inLanguage: "es-CO",
     author: { "@type": "Organization", name: post.author },
     publisher: { "@type": "Organization", name: siteName, url: siteUrl },
@@ -80,6 +81,16 @@ export default async function BlogPostPage({ params }: Props) {
     },
   }
   if (post.coverImage) jsonLd.image = post.coverImage
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: siteUrl },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${siteUrl}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title, item: `${siteUrl}/blog/${post.slug}` },
+    ],
+  }
 
   const faqJsonLd =
     post.faqs.length > 0
@@ -101,6 +112,10 @@ export default async function BlogPostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {faqJsonLd && (
         <script

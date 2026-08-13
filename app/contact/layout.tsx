@@ -21,6 +21,12 @@ export const metadata: Metadata = {
       "Cuéntanos tu reto o agenda una llamada estratégica. Respondemos en menos de 24 horas hábiles.",
     url: "/contact",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contacto | Codifikai",
+    description:
+      "Cuéntanos tu reto o agenda una llamada estratégica. Respondemos en menos de 24 horas hábiles.",
+  },
 }
 
 export default function ContactLayout({ children }: { children: ReactNode }) {

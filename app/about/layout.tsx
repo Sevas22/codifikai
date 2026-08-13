@@ -2,23 +2,29 @@ import type { Metadata } from "next"
 import type { ReactNode } from "react"
 
 export const metadata: Metadata = {
-  title: "Company",
+  title: "Nosotros",
   description:
-    "Meet CodifikAI: team, technology stack, and vision. Enterprise AI systems, automation, and software built for scalable operations.",
+    "Conoce Codifikai: equipo, stack tecnológico y visión. Sistemas de IA, automatización y software empresarial construidos para escalar operaciones.",
   keywords: [
-    "AI company",
-    "enterprise automation",
-    "CodifikAI team",
-    "software development",
+    "agencia de IA",
+    "automatización empresarial",
+    "equipo Codifikai",
+    "desarrollo de software",
   ],
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "Company | CodifikAI",
+    title: "Nosotros | Codifikai",
     description:
-      "Team, technology stack, and values: digital solutions powered by artificial intelligence.",
+      "Equipo, stack tecnológico y valores: soluciones digitales impulsadas por inteligencia artificial.",
     url: "/about",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nosotros | Codifikai",
+    description:
+      "Equipo, stack tecnológico y valores: soluciones digitales impulsadas por inteligencia artificial.",
   },
 }
 

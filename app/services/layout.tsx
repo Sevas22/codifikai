@@ -4,23 +4,23 @@ import { getSiteUrl, siteName } from "@/lib/site"
 
 const SERVICES = [
   {
-    name: "AI Sales Systems",
+    name: "Sistemas de Ventas con IA",
     description: "CRM, pipeline intelligence y orquestación comercial impulsados por IA.",
   },
   {
-    name: "Enterprise Automation",
+    name: "Automatización Empresarial",
     description: "Automatización de flujos entre equipos, herramientas y datos.",
   },
   {
-    name: "Workflow Intelligence",
+    name: "Inteligencia de Procesos",
     description: "Diseño y ejecución de procesos de negocio con IA integrada.",
   },
   {
-    name: "AI Operations",
+    name: "Operaciones con IA",
     description: "Monitoreo, agentes de IA y control operativo en tiempo real.",
   },
   {
-    name: "Customer Support AI",
+    name: "Soporte al Cliente con IA",
     description: "Asistencia al cliente multicanal con escalamiento inteligente.",
   },
   {
@@ -36,7 +36,7 @@ function ServicesJsonLd() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    serviceType: "Software development and AI automation",
+    serviceType: "Desarrollo de software y automatización con IA",
     provider,
     areaServed: ["CO", "LATAM"],
     url: `${site}/services`,
@@ -61,24 +61,30 @@ function ServicesJsonLd() {
 }
 
 export const metadata: Metadata = {
-  title: "Solutions",
+  title: "Soluciones",
   description:
-    "Enterprise AI infrastructure: sales systems, workflow automation, AI operations, and scalable business systems built for modern teams.",
+    "Infraestructura de IA empresarial: sistemas de ventas, automatización de workflows, operaciones con IA y sistemas de negocio escalables para equipos modernos.",
   keywords: [
-    "enterprise AI",
-    "intelligent automation",
-    "AI sales systems",
-    "custom software",
-    "business automation",
+    "IA empresarial",
+    "automatización inteligente",
+    "sistemas de ventas con IA",
+    "software a medida",
+    "automatización de negocio",
   ],
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Solutions | CodifikAI",
+    title: "Soluciones | Codifikai",
     description:
-      "AI systems, automation, and enterprise workflows designed to accelerate business growth.",
+      "Sistemas de IA, automatización y workflows empresariales diseñados para acelerar el crecimiento del negocio.",
     url: "/services",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Soluciones | Codifikai",
+    description:
+      "Sistemas de IA, automatización y workflows empresariales diseñados para acelerar el crecimiento del negocio.",
   },
 }
 

@@ -20,11 +20,11 @@ const siteUrl = getSiteUrl()
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} | Enterprise AI Systems & Automation`,
+    default: `${siteName} | Sistemas de IA y Automatización Empresarial`,
     template: `%s | ${siteName}`,
   },
   description:
-    "CodifikAI builds enterprise AI systems, intelligent automation, and scalable workflows for global teams. Web platforms, apps, and business automation infrastructure.",
+    "Codifikai diseña sistemas de IA, automatización inteligente y workflows empresariales para equipos en Colombia y Latinoamérica. Plataformas web, apps y automatización de procesos de negocio.",
   applicationName: siteName,
   generator: "Next.js",
   keywords: [
@@ -63,19 +63,19 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    alternateLocale: ["es_CO"],
+    locale: "es_CO",
+    alternateLocale: ["en_US"],
     url: siteUrl,
     siteName,
-    title: `${siteName} | Enterprise AI Systems`,
+    title: `${siteName} | Sistemas de IA Empresarial`,
     description:
-      "AI systems, intelligent automation, and enterprise workflows built for scalable business operations.",
+      "Sistemas de IA, automatización inteligente y workflows empresariales diseñados para escalar operaciones de negocio.",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} | Enterprise AI Systems`,
+    title: `${siteName} | Sistemas de IA Empresarial`,
     description:
-      "Enterprise AI, automation infrastructure, and intelligent workflows for modern teams.",
+      "IA empresarial, infraestructura de automatización y workflows inteligentes para equipos modernos.",
   },
   ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? {
@@ -98,7 +98,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="es" className="dark" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <JsonLdRoot />
         <GoogleTagManager />
