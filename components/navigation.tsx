@@ -104,8 +104,8 @@ export function Navigation() {
                     className={cn(
                       "whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-all sm:px-4 sm:text-sm",
                       active
-                        ? "border border-cyan-500/45 bg-gradient-to-r from-cyan-500/25 via-teal-500/15 to-cyan-400/20 text-cyan-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
-                        : "border border-transparent bg-cyan-500/10 text-foreground hover:border-cyan-500 hover:bg-cyan-500 hover:text-white"
+                        ? "border border-accent/45 bg-accent/15 text-accent shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
+                        : "border border-transparent bg-accent/10 text-foreground hover:border-accent hover:bg-accent hover:text-white"
                     )}
                   >
                     {link.label}

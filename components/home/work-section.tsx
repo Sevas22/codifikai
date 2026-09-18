@@ -118,7 +118,7 @@ export function WorkSection({ copy, language }: { copy: HomeCopy; language: Home
   const rest = successCases.filter((c) => !featuredIds.has(c.id)).slice(0, 6)
 
   return (
-    <EdSection id="work">
+    <EdSection id="work" tone="dark">
       <SectionHeading
         index={4}
         label={copy.work.label}

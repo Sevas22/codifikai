@@ -3,7 +3,6 @@
 import { MessageCircle, Mail, Phone } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/sections/footer"
-import { FloatingContact } from "@/components/floating-contact"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { SectionEyebrow } from "@/components/ui/section-eyebrow"
@@ -135,7 +134,6 @@ export default function ContactPage() {
       </section>
 
       <Footer />
-      <FloatingContact />
     </main>
   )
 }

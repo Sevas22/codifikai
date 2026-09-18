@@ -2,7 +2,6 @@
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/sections/footer"
-import { FloatingContact } from "@/components/floating-contact"
 import { ServicesHero } from "@/components/services/services-hero"
 import { ServicesTrust } from "@/components/services/services-trust"
 import { ServicesGrowthSystem } from "@/components/services/services-growth-system"
@@ -28,7 +27,6 @@ export function ServicesPageView() {
         <ServicesProcess />
         <ServicesCta />
         <Footer />
-        <FloatingContact />
       </div>
     </main>
   )

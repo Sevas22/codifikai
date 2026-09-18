@@ -4,7 +4,6 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/sections/footer"
-import { FloatingContact } from "@/components/floating-contact"
 import { useLanguage } from "@/components/providers/language-provider"
 import { CONTACT_EMAIL, MAILTO_CONTACT } from "@/lib/contact"
 import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
@@ -86,7 +85,6 @@ export function LegalDocumentPage({ titleKey, updatedKey, sections }: LegalDocum
       </article>
 
       <Footer />
-      <FloatingContact />
     </main>
   )
 }

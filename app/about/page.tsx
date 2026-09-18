@@ -6,7 +6,6 @@ import { ArrowRight, Check, Target, Eye, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/sections/footer"
-import { FloatingContact } from "@/components/floating-contact"
 import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { useMouseAmbient } from "@/components/providers/mouse-ambient-provider"
@@ -491,7 +490,6 @@ export default function AboutPage() {
       </section>
 
       <Footer />
-      <FloatingContact />
     </main>
   )
 }

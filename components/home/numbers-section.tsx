@@ -16,7 +16,7 @@ export function NumbersSection({ copy, caseCount }: { copy: HomeCopy; caseCount:
   ]
 
   return (
-    <EdSection id="numbers">
+    <EdSection id="numbers" tone="dark">
       <SectionHeading
         index={1}
         label={copy.numbers.label}

@@ -39,7 +39,7 @@ function Column({
 
 export function StackSection({ copy }: { copy: HomeCopy }) {
   return (
-    <EdSection id="stack" className="border-y border-ed-rule bg-ed-canvas-raised/30">
+    <EdSection id="stack" className="ed-columns border-y border-ed-rule">
       <SectionHeading
         index={5}
         label={copy.stack.label}

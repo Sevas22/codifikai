@@ -4,12 +4,11 @@ import Link from "next/link"
 import { motion, useReducedMotion } from "framer-motion"
 import { ArrowDown, ArrowUpRight } from "lucide-react"
 
-import { OrbitalCanvas } from "@/components/home/orbital-canvas"
 import { Marquee, WordReveal, useMagnetic } from "@/components/home/ed-primitives"
+import { ParticleField } from "@/components/home/particle-field"
 import type { HomeCopy } from "@/lib/home-copy"
-import { cn } from "@/lib/utils"
 
-/** Botón principal que se inclina hacia el cursor. */
+/** Botón de golpe que se inclina hacia el cursor. */
 function MagneticCta({
   href,
   children,
@@ -19,7 +18,7 @@ function MagneticCta({
   children: React.ReactNode
   external?: boolean
 }) {
-  const { ref, x, y } = useMagnetic(0.22)
+  const { ref, x, y } = useMagnetic(0.2)
 
   return (
     <motion.span
@@ -30,11 +29,11 @@ function MagneticCta({
       <Link
         href={href}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-ed-ink px-7 py-4 text-[0.8125rem] font-medium tracking-tight text-ed-canvas transition-colors duration-300 hover:bg-ed-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-accent"
+        className="ed-punch-btn group inline-flex items-center gap-3 rounded-full px-8 py-4 text-[0.9375rem] font-semibold tracking-tight focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-punch"
       >
-        <span className="relative z-10">{children}</span>
+        {children}
         <ArrowUpRight
-          className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
           aria-hidden
         />
       </Link>
@@ -42,7 +41,7 @@ function MagneticCta({
   )
 }
 
-export function Hero({ copy, bookingHref }: { copy: HomeCopy; bookingHref: string }) {
+export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: string }) {
   const reduced = useReducedMotion()
 
   return (
@@ -50,48 +49,56 @@ export function Hero({ copy, bookingHref }: { copy: HomeCopy; bookingHref: strin
       id="top"
       className="ed-grain relative isolate flex min-h-svh flex-col justify-between overflow-hidden pt-32 pb-0 sm:pt-36"
     >
-      {/* Rejilla de reglas verticales: la referencia editorial del rediseño. */}
+      {/* Columnas verticales tenues de fondo */}
+      <div className="ed-columns pointer-events-none absolute inset-0 -z-20" aria-hidden />
+
+      {/* Halos de marca detrás del titular */}
       <div
-        className="ed-hairlines pointer-events-none absolute inset-0 -z-10 opacity-70"
+        className="pointer-events-none absolute -z-20 left-[-10%] top-[8%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--brand-violet)_22%,transparent),transparent_68%)] blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -z-20 right-[-8%] bottom-[6%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--brand-magenta)_20%,transparent),transparent_68%)] blur-3xl"
         aria-hidden
       />
 
-      {/* Pieza central. En móvil se centra detrás del texto y baja de opacidad
-          para no pelear con la lectura. */}
-      <OrbitalCanvas
-        className={cn(
-          "pointer-events-none absolute -z-10",
-          "left-1/2 top-1/2 h-[min(120vw,42rem)] w-[min(120vw,42rem)] -translate-x-1/2 -translate-y-1/2 opacity-40",
-          "lg:left-auto lg:right-[-6%] lg:h-[min(46rem,88vh)] lg:w-[min(46rem,60vw)] lg:translate-x-0 lg:opacity-100"
-        )}
-      />
+      {/* Partículas: el gesto que hace que la página se sienta viva */}
+      <ParticleField className="pointer-events-none absolute inset-0 -z-10" />
 
       <div className="relative mx-auto flex w-full max-w-[80rem] flex-1 flex-col justify-center px-[var(--ed-gutter)]">
-        <div className="max-w-[46rem]">
+        <div className="max-w-[52rem]">
           {/* Kicker */}
           <motion.p
             initial={reduced ? false : { opacity: 0, y: 12 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="ed-label flex items-center gap-3"
+            className="ed-label inline-flex items-center gap-3 rounded-full border border-ed-rule bg-ed-canvas-raised/80 px-4 py-2 backdrop-blur-sm"
           >
             <span className="relative flex h-1.5 w-1.5" aria-hidden>
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ed-accent opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ed-accent" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ed-punch opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ed-punch" />
             </span>
             {copy.hero.kicker}
           </motion.p>
 
           {/* Titular */}
-          <h1 className="ed-display mt-8 text-[clamp(2.75rem,7.4vw,6.75rem)] text-ed-ink">
+          <h1 className="ed-display mt-8 text-[clamp(2.5rem,6.8vw,5.75rem)] text-ed-ink">
             <span className="block">
-              <WordReveal text={copy.hero.titleLead} delay={0.1} />
+              <WordReveal
+                text={copy.hero.titleLead}
+                delay={0.1}
+                accentWords={copy.hero.highlight}
+              />
             </span>
-            <span className="block italic text-ed-accent">
-              <WordReveal text={copy.hero.titleEmphasis} delay={0.28} />
+            <span className="block text-ed-accent">
+              <WordReveal text={copy.hero.titleEmphasis} delay={0.26} />
             </span>
             <span className="block">
-              <WordReveal text={copy.hero.titleTail} delay={0.4} />
+              <WordReveal
+                text={copy.hero.titleTail}
+                delay={0.38}
+                accentWords={copy.hero.highlight}
+              />
             </span>
           </h1>
 
@@ -99,25 +106,25 @@ export function Hero({ copy, bookingHref }: { copy: HomeCopy; bookingHref: strin
           <motion.p
             initial={reduced ? false : { opacity: 0, y: 18 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-9 max-w-[46ch] text-pretty text-[0.975rem] leading-relaxed text-ed-ink-soft sm:text-base"
+            transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 max-w-[48ch] text-pretty text-base leading-relaxed text-ed-ink-soft sm:text-lg"
           >
             {copy.hero.lead}
           </motion.p>
 
-          {/* Llamadas a la acción */}
+          {/* Cierre principal: WhatsApp */}
           <motion.div
             initial={reduced ? false : { opacity: 0, y: 18 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-11 flex flex-wrap items-center gap-x-8 gap-y-4"
+            transition={{ duration: 0.8, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-4"
           >
-            <MagneticCta href={bookingHref} external={bookingHref.startsWith("http")}>
+            <MagneticCta href={whatsappHref} external>
               {copy.hero.ctaPrimary}
             </MagneticCta>
             <Link
               href="#work"
-              className="ed-link text-[0.8125rem] font-medium tracking-tight text-ed-ink-soft transition-colors hover:text-ed-ink"
+              className="inline-flex items-center gap-2 rounded-full border border-ed-rule-strong bg-ed-canvas-raised px-7 py-4 text-[0.9375rem] font-semibold tracking-tight text-ed-ink transition-colors duration-300 hover:border-ed-accent hover:text-ed-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-accent"
             >
               {copy.hero.ctaSecondary}
             </Link>
@@ -131,14 +138,14 @@ export function Hero({ copy, bookingHref }: { copy: HomeCopy; bookingHref: strin
           <motion.span
             initial={reduced ? false : { opacity: 0 }}
             animate={reduced ? undefined : { opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.15 }}
-            className="ed-label flex items-center gap-3 text-ed-ink-faint/80"
+            transition={{ duration: 0.8, delay: 1.05 }}
+            className="ed-label flex items-center gap-3"
           >
-            <ArrowDown className="h-3.5 w-3.5 animate-bounce text-ed-accent" aria-hidden />
+            <ArrowDown className="h-3.5 w-3.5 animate-bounce text-ed-punch" aria-hidden />
             {copy.hero.scrollCue}
           </motion.span>
         </div>
-        <div className="border-y border-ed-rule bg-ed-canvas-raised/40 py-4 backdrop-blur-sm">
+        <div className="border-y border-ed-rule bg-ed-canvas-raised/70 py-4 backdrop-blur-sm">
           <Marquee items={copy.hero.marquee} durationSeconds={52} />
         </div>
       </div>

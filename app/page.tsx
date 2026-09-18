@@ -1,7 +1,6 @@
 import { Navigation } from "@/components/navigation"
 import { HomeExperience } from "@/components/home/home-experience"
 import { Footer } from "@/components/sections/footer"
-import { FloatingContact } from "@/components/floating-contact"
 
 /**
  * Portada rediseñada (2026).
@@ -12,11 +11,10 @@ import { FloatingContact } from "@/components/floating-contact"
  */
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-ed-canvas text-ed-ink">
+    <main className="ed-light-scope relative min-h-screen overflow-x-hidden bg-ed-canvas text-ed-ink">
       <Navigation />
       <HomeExperience />
       <Footer />
-      <FloatingContact />
     </main>
   )
 }

@@ -28,7 +28,10 @@ export type HomeCopy = {
     ctaSecondary: string
     scrollCue: string
     marquee: string[]
+    /** Palabras del titular que se pintan con el color de marca. */
+    highlight: string[]
   }
+  ui: { carousel: string; previous: string; next: string }
   numbers: {
     label: string
     title: string
@@ -37,7 +40,7 @@ export type HomeCopy = {
     casesLabel: string
     casesNote: string
   }
-  capabilities: { label: string; title: string; lead: string; items: Item[] }
+  capabilities: { label: string; title: string; lead: string; cardCta: string; items: Item[] }
   process: { label: string; title: string; lead: string; steps: Step[] }
   work: {
     label: string
@@ -77,7 +80,7 @@ const es: HomeCopy = {
     titleEmphasis: "que operan",
     titleTail: "el negocio por ti.",
     lead: "Codifikai diseña sistemas de IA, infraestructura de automatización y workflows enterprise que reducen fricción operativa y aceleran el crecimiento.",
-    ctaPrimary: "Agendar llamada estratégica",
+    ctaPrimary: "Hablemos por WhatsApp",
     ctaSecondary: "Ver el trabajo",
     scrollCue: "Desliza para explorar",
     marquee: [
@@ -90,6 +93,12 @@ const es: HomeCopy = {
       "Workflows",
       "Integraciones",
     ],
+    highlight: ["sistemas", "negocio"],
+  },
+  ui: {
+    carousel: "Servicios, desliza o arrastra",
+    previous: "Anterior",
+    next: "Siguiente",
   },
   numbers: {
     label: "En cifras",
@@ -107,6 +116,7 @@ const es: HomeCopy = {
     label: "Qué construimos",
     title: "Infraestructura de automatización para equipos que ya no dan abasto.",
     lead: "Combinamos sistemas de IA, workflows inteligentes y diseño operativo para mover el negocio más rápido con menos trabajo manual.",
+    cardCta: "Hablar de esto",
     items: [
       {
         title: "Sistemas de ventas con IA",
@@ -210,8 +220,8 @@ const es: HomeCopy = {
     label: "Siguiente paso",
     title: "Cuéntanos qué se está rompiendo en tu operación.",
     lead: "Una llamada corta basta para saber si hay algo que automatizar y cuánto valdría la pena.",
-    ctaPrimary: "Agendar llamada estratégica",
-    ctaSecondary: "Escribir por WhatsApp",
+    ctaPrimary: "Escríbenos por WhatsApp",
+    ctaSecondary: "Ver todas las formas de contacto",
     reassurance: ["Sin costo", "Sin compromiso", "Respuesta el mismo día hábil"],
   },
   indexLabel: "En esta página",
@@ -235,7 +245,7 @@ const en: HomeCopy = {
     titleEmphasis: "that run",
     titleTail: "the business for you.",
     lead: "Codifikai designs AI systems, automation infrastructure and enterprise workflows that cut operational friction and accelerate growth.",
-    ctaPrimary: "Book a strategy call",
+    ctaPrimary: "Message us on WhatsApp",
     ctaSecondary: "See the work",
     scrollCue: "Scroll to explore",
     marquee: [
@@ -248,6 +258,12 @@ const en: HomeCopy = {
       "Workflows",
       "Integrations",
     ],
+    highlight: ["systems", "business"],
+  },
+  ui: {
+    carousel: "Services, swipe or drag",
+    previous: "Previous",
+    next: "Next",
   },
   numbers: {
     label: "By the numbers",
@@ -265,6 +281,7 @@ const en: HomeCopy = {
     label: "What we build",
     title: "Automation infrastructure for teams that have outgrown manual work.",
     lead: "We combine AI systems, intelligent workflows and operational design to move the business faster with less manual work.",
+    cardCta: "Talk about this",
     items: [
       {
         title: "AI sales systems",
@@ -368,8 +385,8 @@ const en: HomeCopy = {
     label: "Next step",
     title: "Tell us what is breaking in your operation.",
     lead: "A short call is enough to tell whether there is something worth automating, and what it would be worth.",
-    ctaPrimary: "Book a strategy call",
-    ctaSecondary: "Message us on WhatsApp",
+    ctaPrimary: "Message us on WhatsApp",
+    ctaSecondary: "See all the ways to reach us",
     reassurance: ["No cost", "No commitment", "Same business-day reply"],
   },
   indexLabel: "On this page",

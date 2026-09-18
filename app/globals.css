@@ -1,7 +1,10 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@custom-variant dark (&:is(.dark *));
+/* La variante dark: se desactiva dentro del subárbol claro de la portada.
+   Un solo cambio aquí evita reescribir cada componente compartido que trae
+   sus propias clases dark: (navegación, botones, tarjetas, formularios). */
+@custom-variant dark (&:is(.dark *):not(.ed-light-scope):not(.ed-light-scope *));
 
 /* Codifikai — paleta startup: cyan eléctrico → magenta / violeta, fondo profundo */
 :root {
@@ -937,86 +940,167 @@
 }
 
 /* ==========================================================================
-   Capa editorial — rediseño 2026
-   Lenguaje visual: lienzo casi negro, reglas de un pixel, tipografía display
-   serif a gran escala y micro-etiquetas monoespaciadas. Convive con los
-   tokens existentes: solo añade, no reemplaza.
+   Capa "vivid" — rediseño 2026
+   Lienzo claro, Space Grotesk en peso 700 a gran escala, palabras destacadas
+   en violeta y magenta como color de golpe. El ritmo alterna bloques claros y
+   oscuros: cualquier sección envuelta en `.ed-dark` invierte los tokens.
+   Solo añade; no toca los tokens que usa el resto del sitio.
    ========================================================================== */
 
 :root {
-  /* Lienzo y tintas del rediseño */
-  --ed-canvas: oklch(0.045 0.012 265);
-  --ed-canvas-raised: oklch(0.085 0.014 265);
-  --ed-ink: oklch(0.97 0.004 265);
-  --ed-ink-soft: oklch(0.74 0.012 265);
-  --ed-ink-faint: oklch(0.55 0.014 265);
-  --ed-rule: oklch(1 0 0 / 0.09);
-  --ed-rule-strong: oklch(1 0 0 / 0.18);
-  --ed-accent: oklch(0.82 0.15 195);
-  --ed-accent-deep: oklch(0.58 0.19 195);
+  /* Lienzo claro por defecto */
+  --ed-canvas: oklch(0.985 0.003 265);
+  --ed-canvas-raised: oklch(1 0 0);
+  --ed-canvas-sunken: oklch(0.955 0.005 265);
 
-  /* Ritmo vertical y medidas editoriales */
+  --ed-ink: oklch(0.14 0.02 265);
+  --ed-ink-soft: oklch(0.44 0.015 265);
+  --ed-ink-faint: oklch(0.58 0.015 265);
+
+  --ed-rule: oklch(0.14 0.02 265 / 0.10);
+  --ed-rule-strong: oklch(0.14 0.02 265 / 0.18);
+
+  /* Colores de marca en sus tres papeles */
+  --ed-accent: var(--brand-violet);        /* palabras destacadas */
+  --ed-punch: var(--brand-magenta);        /* botones y golpes */
+  --ed-cool: var(--brand-cyan);            /* acentos y partículas */
+
+  /* Sombra de tarjeta: suave en claro, inexistente en oscuro */
+  --ed-shadow: 0 1px 2px oklch(0.14 0.02 265 / 0.04),
+    0 8px 24px -8px oklch(0.14 0.02 265 / 0.10);
+  --ed-shadow-lift: 0 2px 4px oklch(0.14 0.02 265 / 0.05),
+    0 18px 40px -12px oklch(0.14 0.02 265 / 0.16);
+
+  --ed-radius: 1rem;
   --ed-gutter: clamp(1.25rem, 4vw, 4rem);
-  --ed-section-y: clamp(5rem, 12vw, 11rem);
+  --ed-section-y: clamp(4.5rem, 10vw, 9rem);
+}
+
+/* Bloques oscuros: mismos nombres de token, valores invertidos. */
+.ed-dark {
+  --ed-canvas: oklch(0.055 0.025 270);
+  --ed-canvas-raised: oklch(0.11 0.025 272);
+  --ed-canvas-sunken: oklch(0.03 0.02 270);
+
+  --ed-ink: oklch(0.985 0.004 265);
+  --ed-ink-soft: oklch(0.78 0.012 265);
+  --ed-ink-faint: oklch(0.62 0.015 265);
+
+  --ed-rule: oklch(1 0 0 / 0.12);
+  --ed-rule-strong: oklch(1 0 0 / 0.22);
+
+  --ed-accent: var(--brand-cyan-bright);
+  --ed-punch: var(--brand-magenta);
+  --ed-cool: var(--brand-cyan-bright);
+
+  --ed-shadow: none;
+  --ed-shadow-lift: 0 24px 60px -20px oklch(0.76 0.18 195 / 0.25);
+
+  background-color: var(--ed-canvas);
+  color: var(--ed-ink);
 }
 
 @theme inline {
   --color-ed-canvas: var(--ed-canvas);
   --color-ed-canvas-raised: var(--ed-canvas-raised);
+  --color-ed-canvas-sunken: var(--ed-canvas-sunken);
   --color-ed-ink: var(--ed-ink);
   --color-ed-ink-soft: var(--ed-ink-soft);
   --color-ed-ink-faint: var(--ed-ink-faint);
   --color-ed-rule: var(--ed-rule);
   --color-ed-rule-strong: var(--ed-rule-strong);
   --color-ed-accent: var(--ed-accent);
-  --color-ed-accent-deep: var(--ed-accent-deep);
+  --color-ed-punch: var(--ed-punch);
+  --color-ed-cool: var(--ed-cool);
+  --radius-ed: var(--ed-radius);
 }
 
 @layer utilities {
-  /* Micro-etiqueta monoespaciada: el conector visual de todo el rediseño */
+  /* Micro-etiqueta monoespaciada */
   .ed-label {
-    /* Se apunta a la variable real de next/font: las de `@theme inline` las
-       inserta Tailwind dentro de sus utilidades y no existen en runtime. */
     font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
     font-size: clamp(0.625rem, 0.72vw, 0.6875rem);
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--ed-ink-faint);
   }
 
-  /* Titular display: serif de alto contraste, interlineado cerrado */
+  /* Titular: Space Grotesk 700, muy apretado — el gesto de pixelee. */
   .ed-display {
-    font-family: var(--font-instrument), 'Instrument Serif', Georgia, 'Times New Roman', serif;
-    font-weight: 400;
-    line-height: 0.92;
-    letter-spacing: -0.02em;
+    font-family: var(--font-space), 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
     text-wrap: balance;
   }
 
-  /* Rejilla de reglas verticales de un pixel, como papel milimetrado caro */
-  .ed-hairlines {
+  /* Palabra destacada dentro de un titular */
+  .ed-hl {
+    color: var(--ed-accent);
+  }
+  .ed-hl-punch {
+    color: var(--ed-punch);
+  }
+
+  /* Botón de golpe: relleno magenta con halo, como el lima de la referencia */
+  .ed-punch-btn {
+    background-color: var(--ed-punch);
+    color: oklch(1 0 0);
+    box-shadow: 0 0 0 0 oklch(0.68 0.24 310 / 0.5),
+      0 10px 30px -8px oklch(0.68 0.24 310 / 0.55);
+    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ed-punch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 6px oklch(0.68 0.24 310 / 0.16),
+      0 16px 40px -10px oklch(0.68 0.24 310 / 0.7);
+  }
+
+  /* Tarjeta */
+  .ed-card {
+    background-color: var(--ed-canvas-raised);
+    border: 1px solid var(--ed-rule);
+    border-radius: var(--ed-radius);
+    box-shadow: var(--ed-shadow);
+    transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.5s ease;
+  }
+  .ed-card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ed-shadow-lift);
+    border-color: color-mix(in oklch, var(--ed-accent) 45%, transparent);
+  }
+
+  /* Columnas verticales tenues de fondo (referencia: hero de pixelee) */
+  .ed-columns {
     background-image: repeating-linear-gradient(
       to right,
       var(--ed-rule) 0,
       var(--ed-rule) 1px,
       transparent 1px,
-      transparent calc(100% / 6)
+      transparent calc(100% / 7)
     );
   }
 
-  /* Grano finísimo: quita el aspecto plano del negro digital */
+  /* Grano fino */
   .ed-grain::after {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.035;
-    mix-blend-mode: overlay;
+    opacity: 0.03;
+    mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+  .ed-dark .ed-grain::after {
+    mix-blend-mode: overlay;
+    opacity: 0.04;
+  }
 
-  /* Regla horizontal que se dibuja sola al entrar en pantalla */
+  /* Regla que se dibuja al entrar */
   .ed-rule-draw {
     transform-origin: left center;
     transform: scaleX(0);
@@ -1037,17 +1121,32 @@
     animation-play-state: paused;
   }
 
-  /* Enlace editorial: subrayado que crece desde la izquierda */
+  /* Enlace con subrayado que crece */
   .ed-link {
     background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0% 1px;
+    background-size: 0% 2px;
     background-position: 0 100%;
     background-repeat: no-repeat;
     transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .ed-link:hover,
   .ed-link:focus-visible {
-    background-size: 100% 1px;
+    background-size: 100% 2px;
+  }
+
+  /* Carrusel arrastrable */
+  .ed-drag {
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .ed-drag::-webkit-scrollbar {
+    display: none;
+  }
+  .ed-drag[data-dragging="true"] {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
   }
 }
 
@@ -1060,13 +1159,13 @@
   }
 }
 
-@keyframes ed-drift {
+@keyframes ed-float {
   0%,
   100% {
     transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translate3d(0, -1.25rem, 0);
+    transform: translate3d(0, -18px, 0);
   }
 }
 
@@ -1078,4 +1177,37 @@
     transition: none;
     transform: scaleX(1);
   }
+  .ed-punch-btn,
+  .ed-card {
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Tema claro acotado a la portada.
+
+   El `<html>` fuerza `.dark` para todo el sitio y el resto de páginas siguen
+   en oscuro. En vez de reescribir componentes compartidos (navegación, footer,
+   botones) para que sepan de dos temas, se redefinen aquí los tokens de shadcn
+   solo dentro del subárbol de la portada: todo lo que ya usa `--foreground`,
+   `--card` o `--border` se aclara sin tocar una línea de esos componentes.
+   -------------------------------------------------------------------------- */
+.ed-light-scope {
+  --background: oklch(0.985 0.003 265);
+  --foreground: oklch(0.14 0.02 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.14 0.02 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.14 0.02 265);
+  --primary: oklch(0.14 0.02 265);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0.005 265);
+  --secondary-foreground: oklch(0.14 0.02 265);
+  --muted: oklch(0.95 0.005 265);
+  --muted-foreground: oklch(0.46 0.015 265);
+  --accent: var(--brand-violet);
+  --accent-foreground: oklch(0.99 0 0);
+  --border: oklch(0.14 0.02 265 / 0.12);
+  --input: oklch(0.95 0.005 265);
+  --ring: var(--brand-violet);
 }

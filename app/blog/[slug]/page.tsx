@@ -5,7 +5,6 @@ import { notFound } from "next/navigation"
 import { ArrowLeft, MapPin } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/sections/footer"
-import { FloatingContact } from "@/components/floating-contact"
 import { BlogCta } from "@/components/blog/blog-cta"
 import { FadeIn } from "@/components/ui/fade-in"
 import { getAllPostSlugs, getPostBySlug } from "@/lib/blog"
@@ -108,7 +107,6 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <main className="relative min-h-screen bg-transparent text-foreground">
       <Navigation />
-      <FloatingContact />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

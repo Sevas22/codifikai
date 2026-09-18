@@ -2,7 +2,6 @@
 
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/sections/footer"
-import { FloatingContact } from "@/components/floating-contact"
 import { BlogCard } from "@/components/blog/blog-card"
 import { BlogCta } from "@/components/blog/blog-cta"
 import { FadeIn } from "@/components/ui/fade-in"
@@ -16,7 +15,6 @@ export function BlogPageView({ posts }: { posts: BlogPostMeta[] }) {
   return (
     <main className="relative min-h-screen bg-transparent text-foreground">
       <Navigation />
-      <FloatingContact />
 
       <section className="relative overflow-hidden pt-32 pb-12 md:pt-40 md:pb-16">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_45%_at_50%_-10%,rgba(34,211,238,0.14),transparent)]" />

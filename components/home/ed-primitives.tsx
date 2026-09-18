@@ -395,16 +395,23 @@ export function EdSection({
   children,
   className,
   bleed = false,
+  tone = "light",
 }: {
   id: string
   children: React.ReactNode
   className?: string
   bleed?: boolean
+  /** "dark" invierte los tokens `ed-*` para toda la sección. */
+  tone?: "light" | "dark"
 }) {
   return (
     <section
       id={id}
-      className={cn("relative scroll-mt-24 py-[var(--ed-section-y)]", className)}
+      className={cn(
+        "relative scroll-mt-24 py-[var(--ed-section-y)]",
+        tone === "dark" && "ed-dark",
+        className
+      )}
     >
       <div className={cn(bleed ? "w-full" : "mx-auto w-full max-w-[80rem] px-[var(--ed-gutter)]")}>
         {children}

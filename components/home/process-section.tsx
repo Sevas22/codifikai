@@ -5,7 +5,7 @@ import type { HomeCopy } from "@/lib/home-copy"
 
 export function ProcessSection({ copy }: { copy: HomeCopy }) {
   return (
-    <EdSection id="process">
+    <EdSection id="process" className="bg-ed-canvas-sunken">
       <SectionHeading
         index={3}
         label={copy.process.label}
