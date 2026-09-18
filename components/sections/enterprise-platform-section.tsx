@@ -17,7 +17,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 import { cn } from "@/lib/utils"
-
+import { useLocalePath } from "@/hooks/use-locale-path"
 const capabilityKeys = [
   { key: "platform.cap.sales", icon: Bot },
   { key: "platform.cap.automation", icon: Workflow },
@@ -32,6 +32,7 @@ const industryKeys = ["platform.ind.1", "platform.ind.2", "platform.ind.3", "pla
 const integrationKeys = ["platform.int.1", "platform.int.2", "platform.int.3", "platform.int.4", "platform.int.5"] as const
 
 export function EnterprisePlatformSection() {
+  const path = useLocalePath()
   const { t } = useLanguage()
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 })
 
@@ -134,7 +135,7 @@ export function EnterprisePlatformSection() {
             </div>
 
             <Button asChild variant="cta" size="cta" className="group w-full">
-              <Link href="/services">
+              <Link href={path("/services")}>
                 {t("platform.cta")}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>

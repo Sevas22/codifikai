@@ -8,6 +8,7 @@ import { DrawnRule, EdSection, Reveal, SectionHeading } from "@/components/home/
 import type { HomeCopy, HomeLang } from "@/lib/home-copy"
 import { isLogoPosterPath, successCases, type SuccessCase } from "@/lib/success-cases"
 import { cn } from "@/lib/utils"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 function CaseCard({
   item,
@@ -113,6 +114,7 @@ function CaseCard({
 }
 
 export function WorkSection({ copy, language }: { copy: HomeCopy; language: HomeLang }) {
+  const path = useLocalePath()
   const featured = successCases.filter((c) => c.featured).slice(0, 2)
   const featuredIds = new Set(featured.map((c) => c.id))
   const rest = successCases.filter((c) => !featuredIds.has(c.id)).slice(0, 6)
@@ -148,7 +150,7 @@ export function WorkSection({ copy, language }: { copy: HomeCopy; language: Home
 
       <Reveal delay={0.1} className="mt-16">
         <Link
-          href="/services#cases"
+          href={path("/services#cases")}
           className="ed-link inline-flex items-center gap-2 text-[0.9375rem] font-medium tracking-tight text-ed-ink transition-colors hover:text-ed-accent"
         >
           {copy.work.allCases}

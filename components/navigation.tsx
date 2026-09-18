@@ -10,13 +10,20 @@ import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
 import { ServicesMenu } from "@/components/nav/services-menu"
 import { IconSquircle } from "@/components/ui/icon-squircle"
 import { WHATSAPP_URL } from "@/lib/contact"
+import { localePath, otherLocale, stripLocale } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-  const { language, setLanguage, t } = useLanguage()
+  const { language, t } = useLanguage()
+
+  // Cambiar de idioma es navegar, no traducir en el sitio: se calcula la URL
+  // equivalente de la página actual en el otro idioma. Si el visitante está en
+  // /en/services, el conmutador lo lleva a /services y viceversa.
+  const alternateLocale = otherLocale(language)
+  const alternateHref = localePath(alternateLocale, stripLocale(pathname).path)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,9 +56,12 @@ export function Navigation() {
     { href: "/contact", label: t("nav.contact"), highlight: false },
   ] as const
 
+  // La comparación se hace sobre la ruta sin prefijo, para que /en/services
+  // marque "Servicios" como activo igual que /services.
+  const currentPath = stripLocale(pathname).path
   const isActive = (href: string) => {
-    if (href === "/") return pathname === "/"
-    return pathname.startsWith(href)
+    if (href === "/") return currentPath === "/"
+    return currentPath.startsWith(href)
   }
 
   const pillSurface =
@@ -83,7 +93,7 @@ export function Navigation() {
           aria-label="Principal"
         >
           <Link
-            href="/"
+            href={localePath(language, "/")}
             className="group relative flex shrink-0 items-center rounded-lg px-1 py-0.5 outline-none ring-offset-background transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-accent"
           >
             <CodifikaiLogo size="sm" showCode className="relative" />
@@ -115,7 +125,7 @@ export function Navigation() {
               return (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={localePath(language, link.href)}
                   className={cn(
                     "rounded-lg px-2.5 py-1.5 text-xs font-medium transition-colors sm:px-3 sm:text-sm",
                     active
@@ -132,14 +142,14 @@ export function Navigation() {
           <span className="mx-0.5 hidden h-6 w-px shrink-0 bg-border/80 sm:mx-1 sm:block" aria-hidden />
 
           <div className="flex shrink-0 items-center gap-0.5 sm:gap-1">
-            <button
-              type="button"
-              onClick={() => setLanguage(language === "es" ? "en" : "es")}
+            <Link
+              href={alternateHref}
+              hrefLang={alternateLocale}
               className="rounded-lg px-2 py-1.5 text-xs font-bold uppercase tracking-wide text-muted-foreground transition hover:bg-foreground/5 hover:text-foreground"
               aria-label={t("nav.languageLabel")}
             >
-              {language === "es" ? "ES" : "EN"}
-            </button>
+              {alternateLocale.toUpperCase()}
+            </Link>
 
             <Button asChild variant="cta" size="cta-sm" className="ml-0.5 shrink-0">
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
@@ -164,7 +174,7 @@ export function Navigation() {
           <div className="w-[7.75rem] shrink-0 sm:w-[8.25rem]" aria-hidden />
           <div className="flex min-w-0 flex-1 justify-center px-1">
             <Link
-              href="/"
+              href={localePath(language, "/")}
               className="group relative z-10 flex max-w-full items-center justify-center"
             >
               {/* -inset-4 en móvil empuja el glow encima de los iconos; solo desde md */}
@@ -178,14 +188,14 @@ export function Navigation() {
           </div>
 
           <div className="flex w-[7.75rem] shrink-0 items-center justify-end gap-0.5 sm:w-[8.25rem] sm:gap-1">
-            <button
-              type="button"
-              onClick={() => setLanguage(language === "es" ? "en" : "es")}
+            <Link
+              href={alternateHref}
+              hrefLang={alternateLocale}
               className="p-1 text-muted-foreground transition-colors hover:text-foreground"
               aria-label={t("nav.languageLabel")}
             >
               <IconSquircle icon={Globe} size="sm" />
-            </button>
+            </Link>
             <button
               type="button"
               className="relative z-50 p-2.5 text-foreground"
@@ -225,7 +235,7 @@ export function Navigation() {
             {navLinks.map((link, index) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={localePath(language, link.href)}
                 className={`block py-2.5 text-2xl font-bold transition-all duration-500 sm:py-3 sm:text-3xl ${
                   link.highlight
                     ? isActive(link.href)

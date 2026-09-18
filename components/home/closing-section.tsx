@@ -7,6 +7,7 @@ import { ArrowUpRight, Check } from "lucide-react"
 import { EdSection, Reveal, WordReveal, useMagnetic } from "@/components/home/ed-primitives"
 import { ParticleField } from "@/components/home/particle-field"
 import type { HomeCopy } from "@/lib/home-copy"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 export function ClosingSection({
   copy,
@@ -16,6 +17,7 @@ export function ClosingSection({
   whatsappHref: string
 }) {
   const { ref, x, y } = useMagnetic(0.18)
+  const path = useLocalePath()
 
   return (
     <EdSection id="contact" tone="dark" className="ed-grain relative overflow-hidden">
@@ -67,7 +69,7 @@ export function ClosingSection({
             </motion.span>
 
             <Link
-              href="/contact"
+              href={path("/contact")}
               className="ed-link text-[0.9375rem] font-semibold tracking-tight text-ed-ink-soft transition-colors hover:text-ed-ink"
             >
               {copy.closing.ctaSecondary}

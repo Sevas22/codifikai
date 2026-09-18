@@ -33,6 +33,12 @@ export async function GET() {
 - [Blog](${site}/blog): Guías prácticas de IA y automatización para empresas de Colombia.
 - [Contacto](${site}/contact): Cómo iniciar un proyecto con Codifikai.
 
+## Idiomas
+
+El sitio está publicado en español (raíz) e inglés (prefijo /en). Cada página
+declara sus alternativas con hreflang: por ejemplo ${site}/services y
+${site}/en/services son la misma página en dos idiomas.
+
 ## Servicios
 
 ${serviceLines}

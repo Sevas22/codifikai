@@ -9,7 +9,7 @@ import { WHATSAPP_URL } from "@/lib/contact"
 import { SectionEyebrow } from "@/components/ui/section-eyebrow"
 import { HeroConsoleVideo } from "@/components/hero-console-video"
 import { cn } from "@/lib/utils"
-
+import { useLocalePath } from "@/hooks/use-locale-path"
 const HERO_METRIC_KEYS = [
   "hero.console.metric1",
   "hero.console.metric2",
@@ -55,6 +55,7 @@ function HeroWorkflowVisual() {
 }
 
 export function HeroSection() {
+  const path = useLocalePath()
   const { t } = useLanguage()
   const { ref, isVisible } = useScrollReveal({ threshold: 0.08 })
 
@@ -121,7 +122,7 @@ export function HeroSection() {
                 size="lg"
                 className="w-full rounded-full border-border/80 bg-transparent sm:w-auto"
               >
-                <Link href="/services#cases">{t("hero.cta.secondary")}</Link>
+                <Link href={path("/services#cases")}>{t("hero.cta.secondary")}</Link>
               </Button>
             </div>
 

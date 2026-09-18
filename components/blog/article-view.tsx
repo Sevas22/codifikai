@@ -11,6 +11,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import type { TocEntry } from "@/lib/blog-toc"
 import type { BlogPost, BlogPostMeta } from "@/lib/blog"
 import { WHATSAPP_URL } from "@/lib/contact"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 const LABELS = {
   es: {
@@ -162,6 +163,7 @@ export function ArticleView({
 }) {
   const { language } = useLanguage()
   const labels = LABELS[language] ?? LABELS.es
+  const path = useLocalePath()
   const articleRef = React.useRef<HTMLElement>(null)
   // Solo se anuncia la actualización cuando de verdad difiere de la publicación.
   const wasUpdated = new Date(post.updatedAt) > new Date(post.date)
@@ -183,7 +185,7 @@ export function ArticleView({
           <div className="relative mx-auto w-full max-w-[80rem] px-[var(--ed-gutter)]">
             <div className="max-w-[46rem]">
             <Link
-              href="/blog"
+              href={path("/blog")}
               className="ed-label inline-flex items-center gap-2 transition-colors hover:text-ed-accent"
             >
               <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
@@ -290,7 +292,7 @@ export function ArticleView({
             {related.map((item, i) => (
               <Reveal key={item.slug} delay={i * 0.08} y={20}>
                 <Link
-                  href={`/blog/${item.slug}`}
+                  href={path(`/blog/${item.slug}`)}
                   className="ed-card ed-card-lift group flex h-full flex-col p-6"
                 >
                   <span className="ed-label inline-flex items-center gap-2 text-ed-accent">

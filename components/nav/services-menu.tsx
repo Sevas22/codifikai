@@ -17,6 +17,7 @@ import { ArrowUpRight, ChevronDown } from "lucide-react"
 import { useLanguage } from "@/components/providers/language-provider"
 import { SERVICES, SERVICES_MENU_INTRO } from "@/lib/services"
 import { cn } from "@/lib/utils"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 const CLOSE_DELAY_MS = 140
 
@@ -29,6 +30,7 @@ export function ServicesMenu({
 }) {
   const { language } = useLanguage()
   const reduced = useReducedMotion()
+  const path = useLocalePath()
   const [open, setOpen] = React.useState(false)
   const closeTimer = React.useRef<number | null>(null)
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -128,7 +130,7 @@ export function ServicesMenu({
                     </p>
                   </div>
                   <Link
-                    href="/services"
+                    href={path("/services")}
                     className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-ed-punch px-5 py-2.5 text-[0.8125rem] font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5"
                   >
                     {intro.cta[language]}
@@ -140,7 +142,7 @@ export function ServicesMenu({
                 {SERVICES.map((service) => (
                   <Link
                     key={service.id}
-                    href={`/services/${service.slug}`}
+                    href={path(`/services/${service.slug}`)}
                     className="group flex flex-col rounded-3xl bg-white/[0.04] p-6 transition-colors duration-300 hover:bg-white/[0.09] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent"
                   >
                     <span className="ed-label text-ed-accent tabular-nums">

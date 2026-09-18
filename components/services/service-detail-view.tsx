@@ -19,6 +19,7 @@ import {
   getRelatedServices,
   type Service,
 } from "@/lib/services"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 /** Lista con viñeta de marca, reutilizada por los tres bloques de detalle. */
 function TickList({ items, tone = "check" }: { items: string[]; tone?: "check" | "dot" }) {
@@ -42,6 +43,7 @@ function TickList({ items, tone = "check" }: { items: string[]; tone?: "check" |
 }
 
 export function ServiceDetailView({ service }: { service: Service }) {
+  const path = useLocalePath()
   const { language } = useLanguage()
   const labels = SERVICE_PAGE_LABELS
   const related = getRelatedServices(service.slug)
@@ -67,13 +69,13 @@ export function ServiceDetailView({ service }: { service: Service }) {
           <nav aria-label="breadcrumb">
             <ol className="ed-label flex flex-wrap items-center gap-2">
               <li>
-                <Link href="/" className="transition-colors hover:text-ed-accent">
+                <Link href={path("/")} className="transition-colors hover:text-ed-accent">
                   {labels.breadcrumbHome[language]}
                 </Link>
               </li>
               <li aria-hidden>/</li>
               <li>
-                <Link href="/services" className="transition-colors hover:text-ed-accent">
+                <Link href={path("/services")} className="transition-colors hover:text-ed-accent">
                   {labels.breadcrumbServices[language]}
                 </Link>
               </li>
@@ -113,7 +115,7 @@ export function ServiceDetailView({ service }: { service: Service }) {
                   />
                 </Link>
                 <Link
-                  href="/services"
+                  href={path("/services")}
                   className="inline-flex items-center gap-2 rounded-full border border-ed-rule-strong bg-ed-canvas-raised px-7 py-4 text-[0.9375rem] font-semibold tracking-tight text-ed-ink transition-colors duration-300 hover:border-ed-accent hover:text-ed-accent"
                 >
                   {labels.ctaSecondary[language]}
@@ -212,7 +214,7 @@ export function ServiceDetailView({ service }: { service: Service }) {
           {related.map((item, i) => (
             <Reveal key={item.id} delay={i * 0.07} y={20}>
               <Link
-                href={`/services/${item.slug}`}
+                href={path(`/services/${item.slug}`)}
                 className="ed-card ed-card-lift group flex h-full flex-col p-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-accent"
               >
                 <span className="ed-label text-ed-accent tabular-nums">

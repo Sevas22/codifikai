@@ -13,6 +13,7 @@ import {
   WHATSAPP_URL,
 } from "@/lib/contact"
 import { SERVICES } from "@/lib/services"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 /**
  * Pie de página.
@@ -106,6 +107,7 @@ function FooterLink({
 }
 
 export function Footer() {
+  const path = useLocalePath()
   const { language } = useLanguage()
   const labels = LABELS[language] ?? LABELS.es
   const currentYear = new Date().getFullYear()
@@ -145,7 +147,7 @@ export function Footer() {
         {/* ------------------------------------------------------------ Columnas */}
         <div className="grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr] lg:gap-10">
           <div>
-            <Link href="/" className="inline-flex">
+            <Link href={path("/")} className="inline-flex">
               <CodifikaiLogo size="sm" showCode />
             </Link>
             <p className="mt-6 max-w-[38ch] text-[0.9375rem] leading-relaxed text-ed-ink-soft">
@@ -176,19 +178,19 @@ export function Footer() {
 
           <FooterColumn title={labels.services}>
             {SERVICES.map((service) => (
-              <FooterLink key={service.id} href={`/services/${service.slug}`}>
+              <FooterLink key={service.id} href={path(`/services/${service.slug}`)}>
                 {service.title[language]}
               </FooterLink>
             ))}
-            <FooterLink href="/services">{labels.allServices}</FooterLink>
+            <FooterLink href={path("/services")}>{labels.allServices}</FooterLink>
           </FooterColumn>
 
           <FooterColumn title={labels.company}>
-            <FooterLink href="/about">{labels.about}</FooterLink>
-            <FooterLink href="/blog">{labels.blog}</FooterLink>
-            <FooterLink href="/contact">{labels.contact}</FooterLink>
-            <FooterLink href="/privacy">{labels.privacy}</FooterLink>
-            <FooterLink href="/terms">{labels.terms}</FooterLink>
+            <FooterLink href={path("/about")}>{labels.about}</FooterLink>
+            <FooterLink href={path("/blog")}>{labels.blog}</FooterLink>
+            <FooterLink href={path("/contact")}>{labels.contact}</FooterLink>
+            <FooterLink href={path("/privacy")}>{labels.privacy}</FooterLink>
+            <FooterLink href={path("/terms")}>{labels.terms}</FooterLink>
           </FooterColumn>
 
           <FooterColumn title={labels.contact}>
@@ -233,10 +235,10 @@ export function Footer() {
             &copy; {currentYear} Codifikai. {labels.rights}
           </p>
           <div className="ed-label flex items-center gap-6">
-            <Link href="/privacy" className="transition-colors hover:text-ed-accent">
+            <Link href={path("/privacy")} className="transition-colors hover:text-ed-accent">
               {labels.privacy}
             </Link>
-            <Link href="/terms" className="transition-colors hover:text-ed-accent">
+            <Link href={path("/terms")} className="transition-colors hover:text-ed-accent">
               {labels.terms}
             </Link>
           </div>

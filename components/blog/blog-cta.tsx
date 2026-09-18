@@ -5,8 +5,9 @@ import { FadeIn } from "@/components/ui/fade-in"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/components/providers/language-provider"
 import { WHATSAPP_URL } from "@/lib/contact"
-
+import { useLocalePath } from "@/hooks/use-locale-path"
 export function BlogCta() {
+  const path = useLocalePath()
   const { t } = useLanguage()
 
   return (
@@ -31,7 +32,7 @@ export function BlogCta() {
           </a>
         </Button>
         <Button asChild variant="outline" size="lg" className="w-full rounded-full border-white/15 sm:w-auto">
-          <a href="/services">{t("blogPage.ctaSecondary")}</a>
+          <a href={path("/services")}>{t("blogPage.ctaSecondary")}</a>
         </Button>
       </div>
     </FadeIn>

@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext } from "react"
 
 type Language = "es" | "en"
 
 type LanguageProviderProps = {
   children: React.ReactNode
-  defaultLanguage?: Language
-  storageKey?: string
+  /** Idioma de la ruta actual. Lo inyecta el layout raíz de cada idioma. */
+  language: Language
 }
 
 type LanguageProviderState = {
@@ -1430,53 +1430,29 @@ const initialState: LanguageProviderState = {
 
 const LanguageProviderContext = createContext<LanguageProviderState>(initialState)
 
-function isLanguage(value: string | null): value is Language {
-  return value === "es" || value === "en"
-}
-
+/**
+ * El idioma lo determina la ruta, no un estado del navegador.
+ *
+ * Antes esto era un traductor: una sola URL por página y el texto se cambiaba
+ * en el cliente. El buscador solo veía español y el inglés no existía como
+ * página indexable. Ahora cada idioma tiene su propia URL y este proveedor se
+ * limita a repartir el idioma de la ruta y sus traducciones.
+ *
+ * Se conserva `setLanguage` por compatibilidad con el código que aún lo llama,
+ * pero no cambia nada: para cambiar de idioma hay que navegar (ver
+ * `LanguageSwitch` en la navegación).
+ */
 export function LanguageProvider({
   children,
-  defaultLanguage = "es",
-  storageKey = "codifikai-language",
+  language,
   ...props
 }: LanguageProviderProps) {
-  const [language, setLanguage] = useState<Language>(defaultLanguage)
-  const [isHydrated, setIsHydrated] = useState(false)
-
-  // Mismo idioma en servidor y primer render del cliente (evita hydration mismatch).
-  // Después de hidratar, aplicamos la preferencia guardada en localStorage.
-  useEffect(() => {
-    const stored = localStorage.getItem(storageKey)
-    if (isLanguage(stored)) {
-      setLanguage(stored)
-    } else if (typeof navigator !== "undefined") {
-      // Sin preferencia guardada: detectamos el idioma del navegador.
-      // El mercado principal es Colombia/LATAM, así que cualquier variante de
-      // español arranca en "es"; cualquier otro navegador entra en inglés.
-      const browserLangs = [navigator.language, ...(navigator.languages ?? [])]
-      const prefersSpanish = browserLangs.some((l) =>
-        l?.toLowerCase().startsWith("es")
-      )
-      setLanguage(prefersSpanish ? "es" : "en")
-    }
-    setIsHydrated(true)
-  }, [storageKey])
-
-  useEffect(() => {
-    if (!isHydrated) return
-    localStorage.setItem(storageKey, language)
-    document.documentElement.lang = language
-  }, [language, storageKey, isHydrated])
-
-  const activeLanguage = isHydrated ? language : defaultLanguage
-
-  const t = (key: string): string => {
-    return translations[activeLanguage][key] || key
-  }
+  const t = (key: string): string => translations[language][key] || key
 
   const value = {
-    language: activeLanguage,
-    setLanguage,
+    language,
+    // No-op deliberado: cambiar de idioma es una navegación, no un estado.
+    setLanguage: () => {},
     t,
   }
 

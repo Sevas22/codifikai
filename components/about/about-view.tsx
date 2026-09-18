@@ -15,8 +15,10 @@ import { Navigation } from "@/components/navigation"
 import { useLanguage } from "@/components/providers/language-provider"
 import { ABOUT_TEAM, aboutCopy } from "@/lib/about-copy"
 import { WHATSAPP_URL } from "@/lib/contact"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 export function AboutView() {
+  const path = useLocalePath()
   const { language } = useLanguage()
   const copy = aboutCopy
 
@@ -37,7 +39,7 @@ export function AboutView() {
           <nav aria-label="breadcrumb">
             <ol className="ed-label flex flex-wrap items-center gap-2">
               <li>
-                <Link href="/" className="transition-colors hover:text-ed-accent">
+                <Link href={path("/")} className="transition-colors hover:text-ed-accent">
                   {copy.breadcrumbHome[language]}
                 </Link>
               </li>
@@ -82,7 +84,7 @@ export function AboutView() {
                   />
                 </Link>
                 <Link
-                  href="/services"
+                  href={path("/services")}
                   className="inline-flex items-center gap-2 rounded-full border border-ed-rule-strong bg-ed-canvas-raised px-7 py-4 text-[0.9375rem] font-semibold tracking-tight text-ed-ink transition-colors duration-300 hover:border-ed-accent hover:text-ed-accent"
                 >
                   {copy.hero.ctaSecondary[language]}

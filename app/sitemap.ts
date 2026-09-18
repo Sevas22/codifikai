@@ -1,43 +1,63 @@
 import type { MetadataRoute } from "next"
-import { getSiteUrl } from "@/lib/site"
-import { getAllPosts } from "@/lib/blog"
-import { SERVICES } from "@/lib/services"
 
+import { getAllPosts } from "@/lib/blog"
+import { localePath } from "@/lib/i18n"
+import { SERVICES } from "@/lib/services"
+import { getSiteUrl } from "@/lib/site"
+
+/**
+ * Sitemap con alternancia de idioma.
+ *
+ * Cada página aparece dos veces —una por idioma— y ambas declaran el bloque
+ * `alternates.languages`. Es la señal que necesita Google para entender que no
+ * son contenido duplicado sino la misma página en dos idiomas, y para servir
+ * la correcta según el país de quien busca.
+ */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl()
   const now = new Date()
 
-  const routes: { path: string; changeFrequency: MetadataRoute.Sitemap[0]["changeFrequency"]; priority: number }[] = [
-    { path: "/", changeFrequency: "weekly", priority: 1 },
-    { path: "/about", changeFrequency: "monthly", priority: 0.9 },
-    { path: "/services", changeFrequency: "weekly", priority: 0.95 },
-    { path: "/blog", changeFrequency: "daily", priority: 0.8 },
-    { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
-    { path: "/privacy", changeFrequency: "yearly", priority: 0.4 },
-    { path: "/terms", changeFrequency: "yearly", priority: 0.4 },
+  const url = (locale: "es" | "en", path: string) => `${base}${localePath(locale, path)}`
+
+  /** Cada ruta neutra se expande a sus dos versiones, enlazadas entre sí. */
+  const withAlternates = (
+    path: string,
+    changeFrequency: MetadataRoute.Sitemap[0]["changeFrequency"],
+    priority: number,
+    lastModified: Date = now
+  ): MetadataRoute.Sitemap =>
+    (["es", "en"] as const).map((locale) => ({
+      url: url(locale, path),
+      lastModified,
+      changeFrequency,
+      priority,
+      alternates: {
+        languages: {
+          "es-CO": url("es", path),
+          en: url("en", path),
+          "x-default": url("es", path),
+        },
+      },
+    }))
+
+  const staticEntries = [
+    ...withAlternates("/", "weekly", 1),
+    ...withAlternates("/about", "monthly", 0.9),
+    ...withAlternates("/services", "weekly", 0.95),
+    ...withAlternates("/blog", "daily", 0.8),
+    ...withAlternates("/contact", "monthly", 0.8),
+    ...withAlternates("/privacy", "yearly", 0.4),
+    ...withAlternates("/terms", "yearly", 0.4),
   ]
 
-  const staticEntries = routes.map(({ path, changeFrequency, priority }) => ({
-    url: path === "/" ? base : `${base}${path}`,
-    lastModified: now,
-    changeFrequency,
-    priority,
-  }))
+  const serviceEntries = SERVICES.flatMap((service) =>
+    withAlternates(`/services/${service.slug}`, "monthly", 0.85)
+  )
 
-  // Una entrada por subpágina de servicio: son las que deben indexarse.
-  const serviceEntries = SERVICES.map((service) => ({
-    url: `${base}/services/${service.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.85,
-  }))
-
-  const postEntries = (await getAllPosts()).map((post) => ({
-    url: `${base}/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }))
+  const posts = await getAllPosts()
+  const postEntries = posts.flatMap((post) =>
+    withAlternates(`/blog/${post.slug}`, "monthly", 0.6, new Date(post.updatedAt))
+  )
 
   return [...staticEntries, ...serviceEntries, ...postEntries]
 }
