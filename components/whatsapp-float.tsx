@@ -23,11 +23,6 @@ const LABEL = {
   en: "Message us on WhatsApp",
 } as const
 
-const TEASER = {
-  es: "¿Hablamos?",
-  en: "Let's talk",
-} as const
-
 function WhatsAppGlyph({ className }: { className?: string }) {
   return (
     <svg
@@ -45,7 +40,6 @@ function WhatsAppGlyph({ className }: { className?: string }) {
 export function WhatsAppFloat({ className }: { className?: string }) {
   const { language } = useLanguage()
   const label = LABEL[language] ?? LABEL.es
-  const teaser = TEASER[language] ?? TEASER.es
 
   return (
     <a
@@ -55,13 +49,16 @@ export function WhatsAppFloat({ className }: { className?: string }) {
       aria-label={label}
       data-gtm="whatsapp-float"
       className={cn(
-        "group fixed z-50 flex items-center gap-3",
+        // Círculo exacto: medidas fijas y sin hueco interno que lo deforme.
+        // La versión anterior era una píldora que se ensanchaba al pasar el
+        // cursor, y el espacio reservado para el texto la sacaba de redonda.
+        "group fixed z-50 grid h-14 w-14 place-items-center sm:h-16 sm:w-16",
         "right-[max(1rem,env(safe-area-inset-right,0px))]",
         "bottom-[max(1.25rem,env(safe-area-inset-bottom,0px))]",
-        "rounded-full bg-[#25D366] py-3 pl-3 pr-3 text-white",
-        "shadow-[0_10px_30px_-8px_rgba(37,211,102,0.6)]",
-        "transition-[transform,box-shadow,padding] duration-300 ease-out",
-        "hover:-translate-y-0.5 hover:pr-5 hover:shadow-[0_16px_40px_-10px_rgba(37,211,102,0.75)]",
+        "rounded-full bg-[#25D366] text-white",
+        "shadow-[0_8px_24px_-6px_rgba(37,211,102,0.55)]",
+        "transition-[transform,box-shadow] duration-300 ease-out",
+        "hover:-translate-y-0.5 hover:shadow-[0_14px_34px_-8px_rgba(37,211,102,0.7)]",
         "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366]",
         "motion-reduce:transition-none motion-reduce:hover:translate-y-0",
         className
@@ -73,12 +70,7 @@ export function WhatsAppFloat({ className }: { className?: string }) {
         style={{ animationDuration: "2.4s" }}
         aria-hidden
       />
-      <WhatsAppGlyph className="h-7 w-7 shrink-0 transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none" />
-      {/* El texto solo se despliega al pasar el puntero y en pantallas anchas:
-          en móvil el icono debe ocupar lo mínimo. */}
-      <span className="hidden max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-[max-width,opacity] duration-300 ease-out group-hover:max-w-[12rem] group-hover:opacity-100 sm:inline">
-        {teaser}
-      </span>
+      <WhatsAppGlyph className="h-7 w-7 transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none" />
     </a>
   )
 }
