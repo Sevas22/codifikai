@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { motion, useReducedMotion } from "framer-motion"
+import { m, useReducedMotion } from "framer-motion"
 import { ArrowDown, ArrowUpRight } from "lucide-react"
 
 import { Marquee, WordReveal, useMagnetic } from "@/components/home/ed-primitives"
@@ -21,7 +21,7 @@ function MagneticCta({
   const { ref, x, y } = useMagnetic(0.2)
 
   return (
-    <motion.span
+    <m.span
       ref={ref as React.RefObject<HTMLSpanElement>}
       style={{ x, y }}
       className="inline-block"
@@ -37,7 +37,7 @@ function MagneticCta({
           aria-hidden
         />
       </Link>
-    </motion.span>
+    </m.span>
   )
 }
 
@@ -73,7 +73,7 @@ export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: str
               por el que queremos que nos encuentren. Antes el h1 era solo el
               copy creativo, sin ninguna palabra clave. */}
           <h1 className="text-ed-ink">
-            <motion.span
+            <m.span
               initial={reduced ? false : { opacity: 0, y: 12 }}
               animate={reduced ? undefined : { opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -84,7 +84,7 @@ export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: str
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ed-punch" />
               </span>
               {copy.hero.kicker}
-            </motion.span>
+            </m.span>
 
             <span className="ed-display mt-8 block text-[clamp(2.5rem,6.8vw,5.75rem)]">
             <span className="block">
@@ -108,17 +108,17 @@ export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: str
           </h1>
 
           {/* Bajada */}
-          <motion.p
+          <m.p
             initial={reduced ? false : { opacity: 0, y: 18 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 max-w-[48ch] text-pretty text-base leading-relaxed text-ed-ink-soft sm:text-lg"
           >
             {copy.hero.lead}
-          </motion.p>
+          </m.p>
 
           {/* Cierre principal: WhatsApp */}
-          <motion.div
+          <m.div
             initial={reduced ? false : { opacity: 0, y: 18 }}
             animate={reduced ? undefined : { opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
@@ -133,14 +133,14 @@ export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: str
             >
               {copy.hero.ctaSecondary}
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
       {/* Pie del hero: señal de scroll + marquesina */}
       <div className="relative mt-16 w-full">
         <div className="mx-auto mb-6 flex w-full max-w-[80rem] items-center px-[var(--ed-gutter)]">
-          <motion.span
+          <m.span
             initial={reduced ? false : { opacity: 0 }}
             animate={reduced ? undefined : { opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.05 }}
@@ -148,7 +148,7 @@ export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: str
           >
             <ArrowDown className="h-3.5 w-3.5 animate-bounce text-ed-punch" aria-hidden />
             {copy.hero.scrollCue}
-          </motion.span>
+          </m.span>
         </div>
         <div className="border-y border-ed-rule bg-ed-canvas-raised/70 py-4 backdrop-blur-sm">
           <Marquee items={copy.hero.marquee} durationSeconds={52} />

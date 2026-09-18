@@ -63,6 +63,11 @@ export function ParticleField({
     // Fuera del lienzo hasta que el puntero entre, para no empujar de salida.
     let pointerX = -9999
     let pointerY = -9999
+    // Posición del puntero en la ventana. Se traduce al lienzo una vez por
+    // cuadro y no en cada pointermove: medir el lienzo ahí forzaba al
+    // navegador a recalcular el layout con cada movimiento del mouse.
+    let clientX: number | null = null
+    let clientY = 0
 
     const build = () => {
       const count = Math.round((width * height) / 100000 * density)
@@ -110,49 +115,59 @@ export function ParticleField({
       const dt = Math.min((now - last) / 1000, 0.05)
       last = now
 
-      if (visible) {
-        for (const p of particles) {
-          // Deriva vertical constante con un vaivén lateral suave.
-          p.y -= p.speed * dt
-          p.phase += dt * p.drift
-          p.x += Math.sin(p.phase) * 8 * dt
-
-          if (p.y < -p.size) {
-            p.y = height + p.size
-            p.x = Math.random() * width
-          }
-          if (p.x < -p.size) p.x = width + p.size
-          if (p.x > width + p.size) p.x = -p.size
-
-          // Repulsión del cursor, con retorno elástico al reposo.
-          const dx = p.x - pointerX
-          const dy = p.y - pointerY
-          const dist = Math.hypot(dx, dy)
-          if (dist < POINTER_RADIUS && dist > 0.01) {
-            const force = (1 - dist / POINTER_RADIUS) ** 2 * 46
-            p.pushX += (dx / dist) * force * dt * 6
-            p.pushY += (dy / dist) * force * dt * 6
-          }
-          p.pushX += (0 - p.pushX) * Math.min(1, dt * 3)
-          p.pushY += (0 - p.pushY) * Math.min(1, dt * 3)
-        }
-        draw()
+      if (clientX !== null) {
+        const rect = wrap.getBoundingClientRect()
+        pointerX = clientX - rect.left
+        pointerY = clientY - rect.top
       }
-      raf = requestAnimationFrame(frame)
+
+      for (const p of particles) {
+        // Deriva vertical constante con un vaivén lateral suave.
+        p.y -= p.speed * dt
+        p.phase += dt * p.drift
+        p.x += Math.sin(p.phase) * 8 * dt
+
+        if (p.y < -p.size) {
+          p.y = height + p.size
+          p.x = Math.random() * width
+        }
+        if (p.x < -p.size) p.x = width + p.size
+        if (p.x > width + p.size) p.x = -p.size
+
+        // Repulsión del cursor, con retorno elástico al reposo.
+        const dx = p.x - pointerX
+        const dy = p.y - pointerY
+        const dist = Math.hypot(dx, dy)
+        if (dist < POINTER_RADIUS && dist > 0.01) {
+          const force = (1 - dist / POINTER_RADIUS) ** 2 * 46
+          p.pushX += (dx / dist) * force * dt * 6
+          p.pushY += (dy / dist) * force * dt * 6
+        }
+        p.pushX += (0 - p.pushX) * Math.min(1, dt * 3)
+        p.pushY += (0 - p.pushY) * Math.min(1, dt * 3)
+      }
+      draw()
+      raf = visible ? requestAnimationFrame(frame) : 0
     }
 
     const onPointerMove = (event: PointerEvent) => {
-      const rect = wrap.getBoundingClientRect()
-      pointerX = event.clientX - rect.left
-      pointerY = event.clientY - rect.top
+      clientX = event.clientX
+      clientY = event.clientY
     }
     const onPointerLeave = () => {
+      clientX = null
       pointerX = -9999
       pointerY = -9999
     }
 
+    // Fuera de la pantalla el ciclo se detiene del todo, en vez de seguir
+    // despertando al navegador en cada cuadro sin dibujar nada.
     const io = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting
+      if (visible && !raf && !reduced) {
+        last = performance.now()
+        raf = requestAnimationFrame(frame)
+      }
     })
     io.observe(wrap)
 
@@ -173,6 +188,7 @@ export function ParticleField({
     }
 
     return () => {
+      visible = false
       cancelAnimationFrame(raf)
       io.disconnect()
       ro.disconnect()

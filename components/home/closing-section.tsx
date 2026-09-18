@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { ArrowUpRight, Check } from "lucide-react"
 
 import { EdSection, KineticTitle, Reveal, useMagnetic } from "@/components/home/ed-primitives"
@@ -52,7 +52,7 @@ export function ClosingSection({
 
         <Reveal delay={0.25} y={18}>
           <div className="mt-11 flex flex-col items-center justify-center gap-x-5 gap-y-4 sm:flex-row">
-            <motion.span
+            <m.span
               ref={ref as React.RefObject<HTMLSpanElement>}
               style={{ x, y }}
               className="inline-block"
@@ -69,7 +69,7 @@ export function ClosingSection({
                   aria-hidden
                 />
               </Link>
-            </motion.span>
+            </m.span>
 
             <Link
               href={path("/contact")}

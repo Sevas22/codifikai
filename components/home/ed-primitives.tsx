@@ -10,7 +10,7 @@
 import * as React from "react"
 import {
   animate,
-  motion,
+  m,
   useInView,
   useMotionValue,
   useReducedMotion,
@@ -111,7 +111,7 @@ type RevealProps = {
 export function Reveal({ children, className, id, delay = 0, y = 28, as = "div" }: RevealProps) {
   const reduced = useReducedMotion()
   const observerDown = useObserverUnavailable()
-  const MotionTag = motion[as]
+  const MotionTag = m[as]
   const still = reduced || observerDown
 
   return (
@@ -180,7 +180,7 @@ export function WordReveal({ text, className, delay = 0, accentWords = [] }: Wor
     <span ref={ref} className={cn("inline", className)}>
       {words.map((word, i) => (
         <span key={`${word}-${i}`} className="inline-block overflow-hidden align-bottom pb-[0.08em]">
-          <motion.span
+          <m.span
             className={cn(
               "inline-block",
               accent.has(word.toLowerCase().replace(/[.,;:]/g, "")) && "text-ed-accent"
@@ -195,7 +195,7 @@ export function WordReveal({ text, className, delay = 0, accentWords = [] }: Wor
           >
             {word}
             {i < words.length - 1 ? " " : ""}
-          </motion.span>
+          </m.span>
         </span>
       ))}
     </span>
@@ -239,7 +239,7 @@ export function KineticTitle({
   return (
     <span ref={ref} className={cn("ed-kinetic block", className)}>
       {lines.map((line, i) => (
-        <motion.span
+        <m.span
           key={`${line.text}-${i}`}
           className={cn("block", KINETIC_TONE[line.tone ?? "solid"])}
           initial={still ? false : { opacity: 0, y: "0.45em" }}
@@ -250,7 +250,7 @@ export function KineticTitle({
           {/* El espacio no se ve al final de un bloque, pero evita que el texto
               del titular salga pegado ("repetitivono") al copiarlo o indexarlo. */}
           {i < lines.length - 1 ? " " : ""}
-        </motion.span>
+        </m.span>
       ))}
     </span>
   )

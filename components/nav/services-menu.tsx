@@ -11,7 +11,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { AnimatePresence, m, useReducedMotion } from "framer-motion"
 import { ArrowUpRight, ChevronDown } from "lucide-react"
 
 import { useLanguage } from "@/components/providers/language-provider"
@@ -107,7 +107,7 @@ export function ServicesMenu({
 
       <AnimatePresence>
         {open ? (
-          <motion.div
+          <m.div
             initial={reduced ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.985 }}
             animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
             exit={reduced ? { opacity: 0 } : { opacity: 0, y: -8, scale: 0.985 }}
@@ -182,7 +182,7 @@ export function ServicesMenu({
                 })}
               </div>
             </div>
-          </motion.div>
+          </m.div>
         ) : null}
       </AnimatePresence>
     </div>

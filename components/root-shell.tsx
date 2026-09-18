@@ -4,10 +4,9 @@ import { Analytics } from "@vercel/analytics/next"
 
 import { GoogleTagManager } from "@/components/google-tag-manager"
 import { LanguageProvider } from "@/components/providers/language-provider"
-import { MouseAmbientProvider } from "@/components/providers/mouse-ambient-provider"
+import { MotionProvider } from "@/components/providers/motion-provider"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { JsonLdRoot } from "@/components/seo/json-ld"
-import { SiteInteractiveBackground } from "@/components/site-interactive-background"
 import { SoundToggle } from "@/components/sound-toggle"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 import { LOCALE_TAGS, type Locale } from "@/lib/i18n"
@@ -42,10 +41,13 @@ export function RootShell({
         <ThemeProvider>
           {/* El idioma lo fija la ruta, no un estado del navegador. */}
           <LanguageProvider language={locale}>
-            <MouseAmbientProvider>
-              <SiteInteractiveBackground />
+            {/* Aquí vivían un fondo animado a pantalla completa y un proveedor
+                que reenviaba cada movimiento del mouse a todo el árbol. Todas
+                las páginas tienen fondo opaco (el fondo no se veía en ninguna)
+                y nada leía el mouse: solo gastaban CPU en cada cuadro. */}
+            <MotionProvider>
               <div className="relative z-10 min-h-screen overflow-x-clip">{children}</div>
-            </MouseAmbientProvider>
+            </MotionProvider>
             {/* Dentro del proveedor de idioma: fuera de él, en /en anunciaban
                 sus etiquetas en español. */}
             <SoundToggle />
