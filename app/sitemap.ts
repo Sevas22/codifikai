@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next"
 import { getSiteUrl } from "@/lib/site"
 import { getAllPosts } from "@/lib/blog"
+import { SERVICES } from "@/lib/services"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = getSiteUrl()
@@ -23,6 +24,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority,
   }))
 
+  // Una entrada por subpágina de servicio: son las que deben indexarse.
+  const serviceEntries = SERVICES.map((service) => ({
+    url: `${base}/services/${service.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }))
+
   const postEntries = (await getAllPosts()).map((post) => ({
     url: `${base}/blog/${post.slug}`,
     lastModified: new Date(post.updatedAt),
@@ -30,5 +39,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }))
 
-  return [...staticEntries, ...postEntries]
+  return [...staticEntries, ...serviceEntries, ...postEntries]
 }

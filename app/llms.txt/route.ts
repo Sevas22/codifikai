@@ -1,5 +1,6 @@
 import { getAllPosts } from "@/lib/blog"
 import { getSiteUrl, siteName } from "@/lib/site"
+import { SERVICES } from "@/lib/services"
 
 /**
  * llms.txt: convención emergente (no estándar oficial) para orientar a
@@ -9,6 +10,11 @@ import { getSiteUrl, siteName } from "@/lib/site"
 export async function GET() {
   const site = getSiteUrl()
   const posts = await getAllPosts()
+
+  const serviceLines = SERVICES.map(
+    (service) =>
+      `- [${service.title.es}](${site}/services/${service.slug}): ${service.seo.description.es}`
+  ).join("\n")
 
   const postLines = posts
     .slice(0, 30)
@@ -22,10 +28,14 @@ export async function GET() {
 ## Páginas principales
 
 - [Inicio](${site}/): Qué hace Codifikai y para quién.
-- [Soluciones](${site}/services): Servicios de IA empresarial, automatización, desarrollo de software a medida y casos de éxito reales con clientes verificables.
+- [Servicios](${site}/services): Catálogo completo de servicios y casos de éxito reales con clientes verificables.
 - [Sobre nosotros](${site}/about): Equipo fundador y enfoque de trabajo.
 - [Blog](${site}/blog): Guías prácticas de IA y automatización para empresas de Colombia.
 - [Contacto](${site}/contact): Cómo iniciar un proyecto con Codifikai.
+
+## Servicios
+
+${serviceLines}
 
 ## Artículos del blog
 

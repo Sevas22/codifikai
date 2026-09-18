@@ -140,7 +140,7 @@ export function ServicesMenu({
                 {SERVICES.map((service) => (
                   <Link
                     key={service.id}
-                    href={`/services#${service.id}`}
+                    href={`/services/${service.slug}`}
                     className="group flex flex-col rounded-3xl bg-white/[0.04] p-6 transition-colors duration-300 hover:bg-white/[0.09] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent"
                   >
                     <span className="ed-label text-ed-accent tabular-nums">
