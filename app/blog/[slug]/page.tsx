@@ -1,16 +1,16 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import Image from "next/image"
 import { notFound } from "next/navigation"
-import { ArrowLeft, MapPin } from "lucide-react"
-import { Navigation } from "@/components/navigation"
+
+import { ArticleView } from "@/components/blog/article-view"
 import { Footer } from "@/components/sections/footer"
-import { BlogCta } from "@/components/blog/blog-cta"
-import { FadeIn } from "@/components/ui/fade-in"
-import { getAllPostSlugs, getPostBySlug } from "@/lib/blog"
+import { estimateReadingMinutes, withHeadingIds } from "@/lib/blog-toc"
+import { getAllPostSlugs, getAllPosts, getPostBySlug } from "@/lib/blog"
 import { getSiteUrl, siteName } from "@/lib/site"
 
 type Props = { params: Promise<{ slug: string }> }
+
+/** Cuántos artículos se sugieren al final. */
+const RELATED_COUNT = 3
 
 export async function generateStaticParams() {
   return (await getAllPostSlugs()).map((slug) => ({ slug }))
@@ -48,20 +48,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-function formatDate(date: string) {
-  return new Date(date).toLocaleDateString("es-CO", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  })
-}
-
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
   if (!post) notFound()
 
+  // Se procesa en el servidor: el artículo entero no debe reparsearse en el
+  // navegador solo para pintar un índice.
+  const { html, toc } = withHeadingIds(post.html)
+  const readingMinutes = estimateReadingMinutes(post.html)
+
+  // Se priorizan los artículos del mismo departamento: el blog es local y esa
+  // es la relación más útil para el lector.
+  const others = (await getAllPosts()).filter((p) => p.slug !== post.slug)
+  const sameArea = others.filter((p) => p.department === post.department)
+  const related = [...sameArea, ...others.filter((p) => !sameArea.includes(p))].slice(
+    0,
+    RELATED_COUNT
+  )
+
   const siteUrl = getSiteUrl()
+  const articleUrl = `${siteUrl}/blog/${post.slug}`
+
   const jsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -72,14 +80,17 @@ export default async function BlogPostPage({ params }: Props) {
     inLanguage: "es-CO",
     author: { "@type": "Organization", name: post.author },
     publisher: { "@type": "Organization", name: siteName, url: siteUrl },
-    mainEntityOfPage: `${siteUrl}/blog/${post.slug}`,
+    mainEntityOfPage: articleUrl,
     about: post.department,
+    // Minutos de lectura: los buscadores lo usan para previsualizar el esfuerzo.
+    timeRequired: `PT${readingMinutes}M`,
     spatialCoverage: {
       "@type": "AdministrativeArea",
       name: post.city || post.department,
     },
   }
   if (post.coverImage) jsonLd.image = post.coverImage
+  if (post.keywords.length > 0) jsonLd.keywords = post.keywords.join(", ")
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -87,10 +98,12 @@ export default async function BlogPostPage({ params }: Props) {
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Inicio", item: siteUrl },
       { "@type": "ListItem", position: 2, name: "Blog", item: `${siteUrl}/blog` },
-      { "@type": "ListItem", position: 3, name: post.title, item: `${siteUrl}/blog/${post.slug}` },
+      { "@type": "ListItem", position: 3, name: post.title, item: articleUrl },
     ],
   }
 
+  // Las preguntas se extraen del propio contenido, así que el marcado siempre
+  // corresponde a texto visible en la página (requisito de Google).
   const faqJsonLd =
     post.faqs.length > 0
       ? {
@@ -105,8 +118,7 @@ export default async function BlogPostPage({ params }: Props) {
       : null
 
   return (
-    <main className="relative min-h-screen bg-transparent text-foreground">
-      <Navigation />
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -115,74 +127,24 @@ export default async function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      {faqJsonLd && (
+      {faqJsonLd ? (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
-      )}
+      ) : null}
 
-      <article className="relative pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_45%_at_50%_-10%,rgba(34,211,238,0.14),transparent)]" />
-
-        <div className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-accent"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Volver al blog
-            </Link>
-
-            <div className="mt-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
-              <MapPin className="h-3.5 w-3.5" />
-              {post.city || post.department}
-            </div>
-
-            <h1
-              className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-5xl lg:leading-[1.1]"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              <span className="heading-brand">{post.title}</span>
-            </h1>
-
-            <div className="mt-6 flex items-center gap-3 text-sm text-muted-foreground">
-              <span>{post.author}</span>
-              <span aria-hidden>·</span>
-              <time dateTime={post.date}>{formatDate(post.date)}</time>
-            </div>
-          </FadeIn>
-
-          {post.coverImage && (
-            <FadeIn delay={0.05}>
-              <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/10">
-                <Image
-                  src={post.coverImage}
-                  alt={post.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 768px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </FadeIn>
-          )}
-
-          <FadeIn delay={0.1}>
-            <div
-              className="blog-prose mt-12"
-              dangerouslySetInnerHTML={{ __html: post.html }}
-            />
-          </FadeIn>
-
-          <FadeIn delay={0.15} className="mt-16">
-            <BlogCta />
-          </FadeIn>
-        </div>
-      </article>
-
-      <Footer />
-    </main>
+      <main className="relative min-h-screen overflow-x-hidden">
+        <ArticleView
+          post={post}
+          html={html}
+          toc={toc}
+          readingMinutes={readingMinutes}
+          related={related}
+        />
+        {/* Fuera de ed-light-scope: el footer tiene colores oscuros fijos. */}
+        <Footer />
+      </main>
+    </>
   )
 }

@@ -1211,3 +1211,134 @@
   --input: oklch(0.95 0.005 265);
   --ring: var(--brand-violet);
 }
+
+/* --------------------------------------------------------------------------
+   Tipografía de lectura del artículo, solo dentro del ámbito claro.
+
+   Los tamaños globales de `.blog-prose` (1rem / 1.75) sirven para una tarjeta,
+   no para leer dos mil palabras seguidas. Aquí se sube el cuerpo, se abre el
+   interlineado y se marcan mejor las jerarquías, sin tocar el estilo que
+   siguen usando las páginas todavía oscuras.
+   -------------------------------------------------------------------------- */
+.ed-light-scope .blog-prose {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--ed-ink-soft);
+}
+
+.ed-light-scope .blog-prose h2 {
+  font-family: var(--font-space), "Space Grotesk", system-ui, sans-serif;
+  font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--ed-ink);
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  /* Deja aire bajo la barra fija al saltar desde el índice. */
+  scroll-margin-top: 7rem;
+}
+
+.ed-light-scope .blog-prose h3 {
+  font-family: var(--font-space), "Space Grotesk", system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ed-ink);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 7rem;
+}
+
+.ed-light-scope .blog-prose p {
+  margin-bottom: 1.5rem;
+  text-wrap: pretty;
+}
+
+.ed-light-scope .blog-prose strong {
+  color: var(--ed-ink);
+  font-weight: 600;
+}
+
+.ed-light-scope .blog-prose a {
+  color: var(--ed-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.ed-light-scope .blog-prose li {
+  margin-bottom: 0.625rem;
+}
+
+.ed-light-scope .blog-prose li::marker {
+  color: var(--ed-punch);
+}
+
+.ed-light-scope .blog-prose blockquote {
+  margin: 2rem 0;
+  border-left: 3px solid var(--ed-punch);
+  background-color: var(--ed-canvas-sunken);
+  border-radius: 0 var(--ed-radius) var(--ed-radius) 0;
+  padding: 1.25rem 1.5rem;
+  color: var(--ed-ink);
+  font-style: normal;
+}
+
+.ed-light-scope .blog-prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.ed-light-scope .blog-prose img {
+  border-radius: var(--ed-radius);
+  border: 1px solid var(--ed-rule);
+  margin: 2rem 0;
+}
+
+.ed-light-scope .blog-prose code {
+  background-color: var(--ed-canvas-sunken);
+  border: 1px solid var(--ed-rule);
+  border-radius: 0.375rem;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.875em;
+  color: var(--ed-ink);
+}
+
+/* Los bloques de código desbordan a lo ancho: se hacen desplazables ellos
+   mismos para que no obliguen a la página a hacer scroll horizontal. */
+.ed-light-scope .blog-prose pre {
+  overflow-x: auto;
+  border-radius: var(--ed-radius);
+  border: 1px solid var(--ed-rule);
+  background-color: var(--ed-canvas-sunken);
+  padding: 1.25rem;
+  margin: 2rem 0;
+}
+
+.ed-light-scope .blog-prose pre code {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.ed-light-scope .blog-prose table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.ed-light-scope .blog-prose th,
+.ed-light-scope .blog-prose td {
+  border: 1px solid var(--ed-rule);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.ed-light-scope .blog-prose th {
+  background-color: var(--ed-canvas-sunken);
+  color: var(--ed-ink);
+  font-weight: 600;
+}

@@ -1,6 +1,9 @@
 import type { Metadata } from "next"
-import { BlogPageView } from "@/components/blog/blog-page-view"
+
+import { BlogIndexView } from "@/components/blog/blog-index-view"
+import { Footer } from "@/components/sections/footer"
 import { getAllPosts } from "@/lib/blog"
+import { getSiteUrl, siteName } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -25,5 +28,36 @@ export const metadata: Metadata = {
 
 export default async function BlogPage() {
   const posts = await getAllPosts()
-  return <BlogPageView posts={posts} />
+  const site = getSiteUrl()
+
+  // El listado en datos estructurados deja claro que esto es un blog y qué
+  // artículos contiene, en vez de una página suelta más.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: `Blog | ${siteName}`,
+    url: `${site}/blog`,
+    blogPost: posts.slice(0, 20).map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      dateModified: post.updatedAt,
+      url: `${site}/blog/${post.slug}`,
+    })),
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <main className="relative min-h-screen overflow-x-hidden">
+        <BlogIndexView posts={posts} />
+        {/* Fuera de ed-light-scope: el footer tiene colores oscuros fijos. */}
+        <Footer />
+      </main>
+    </>
+  )
 }
