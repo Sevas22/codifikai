@@ -7,6 +7,7 @@ import { Footer } from "@/components/sections/footer"
 import { useLanguage } from "@/components/providers/language-provider"
 import { CONTACT_EMAIL, MAILTO_CONTACT } from "@/lib/contact"
 import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 export type LegalSection = { titleKey: string; bodyKey: string }
 
@@ -17,6 +18,7 @@ type LegalDocumentPageProps = {
 }
 
 export function LegalDocumentPage({ titleKey, updatedKey, sections }: LegalDocumentPageProps) {
+  const path = useLocalePath()
   const { t } = useLanguage()
 
   return (
@@ -33,7 +35,7 @@ export function LegalDocumentPage({ titleKey, updatedKey, sections }: LegalDocum
 
       <article className="relative mx-auto max-w-3xl px-4 pb-24 pt-28 sm:px-6 sm:pt-32 lg:px-8">
         <Link
-          href="/"
+          href={path("/")}
           className="mb-10 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-accent"
         >
           <ArrowLeft className="h-3.5 w-3.5" />

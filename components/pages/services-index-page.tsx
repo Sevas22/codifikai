@@ -12,11 +12,12 @@ import { getSiteUrl, siteName } from "@/lib/site"
  */
 function ServicesCatalogJsonLd({ locale }: { locale: Locale }) {
   const site = getSiteUrl()
-  const provider = { "@type": "Organization", name: siteName, url: site }
+  const provider = { "@id": `${site}#organization` }
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    inLanguage: locale === "es" ? "es-CO" : "en",
     name: locale === "es" ? `Servicios de ${siteName}` : `${siteName} services`,
     itemListElement: SERVICES.map((service) => ({
       "@type": "ListItem",

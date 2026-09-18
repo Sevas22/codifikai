@@ -20,6 +20,7 @@ function ContactJsonLd({ locale }: { locale: Locale }) {
       "@id": `${url}#page`,
       url,
       name: `${locale === "es" ? "Contacto" : "Contact"} | ${siteName}`,
+      inLanguage: locale === "es" ? "es-CO" : "en",
     },
     {
       // Los datos de contacto en schema permiten que un buscador —o un

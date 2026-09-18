@@ -18,6 +18,10 @@ export function JsonLdRoot() {
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    // Identidad estable: las demás páginas referencian este @id en vez de
+    // repetir la organización. Sin él, cada página declara una entidad
+    // distinta y el buscador no las une en una sola ficha.
+    "@id": `${url}#organization`,
     name: siteName,
     alternateName: "CodifikAI",
     url,
@@ -35,6 +39,15 @@ export function JsonLdRoot() {
     ],
     email: CONTACT_EMAIL,
     telephone: PHONE_TEL_HREF.replace(/^tel:/, ""),
+    // Solo el país: es el dato de ubicación que el sitio publica de verdad.
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "CO",
+    },
+    areaServed: [
+      { "@type": "Country", name: "Colombia" },
+      { "@type": "Place", name: "Latinoamérica" },
+    ],
     sameAs: [...socialProfileUrls],
     contactPoint: [
       {
@@ -51,9 +64,10 @@ export function JsonLdRoot() {
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${url}#website`,
     name: siteName,
     url,
-    publisher: { "@type": "Organization", name: siteName, url },
+    publisher: { "@id": `${url}#organization` },
     inLanguage: ["es-CO", "en"],
   }
 

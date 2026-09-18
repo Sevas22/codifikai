@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button"
 import { FadeIn } from "@/components/ui/fade-in"
 import { useLanguage } from "@/components/providers/language-provider"
 import { WHATSAPP_URL } from "@/lib/contact"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 export function ServicesCta() {
+  const path = useLocalePath()
   const { t } = useLanguage()
 
   return (
@@ -37,7 +39,7 @@ export function ServicesCta() {
                 size="lg"
                 className="w-full rounded-full border-white/15 bg-transparent sm:w-auto"
               >
-                <Link href="/">{t("svc.cta.secondary")}</Link>
+                <Link href={path("/")}>{t("svc.cta.secondary")}</Link>
               </Button>
             </div>
           </div>

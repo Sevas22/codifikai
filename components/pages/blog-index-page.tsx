@@ -13,6 +13,8 @@ export async function BlogIndexPage({ locale }: { locale: Locale }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
+    inLanguage: locale === "es" ? "es-CO" : "en",
+    publisher: { "@id": `${site}#organization` },
     name: `Blog | ${siteName}`,
     url: `${site}${localePath(locale, "/blog")}`,
     blogPost: posts.slice(0, 20).map((post) => ({

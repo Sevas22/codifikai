@@ -17,6 +17,7 @@ import {
   PHONE_TEL_HREF,
   WHATSAPP_URL,
 } from "@/lib/contact"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 const LABELS = {
   es: {
@@ -48,6 +49,7 @@ const LABELS = {
 } as const
 
 export function ContactView() {
+  const path = useLocalePath()
   const { language, t } = useLanguage()
   const labels = LABELS[language] ?? LABELS.es
 
@@ -92,7 +94,7 @@ export function ContactView() {
           <nav aria-label="breadcrumb">
             <ol className="ed-label flex flex-wrap items-center gap-2">
               <li>
-                <Link href="/" className="transition-colors hover:text-ed-accent">
+                <Link href={path("/")} className="transition-colors hover:text-ed-accent">
                   {labels.breadcrumbHome}
                 </Link>
               </li>

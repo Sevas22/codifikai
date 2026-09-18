@@ -22,6 +22,21 @@ type BilingualList = { es: string[]; en: string[] }
 
 const siteUrl = getSiteUrl()
 
+/**
+ * Imagen social por defecto.
+ *
+ * Se declara explícitamente en vez de confiar en que Next resuelva
+ * `app/opengraph-image.tsx` por convención: con dos layouts raíz esa
+ * resolución dejó de aplicarse y las páginas salían sin `og:image`, así que
+ * cualquier enlace compartido aparecía sin tarjeta.
+ */
+const OG_IMAGE = {
+  url: `${siteUrl}/opengraph-image`,
+  width: 1200,
+  height: 630,
+  alt: siteName,
+}
+
 /** Bloque común a todas las páginas: canónico, hreflang y Open Graph. */
 function common(locale: Locale, path: string, title: string, description: string) {
   return {
@@ -35,11 +50,13 @@ function common(locale: Locale, path: string, title: string, description: string
       siteName,
       title,
       description,
+      images: [OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image" as const,
       title,
       description,
+      images: [OG_IMAGE.url],
     },
   }
 }
@@ -127,11 +144,13 @@ export function rootMetadata(locale: Locale): Metadata {
       siteName,
       title: ROOT.ogTitle[locale],
       description,
+      images: [OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
       title: ROOT.ogTitle[locale],
       description,
+      images: [OG_IMAGE.url],
     },
     ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
       ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
@@ -273,7 +292,7 @@ export function articleMetadata(
   modifiedTime: string,
   image?: string
 ): Metadata {
-  const images = image ? [{ url: image }] : undefined
+  const images = image ? [{ url: image }] : [OG_IMAGE]
   const path = `/blog/${slug}`
 
   return {
@@ -296,7 +315,7 @@ export function articleMetadata(
       card: "summary_large_image",
       title,
       description,
-      images,
+      images: image ? [image] : [OG_IMAGE.url],
     },
   }
 }

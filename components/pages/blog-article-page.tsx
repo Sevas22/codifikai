@@ -40,7 +40,7 @@ export async function BlogArticlePage({ slug, locale }: { slug: string; locale: 
     dateModified: post.updatedAt,
     inLanguage: LOCALE_TAGS[locale],
     author: { "@type": "Organization", name: post.author },
-    publisher: { "@type": "Organization", name: siteName, url: siteUrl },
+    publisher: { "@id": `${siteUrl}#organization` },
     mainEntityOfPage: articleUrl,
     about: post.department,
     // Minutos de lectura: los buscadores lo usan para previsualizar el esfuerzo.

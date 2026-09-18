@@ -22,7 +22,7 @@ type Params = { slug: string }
 function ServiceJsonLd({ service, locale }: { service: Service; locale: Locale }) {
   const site = getSiteUrl()
   const url = `${site}${localePath(locale, `/services/${service.slug}`)}`
-  const provider = { "@type": "Organization", name: siteName, url: site }
+  const provider = { "@id": `${site}#organization` }
 
   const graph = [
     {
@@ -33,6 +33,7 @@ function ServiceJsonLd({ service, locale }: { service: Service; locale: Locale }
       serviceType: service.title[locale],
       provider,
       areaServed: ["CO", "LATAM"],
+      inLanguage: locale === "es" ? "es-CO" : "en",
       url,
       // Lo que incluye el servicio, para que el buscador pueda enumerarlo.
       hasOfferCatalog: {

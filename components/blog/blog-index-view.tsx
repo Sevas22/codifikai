@@ -12,6 +12,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import type { BlogPostMeta } from "@/lib/blog"
 import { WHATSAPP_URL } from "@/lib/contact"
 import { cn } from "@/lib/utils"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
 const LABELS = {
   es: {
@@ -63,9 +64,11 @@ function PostCard({
   readLabel: string
   featured?: boolean
 }) {
+  const path = useLocalePath()
+
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={path(`/blog/${post.slug}`)}
       className={cn(
         "ed-card ed-card-lift group flex h-full flex-col overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-accent",
         featured && "sm:col-span-2 sm:flex-row"
@@ -136,6 +139,7 @@ function PostCard({
 }
 
 export function BlogIndexView({ posts }: { posts: BlogPostMeta[] }) {
+  const path = useLocalePath()
   const { language } = useLanguage()
   const labels = LABELS[language] ?? LABELS.es
   const [place, setPlace] = React.useState<string>("__all")
@@ -172,7 +176,7 @@ export function BlogIndexView({ posts }: { posts: BlogPostMeta[] }) {
           <nav aria-label="breadcrumb">
             <ol className="ed-label flex flex-wrap items-center gap-2">
               <li>
-                <Link href="/" className="transition-colors hover:text-ed-accent">
+                <Link href={path("/")} className="transition-colors hover:text-ed-accent">
                   {labels.breadcrumbHome}
                 </Link>
               </li>

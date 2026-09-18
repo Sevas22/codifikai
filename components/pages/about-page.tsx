@@ -24,8 +24,10 @@ function AboutJsonLd({ locale }: { locale: Locale }) {
       name: `${locale === "es" ? "Sobre nosotros" : "About us"} | ${siteName}`,
       // El equipo en datos estructurados ayuda a que un buscador entienda
       // quién está detrás, que es parte de lo que evalúa como confianza.
+      inLanguage: locale === "es" ? "es-CO" : "en",
       about: {
         "@type": "Organization",
+        "@id": `${site}#organization`,
         name: siteName,
         url: site,
         employee: ABOUT_TEAM.map((member) => ({
