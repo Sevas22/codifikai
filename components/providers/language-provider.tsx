@@ -1423,7 +1423,7 @@ const translations: Record<Language, Record<string, string>> = {
 }
 
 const initialState: LanguageProviderState = {
-  language: "en",
+  language: "es",
   setLanguage: () => null,
   t: () => "",
 }
@@ -1436,7 +1436,7 @@ function isLanguage(value: string | null): value is Language {
 
 export function LanguageProvider({
   children,
-  defaultLanguage = "en",
+  defaultLanguage = "es",
   storageKey = "codifikai-language",
   ...props
 }: LanguageProviderProps) {
@@ -1452,12 +1452,12 @@ export function LanguageProvider({
     } else if (typeof navigator !== "undefined") {
       // Sin preferencia guardada: detectamos el idioma del navegador.
       // El mercado principal es Colombia/LATAM, así que cualquier variante de
-      // español arranca en "es"; el resto queda en el idioma por defecto.
+      // español arranca en "es"; cualquier otro navegador entra en inglés.
       const browserLangs = [navigator.language, ...(navigator.languages ?? [])]
       const prefersSpanish = browserLangs.some((l) =>
         l?.toLowerCase().startsWith("es")
       )
-      if (prefersSpanish) setLanguage("es")
+      setLanguage(prefersSpanish ? "es" : "en")
     }
     setIsHydrated(true)
   }, [storageKey])
