@@ -10,6 +10,8 @@
  * y el conteo de proyectos se calcula desde `successCases`.
  */
 
+import type { KineticLine } from "@/lib/kinetic"
+
 export type HomeLang = "es" | "en"
 
 type Metric = { value: string; label: string; note: string }
@@ -63,6 +65,8 @@ export type HomeCopy = {
   closing: {
     label: string
     title: string
+    /** El mismo titular, partido en líneas con su tratamiento. */
+    titleLines: KineticLine[]
     lead: string
     ctaPrimary: string
     ctaSecondary: string
@@ -200,6 +204,7 @@ const es: HomeCopy = {
   closing: {
     label: "Siguiente paso",
     title: "Cuéntanos qué se está rompiendo en tu operación.",
+    titleLines: [{ text: "Cuéntanos qué", tone: "solid" }, { text: "se está rompiendo", tone: "outline-accent" }, { text: "en tu operación.", tone: "gradient" }],
     lead: "Un mensaje corto basta para saber si hay algo que automatizar y cuánto valdría la pena.",
     ctaPrimary: "Escríbenos por WhatsApp",
     ctaSecondary: "Ver todas las formas de contacto",
@@ -349,6 +354,7 @@ const en: HomeCopy = {
   closing: {
     label: "Next step",
     title: "Tell us what is breaking in your operation.",
+    titleLines: [{ text: "Tell us what", tone: "solid" }, { text: "is breaking", tone: "outline-accent" }, { text: "in your operation.", tone: "gradient" }],
     lead: "A short message is enough to tell whether there is something worth automating, and what it would be worth.",
     ctaPrimary: "Message us on WhatsApp",
     ctaSecondary: "See all the ways to reach us",

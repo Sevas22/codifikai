@@ -7,9 +7,9 @@ import { ArrowUpRight } from "lucide-react"
 import {
   EdLabel,
   EdSection,
+  KineticTitle,
   Reveal,
   SectionHeading,
-  WordReveal,
 } from "@/components/home/ed-primitives"
 import { ParticleField } from "@/components/home/particle-field"
 import { Navigation } from "@/components/navigation"
@@ -25,8 +25,7 @@ const LABELS = {
     breadcrumbHome: "Inicio",
     breadcrumbServices: "Servicios",
     kicker: "Servicios de inteligencia artificial y desarrollo a la medida",
-    headline: "La IA en el centro. Todo lo demás, a su servicio.",
-    highlight: ["centro."],
+    headlineLines: [{ text: "La IA en el centro.", tone: "gradient" }, { text: "Todo lo demás,", tone: "solid" }, { text: "a su servicio.", tone: "outline-accent" }],
     lead: "Somos una agencia de inteligencia artificial. Construimos los agentes y automatizaciones que operan tu negocio, el software a la medida sobre el que corren y los servicios tecnológicos que los hacen crecer.",
     ctaHero: "Escríbenos por WhatsApp",
     seeService: "Ver el servicio",
@@ -35,7 +34,7 @@ const LABELS = {
     casesLead:
       "Marketplaces, telemedicina, logística y comercio exterior. Cada uno con su sitio público, abierto a inspección.",
     liveSite: "Sitio en vivo",
-    ctaTitle: "¿Por dónde empezamos?",
+    ctaTitleLines: [{ text: "¿Por dónde", tone: "solid" }, { text: "empezamos?", tone: "gradient" }],
     ctaLead:
       "Cuéntanos qué proceso le consume más horas a tu equipo y te decimos, sin rodeos, si la inteligencia artificial puede hacerse cargo.",
     cta: "Escríbenos por WhatsApp",
@@ -44,8 +43,7 @@ const LABELS = {
     breadcrumbHome: "Home",
     breadcrumbServices: "Services",
     kicker: "Artificial intelligence and custom development services",
-    headline: "AI at the centre. Everything else in its service.",
-    highlight: ["centre."],
+    headlineLines: [{ text: "AI at the centre.", tone: "gradient" }, { text: "Everything else", tone: "solid" }, { text: "in its service.", tone: "outline-accent" }],
     lead: "We are an artificial intelligence agency. We build the AI agents and automations that run your business, the custom software they run on, and the technology services that help them grow.",
     ctaHero: "Message us on WhatsApp",
     seeService: "See the service",
@@ -54,7 +52,7 @@ const LABELS = {
     casesLead:
       "Marketplaces, telehealth, logistics and cross-border trade, each with a public site that is open to inspection.",
     liveSite: "Live site",
-    ctaTitle: "Where do we start?",
+    ctaTitleLines: [{ text: "Where do", tone: "solid" }, { text: "we start?", tone: "gradient" }],
     ctaLead:
       "Tell us which process eats the most hours on your team and we'll tell you straight whether artificial intelligence can take it over.",
     cta: "Message us on WhatsApp",
@@ -173,9 +171,10 @@ export function ServicesHubView() {
                 <span className="h-1.5 w-1.5 rounded-full bg-ed-punch" aria-hidden />
                 {labels.kicker}
               </span>
-              <span className="ed-display mt-8 block text-[clamp(2.5rem,6.5vw,5.25rem)]">
-                <WordReveal text={labels.headline} accentWords={[...labels.highlight]} />
-              </span>
+              <KineticTitle
+                lines={labels.headlineLines}
+                className="ed-display mt-8 text-[clamp(2.5rem,6.4vw,5.5rem)]"
+              />
             </h1>
 
             <Reveal delay={0.15} y={18}>
@@ -334,8 +333,11 @@ export function ServicesHubView() {
           aria-hidden
         />
         <div className="mx-auto max-w-[46rem] text-center">
-          <h2 className="ed-display text-[clamp(2rem,5vw,3.75rem)] text-ed-ink">
-            <WordReveal text={labels.ctaTitle} />
+          <h2 className="text-ed-ink">
+            <KineticTitle
+              lines={labels.ctaTitleLines}
+              className="ed-display text-[clamp(2.5rem,6.5vw,5.25rem)]"
+            />
           </h2>
           <Reveal delay={0.15} y={18}>
             <p className="mx-auto mt-6 max-w-[48ch] text-pretty text-base leading-relaxed text-ed-ink-soft">

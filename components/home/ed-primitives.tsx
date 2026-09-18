@@ -18,6 +18,7 @@ import {
   type MotionValue,
 } from "framer-motion"
 
+import type { KineticLine, KineticTone } from "@/lib/kinetic"
 import { cn } from "@/lib/utils"
 
 /* -------------------------------------------------------------------------- */
@@ -145,13 +146,19 @@ export function WordReveal({ text, className, delay = 0, accentWords = [] }: Wor
   const reduced = useReducedMotion()
   const observerDown = useObserverUnavailable()
   const still = reduced || observerDown
+  // Se observa el titular entero y no cada palabra. Cada palabra arranca
+  // desplazada fuera de su máscara, recortada por completo, y un elemento
+  // recortado del todo puede no contar nunca como visible: en algunos
+  // navegadores el titular se quedaba invisible.
+  const ref = React.useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" })
   const words = text.split(" ").filter(Boolean)
   // Se normaliza igual que la palabra al comparar: si no, una entrada escrita
   // con el punto final ("funcional.") nunca casaba con el token ya limpiado.
   const accent = new Set(accentWords.map((w) => w.toLowerCase().replace(/[.,;:]/g, "")))
 
   return (
-    <span className={cn("inline", className)}>
+    <span ref={ref} className={cn("inline", className)}>
       {words.map((word, i) => (
         <span key={`${word}-${i}`} className="inline-block overflow-hidden align-bottom pb-[0.08em]">
           <motion.span
@@ -160,9 +167,7 @@ export function WordReveal({ text, className, delay = 0, accentWords = [] }: Wor
               accent.has(word.toLowerCase().replace(/[.,;:]/g, "")) && "text-ed-accent"
             )}
             initial={still ? false : { y: "110%" }}
-            animate={observerDown && !reduced ? { y: "0%" } : undefined}
-            whileInView={still ? undefined : { y: "0%" }}
-            viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+            animate={still || inView ? { y: "0%" } : undefined}
             transition={{
               duration: 0.9,
               delay: delay + i * 0.055,
@@ -173,6 +178,59 @@ export function WordReveal({ text, className, delay = 0, accentWords = [] }: Wor
             {i < words.length - 1 ? " " : ""}
           </motion.span>
         </span>
+      ))}
+    </span>
+  )
+}
+
+/* -------------------------------------------------------------------------- */
+/* Titular cinético                                                            */
+/* -------------------------------------------------------------------------- */
+
+const KINETIC_TONE: Record<KineticTone, string> = {
+  solid: "",
+  outline: "ed-outline",
+  "outline-accent": "ed-outline ed-outline-accent",
+  gradient: "ed-gradient-text",
+}
+
+/**
+ * Mayúsculas apretadas, una línea por golpe, cada una con su tratamiento
+ * (sólido, contorno o degradado de marca). Las líneas suben escalonadas.
+ *
+ * No hay máscaras con overflow: las tildes de las mayúsculas (Á, É, Ó)
+ * sobresalen del interlineado tan cerrado y quedarían cortadas.
+ */
+export function KineticTitle({
+  lines,
+  className,
+  delay = 0,
+}: {
+  lines: readonly KineticLine[]
+  className?: string
+  delay?: number
+}) {
+  const reduced = useReducedMotion()
+  const observerDown = useObserverUnavailable()
+  const still = reduced || observerDown
+  const ref = React.useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" })
+
+  return (
+    <span ref={ref} className={cn("ed-kinetic block", className)}>
+      {lines.map((line, i) => (
+        <motion.span
+          key={`${line.text}-${i}`}
+          className={cn("block", KINETIC_TONE[line.tone ?? "solid"])}
+          initial={still ? false : { opacity: 0, y: "0.45em" }}
+          animate={still || inView ? { opacity: 1, y: "0em" } : undefined}
+          transition={{ duration: 0.9, delay: delay + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {line.text}
+          {/* El espacio no se ve al final de un bloque, pero evita que el texto
+              del titular salga pegado ("repetitivono") al copiarlo o indexarlo. */}
+          {i < lines.length - 1 ? " " : ""}
+        </motion.span>
       ))}
     </span>
   )

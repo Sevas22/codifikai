@@ -15,6 +15,8 @@
  * resultados que nadie pueda verificar.
  */
 
+import type { LocalizedKinetic } from "@/lib/kinetic"
+
 export type ServiceLang = "es" | "en"
 
 type Localized = { es: string; en: string }
@@ -49,9 +51,9 @@ export type Service = {
   /** Etiqueta corta sobre el titular de la subpágina. */
   eyebrow: Localized
   /** Titular propio de la subpágina; puede diferir del nombre del servicio. */
-  headline: Localized
   /** Palabras del titular que se pintan con el color de marca. */
-  headlineHighlight: LocalizedList
+  /** Titular del hero, partido en líneas con su tratamiento (sólido, contorno o degradado). */
+  headlineLines: LocalizedKinetic
   /** Entradilla de la subpágina. */
   lead: Localized
   /** Qué incluye el servicio. */
@@ -80,11 +82,10 @@ export const SERVICES: Service[] = [
       en: "AI agents, CRM orchestration and workflows that qualify leads, route cases and handle exceptions without manual work.",
     },
     eyebrow: { es: "Automatización con IA", en: "AI automation" },
-    headline: {
-      es: "El trabajo repetitivo no necesita a tu mejor gente.",
-      en: "Repetitive work doesn't need your best people.",
+    headlineLines: {
+      es: [{ text: "El trabajo repetitivo", tone: "gradient" }, { text: "no necesita a tu", tone: "solid" }, { text: "mejor gente.", tone: "outline-accent" }],
+      en: [{ text: "Repetitive work", tone: "gradient" }, { text: "doesn't need your", tone: "solid" }, { text: "best people.", tone: "outline-accent" }],
     },
-    headlineHighlight: { es: ["repetitivo"], en: ["Repetitive"] },
     lead: {
       es: "Responder lo mismo cien veces, pasar datos de un sistema a otro, revisar si alguien contestó: es trabajo que consume horas y no requiere criterio. Eso es lo que automatizamos primero.",
       en: "Answering the same thing a hundred times, moving data between systems, checking whether anyone replied: work that eats hours and needs no judgement. That's what we automate first.",
@@ -206,11 +207,10 @@ export const SERVICES: Service[] = [
       en: "Bespoke platforms, systems and products with solid architecture and a scalable approach, aligned with how your business actually runs.",
     },
     eyebrow: { es: "Desarrollo a la medida", en: "Custom software" },
-    headline: {
-      es: "Cuando la herramienta genérica ya no alcanza.",
-      en: "When the off-the-shelf tool stops being enough.",
+    headlineLines: {
+      es: [{ text: "Cuando la herramienta", tone: "solid" }, { text: "genérica", tone: "outline-accent" }, { text: "ya no alcanza.", tone: "gradient" }],
+      en: [{ text: "When the off-the-shelf", tone: "solid" }, { text: "tool stops", tone: "outline-accent" }, { text: "being enough.", tone: "gradient" }],
     },
-    headlineHighlight: { es: ["alcanza."], en: ["enough."] },
     lead: {
       es: "Llega un punto en que el equipo trabaja para la herramienta en vez de al revés: hojas de cálculo paralelas, datos que se copian a mano, procesos que solo una persona sabe hacer. Ahí empieza el software a medida.",
       en: "There's a point where the team works for the tool instead of the other way round: parallel spreadsheets, data copied by hand, processes only one person knows. That's where custom software starts.",
@@ -332,11 +332,10 @@ export const SERVICES: Service[] = [
       en: "Fast, well-structured sites and web apps for companies that need to launch and optimise quickly without giving up visual quality.",
     },
     eyebrow: { es: "Desarrollo web", en: "Web development" },
-    headline: {
-      es: "Una web que trabaja para tu negocio.",
-      en: "A website that works for your business.",
+    headlineLines: {
+      es: [{ text: "Una web", tone: "solid" }, { text: "que trabaja", tone: "gradient" }, { text: "para tu negocio.", tone: "outline-accent" }],
+      en: [{ text: "A website", tone: "solid" }, { text: "that works", tone: "gradient" }, { text: "for your business.", tone: "outline-accent" }],
     },
-    headlineHighlight: { es: ["trabaja"], en: ["works"] },
     lead: {
       es: "La mayoría de sitios corporativos son folletos caros: se ven bien y no producen nada. Construimos sitios rápidos, medibles y pensados desde el primer boceto para que el visitante haga algo.",
       en: "Most corporate sites are expensive brochures: they look fine and produce nothing. We build fast, measurable sites designed from the first sketch to get the visitor to act.",
@@ -458,11 +457,10 @@ export const SERVICES: Service[] = [
       en: "Search positioning and digital visibility strategies that bring in quality traffic, strengthen your presence and generate sustainable commercial opportunities.",
     },
     eyebrow: { es: "Marketing digital", en: "Digital marketing" },
-    headline: {
-      es: "Ya te están buscando. La pregunta es si te encuentran.",
-      en: "They're already searching. The question is whether they find you.",
+    headlineLines: {
+      es: [{ text: "Ya te están buscando.", tone: "solid" }, { text: "La pregunta es si", tone: "outline-accent" }, { text: "te encuentran.", tone: "gradient" }],
+      en: [{ text: "They're already searching.", tone: "solid" }, { text: "The question is whether", tone: "outline-accent" }, { text: "they find you.", tone: "gradient" }],
     },
-    headlineHighlight: { es: ["encuentran."], en: ["find"] },
     lead: {
       es: "Hay gente escribiendo en Google exactamente lo que tú vendes. Si en esa búsqueda aparece tu competencia y no tú, el problema no es el producto: es la visibilidad.",
       en: "People are typing into Google exactly what you sell. If your competitor shows up in that search and you don't, the problem isn't the product — it's visibility.",
@@ -584,11 +582,10 @@ export const SERVICES: Service[] = [
       en: "A coherent visual identity — logo, colour, type and applications — so the brand holds the same level at every touchpoint.",
     },
     eyebrow: { es: "Diseño de marca", en: "Brand design" },
-    headline: {
-      es: "Tu marca dice algo antes de que hables.",
-      en: "Your brand says something before you speak.",
+    headlineLines: {
+      es: [{ text: "Tu marca dice algo", tone: "solid" }, { text: "antes", tone: "gradient" }, { text: "de que hables.", tone: "outline-accent" }],
+      en: [{ text: "Your brand says something", tone: "solid" }, { text: "before", tone: "gradient" }, { text: "you speak.", tone: "outline-accent" }],
     },
-    headlineHighlight: { es: ["antes"], en: ["before"] },
     lead: {
       es: "Un logo distinto en cada documento, colores que cambian según quién diseñe, una propuesta comercial que no se parece a tu web. Esa incoherencia cuesta credibilidad justo cuando más la necesitas.",
       en: "A different logo on every document, colours that shift depending on who designs them, a proposal that looks nothing like your website. That inconsistency costs credibility exactly when you need it most.",
@@ -770,9 +767,9 @@ export const SERVICE_PAGE_LABELS = {
   deliverables: { es: "Qué recibes al final", en: "What you get at the end" },
   faq: { es: "Preguntas frecuentes", en: "Frequent questions" },
   related: { es: "Otros servicios", en: "Other services" },
-  ctaTitle: {
-    es: "¿Te suena a lo que necesitas?",
-    en: "Sound like what you need?",
+  ctaTitleLines: {
+    es: [{ text: "¿Te suena a lo", tone: "solid" }, { text: "que necesitas?", tone: "gradient" }],
+    en: [{ text: "Sound like", tone: "solid" }, { text: "what you need?", tone: "gradient" }],
   },
   ctaLead: {
     es: "Cuéntanos el caso por WhatsApp y te decimos si esto encaja, sin rodeos.",

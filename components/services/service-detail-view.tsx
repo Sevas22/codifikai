@@ -6,9 +6,9 @@ import { ArrowUpRight, Check, Plus } from "lucide-react"
 import {
   EdLabel,
   EdSection,
+  KineticTitle,
   Reveal,
   SectionHeading,
-  WordReveal,
 } from "@/components/home/ed-primitives"
 import { ParticleField } from "@/components/home/particle-field"
 import { Navigation } from "@/components/navigation"
@@ -94,12 +94,10 @@ export function ServiceDetailView({ service }: { service: Service }) {
                 página; el titular creativo va después, igual que antes. */}
             <h1 className="mt-7 text-ed-ink">
               <span className="ed-label block text-ed-accent">{service.title[language]}</span>
-              <span className="ed-display mt-4 block text-[clamp(2.25rem,6vw,4.75rem)]">
-              <WordReveal
-                text={service.headline[language]}
-                accentWords={service.headlineHighlight[language]}
+              <KineticTitle
+                lines={service.headlineLines[language]}
+                className="ed-display mt-5 text-[clamp(2.25rem,5.4vw,4.5rem)]"
               />
-              </span>
             </h1>
 
             <Reveal delay={0.15} y={18}>
@@ -251,8 +249,11 @@ export function ServiceDetailView({ service }: { service: Service }) {
           aria-hidden
         />
         <div className="mx-auto max-w-[46rem] text-center">
-          <h2 className="ed-display text-[clamp(2rem,5vw,3.75rem)] text-ed-ink">
-            <WordReveal text={labels.ctaTitle[language]} />
+          <h2 className="text-ed-ink">
+            <KineticTitle
+              lines={labels.ctaTitleLines[language]}
+              className="ed-display text-[clamp(2.5rem,6.5vw,5.25rem)]"
+            />
           </h2>
           <Reveal delay={0.15} y={18}>
             <p className="mx-auto mt-6 max-w-[44ch] text-pretty text-base leading-relaxed text-ed-ink-soft">

@@ -965,6 +965,10 @@
   --ed-punch: var(--brand-magenta);        /* botones y golpes */
   --ed-cool: var(--brand-cyan);            /* acentos y partículas */
 
+  /* Degradado de titulares. En claro arranca en violeta: el cian claro no
+     tiene contraste suficiente sobre blanco. */
+  --ed-gradient: linear-gradient(90deg, var(--brand-violet), var(--brand-magenta), var(--brand-cyan), var(--brand-violet));
+
   /* Sombra de tarjeta: suave en claro, inexistente en oscuro */
   --ed-shadow: 0 1px 2px oklch(0.14 0.02 265 / 0.04),
     0 8px 24px -8px oklch(0.14 0.02 265 / 0.10);
@@ -992,6 +996,8 @@
   --ed-accent: var(--brand-cyan-bright);
   --ed-punch: var(--brand-magenta);
   --ed-cool: var(--brand-cyan-bright);
+
+  --ed-gradient: linear-gradient(90deg, var(--brand-cyan-bright), var(--brand-violet), var(--brand-magenta), var(--brand-cyan-bright));
 
   --ed-shadow: none;
   --ed-shadow-lift: 0 24px 60px -20px oklch(0.76 0.18 195 / 0.25);
@@ -1035,6 +1041,36 @@
     line-height: 0.95;
     letter-spacing: -0.035em;
     text-wrap: balance;
+  }
+
+  /* Titular cinético: mayúsculas muy apretadas, una línea por golpe. Va
+     después de .ed-display para ganarle el interlineado y el tracking. */
+  .ed-kinetic {
+    text-transform: uppercase;
+    letter-spacing: -0.045em;
+    line-height: 0.9;
+    overflow-wrap: break-word;
+  }
+
+  /* Solo el contorno de la letra. Se vacía el relleno y no el color, para
+     que el trazo siga tomando el color del texto con currentColor. */
+  .ed-outline {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: max(1.5px, 0.022em) currentColor;
+    paint-order: stroke fill;
+  }
+  .ed-outline-accent {
+    -webkit-text-stroke-color: var(--ed-accent);
+  }
+
+  /* Degradado de marca recortado a la letra, en movimiento lento. */
+  .ed-gradient-text {
+    background-image: var(--ed-gradient);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: ed-gradient-pan 9s ease-in-out infinite alternate;
   }
 
   /* Palabra destacada dentro de un titular */
@@ -1171,8 +1207,18 @@
   }
 }
 
+@keyframes ed-gradient-pan {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .ed-marquee-track {
+  .ed-marquee-track,
+  .ed-gradient-text {
     animation: none;
   }
   .ed-rule-draw {

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { ArrowUpRight, Check } from "lucide-react"
 
-import { EdSection, Reveal, WordReveal, useMagnetic } from "@/components/home/ed-primitives"
+import { EdSection, KineticTitle, Reveal, useMagnetic } from "@/components/home/ed-primitives"
 import { ParticleField } from "@/components/home/particle-field"
 import type { HomeCopy } from "@/lib/home-copy"
 import { useLocalePath } from "@/hooks/use-locale-path"
@@ -37,8 +37,11 @@ export function ClosingSection({
           </span>
         </Reveal>
 
-        <h2 className="ed-display mt-8 text-[clamp(2.25rem,6vw,5rem)] text-ed-ink">
-          <WordReveal text={copy.closing.title} accentWords={copy.highlights.closing} />
+        <h2 className="mt-8 text-ed-ink">
+          <KineticTitle
+            lines={copy.closing.titleLines}
+            className="ed-display text-[clamp(2.5rem,7vw,6rem)]"
+          />
         </h2>
 
         <Reveal delay={0.15} y={18}>
