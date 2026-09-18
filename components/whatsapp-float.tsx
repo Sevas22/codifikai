@@ -71,9 +71,11 @@ export function WhatsAppFloat({ className }: { className?: string }) {
         className
       )}
     >
-      {/* Anillo de pulso: llama la atención sin tapar contenido. */}
+      {/* Anillo de pulso: llama la atención sin tapar contenido. No recibe
+          clics: al crecer invade el botón de sonido que va encima y le
+          robaba el clic para abrir WhatsApp. */}
       <span
-        className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/40 motion-reduce:animate-none"
+        className="pointer-events-none absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/40 motion-reduce:animate-none"
         style={{ animationDuration: "2.4s" }}
         aria-hidden
       />

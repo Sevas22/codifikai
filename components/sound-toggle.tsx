@@ -56,24 +56,25 @@ export function SoundToggle() {
       aria-label={label}
       title={label}
       className={cn(
-        "fixed z-50 grid h-10 w-10 place-items-center rounded-full",
+        "fixed z-50 grid h-8 w-8 place-items-center rounded-full",
         // Centrado sobre el botón de WhatsApp (h-14 → h-16 desde sm).
-        "right-[calc(max(1rem,env(safe-area-inset-right,0px))+0.5rem)]",
-        "sm:right-[calc(max(1rem,env(safe-area-inset-right,0px))+0.75rem)]",
-        "bottom-[calc(max(1.25rem,env(safe-area-inset-bottom,0px))+4.25rem)]",
-        "sm:bottom-[calc(max(1.25rem,env(safe-area-inset-bottom,0px))+4.75rem)]",
-        // Vidrio oscuro: se lee igual sobre secciones claras y oscuras.
-        "bg-black/70 text-white ring-1 ring-white/15 backdrop-blur-md",
-        "shadow-[0_8px_20px_-8px_rgba(0,0,0,0.5)]",
-        "transition-[transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-black/85",
+        "right-[calc(max(1rem,env(safe-area-inset-right,0px))+0.75rem)]",
+        "sm:right-[calc(max(1rem,env(safe-area-inset-right,0px))+1rem)]",
+        "bottom-[calc(max(1.25rem,env(safe-area-inset-bottom,0px))+4.1rem)]",
+        "sm:bottom-[calc(max(1.25rem,env(safe-area-inset-bottom,0px))+4.6rem)]",
+        // Discreto: vidrio casi transparente que solo se enciende al pasar
+        // el cursor o al recibir el foco. Legible sobre fondos claros y oscuros.
+        "bg-black/30 text-white/70 backdrop-blur-sm",
+        "transition-[background-color,color,opacity] duration-300",
+        "opacity-60 hover:bg-black/70 hover:text-white hover:opacity-100 focus-visible:opacity-100",
         "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand-violet)]",
-        "motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+        "motion-reduce:transition-none"
       )}
     >
       {enabled ? (
-        <Volume2 className="h-[1.1rem] w-[1.1rem]" aria-hidden />
+        <Volume2 className="h-3.5 w-3.5" aria-hidden />
       ) : (
-        <VolumeX className="h-[1.1rem] w-[1.1rem] opacity-70" aria-hidden />
+        <VolumeX className="h-3.5 w-3.5" aria-hidden />
       )}
     </button>
   )

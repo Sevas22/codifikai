@@ -14,10 +14,10 @@
 
 const STORAGE_KEY = "codifikai:typing-sound"
 
-/** Tope de teclas por titular: el tecleo acompaña, no se alarga. */
-const MAX_KEYS = 22
+/** Tope de teclas por titular: unas pocas bastan para sugerir que se escribe. */
+const MAX_KEYS = 8
 /** Si ya hay tecleo en cola más allá de esto, el nuevo titular no suma otro. */
-const MAX_QUEUE_SECONDS = 0.5
+const MAX_QUEUE_SECONDS = 0.4
 
 let enabled: boolean | null = null
 let ctx: AudioContext | null = null
@@ -77,7 +77,8 @@ function startContext() {
   if (!AudioCtor) return
   ctx = new AudioCtor()
   master = ctx.createGain()
-  master.gain.value = 0.55
+  // Volumen bajo a propósito: es un detalle de fondo, no un efecto.
+  master.gain.value = 0.28
   master.connect(ctx.destination)
   noise = createNoise(ctx)
 }
@@ -103,7 +104,7 @@ export function installAudioUnlock() {
 
 const rand = (min: number, max: number) => min + Math.random() * (max - min)
 
-/** Una pulsación: chasquido agudo de la tecla más el golpe grave del fondo. */
+/** Una pulsación: chasquido suave de la tecla más el golpe grave del fondo. */
 function key(at: number, space: boolean) {
   if (!ctx || !master || !noise) return
   const strength = rand(0.75, 1)
@@ -122,11 +123,11 @@ function key(at: number, space: boolean) {
   click.buffer = noise
   const band = ctx.createBiquadFilter()
   band.type = "bandpass"
-  band.frequency.value = space ? rand(1100, 1600) : rand(1900, 3600)
+  band.frequency.value = space ? rand(900, 1300) : rand(1500, 2500)
   band.Q.value = rand(0.9, 1.6)
   const clickGain = ctx.createGain()
   clickGain.gain.setValueAtTime(0.0001, at)
-  clickGain.gain.exponentialRampToValueAtTime(0.9 * strength, at + 0.0015)
+  clickGain.gain.exponentialRampToValueAtTime(0.55 * strength, at + 0.002)
   clickGain.gain.exponentialRampToValueAtTime(0.0001, at + clickLength)
   click.connect(band).connect(clickGain).connect(out)
   click.start(at, rand(0, 0.9), clickLength + 0.01)
@@ -162,7 +163,7 @@ export function playTyping(text: string) {
   for (const char of chars) {
     const space = char === " "
     key(at, space)
-    at += space ? rand(0.08, 0.13) : rand(0.045, 0.085)
+    at += space ? rand(0.2, 0.28) : rand(0.11, 0.17)
   }
   busyUntil = at
 }
@@ -183,6 +184,6 @@ export function playConfirmation() {
   }
   const at = ctx.currentTime + 0.03
   key(at, false)
-  key(at + 0.07, false)
-  busyUntil = Math.max(busyUntil, at + 0.12)
+  key(at + 0.14, false)
+  busyUntil = Math.max(busyUntil, at + 0.2)
 }
