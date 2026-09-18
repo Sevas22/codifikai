@@ -86,7 +86,7 @@ const es: HomeCopy = {
     titleLead: "Construimos los sistemas",
     titleEmphasis: "que operan",
     titleTail: "el negocio por ti.",
-    lead: "Codifikai diseña sistemas de IA, infraestructura de automatización y workflows enterprise que reducen fricción operativa y aceleran el crecimiento.",
+    lead: "Codifikai diseña agentes de inteligencia artificial, automatización de procesos y software a la medida que reducen la fricción operativa y aceleran el crecimiento.",
     ctaPrimary: "Hablemos por WhatsApp",
     ctaSecondary: "Ver el trabajo",
     scrollCue: "Desliza para explorar",
@@ -97,7 +97,7 @@ const es: HomeCopy = {
       "Logística",
       "Automatización",
       "B2B SaaS",
-      "Workflows",
+      "Flujos de trabajo",
       "Integraciones",
     ],
     highlight: ["sistemas", "negocio"],
@@ -113,7 +113,7 @@ const es: HomeCopy = {
     lead: "Las mismas cifras que sostenemos en cada conversación comercial, sin adornos.",
     metrics: [
       { value: "150+", label: "Sistemas desplegados", note: "En producción, no en demo" },
-      { value: "50+", label: "Equipos enterprise", note: "Operando sobre lo que construimos" },
+      { value: "50+", label: "Equipos empresariales", note: "Operando sobre lo que construimos" },
       { value: "4.2x", label: "ROI promedio", note: "En proyectos de automatización" },
     ],
     casesLabel: "Casos publicados",
@@ -135,8 +135,8 @@ const es: HomeCopy = {
         body: "Mapeamos operaciones, cuellos de botella y oportunidades de automatización.",
       },
       {
-        title: "Arquitectura de workflows",
-        body: "Diseñamos workflows inteligentes, flujos de datos y responsabilidades de agentes IA.",
+        title: "Arquitectura de flujos de trabajo",
+        body: "Diseñamos los flujos de trabajo, los datos que los alimentan y lo que le corresponde a cada agente de IA.",
       },
       {
         title: "Build e integración",
@@ -159,11 +159,11 @@ const es: HomeCopy = {
   stack: {
     label: "Sobre qué corre",
     title: "Se conecta con lo que ya usas.",
-    lead: "No reemplazamos tu stack: lo orquestamos.",
+    lead: "No reemplazamos tus herramientas: las orquestamos.",
     integrationsLabel: "Integraciones",
     integrations: ["HubSpot", "Salesforce", "Zapier / Make", "WhatsApp API", "APIs personalizadas"],
     industriesLabel: "Industrias",
-    industries: ["Comercio global", "Logística", "B2B SaaS", "Servicios enterprise"],
+    industries: ["Comercio global", "Logística", "B2B SaaS", "Servicios empresariales"],
   },
   team: {
     label: "El equipo",
@@ -185,11 +185,11 @@ const es: HomeCopy = {
       },
       {
         q: "¿Hay que cambiar las herramientas que ya usamos?",
-        a: "No. El punto de partida es tu stack actual. Nos integramos con CRM, mensajería y APIs propias, y construimos la capa de automatización encima.",
+        a: "No. El punto de partida son tus herramientas actuales. Nos integramos con CRM, mensajería y APIs propias, y construimos la capa de automatización encima.",
       },
       {
         q: "¿Cómo arranca un proyecto?",
-        a: "Con una llamada estratégica para mapear operaciones y cuellos de botella. De ahí sale la arquitectura de workflows y el alcance concreto antes de escribir una línea de código.",
+        a: "Con una llamada estratégica para mapear operaciones y cuellos de botella. De ahí salen los flujos de trabajo a automatizar y el alcance concreto antes de escribir una línea de código.",
       },
       {
         q: "¿Puedo ver el trabajo antes de decidir?",
@@ -222,7 +222,7 @@ const es: HomeCopy = {
     "Servicios",
     "Cómo lo hacemos",
     "El trabajo",
-    "Stack",
+    "Integraciones",
     "Equipo",
     "Preguntas",
     "Contacto",

@@ -10,6 +10,7 @@ import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
 import { ServicesMenu } from "@/components/nav/services-menu"
 import { IconSquircle } from "@/components/ui/icon-squircle"
 import { WHATSAPP_URL } from "@/lib/contact"
+import { isBlogPostPath } from "@/lib/blog-paths"
 import { localePath, otherLocale, stripLocale } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
 
@@ -22,8 +23,14 @@ export function Navigation() {
   // Cambiar de idioma es navegar, no traducir en el sitio: se calcula la URL
   // equivalente de la página actual en el otro idioma. Si el visitante está en
   // /en/services, el conmutador lo lleva a /services y viceversa.
+  // Los artículos no tienen versión en inglés: desde uno se va al blog del
+  // otro idioma en vez de a una URL que no existe.
   const alternateLocale = otherLocale(language)
-  const alternateHref = localePath(alternateLocale, stripLocale(pathname).path)
+  const neutralPath = stripLocale(pathname).path
+  const alternateHref = localePath(
+    alternateLocale,
+    isBlogPostPath(neutralPath) ? "/blog" : neutralPath
+  )
 
   useEffect(() => {
     const handleScroll = () => {

@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next"
 
 import { getAllPosts } from "@/lib/blog"
-import { localePath } from "@/lib/i18n"
+import { BLOG_LOCALE, blogPostPath } from "@/lib/blog-paths"
+import { LOCALE_TAGS, localePath } from "@/lib/i18n"
 import { SERVICES } from "@/lib/services"
 import { getSiteUrl } from "@/lib/site"
 
@@ -60,9 +61,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   )
 
   const posts = await getAllPosts()
-  const postEntries = posts.flatMap((post) =>
-    withAlternates(`/blog/${post.slug}`, "monthly", 0.6, new Date(post.updatedAt))
-  )
+  // Los artículos solo existen en español: una entrada por artículo, sin
+  // alternativa en inglés que repetiría el mismo texto.
+  const postEntries: MetadataRoute.Sitemap = posts.map((post) => {
+    const postUrl = `${base}${blogPostPath(post.slug)}`
+    return {
+      url: postUrl,
+      lastModified: new Date(post.updatedAt),
+      changeFrequency: "monthly",
+      priority: 0.6,
+      alternates: {
+        languages: { [LOCALE_TAGS[BLOG_LOCALE]]: postUrl, "x-default": postUrl },
+      },
+    }
+  })
 
   return [...staticEntries, ...serviceEntries, ...postEntries]
 }

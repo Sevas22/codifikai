@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ArrowUpRight, MapPin } from "lucide-react"
 import { FadeIn } from "@/components/ui/fade-in"
 import type { BlogPostMeta } from "@/lib/blog"
-import { useLocalePath } from "@/hooks/use-locale-path"
+import { blogPostPath } from "@/lib/blog-paths"
 
 function formatDate(date: string) {
   return new Date(date).toLocaleDateString("es-CO", {
@@ -15,12 +15,10 @@ function formatDate(date: string) {
 }
 
 export function BlogCard({ post, index = 0 }: { post: BlogPostMeta; index?: number }) {
-  const path = useLocalePath()
-
   return (
     <FadeIn delay={Math.min(index, 6) * 0.05}>
       <Link
-        href={path(`/blog/${post.slug}`)}
+        href={blogPostPath(post.slug)}
         className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-black transition-all duration-300 hover:border-accent/30 hover:-translate-y-1"
       >
         <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden bg-gradient-to-br from-accent/15 via-black to-black">

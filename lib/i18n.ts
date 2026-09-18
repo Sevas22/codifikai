@@ -81,3 +81,21 @@ export function localeAlternates(locale: Locale, path: string) {
     },
   }
 }
+
+/**
+ * Bloque `alternates` para contenido que existe en un solo idioma.
+ *
+ * Declarar una versión en otro idioma que en realidad repite el mismo texto es
+ * peor que no declararla: Google lo trata como duplicado y deja de confiar en
+ * el resto de etiquetas `hreflang` del sitio.
+ */
+export function singleLocaleAlternates(locale: Locale, path: string) {
+  const url = localePath(locale, path)
+  return {
+    canonical: url,
+    languages: {
+      [LOCALE_TAGS[locale]]: url,
+      "x-default": url,
+    },
+  }
+}

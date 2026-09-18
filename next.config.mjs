@@ -57,6 +57,14 @@ const nextConfig = {
         destination: "/services#cases",
         permanent: true,
       },
+      // Los artículos se publican solo en español (lib/blog-paths.ts). Estas
+      // URLs existieron con el texto sin traducir; se redirigen para no
+      // dejar enlaces rotos ni contenido duplicado.
+      {
+        source: "/en/blog/:slug",
+        destination: "/blog/:slug",
+        permanent: true,
+      },
     ]
   },
 }

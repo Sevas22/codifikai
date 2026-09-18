@@ -233,8 +233,11 @@ export function ServicesHubView() {
         return (
           <EdSection key={tier} id={tier} tone={tone.tone} className={tone.className}>
             <div className="max-w-[48rem]">
+              {/* h2 real: sin él, las tarjetas (h3) colgaban directo del h1. */}
               <Reveal y={14}>
-                <EdLabel index={i + 1}>{SERVICE_TIERS[tier].label[language]}</EdLabel>
+                <h2>
+                  <EdLabel index={i + 1}>{SERVICE_TIERS[tier].label[language]}</EdLabel>
+                </h2>
               </Reveal>
               <Reveal delay={0.08} y={16}>
                 <p

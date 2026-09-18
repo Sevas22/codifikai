@@ -76,7 +76,7 @@ export const SERVICES: Service[] = [
       en: "Take repetitive work off your team's hands.",
     },
     body: {
-      es: "Agentes de IA, orquestación de CRM y workflows que califican leads, enrutan casos y manejan excepciones sin intervención manual.",
+      es: "Agentes de IA, orquestación de CRM y flujos automatizados que califican leads, enrutan casos y manejan excepciones sin intervención manual.",
       en: "AI agents, CRM orchestration and workflows that qualify leads, route cases and handle exceptions without manual work.",
     },
     eyebrow: { es: "Automatización con IA", en: "AI automation" },
@@ -121,7 +121,7 @@ export const SERVICES: Service[] = [
     },
     deliverables: {
       es: [
-        "Workflows en producción, conectados a tus herramientas",
+        "Flujos automatizados en producción, conectados a tus herramientas",
         "Reglas de escalamiento a una persona cuando hace falta",
         "Documentación de qué hace cada automatización y cómo apagarla",
       ],
@@ -169,7 +169,7 @@ export const SERVICES: Service[] = [
         en: "Business process automation with AI | Codifikai",
       },
       description: {
-        es: "Agentes de IA y workflows que califican leads, orquestan tu CRM y responden por WhatsApp. Automatiza el trabajo repetitivo sin perder el criterio humano.",
+        es: "Agentes de IA que califican leads, orquestan tu CRM y responden por WhatsApp. Automatiza el trabajo repetitivo de tu empresa sin perder el criterio humano.",
         en: "AI agents and workflows that qualify leads, orchestrate your CRM and reply over WhatsApp. Automate repetitive work without losing human judgement.",
       },
       keywords: {
@@ -264,7 +264,7 @@ export const SERVICES: Service[] = [
           en: "Do we have to drop the tools we already use?",
         },
         a: {
-          es: "No. El punto de partida es tu stack actual. Nos integramos con tu CRM, tu mensajería y tus APIs, y construimos encima solo lo que falta.",
+          es: "No. El punto de partida son tus herramientas actuales. Nos integramos con tu CRM, tu mensajería y tus APIs, y construimos encima solo lo que falta.",
           en: "No. Your current stack is the starting point. We integrate with your CRM, your messaging and your APIs, and only build what's missing on top.",
         },
       },
@@ -295,8 +295,8 @@ export const SERVICES: Service[] = [
         en: "Custom software development for companies | Codifikai",
       },
       description: {
-        es: "Desarrollo de software a la medida: las plataformas sobre las que corre la inteligencia artificial de tu empresa, integradas con tu CRM. Código propio y documentación incluida.",
-        en: "Custom software development: the platforms your company's artificial intelligence runs on, integrated with your CRM. Your own code and documentation included.",
+        es: "Desarrollo de software a la medida: las plataformas donde corre la inteligencia artificial de tu empresa, integradas con tu CRM. Código y documentación son tuyos.",
+        en: "Custom software development: the platforms your company's AI runs on, integrated with your CRM. The code and documentation are yours.",
       },
       keywords: {
         es: [

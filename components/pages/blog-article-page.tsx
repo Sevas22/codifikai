@@ -4,13 +4,16 @@ import { ArticleView } from "@/components/blog/article-view"
 import { Footer } from "@/components/sections/footer"
 import { estimateReadingMinutes, withHeadingIds } from "@/lib/blog-toc"
 import { getAllPosts, getPostBySlug } from "@/lib/blog"
-import { LOCALE_TAGS, localePath, type Locale } from "@/lib/i18n"
+import { BLOG_LOCALE, blogPostPath } from "@/lib/blog-paths"
+import { LOCALE_TAGS, localePath } from "@/lib/i18n"
 import { getSiteUrl, siteName } from "@/lib/site"
 
 /** Cuántos artículos se sugieren al final. */
 const RELATED_COUNT = 3
 
-export async function BlogArticlePage({ slug, locale }: { slug: string; locale: Locale }) {
+/** Los artículos solo existen en `BLOG_LOCALE` (ver lib/blog-paths.ts). */
+export async function BlogArticlePage({ slug }: { slug: string }) {
+  const locale = BLOG_LOCALE
   const post = await getPostBySlug(slug)
   if (!post) notFound()
 
@@ -29,7 +32,7 @@ export async function BlogArticlePage({ slug, locale }: { slug: string; locale: 
   )
 
   const siteUrl = getSiteUrl()
-  const articleUrl = `${siteUrl}${localePath(locale, `/blog/${post.slug}`)}`
+  const articleUrl = `${siteUrl}${blogPostPath(post.slug)}`
 
   const jsonLd: Record<string, unknown> = {
     "@context": "https://schema.org",

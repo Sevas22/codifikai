@@ -12,6 +12,7 @@ import type { TocEntry } from "@/lib/blog-toc"
 import type { BlogPost, BlogPostMeta } from "@/lib/blog"
 import { WHATSAPP_URL } from "@/lib/contact"
 import { useLocalePath } from "@/hooks/use-locale-path"
+import { blogPostPath } from "@/lib/blog-paths"
 
 const LABELS = {
   es: {
@@ -292,7 +293,7 @@ export function ArticleView({
             {related.map((item, i) => (
               <Reveal key={item.slug} delay={i * 0.08} y={20}>
                 <Link
-                  href={path(`/blog/${item.slug}`)}
+                  href={blogPostPath(item.slug)}
                   className="ed-card ed-card-lift group flex h-full flex-col p-6"
                 >
                   <span className="ed-label inline-flex items-center gap-2 text-ed-accent">

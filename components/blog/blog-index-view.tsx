@@ -11,6 +11,7 @@ import { Navigation } from "@/components/navigation"
 import { useLanguage } from "@/components/providers/language-provider"
 import type { BlogPostMeta } from "@/lib/blog"
 import { WHATSAPP_URL } from "@/lib/contact"
+import { BLOG_LOCALE, blogPostPath } from "@/lib/blog-paths"
 import { cn } from "@/lib/utils"
 import { useLocalePath } from "@/hooks/use-locale-path"
 
@@ -25,6 +26,7 @@ const LABELS = {
     featured: "Destacado",
     all: "Todos",
     read: "Leer artículo",
+    inSpanish: "",
     empty: "Todavía no hay artículos publicados. Vuelve pronto.",
     ctaTitle: "¿Prefieres que lo veamos sobre tu caso?",
     cta: "Escríbenos por WhatsApp",
@@ -35,10 +37,11 @@ const LABELS = {
     eyebrow: "Artificial intelligence blog for businesses",
     headline: "What we learn, in the open.",
     highlight: ["open."],
-    lead: "Practical guides on artificial intelligence, automation and digital presence for companies in Colombia. No smoke, no needless jargon.",
+    lead: "Practical guides on artificial intelligence, automation and digital presence for companies in Colombia. No smoke, no needless jargon. Articles are written in Spanish.",
     featured: "Featured",
     all: "All",
     read: "Read article",
+    inSpanish: "In Spanish",
     empty: "No articles published yet. Check back soon.",
     ctaTitle: "Rather look at your own case?",
     cta: "Message us on WhatsApp",
@@ -57,18 +60,21 @@ function PostCard({
   post,
   language,
   readLabel,
+  languageNote,
   featured = false,
 }: {
   post: BlogPostMeta
   language: "es" | "en"
   readLabel: string
+  languageNote: string
   featured?: boolean
 }) {
-  const path = useLocalePath()
+  const foreign = language !== BLOG_LOCALE
 
   return (
     <Link
-      href={path(`/blog/${post.slug}`)}
+      href={blogPostPath(post.slug)}
+      hrefLang={foreign ? BLOG_LOCALE : undefined}
       className={cn(
         "ed-card ed-card-lift group flex h-full flex-col overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-accent",
         featured && "sm:col-span-2 sm:flex-row"
@@ -98,12 +104,20 @@ function PostCard({
       </div>
 
       <div className={cn("flex flex-1 flex-col p-6", featured && "sm:p-9")}>
-        <span className="ed-label inline-flex items-center gap-2 text-ed-accent">
-          <MapPin className="h-3 w-3" aria-hidden />
-          {post.city || post.department}
+        <span className="flex flex-wrap items-center justify-between gap-2">
+          <span className="ed-label inline-flex items-center gap-2 text-ed-accent">
+            <MapPin className="h-3 w-3" aria-hidden />
+            {post.city || post.department}
+          </span>
+          {foreign ? (
+            <span className="ed-label rounded-full border border-ed-rule px-2.5 py-1 text-[0.5625rem]">
+              {languageNote}
+            </span>
+          ) : null}
         </span>
 
         <h2
+          lang={foreign ? BLOG_LOCALE : undefined}
           className={cn(
             "mt-4 font-semibold leading-snug tracking-tight text-ed-ink",
             featured ? "text-[1.375rem] sm:text-[1.75rem]" : "text-[1.0625rem]"
@@ -113,6 +127,7 @@ function PostCard({
         </h2>
 
         <p
+          lang={foreign ? BLOG_LOCALE : undefined}
           className={cn(
             "mt-3 flex-1 leading-relaxed text-ed-ink-soft",
             featured ? "text-[0.9375rem] line-clamp-4" : "text-[0.875rem] line-clamp-3"
@@ -249,13 +264,19 @@ export function BlogIndexView({ posts }: { posts: BlogPostMeta[] }) {
                   post={featured}
                   language={language}
                   readLabel={labels.read}
+                  languageNote={labels.inSpanish}
                   featured
                 />
               </Reveal>
             ) : null}
             {rest.map((post, i) => (
               <Reveal key={post.slug} delay={(i % 3) * 0.08} y={22}>
-                <PostCard post={post} language={language} readLabel={labels.read} />
+                <PostCard
+                  post={post}
+                  language={language}
+                  readLabel={labels.read}
+                  languageNote={labels.inSpanish}
+                />
               </Reveal>
             ))}
           </div>

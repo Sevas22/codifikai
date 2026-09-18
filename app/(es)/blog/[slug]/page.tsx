@@ -20,7 +20,6 @@ export async function generateMetadata({
   if (!post) return {}
 
   return articleMetadata(
-    "es",
     post.slug,
     post.title,
     post.description,
@@ -33,5 +32,5 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { slug } = await params
-  return <BlogArticlePage slug={slug} locale="es" />
+  return <BlogArticlePage slug={slug} />
 }

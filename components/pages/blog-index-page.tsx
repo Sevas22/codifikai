@@ -1,7 +1,8 @@
 import { BlogIndexView } from "@/components/blog/blog-index-view"
 import { Footer } from "@/components/sections/footer"
 import { getAllPosts } from "@/lib/blog"
-import { localePath, type Locale } from "@/lib/i18n"
+import { BLOG_LOCALE, blogPostPath } from "@/lib/blog-paths"
+import { LOCALE_TAGS, localePath, type Locale } from "@/lib/i18n"
 import { getSiteUrl, siteName } from "@/lib/site"
 
 export async function BlogIndexPage({ locale }: { locale: Locale }) {
@@ -23,7 +24,10 @@ export async function BlogIndexPage({ locale }: { locale: Locale }) {
       description: post.description,
       datePublished: post.date,
       dateModified: post.updatedAt,
-      url: `${site}${localePath(locale, `/blog/${post.slug}`)}`,
+      // Cada artículo declara su propio idioma: en /en/blog se listan los
+      // mismos artículos, que siguen estando en español.
+      inLanguage: LOCALE_TAGS[BLOG_LOCALE],
+      url: `${site}${blogPostPath(post.slug)}`,
     })),
   }
 

@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 
+import { BLOG_LOCALE } from "@/lib/blog-paths"
 import {
   DEFAULT_LOCALE,
   OG_LOCALES,
   localeAlternates,
   localePath,
+  singleLocaleAlternates,
   type Locale,
 } from "@/lib/i18n"
 import { getSiteUrl, siteName } from "@/lib/site"
@@ -79,8 +81,8 @@ const ROOT: {
     en: `${siteName} | Artificial Intelligence Agency for Businesses`,
   },
   description: {
-    es: "Agencia de inteligencia artificial en Colombia. Automatizamos procesos con agentes de IA y desarrollamos software a la medida para empresas que quieren crecer sin multiplicar el equipo.",
-    en: "Artificial intelligence agency in Colombia. We automate business processes with AI agents and build custom software for companies that want to grow without growing headcount.",
+    es: "Agencia de inteligencia artificial en Colombia. Automatizamos procesos con agentes de IA y creamos software a la medida para crecer sin multiplicar el equipo.",
+    en: "Artificial intelligence agency in Colombia. We automate processes with AI agents and build custom software so you grow without growing headcount.",
   },
   ogTitle: {
     es: `${siteName} | Agencia de Inteligencia Artificial`,
@@ -181,8 +183,8 @@ const PAGES = {
       en: "About us: an artificial intelligence agency",
     },
     description: {
-      es: "Codifikai es una agencia de inteligencia artificial en Colombia. Conoce al equipo fundador, cómo trabajamos y el stack con el que construimos IA y software a la medida.",
-      en: "Codifikai is an artificial intelligence agency in Colombia. Meet the founding team, how we work and the stack we use to build AI and custom software.",
+      es: "Codifikai es una agencia de inteligencia artificial en Colombia. Conoce al equipo fundador, cómo trabajamos y con qué tecnologías construimos IA y software.",
+      en: "Codifikai is an artificial intelligence agency in Colombia. Meet the founding team, how we work and the technologies we use to build AI and software.",
     },
     keywords: {
       es: ["agencia de inteligencia artificial Colombia", "equipo Codifikai", "empresa de IA", "desarrollo de software a la medida"],
@@ -192,11 +194,11 @@ const PAGES = {
   services: {
     path: "/services",
     title: {
-      es: "Servicios de inteligencia artificial y desarrollo a la medida",
+      es: "Servicios de IA y desarrollo de software a la medida",
       en: "AI services and custom software development",
     },
     description: {
-      es: "Automatización con inteligencia artificial como núcleo, desarrollo de software a la medida para construirla y servicios tecnológicos que la hacen crecer: web, marketing y marca.",
+      es: "Inteligencia artificial como núcleo, software a la medida para construirla y servicios tecnológicos que la hacen crecer: desarrollo web, marketing y marca.",
       en: "AI automation at the core, custom software development to build it, and the technology services that help it grow: web, marketing and brand.",
     },
     keywords: {
@@ -232,8 +234,8 @@ const PAGES = {
   contact: {
     path: "/contact",
     title: {
-      es: "Contacto: habla con una agencia de inteligencia artificial",
-      en: "Contact: talk to an artificial intelligence agency",
+      es: "Contacto: agencia de inteligencia artificial",
+      en: "Contact an artificial intelligence agency",
     },
     description: {
       es: "Cuéntanos tu reto y te decimos si hay algo que se pueda automatizar. Respondemos por WhatsApp, correo o teléfono.",
@@ -297,9 +299,14 @@ export function serviceMetadata(
   }
 }
 
-/** Metadatos de un artículo del blog. */
+/** Largo a partir del cual Google corta el título en resultados. */
+export const TITLE_DISPLAY_LIMIT = 60
+
+/**
+ * Metadatos de un artículo del blog. Existen solo en `BLOG_LOCALE`: sin
+ * alternativa en inglés.
+ */
 export function articleMetadata(
-  locale: Locale,
   slug: string,
   title: string,
   description: string,
@@ -310,18 +317,22 @@ export function articleMetadata(
 ): Metadata {
   const images = image ? [{ url: image }] : [OG_IMAGE]
   const path = `/blog/${slug}`
+  // El sufijo de marca solo se agrega si cabe: en un título largo empuja la
+  // palabra clave fuera de lo que Google muestra.
+  const branded = `${title} | ${siteName}`
+  const fullTitle = branded.length <= TITLE_DISPLAY_LIMIT ? branded : title
 
   return {
-    title,
+    title: { absolute: fullTitle },
     description,
     keywords,
-    alternates: localeAlternates(locale, path),
+    alternates: singleLocaleAlternates(BLOG_LOCALE, path),
     openGraph: {
       type: "article",
-      locale: OG_LOCALES[locale],
-      url: localePath(locale, path),
+      locale: OG_LOCALES[BLOG_LOCALE],
+      url: localePath(BLOG_LOCALE, path),
       siteName,
-      title: `${title} | ${siteName}`,
+      title: fullTitle,
       description,
       publishedTime,
       modifiedTime,

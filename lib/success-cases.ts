@@ -209,7 +209,7 @@ export const successCases: SuccessCase[] = [
     descriptionEs:
       "Integrador estratégico para pymes LATAM: importaciones, comercio internacional y logística.",
     problemEn: "Multi-market services were hard to scan for enterprise buyers.",
-    problemEs: "Servicios multi-mercado difíciles de escanear para compradores enterprise.",
+    problemEs: "Servicios multi-mercado difíciles de escanear para compradores corporativos.",
     url: "https://jinglobaltrading.com/",
     image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1200&q=80",
     category: "Global Trade",

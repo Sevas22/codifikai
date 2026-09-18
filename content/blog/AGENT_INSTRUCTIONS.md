@@ -22,8 +22,8 @@ artículo nuevo para `content/blog/`. El objetivo del blog es posicionamiento SE
 
 ```yaml
 ---
-title: "Título del artículo (máx. ~70 caracteres, con la ciudad o palabra clave principal)"
-description: "Meta descripción de 140-160 caracteres, con intención de búsqueda clara"
+title: "Título del artículo (30-60 caracteres, con la palabra clave o la ciudad al inicio: Google corta los más largos)"
+description: "Meta descripción de 120-155 caracteres, con intención de búsqueda clara"
 date: "YYYY-MM-DD"
 department: "Cundinamarca" | "Boyacá"
 city: "Ciudad o municipio específico (o varios separados por coma)"

@@ -128,13 +128,13 @@ export const aboutCopy: AboutCopy = {
       en: "Artificial intelligence and custom development agency in Colombia",
     },
     headline: {
-      es: "Una fábrica de transformación digital.",
-      en: "A factory of digital transformation.",
+      es: "Una fábrica de inteligencia artificial aplicada.",
+      en: "A factory of applied artificial intelligence.",
     },
-    headlineHighlight: { es: ["transformación"], en: ["transformation."] },
+    headlineHighlight: { es: ["inteligencia", "artificial"], en: ["artificial", "intelligence."] },
     lead: {
-      es: "Las empresas necesitan algo más que tecnología: necesitan visión, ejecución y soluciones que impulsen crecimiento real. Diseñamos experiencias digitales que conectan estrategia, producto y resultados.",
-      en: "Companies need more than technology: they need vision, execution and solutions that drive real growth. We design digital experiences that connect strategy, product and results.",
+      es: "Las empresas necesitan algo más que tecnología: necesitan procesos que funcionen sin depender de una persona. Construimos agentes de inteligencia artificial y el software a la medida que los sostiene, conectando estrategia, producto y resultados.",
+      en: "Companies need more than technology: they need processes that run without depending on one person. We build artificial intelligence agents and the custom software behind them, connecting strategy, product and results.",
     },
     ctaPrimary: { es: "Hablemos por WhatsApp", en: "Message us on WhatsApp" },
     ctaSecondary: { es: "Ver servicios", en: "See services" },
@@ -233,12 +233,12 @@ export const aboutCopy: AboutCopy = {
 
   tech: {
     label: { es: "Capacidad tecnológica", en: "Technical capability" },
-    title: { es: "El stack se elige, no se hereda.", en: "The stack is chosen, not inherited." },
+    title: { es: "La tecnología se elige, no se hereda.", en: "Technology is chosen, not inherited." },
     highlight: { es: ["elige,"], en: ["chosen,"] },
     paragraphs: {
       es: [
         "Combinamos herramientas consolidadas del ecosistema digital con tecnologías modernas orientadas a rendimiento, seguridad y escalabilidad.",
-        "Elegimos cada stack según el contexto del proyecto, la madurez técnica y los objetivos del negocio. Eso permite construir soluciones más sólidas, más mantenibles y mejor preparadas para crecer.",
+        "Elegimos las tecnologías de cada proyecto según su contexto, la madurez técnica y los objetivos del negocio. Eso permite construir soluciones más sólidas, más mantenibles y mejor preparadas para crecer.",
       ],
       en: [
         "We combine proven tools from the digital ecosystem with modern technologies focused on performance, security and scalability.",
