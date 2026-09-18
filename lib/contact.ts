@@ -9,12 +9,21 @@ export const WHATSAPP_URL =
   "https://api.whatsapp.com/send?phone=573124162175&text=!Buen%20dia%20estoy%20interesado%20en%20tener%20mas%20informacion%20de%20sus%20servicios!" as const
 
 /**
- * Correo público de contacto. Por defecto usa el de dominio si está configurado
- * en `NEXT_PUBLIC_CONTACT_EMAIL`; si no, cae al correo actual para no romper nada.
+ * Correo de respaldo del negocio.
+ *
+ * Es la única definición literal de la dirección en el código: la usan tanto
+ * el correo que se muestra al público como el destino al que la API entrega
+ * los leads del formulario. Cambiarla aquí los mueve a los dos.
+ */
+export const DEFAULT_CONTACT_EMAIL = "codifikai@gmail.com" as const
+
+/**
+ * Correo público de contacto. Usa el de dominio si está configurado en
+ * `NEXT_PUBLIC_CONTACT_EMAIL`; si no, el de respaldo.
  * Para proyectar marca enterprise, define un correo de dominio (ej. hola@codifikai.com).
  */
 export const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "codifikai@gmail.com"
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || DEFAULT_CONTACT_EMAIL
 
 export const MAILTO_CONTACT = `mailto:${CONTACT_EMAIL}`
 

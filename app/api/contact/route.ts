@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
+import { DEFAULT_CONTACT_EMAIL } from "@/lib/contact"
+
 export const runtime = "nodejs"
 
 const contactSchema = z.object({
@@ -42,12 +44,21 @@ export async function POST(request: Request) {
   }
 
   const apiKey = process.env.RESEND_API_KEY
-  const to = process.env.CONTACT_TO_EMAIL || process.env.NEXT_PUBLIC_CONTACT_EMAIL
+  // Sin `CONTACT_TO_EMAIL` configurada, los leads caen al correo del negocio
+  // en vez de perderse: antes esta ruta devolvía 503 y el formulario no
+  // entregaba a ninguna parte.
+  const to =
+    process.env.CONTACT_TO_EMAIL?.trim() ||
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() ||
+    DEFAULT_CONTACT_EMAIL
   const from = process.env.CONTACT_FROM_EMAIL || "Codifikai Web <onboarding@resend.dev>"
 
-  if (!apiKey || !to) {
+  // La clave de Resend no tiene respaldo posible: sin ella no hay forma de
+  // enviar nada, y el formulario muestra su salida a WhatsApp y correo.
+  if (!apiKey) {
     console.error(
-      "[contact] Falta configuración: define RESEND_API_KEY y CONTACT_TO_EMAIL en el entorno."
+      "[contact] Falta RESEND_API_KEY en el entorno: no se puede enviar el correo. " +
+        `El destino configurado sería ${to}.`
     )
     return NextResponse.json({ error: "not_configured" }, { status: 503 })
   }
