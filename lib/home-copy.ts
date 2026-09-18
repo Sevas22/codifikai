@@ -200,7 +200,7 @@ const es: HomeCopy = {
   closing: {
     label: "Siguiente paso",
     title: "Cuéntanos qué se está rompiendo en tu operación.",
-    lead: "Una llamada corta basta para saber si hay algo que automatizar y cuánto valdría la pena.",
+    lead: "Un mensaje corto basta para saber si hay algo que automatizar y cuánto valdría la pena.",
     ctaPrimary: "Escríbenos por WhatsApp",
     ctaSecondary: "Ver todas las formas de contacto",
     reassurance: ["Sin costo", "Sin compromiso", "Respuesta el mismo día hábil"],
@@ -349,7 +349,7 @@ const en: HomeCopy = {
   closing: {
     label: "Next step",
     title: "Tell us what is breaking in your operation.",
-    lead: "A short call is enough to tell whether there is something worth automating, and what it would be worth.",
+    lead: "A short message is enough to tell whether there is something worth automating, and what it would be worth.",
     ctaPrimary: "Message us on WhatsApp",
     ctaSecondary: "See all the ways to reach us",
     reassurance: ["No cost", "No commitment", "Same business-day reply"],
