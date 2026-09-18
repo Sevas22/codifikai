@@ -21,24 +21,30 @@ export function NumbersSection({ copy, caseCount }: { copy: HomeCopy; caseCount:
         index={1}
         label={copy.numbers.label}
         title={copy.numbers.title}
+        highlight={copy.highlights.numbers}
         lead={copy.numbers.lead}
       />
 
-      <dl className="mt-20 grid grid-cols-1 border-t border-ed-rule sm:grid-cols-2 lg:grid-cols-4">
+      <dl className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {cells.map((cell, i) => (
           <Reveal
             key={cell.label}
             delay={i * 0.09}
             y={22}
-            className="border-b border-ed-rule px-1 py-9 sm:[&:nth-child(2n)]:border-l sm:[&:nth-child(2n)]:pl-8 lg:border-l lg:pl-8 lg:first:border-l-0 lg:first:pl-1"
+            className="ed-card ed-card-lift group relative overflow-hidden px-7 py-8"
           >
-            <dd className="ed-display text-[clamp(3rem,6.5vw,5.5rem)] leading-none text-ed-ink">
+            {/* Destello de marca que aparece al acercarse a la tarjeta */}
+            <span
+              className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-ed-accent/0 blur-2xl transition-colors duration-700 group-hover:bg-ed-accent/25"
+              aria-hidden
+            />
+            <dd className="ed-display relative text-[clamp(2.75rem,5.5vw,4.25rem)] leading-none text-ed-accent">
               <Counter value={cell.value} />
             </dd>
-            <dt className="mt-5 text-[0.9375rem] font-medium tracking-tight text-ed-ink">
+            <dt className="relative mt-5 text-[0.9375rem] font-semibold tracking-tight text-ed-ink">
               {cell.label}
             </dt>
-            <p className="mt-2 max-w-[26ch] text-[0.8125rem] leading-relaxed text-ed-ink-faint">
+            <p className="relative mt-2 max-w-[26ch] text-[0.8125rem] leading-relaxed text-ed-ink-faint">
               {cell.note}
             </p>
           </Reveal>

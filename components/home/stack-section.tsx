@@ -3,31 +3,20 @@
 import { EdSection, Marquee, Reveal, SectionHeading } from "@/components/home/ed-primitives"
 import type { HomeCopy } from "@/lib/home-copy"
 
-function Column({
-  label,
-  items,
-  startIndex,
-}: {
-  label: string
-  items: string[]
-  startIndex: number
-}) {
+/**
+ * Grupo de fichas. Se prefieren a la lista numerada anterior porque estas
+ * etiquetas son un vistazo de reconocimiento — "¿está lo que yo uso?" — y no
+ * una secuencia que se lea en orden.
+ */
+function ChipGroup({ label, items }: { label: string; items: string[] }) {
   return (
     <div>
       <p className="ed-label border-b border-ed-rule pb-4">{label}</p>
-      <ul>
+      <ul className="mt-6 flex flex-wrap gap-2.5">
         {items.map((item, i) => (
-          <Reveal
-            as="li"
-            key={item}
-            delay={i * 0.07}
-            y={16}
-            className="group flex items-baseline gap-5 border-b border-ed-rule py-5"
-          >
-            <span className="ed-label shrink-0 text-ed-ink-faint/60 tabular-nums">
-              {String(startIndex + i).padStart(2, "0")}
-            </span>
-            <span className="text-[1.0625rem] tracking-tight text-ed-ink-soft transition-colors duration-300 group-hover:text-ed-ink sm:text-[1.125rem]">
+          <Reveal as="li" key={item} delay={i * 0.06} y={14}>
+            <span className="ed-card inline-flex items-center gap-2.5 px-5 py-3 text-[0.9375rem] font-medium tracking-tight text-ed-ink transition-colors duration-300 hover:border-ed-accent hover:text-ed-accent">
+              <span className="h-1.5 w-1.5 rounded-full bg-ed-punch" aria-hidden />
               {item}
             </span>
           </Reveal>
@@ -44,12 +33,13 @@ export function StackSection({ copy }: { copy: HomeCopy }) {
         index={5}
         label={copy.stack.label}
         title={copy.stack.title}
+        highlight={copy.highlights.stack}
         lead={copy.stack.lead}
       />
 
       <div className="mt-16 grid gap-12 md:grid-cols-2 md:gap-20">
-        <Column label={copy.stack.integrationsLabel} items={copy.stack.integrations} startIndex={1} />
-        <Column label={copy.stack.industriesLabel} items={copy.stack.industries} startIndex={1} />
+        <ChipGroup label={copy.stack.integrationsLabel} items={copy.stack.integrations} />
+        <ChipGroup label={copy.stack.industriesLabel} items={copy.stack.industries} />
       </div>
 
       <div className="mt-16 -mx-[var(--ed-gutter)] border-y border-ed-rule py-4">

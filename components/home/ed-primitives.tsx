@@ -352,6 +352,7 @@ export function SectionHeading({
   lead,
   className,
   align = "left",
+  highlight,
 }: {
   index: number
   label: string
@@ -359,6 +360,8 @@ export function SectionHeading({
   lead?: string
   className?: string
   align?: "left" | "wide"
+  /** Palabras del titular que se pintan con el color de marca. */
+  highlight?: string[]
 }) {
   return (
     <header className={cn("relative", className)}>
@@ -373,7 +376,7 @@ export function SectionHeading({
             : "max-w-[22ch] text-[clamp(2.25rem,5.2vw,4.5rem)]"
         )}
       >
-        <WordReveal text={title} />
+        <WordReveal text={title} accentWords={highlight} />
       </h2>
       {lead ? (
         <Reveal delay={0.12} y={18}>

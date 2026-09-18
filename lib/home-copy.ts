@@ -69,6 +69,14 @@ export type HomeCopy = {
     ctaSecondary: string
     reassurance: string[]
   }
+  /**
+   * Palabras que se pintan con el color de marca en cada titular de sección.
+   * Van aparte del texto para no partir las cadenas traducibles en trozos.
+   */
+  highlights: Record<
+    "numbers" | "capabilities" | "process" | "work" | "stack" | "team" | "faq" | "closing",
+    string[]
+  >
   indexLabel: string
   sectionIndex: string[]
 }
@@ -223,6 +231,16 @@ const es: HomeCopy = {
     ctaPrimary: "Escríbenos por WhatsApp",
     ctaSecondary: "Ver todas las formas de contacto",
     reassurance: ["Sin costo", "Sin compromiso", "Respuesta el mismo día hábil"],
+  },
+  highlights: {
+    numbers: ["trabajo"],
+    capabilities: ["automatización"],
+    process: ["producción"],
+    work: ["vivo"],
+    stack: ["conecta"],
+    team: ["responde"],
+    faq: ["preguntarnos"],
+    closing: ["rompiendo"],
   },
   indexLabel: "En esta página",
   sectionIndex: [
@@ -388,6 +406,16 @@ const en: HomeCopy = {
     ctaPrimary: "Message us on WhatsApp",
     ctaSecondary: "See all the ways to reach us",
     reassurance: ["No cost", "No commitment", "Same business-day reply"],
+  },
+  highlights: {
+    numbers: ["work"],
+    capabilities: ["Automation"],
+    process: ["production"],
+    work: ["live"],
+    stack: ["plugs"],
+    team: ["answers"],
+    faq: ["ask"],
+    closing: ["breaking"],
   },
   indexLabel: "On this page",
   sectionIndex: [

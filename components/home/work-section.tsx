@@ -35,7 +35,7 @@ function CaseCard({
       rel="noopener noreferrer"
       className="group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-accent"
     >
-      <figure className="relative overflow-hidden bg-ed-canvas-raised">
+      <figure className="relative overflow-hidden rounded-ed bg-ed-canvas-raised">
         <div className={cn("relative w-full", isLead ? "aspect-[16/11]" : "aspect-[16/10]")}>
           <Image
             src={item.image}
@@ -123,6 +123,7 @@ export function WorkSection({ copy, language }: { copy: HomeCopy; language: Home
         index={4}
         label={copy.work.label}
         title={copy.work.title}
+        highlight={copy.highlights.work}
         lead={copy.work.lead}
         align="wide"
       />

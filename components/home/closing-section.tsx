@@ -36,7 +36,7 @@ export function ClosingSection({
         </Reveal>
 
         <h2 className="ed-display mt-8 text-[clamp(2.25rem,6vw,5rem)] text-ed-ink">
-          <WordReveal text={copy.closing.title} />
+          <WordReveal text={copy.closing.title} accentWords={copy.highlights.closing} />
         </h2>
 
         <Reveal delay={0.15} y={18}>

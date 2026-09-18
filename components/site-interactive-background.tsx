@@ -1,5 +1,7 @@
 "use client"
 
+import { usePathname } from "next/navigation"
+
 import { Lightfall } from "@/components/effects/lightfall"
 
 /**
@@ -8,6 +10,12 @@ import { Lightfall } from "@/components/effects/lightfall"
  * en vez de colores genéricos.
  */
 export function SiteInteractiveBackground() {
+  const pathname = usePathname()
+
+  // La portada tiene fondo claro y opaco: el efecto quedaría tapado, pero su
+  // canvas seguiría animándose y gastando CPU en cada frame. Se desmonta ahí.
+  if (pathname === "/") return null
+
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
       <Lightfall

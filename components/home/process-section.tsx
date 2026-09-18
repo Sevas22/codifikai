@@ -10,20 +10,21 @@ export function ProcessSection({ copy }: { copy: HomeCopy }) {
         index={3}
         label={copy.process.label}
         title={copy.process.title}
+        highlight={copy.highlights.process}
         lead={copy.process.lead}
         align="wide"
       />
 
       <div className="mt-20">
-        <DrawnRule />
-        <ol className="grid grid-cols-1 gap-px bg-ed-rule sm:grid-cols-2 lg:grid-cols-4">
+        <DrawnRule className="mb-12" />
+        <ol className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {copy.process.steps.map((step, i) => (
             <Reveal
               as="li"
               key={step.title}
               delay={i * 0.1}
               y={24}
-              className="group relative bg-ed-canvas px-1 pt-10 pb-12 transition-colors duration-500 hover:bg-ed-canvas-raised sm:px-7"
+              className="ed-card ed-card-lift group relative overflow-hidden px-7 pt-9 pb-10"
             >
               {/* Numeral gigante de fondo: ancla visual de cada paso */}
               <span

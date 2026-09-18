@@ -18,6 +18,7 @@ export function FaqSection({ copy }: { copy: HomeCopy }) {
           index={7}
           label={copy.faq.label}
           title={copy.faq.title}
+        highlight={copy.highlights.faq}
           className="lg:sticky lg:top-32 lg:self-start"
         />
 

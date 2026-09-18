@@ -50,6 +50,7 @@ export function TeamSection({ copy, language }: { copy: HomeCopy; language: Home
         index={6}
         label={copy.team.label}
         title={copy.team.title}
+        highlight={copy.highlights.team}
         lead={copy.team.lead}
       />
 
@@ -57,7 +58,7 @@ export function TeamSection({ copy, language }: { copy: HomeCopy; language: Home
         {TEAM.map((member, i) => (
           <Reveal as="li" key={member.name} delay={i * 0.09} y={26}>
             <Link href={member.href} className="group block">
-              <div className="relative aspect-[3/4] overflow-hidden bg-ed-canvas-raised">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-ed bg-ed-canvas-raised">
                 <Image
                   src={member.image}
                   alt={member.name}

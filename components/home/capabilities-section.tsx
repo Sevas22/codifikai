@@ -28,6 +28,7 @@ export function CapabilitiesSection({
           index={2}
           label={copy.capabilities.label}
           title={copy.capabilities.title}
+          highlight={copy.highlights.capabilities}
           lead={copy.capabilities.lead}
         />
         <Reveal delay={0.15} className="shrink-0">
