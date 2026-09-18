@@ -1342,3 +1342,125 @@
   color: var(--ed-ink);
   font-weight: 600;
 }
+
+/* --------------------------------------------------------------------------
+   Panel administrativo.
+
+   Se mantiene oscuro —es una herramienta de trabajo, no una página de venta—
+   pero pasa de un cian suelto a la paleta de marca: violeta para acentos,
+   magenta para la acción principal. Las clases viven aquí para que las
+   pantallas del panel no repitan cadenas largas de utilidades.
+   -------------------------------------------------------------------------- */
+.admin-shell {
+  --admin-bg: oklch(0.055 0.02 270);
+  --admin-surface: oklch(0.10 0.022 272);
+  --admin-surface-hover: oklch(0.14 0.025 272);
+  --admin-rule: oklch(1 0 0 / 0.10);
+  --admin-accent: var(--brand-violet);
+  --admin-punch: var(--brand-magenta);
+
+  background-color: var(--admin-bg);
+  color: oklch(0.98 0.004 265);
+}
+
+@layer utilities {
+  .admin-title {
+    font-family: var(--font-space), "Space Grotesk", system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  .admin-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-jetbrains), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: oklch(1 0 0 / 0.45);
+  }
+
+  /* Acción principal: el mismo magenta que cierra el sitio público. */
+  .admin-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background-color: var(--admin-punch);
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: oklch(1 0 0);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 24px -8px oklch(0.68 0.24 310 / 0.5);
+  }
+  .admin-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px -8px oklch(0.68 0.24 310 / 0.65);
+  }
+
+  .admin-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--admin-rule);
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: oklch(1 0 0 / 0.7);
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+  .admin-btn-ghost:hover {
+    border-color: color-mix(in oklch, var(--admin-accent) 60%, transparent);
+    color: oklch(1 0 0);
+  }
+
+  .admin-list {
+    overflow: hidden;
+    border: 1px solid var(--admin-rule);
+    border-radius: 0.875rem;
+  }
+
+  .admin-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background-color: var(--admin-surface);
+    padding: 1rem 1.25rem;
+    transition: background-color 0.25s ease;
+  }
+  .admin-row + .admin-row {
+    border-top: 1px solid var(--admin-rule);
+  }
+  .admin-row:hover {
+    background-color: var(--admin-surface-hover);
+  }
+
+  .admin-chip-live,
+  .admin-chip-draft,
+  .admin-chip-file {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+  }
+  .admin-chip-live {
+    background-color: oklch(0.72 0.17 160 / 0.16);
+    color: oklch(0.86 0.15 160);
+  }
+  .admin-chip-draft {
+    background-color: oklch(1 0 0 / 0.08);
+    color: oklch(1 0 0 / 0.6);
+  }
+  .admin-chip-file {
+    background-color: color-mix(in oklch, var(--brand-violet) 18%, transparent);
+    color: oklch(0.82 0.12 285);
+  }
+}

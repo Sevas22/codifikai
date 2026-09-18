@@ -13,6 +13,7 @@
  */
 
 import * as React from "react"
+import { usePathname } from "next/navigation"
 
 import { useLanguage } from "@/components/providers/language-provider"
 import { WHATSAPP_URL } from "@/lib/contact"
@@ -38,7 +39,13 @@ function WhatsAppGlyph({ className }: { className?: string }) {
 }
 
 export function WhatsAppFloat({ className }: { className?: string }) {
+  const pathname = usePathname()
   const { language } = useLanguage()
+
+  // El panel administrativo es una herramienta interna: el botón de captación
+  // de clientes no tiene nada que hacer ahí.
+  if (pathname.startsWith("/admin")) return null
+
   const label = LABEL[language] ?? LABEL.es
 
   return (
