@@ -49,18 +49,19 @@ export function AboutView() {
           </nav>
 
           <div className="mt-10 max-w-[54rem]">
-            <Reveal y={14}>
+            {/* La etiqueta de identidad vive dentro del h1: mismo aspecto, pero el
+                encabezado principal ahora nombra lo que somos. */}
+            <h1 className="text-ed-ink">
               <span className="ed-label inline-flex items-center gap-3 rounded-full border border-ed-rule bg-ed-canvas-raised/80 px-4 py-2 backdrop-blur-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-ed-punch" aria-hidden />
                 {copy.hero.eyebrow[language]}
               </span>
-            </Reveal>
-
-            <h1 className="ed-display mt-8 text-[clamp(2.5rem,6.5vw,5.25rem)] text-ed-ink">
+              <span className="ed-display mt-8 block text-[clamp(2.5rem,6.5vw,5.25rem)]">
               <WordReveal
                 text={copy.hero.headline[language]}
                 accentWords={copy.hero.headlineHighlight[language]}
               />
+              </span>
             </h1>
 
             <Reveal delay={0.15} y={18}>

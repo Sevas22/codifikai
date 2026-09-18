@@ -82,7 +82,7 @@ export type HomeCopy = {
 
 const es: HomeCopy = {
   hero: {
-    kicker: "Sistemas de IA · Automatización · Workflows enterprise",
+    kicker: "Agencia de inteligencia artificial para empresas",
     titleLead: "Construimos los sistemas",
     titleEmphasis: "que operan",
     titleTail: "el negocio por ti.",
@@ -231,7 +231,7 @@ const es: HomeCopy = {
 
 const en: HomeCopy = {
   hero: {
-    kicker: "AI systems · Automation · Enterprise workflows",
+    kicker: "Artificial intelligence agency for businesses",
     titleLead: "We build the systems",
     titleEmphasis: "that run",
     titleTail: "the business for you.",

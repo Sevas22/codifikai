@@ -50,8 +50,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...withAlternates("/terms", "yearly", 0.4),
   ]
 
+  // La prioridad refleja el posicionamiento: la IA es el núcleo y su página
+  // pesa más que los servicios que la rodean. No garantiza nada por sí sola,
+  // pero es coherente con el resto de señales en vez de contradecirlas.
+  const TIER_PRIORITY = { ai: 0.95, build: 0.9, tech: 0.8 } as const
+
   const serviceEntries = SERVICES.flatMap((service) =>
-    withAlternates(`/services/${service.slug}`, "monthly", 0.85)
+    withAlternates(`/services/${service.slug}`, "monthly", TIER_PRIORITY[service.tier])
   )
 
   const posts = await getAllPosts()

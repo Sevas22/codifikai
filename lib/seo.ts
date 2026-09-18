@@ -71,38 +71,42 @@ const ROOT: {
   ogTitle: Bilingual
   keywords: BilingualList
 } = {
+  // La identidad va en el título: el término por el que queremos que nos
+  // encuentren es "agencia de inteligencia artificial", no uno genérico de
+  // desarrollo. El resto de servicios se nombra en la descripción.
   titleDefault: {
-    es: `${siteName} | Sistemas de IA y Automatización Empresarial`,
-    en: `${siteName} | Enterprise AI Systems and Automation`,
+    es: `${siteName} | Agencia de Inteligencia Artificial para Empresas`,
+    en: `${siteName} | Artificial Intelligence Agency for Businesses`,
   },
   description: {
-    es: "Codifikai diseña sistemas de IA, automatización inteligente y workflows empresariales para equipos en Colombia y Latinoamérica. Plataformas web, apps y automatización de procesos de negocio.",
-    en: "Codifikai designs AI systems, intelligent automation and enterprise workflows for teams in Colombia and Latin America. Web platforms, apps and business process automation.",
+    es: "Agencia de inteligencia artificial en Colombia. Automatizamos procesos con agentes de IA y desarrollamos software a la medida para empresas que quieren crecer sin multiplicar el equipo.",
+    en: "Artificial intelligence agency in Colombia. We automate business processes with AI agents and build custom software for companies that want to grow without growing headcount.",
   },
   ogTitle: {
-    es: `${siteName} | Sistemas de IA Empresarial`,
-    en: `${siteName} | Enterprise AI Systems`,
+    es: `${siteName} | Agencia de Inteligencia Artificial`,
+    en: `${siteName} | Artificial Intelligence Agency`,
   },
+  // Ordenadas por prioridad: núcleo de IA, luego desarrollo, luego servicios.
   keywords: {
     es: [
-      "inteligencia artificial",
-      "desarrollo de software",
-      "desarrollo web Colombia",
-      "automatización empresarial",
-      "marketing digital",
-      "SEO",
-      "software a medida",
-      "IA empresas",
+      "agencia de inteligencia artificial",
+      "inteligencia artificial para empresas",
+      "automatización con inteligencia artificial",
+      "agentes de IA para empresas",
+      "automatización de procesos",
+      "desarrollo de software a la medida",
+      "desarrollo web para empresas",
+      "servicios tecnológicos Colombia",
     ],
     en: [
-      "artificial intelligence",
-      "software development",
-      "web development Colombia",
-      "business automation",
-      "digital marketing",
-      "SEO",
-      "custom software",
+      "artificial intelligence agency",
       "AI for business",
+      "AI automation",
+      "AI agents for business",
+      "business process automation",
+      "custom software development",
+      "web development for business",
+      "technology services Colombia",
     ],
   },
 }
@@ -172,41 +176,50 @@ type PageSeo = {
 const PAGES = {
   about: {
     path: "/about",
-    title: { es: "Sobre nosotros", en: "About us" },
+    title: {
+      es: "Quiénes somos: agencia de inteligencia artificial",
+      en: "About us: an artificial intelligence agency",
+    },
     description: {
-      es: "Quiénes somos en Codifikai: historia, visión, equipo fundador y el stack con el que construimos software, automatización con IA y presencia digital.",
-      en: "Who we are at Codifikai: history, vision, founding team and the stack we use to build software, AI automation and digital presence.",
+      es: "Codifikai es una agencia de inteligencia artificial en Colombia. Conoce al equipo fundador, cómo trabajamos y el stack con el que construimos IA y software a la medida.",
+      en: "Codifikai is an artificial intelligence agency in Colombia. Meet the founding team, how we work and the stack we use to build AI and custom software.",
     },
     keywords: {
-      es: ["agencia de IA", "equipo Codifikai", "desarrollo de software", "automatización empresarial"],
-      en: ["AI agency", "Codifikai team", "software development", "business automation"],
+      es: ["agencia de inteligencia artificial Colombia", "equipo Codifikai", "empresa de IA", "desarrollo de software a la medida"],
+      en: ["artificial intelligence agency Colombia", "Codifikai team", "AI company", "custom software development"],
     },
   },
   services: {
     path: "/services",
-    title: { es: "Servicios", en: "Services" },
+    title: {
+      es: "Servicios de inteligencia artificial y desarrollo a la medida",
+      en: "AI services and custom software development",
+    },
     description: {
-      es: "Desarrollo web, software a la medida, automatización con IA, marketing digital y diseño de marca para empresas en Colombia y LATAM.",
-      en: "Web development, custom software, AI automation, digital marketing and brand design for companies in Colombia and Latin America.",
+      es: "Automatización con inteligencia artificial como núcleo, desarrollo de software a la medida para construirla y servicios tecnológicos que la hacen crecer: web, marketing y marca.",
+      en: "AI automation at the core, custom software development to build it, and the technology services that help it grow: web, marketing and brand.",
     },
     keywords: {
       es: [
-        "servicios de desarrollo de software",
+        "servicios de inteligencia artificial",
         "automatización con inteligencia artificial",
-        "desarrollo web para empresas",
-        "software a la medida",
+        "desarrollo de software a la medida",
+        "servicios tecnológicos para empresas",
       ],
       en: [
-        "software development services",
+        "artificial intelligence services",
         "AI automation",
-        "web development for business",
-        "custom software",
+        "custom software development",
+        "technology services for business",
       ],
     },
   },
   blog: {
     path: "/blog",
-    title: { es: "Blog", en: "Blog" },
+    title: {
+      es: "Blog de inteligencia artificial para empresas",
+      en: "Artificial intelligence blog for businesses",
+    },
     description: {
       es: "Guías prácticas de inteligencia artificial, automatización y software a medida para empresas de Cundinamarca y Boyacá.",
       en: "Practical guides on artificial intelligence, automation and custom software for companies in Colombia.",
@@ -218,7 +231,10 @@ const PAGES = {
   },
   contact: {
     path: "/contact",
-    title: { es: "Contacto", en: "Contact" },
+    title: {
+      es: "Contacto: habla con una agencia de inteligencia artificial",
+      en: "Contact: talk to an artificial intelligence agency",
+    },
     description: {
       es: "Cuéntanos tu reto y te decimos si hay algo que se pueda automatizar. Respondemos por WhatsApp, correo o teléfono.",
       en: "Tell us your challenge and we'll tell you whether there's something worth automating. Reach us on WhatsApp, email or phone.",

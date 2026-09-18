@@ -16,6 +16,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { WHATSAPP_URL } from "@/lib/contact"
 import {
   SERVICE_PAGE_LABELS,
+  SERVICE_TIERS,
   getRelatedServices,
   type Service,
 } from "@/lib/services"
@@ -85,13 +86,20 @@ export function ServiceDetailView({ service }: { service: Service }) {
           </nav>
 
           <div className="mt-10 max-w-[52rem]">
-            <EdLabel index={service.order}>{service.eyebrow[language]}</EdLabel>
+            {/* Arriba, el nivel: deja claro en cada servicio si es el núcleo de IA
+                o un servicio que lo rodea. */}
+            <EdLabel index={service.order}>{SERVICE_TIERS[service.tier].label[language]}</EdLabel>
 
-            <h1 className="ed-display mt-7 text-[clamp(2.25rem,6vw,4.75rem)] text-ed-ink">
+            {/* El h1 abre con el nombre del servicio, que es la palabra clave de la
+                página; el titular creativo va después, igual que antes. */}
+            <h1 className="mt-7 text-ed-ink">
+              <span className="ed-label block text-ed-accent">{service.title[language]}</span>
+              <span className="ed-display mt-4 block text-[clamp(2.25rem,6vw,4.75rem)]">
               <WordReveal
                 text={service.headline[language]}
                 accentWords={service.headlineHighlight[language]}
               />
+              </span>
             </h1>
 
             <Reveal delay={0.15} y={18}>

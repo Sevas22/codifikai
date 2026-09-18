@@ -18,7 +18,7 @@ const LABELS = {
   es: {
     breadcrumbHome: "Inicio",
     breadcrumbBlog: "Blog",
-    eyebrow: "Guías de IA y automatización",
+    eyebrow: "Blog de inteligencia artificial para empresas",
     headline: "Lo que aprendemos, en abierto.",
     highlight: ["abierto"],
     lead: "Guías prácticas de inteligencia artificial, automatización y presencia digital para empresas de Colombia. Sin humo y sin tecnicismos innecesarios.",
@@ -32,7 +32,7 @@ const LABELS = {
   en: {
     breadcrumbHome: "Home",
     breadcrumbBlog: "Blog",
-    eyebrow: "AI and automation guides",
+    eyebrow: "Artificial intelligence blog for businesses",
     headline: "What we learn, in the open.",
     highlight: ["open."],
     lead: "Practical guides on artificial intelligence, automation and digital presence for companies in Colombia. No smoke, no needless jargon.",
@@ -186,15 +186,14 @@ export function BlogIndexView({ posts }: { posts: BlogPostMeta[] }) {
           </nav>
 
           <div className="mt-9 max-w-[46rem]">
-            <Reveal y={14}>
+            <h1 className="text-ed-ink">
               <span className="ed-label inline-flex items-center gap-3 rounded-full border border-ed-rule bg-ed-canvas-raised/80 px-4 py-2 backdrop-blur-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-ed-punch" aria-hidden />
                 {labels.eyebrow}
               </span>
-            </Reveal>
-
-            <h1 className="ed-display mt-8 text-[clamp(2.25rem,6vw,4.75rem)] text-ed-ink">
+              <span className="ed-display mt-8 block text-[clamp(2.25rem,6vw,4.75rem)]">
               <WordReveal text={labels.headline} accentWords={[...labels.highlight]} />
+              </span>
             </h1>
 
             <Reveal delay={0.15} y={18}>

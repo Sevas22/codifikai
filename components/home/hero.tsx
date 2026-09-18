@@ -67,22 +67,26 @@ export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: str
 
       <div className="relative mx-auto flex w-full max-w-[80rem] flex-1 flex-col justify-center px-[var(--ed-gutter)]">
         <div className="max-w-[52rem]">
-          {/* Kicker */}
-          <motion.p
-            initial={reduced ? false : { opacity: 0, y: 12 }}
-            animate={reduced ? undefined : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="ed-label inline-flex items-center gap-3 rounded-full border border-ed-rule bg-ed-canvas-raised/80 px-4 py-2 backdrop-blur-sm"
-          >
-            <span className="relative flex h-1.5 w-1.5" aria-hidden>
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ed-punch opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ed-punch" />
-            </span>
-            {copy.hero.kicker}
-          </motion.p>
+          {/* El kicker vive DENTRO del h1. Visualmente es la misma etiqueta
+              pequeña de siempre, pero así el encabezado principal de la
+              página contiene "agencia de inteligencia artificial": el término
+              por el que queremos que nos encuentren. Antes el h1 era solo el
+              copy creativo, sin ninguna palabra clave. */}
+          <h1 className="text-ed-ink">
+            <motion.span
+              initial={reduced ? false : { opacity: 0, y: 12 }}
+              animate={reduced ? undefined : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="ed-label inline-flex items-center gap-3 rounded-full border border-ed-rule bg-ed-canvas-raised/80 px-4 py-2 backdrop-blur-sm"
+            >
+              <span className="relative flex h-1.5 w-1.5" aria-hidden>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ed-punch opacity-60" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ed-punch" />
+              </span>
+              {copy.hero.kicker}
+            </motion.span>
 
-          {/* Titular */}
-          <h1 className="ed-display mt-8 text-[clamp(2.5rem,6.8vw,5.75rem)] text-ed-ink">
+            <span className="ed-display mt-8 block text-[clamp(2.5rem,6.8vw,5.75rem)]">
             <span className="block">
               <WordReveal
                 text={copy.hero.titleLead}
@@ -99,6 +103,7 @@ export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: str
                 delay={0.38}
                 accentWords={copy.hero.highlight}
               />
+            </span>
             </span>
           </h1>
 

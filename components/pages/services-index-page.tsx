@@ -1,4 +1,5 @@
-import { ServicesPageView } from "@/components/services/services-page-view"
+import { Footer } from "@/components/sections/footer"
+import { ServicesHubView } from "@/components/services/services-hub-view"
 import { SERVICES } from "@/lib/services"
 import { localePath, type Locale } from "@/lib/i18n"
 import { getSiteUrl, siteName } from "@/lib/site"
@@ -45,7 +46,11 @@ export function ServicesIndexPage({ locale }: { locale: Locale }) {
   return (
     <>
       <ServicesCatalogJsonLd locale={locale} />
-      <ServicesPageView />
+      <main className="relative min-h-screen overflow-x-hidden">
+        <ServicesHubView />
+        {/* Fuera de ed-light-scope: el footer tiene colores oscuros fijos. */}
+        <Footer />
+      </main>
     </>
   )
 }

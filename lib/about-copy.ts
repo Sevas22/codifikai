@@ -124,8 +124,8 @@ export const aboutCopy: AboutCopy = {
 
   hero: {
     eyebrow: {
-      es: "Agencia de desarrollo de software e IA en Colombia",
-      en: "Software development and AI agency in Colombia",
+      es: "Agencia de inteligencia artificial y desarrollo a la medida en Colombia",
+      en: "Artificial intelligence and custom development agency in Colombia",
     },
     headline: {
       es: "Una fábrica de transformación digital.",

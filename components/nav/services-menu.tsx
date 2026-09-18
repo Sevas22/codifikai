@@ -15,7 +15,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { ArrowUpRight, ChevronDown } from "lucide-react"
 
 import { useLanguage } from "@/components/providers/language-provider"
-import { SERVICES, SERVICES_MENU_INTRO } from "@/lib/services"
+import { SERVICES, SERVICES_MENU_INTRO, SERVICE_TIERS } from "@/lib/services"
 import { cn } from "@/lib/utils"
 import { useLocalePath } from "@/hooks/use-locale-path"
 
@@ -139,14 +139,33 @@ export function ServicesMenu({
                 </div>
 
                 {/* Tarjetas numeradas */}
-                {SERVICES.map((service) => (
+                {SERVICES.map((service) => {
+                  const isCore = service.tier === "ai"
+                  return (
                   <Link
                     key={service.id}
                     href={path(`/services/${service.slug}`)}
-                    className="group flex flex-col rounded-3xl bg-white/[0.04] p-6 transition-colors duration-300 hover:bg-white/[0.09] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent"
+                    className={cn(
+                      "group flex flex-col rounded-3xl p-6 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent",
+                      // La IA es el núcleo: su tarjeta se distingue del resto para
+                      // que el panel no presente los cinco servicios como iguales.
+                      isCore
+                        ? "bg-[color-mix(in_oklch,var(--brand-violet)_22%,transparent)] ring-1 ring-[color-mix(in_oklch,var(--brand-violet)_55%,transparent)] hover:bg-[color-mix(in_oklch,var(--brand-violet)_30%,transparent)]"
+                        : "bg-white/[0.04] hover:bg-white/[0.09]"
+                    )}
                   >
-                    <span className="ed-label text-ed-accent tabular-nums">
-                      {String(service.order).padStart(2, "0")}
+                    <span className="flex items-center justify-between gap-3">
+                      <span className="ed-label text-ed-accent tabular-nums">
+                        {String(service.order).padStart(2, "0")}
+                      </span>
+                      <span
+                        className={cn(
+                          "ed-label rounded-full px-2 py-0.5 text-[0.5625rem]",
+                          isCore ? "bg-ed-punch text-white" : "text-ed-ink-faint"
+                        )}
+                      >
+                        {SERVICE_TIERS[service.tier].short[language]}
+                      </span>
                     </span>
                     <span className="mt-6 text-[1.0625rem] font-semibold leading-tight tracking-tight text-ed-ink">
                       {service.title[language]}
@@ -159,7 +178,8 @@ export function ServicesMenu({
                       aria-hidden
                     />
                   </Link>
-                ))}
+                  )
+                })}
               </div>
             </div>
           </motion.div>
