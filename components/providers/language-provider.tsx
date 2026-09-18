@@ -22,7 +22,7 @@ const translations: Record<Language, Record<string, string>> = {
   es: {
     // Navigation
     "nav.home": "Plataforma",
-    "nav.about": "Empresa",
+    "nav.about": "Sobre nosotros",
     "nav.services": "Servicios",
     "nav.cases": "Casos de éxito",
     "nav.blog": "Blog",
@@ -722,7 +722,7 @@ const translations: Record<Language, Record<string, string>> = {
   en: {
     // Navigation
     "nav.home": "Platform",
-    "nav.about": "Company",
+    "nav.about": "About us",
     "nav.services": "Services",
     "nav.cases": "Case Studies",
     "nav.blog": "Blog",

@@ -97,6 +97,8 @@ function useObserverUnavailable() {
 type RevealProps = {
   children: React.ReactNode
   className?: string
+  /** Ancla para enlaces profundos (por ejemplo /about#jhoan-gomez). */
+  id?: string
   /** Retraso en segundos; se usa para escalonar hijos de una misma fila. */
   delay?: number
   /** Distancia inicial en píxeles. `0` deja solo el fundido. */
@@ -104,7 +106,7 @@ type RevealProps = {
   as?: "div" | "section" | "li" | "article" | "header" | "footer"
 }
 
-export function Reveal({ children, className, delay = 0, y = 28, as = "div" }: RevealProps) {
+export function Reveal({ children, className, id, delay = 0, y = 28, as = "div" }: RevealProps) {
   const reduced = useReducedMotion()
   const observerDown = useObserverUnavailable()
   const MotionTag = motion[as]
@@ -112,6 +114,7 @@ export function Reveal({ children, className, delay = 0, y = 28, as = "div" }: R
 
   return (
     <MotionTag
+      id={id}
       className={className}
       initial={still ? false : { opacity: 0, y }}
       // Sin observer fiable, animate toma el relevo y deja la fila a la vista.
@@ -143,7 +146,9 @@ export function WordReveal({ text, className, delay = 0, accentWords = [] }: Wor
   const observerDown = useObserverUnavailable()
   const still = reduced || observerDown
   const words = text.split(" ").filter(Boolean)
-  const accent = new Set(accentWords.map((w) => w.toLowerCase()))
+  // Se normaliza igual que la palabra al comparar: si no, una entrada escrita
+  // con el punto final ("funcional.") nunca casaba con el token ya limpiado.
+  const accent = new Set(accentWords.map((w) => w.toLowerCase().replace(/[.,;:]/g, "")))
 
   return (
     <span className={cn("inline", className)}>
@@ -152,7 +157,7 @@ export function WordReveal({ text, className, delay = 0, accentWords = [] }: Wor
           <motion.span
             className={cn(
               "inline-block",
-              accent.has(word.toLowerCase().replace(/[.,]/g, "")) && "text-ed-accent"
+              accent.has(word.toLowerCase().replace(/[.,;:]/g, "")) && "text-ed-accent"
             )}
             initial={still ? false : { y: "110%" }}
             animate={observerDown && !reduced ? { y: "0%" } : undefined}
