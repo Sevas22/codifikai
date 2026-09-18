@@ -19,6 +19,7 @@ import {
 } from "framer-motion"
 
 import type { KineticLine, KineticTone } from "@/lib/kinetic"
+import { playTyping } from "@/lib/typing-sound"
 import { cn } from "@/lib/utils"
 
 /* -------------------------------------------------------------------------- */
@@ -130,6 +131,23 @@ export function Reveal({ children, className, id, delay = 0, y = 28, as = "div" 
 }
 
 /* -------------------------------------------------------------------------- */
+/* Tecleo al aparecer                                                          */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Teclea el titular cuando empieza su animación de entrada, con el mismo
+ * retraso. Si el titular aparece sin animar (movimiento reducido u observer
+ * caído) no suena: no hay nada "escribiéndose" que acompañar.
+ */
+function useTypingOnReveal(text: string, revealing: boolean, delay = 0) {
+  React.useEffect(() => {
+    if (!revealing) return
+    const timer = window.setTimeout(() => playTyping(text), delay * 1000)
+    return () => window.clearTimeout(timer)
+  }, [revealing, text, delay])
+}
+
+/* -------------------------------------------------------------------------- */
 /* Titular con revelado palabra a palabra                                      */
 /* -------------------------------------------------------------------------- */
 
@@ -152,6 +170,7 @@ export function WordReveal({ text, className, delay = 0, accentWords = [] }: Wor
   // navegadores el titular se quedaba invisible.
   const ref = React.useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" })
+  useTypingOnReveal(text, inView && !still, delay)
   const words = text.split(" ").filter(Boolean)
   // Se normaliza igual que la palabra al comparar: si no, una entrada escrita
   // con el punto final ("funcional.") nunca casaba con el token ya limpiado.
@@ -215,6 +234,7 @@ export function KineticTitle({
   const still = reduced || observerDown
   const ref = React.useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" })
+  useTypingOnReveal(lines.map((line) => line.text).join(" "), inView && !still, delay)
 
   return (
     <span ref={ref} className={cn("ed-kinetic block", className)}>

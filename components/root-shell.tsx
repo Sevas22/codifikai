@@ -8,6 +8,7 @@ import { MouseAmbientProvider } from "@/components/providers/mouse-ambient-provi
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import { JsonLdRoot } from "@/components/seo/json-ld"
 import { SiteInteractiveBackground } from "@/components/site-interactive-background"
+import { SoundToggle } from "@/components/sound-toggle"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 import { LOCALE_TAGS, type Locale } from "@/lib/i18n"
 
@@ -45,10 +46,13 @@ export function RootShell({
               <SiteInteractiveBackground />
               <div className="relative z-10 min-h-screen overflow-x-clip">{children}</div>
             </MouseAmbientProvider>
+            {/* Dentro del proveedor de idioma: fuera de él, en /en anunciaban
+                sus etiquetas en español. */}
+            <SoundToggle />
+            <WhatsAppFloat />
           </LanguageProvider>
         </ThemeProvider>
         <Analytics />
-        <WhatsAppFloat />
       </body>
     </html>
   )
