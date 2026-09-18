@@ -5,20 +5,23 @@ import { ArrowUpRight } from "lucide-react"
 
 import { DragCarousel } from "@/components/home/drag-carousel"
 import { EdSection, Reveal, SectionHeading } from "@/components/home/ed-primitives"
-import type { HomeCopy } from "@/lib/home-copy"
+import type { HomeCopy, HomeLang } from "@/lib/home-copy"
+import { SERVICES } from "@/lib/services"
 
 /**
  * Servicios en carrusel arrastrable de tarjetas numeradas.
  *
- * Se prefiere al grid clásico porque el gesto de arrastre es lo que da la
- * sensación de página viva; el contenido sigue siendo accesible con rueda,
- * teclado y táctil (ver `DragCarousel`).
+ * Las tarjetas salen de `SERVICES`, la misma fuente que alimenta el panel
+ * desplegable de la navegación: así el catálogo no puede decir una cosa arriba
+ * y otra en la portada.
  */
 export function CapabilitiesSection({
   copy,
+  language,
   whatsappHref,
 }: {
   copy: HomeCopy
+  language: HomeLang
   whatsappHref: string
 }) {
   return (
@@ -50,20 +53,20 @@ export function CapabilitiesSection({
         previousLabel={copy.ui.previous}
         nextLabel={copy.ui.next}
       >
-        {copy.capabilities.items.map((item, i) => (
+        {SERVICES.map((service) => (
           <article
-            key={item.title}
+            key={service.id}
             className="ed-card ed-card-lift group flex w-[min(85vw,22rem)] shrink-0 snap-start flex-col justify-between p-7"
           >
             <div>
               <span className="ed-display text-[2.75rem] leading-none text-ed-accent">
-                {String(i + 1).padStart(2, "0")}
+                {String(service.order).padStart(2, "0")}
               </span>
               <h3 className="mt-6 text-[1.1875rem] font-semibold tracking-tight text-ed-ink">
-                {item.title}
+                {service.title[language]}
               </h3>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-ed-ink-soft">
-                {item.body}
+                {service.body[language]}
               </p>
             </div>
 

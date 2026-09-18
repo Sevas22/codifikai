@@ -33,7 +33,7 @@ export function HomeExperience() {
 
       <Hero copy={copy} whatsappHref={WHATSAPP_URL} />
       <NumbersSection copy={copy} caseCount={successCases.length} />
-      <CapabilitiesSection copy={copy} whatsappHref={WHATSAPP_URL} />
+      <CapabilitiesSection copy={copy} language={language} whatsappHref={WHATSAPP_URL} />
       <ProcessSection copy={copy} />
       <WorkSection copy={copy} language={language} />
       <StackSection copy={copy} />

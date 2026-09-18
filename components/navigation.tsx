@@ -7,6 +7,7 @@ import { Globe, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/components/providers/language-provider"
 import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
+import { ServicesMenu } from "@/components/nav/services-menu"
 import { IconSquircle } from "@/components/ui/icon-squircle"
 import { WHATSAPP_URL } from "@/lib/contact"
 import { cn } from "@/lib/utils"
@@ -96,20 +97,19 @@ export function Navigation() {
           <div className="flex flex-1 flex-wrap items-center justify-center gap-0.5 sm:gap-1">
             {navLinks.map((link) => {
               const active = isActive(link.href)
+              // El enlace destacado despliega el catálogo de servicios en vez
+              // de navegar directo: es la entrada comercial del sitio.
               if (link.highlight) {
                 return (
-                  <Link
+                  <ServicesMenu
                     key={link.href}
-                    href={link.href}
-                    className={cn(
-                      "whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-all sm:px-4 sm:text-sm",
+                    label={link.label}
+                    triggerClassName={cn(
                       active
                         ? "border border-accent/45 bg-accent/15 text-accent shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
                         : "border border-transparent bg-accent/10 text-foreground hover:border-accent hover:bg-accent hover:text-white"
                     )}
-                  >
-                    {link.label}
-                  </Link>
+                  />
                 )
               }
               return (

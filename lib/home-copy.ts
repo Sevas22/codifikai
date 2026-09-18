@@ -13,7 +13,6 @@
 export type HomeLang = "es" | "en"
 
 type Metric = { value: string; label: string; note: string }
-type Item = { title: string; body: string }
 type Step = { title: string; body: string }
 type Faq = { q: string; a: string }
 
@@ -40,7 +39,7 @@ export type HomeCopy = {
     casesLabel: string
     casesNote: string
   }
-  capabilities: { label: string; title: string; lead: string; cardCta: string; items: Item[] }
+  capabilities: { label: string; title: string; lead: string; cardCta: string }
   process: { label: string; title: string; lead: string; steps: Step[] }
   work: {
     label: string
@@ -121,36 +120,10 @@ const es: HomeCopy = {
     casesNote: "Todos con sitio en vivo y verificable",
   },
   capabilities: {
-    label: "Qué construimos",
-    title: "Infraestructura de automatización para equipos que ya no dan abasto.",
-    lead: "Combinamos sistemas de IA, workflows inteligentes y diseño operativo para mover el negocio más rápido con menos trabajo manual.",
+    label: "Servicios",
+    title: "Soluciones digitales para crecer con estrategia.",
+    lead: "Cinco frentes que cubrimos de punta a punta: del sitio que vende a los sistemas que operan por dentro.",
     cardCta: "Hablar de esto",
-    items: [
-      {
-        title: "Sistemas de ventas con IA",
-        body: "Calificación de leads, orquestación CRM y workflows de conversión con agentes de IA.",
-      },
-      {
-        title: "Automatización inteligente",
-        body: "Automatiza operaciones repetitivas con triggers, enrutamiento y manejo de excepciones.",
-      },
-      {
-        title: "Workflows enterprise",
-        body: "Diseña flujos entre ventas, operaciones, finanzas y customer success.",
-      },
-      {
-        title: "Operaciones con IA",
-        body: "Dashboards operativos y capas de decisión para visibilidad del negocio en tiempo real.",
-      },
-      {
-        title: "Infraestructura de automatización",
-        body: "Integraciones seguras, pipelines de datos y arquitectura escalable.",
-      },
-      {
-        title: "ROI de automatización",
-        body: "Mide eficiencia, reducción de tiempos de ciclo e impacto en ingresos.",
-      },
-    ],
   },
   process: {
     label: "Cómo lo hacemos",
@@ -234,7 +207,7 @@ const es: HomeCopy = {
   },
   highlights: {
     numbers: ["trabajo"],
-    capabilities: ["automatización"],
+    capabilities: ["estrategia"],
     process: ["producción"],
     work: ["vivo"],
     stack: ["conecta"],
@@ -246,7 +219,7 @@ const es: HomeCopy = {
   sectionIndex: [
     "Inicio",
     "Cifras",
-    "Qué construimos",
+    "Servicios",
     "Cómo lo hacemos",
     "El trabajo",
     "Stack",
@@ -296,36 +269,10 @@ const en: HomeCopy = {
     casesNote: "Every one with a live, checkable site",
   },
   capabilities: {
-    label: "What we build",
-    title: "Automation infrastructure for teams that have outgrown manual work.",
-    lead: "We combine AI systems, intelligent workflows and operational design to move the business faster with less manual work.",
+    label: "Services",
+    title: "Digital solutions to grow with a strategy.",
+    lead: "Five fronts we cover end to end: from the site that sells to the systems running things underneath.",
     cardCta: "Talk about this",
-    items: [
-      {
-        title: "AI sales systems",
-        body: "Lead qualification, CRM orchestration and conversion workflows powered by AI agents.",
-      },
-      {
-        title: "Intelligent automation",
-        body: "Automate repetitive operations with triggers, routing and exception handling.",
-      },
-      {
-        title: "Enterprise workflows",
-        body: "Design flows across sales, operations, finance and customer success.",
-      },
-      {
-        title: "AI operations",
-        body: "Operational dashboards and decision layers for real-time business visibility.",
-      },
-      {
-        title: "Automation infrastructure",
-        body: "Secure integrations, data pipelines and scalable architecture.",
-      },
-      {
-        title: "Automation ROI",
-        body: "Measure efficiency, cycle-time reduction and revenue impact.",
-      },
-    ],
   },
   process: {
     label: "How we work",
@@ -409,7 +356,7 @@ const en: HomeCopy = {
   },
   highlights: {
     numbers: ["work"],
-    capabilities: ["Automation"],
+    capabilities: ["strategy"],
     process: ["production"],
     work: ["live"],
     stack: ["plugs"],
@@ -421,7 +368,7 @@ const en: HomeCopy = {
   sectionIndex: [
     "Top",
     "Numbers",
-    "What we build",
+    "Services",
     "How we work",
     "The work",
     "Stack",
