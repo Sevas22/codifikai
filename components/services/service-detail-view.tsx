@@ -13,6 +13,7 @@ import {
 import { ParticleField } from "@/components/home/particle-field"
 import { Navigation } from "@/components/navigation"
 import { useLanguage } from "@/components/providers/language-provider"
+import { ServiceBadge } from "@/components/services/service-badge"
 import { WHATSAPP_URL } from "@/lib/contact"
 import {
   SERVICE_PAGE_LABELS,
@@ -88,7 +89,11 @@ export function ServiceDetailView({ service }: { service: Service }) {
           <div className="mt-10 max-w-[52rem]">
             {/* Arriba, el nivel: deja claro en cada servicio si es el núcleo de IA
                 o un servicio que lo rodea. */}
-            <EdLabel index={service.order}>{SERVICE_TIERS[service.tier].label[language]}</EdLabel>
+            {/* La insignia va aquí y no en el h1: no es parte del título. */}
+            <div className="flex flex-wrap items-center gap-4">
+              <EdLabel index={service.order}>{SERVICE_TIERS[service.tier].label[language]}</EdLabel>
+              {service.badge ? <ServiceBadge label={service.badge[language]} /> : null}
+            </div>
 
             {/* El h1 abre con el nombre del servicio, que es la palabra clave de la
                 página; el titular creativo va después, igual que antes. */}

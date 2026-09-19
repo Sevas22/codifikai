@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react"
 
 import { DragCarousel } from "@/components/home/drag-carousel"
 import { EdSection, Reveal, SectionHeading } from "@/components/home/ed-primitives"
+import { ServiceBadge } from "@/components/services/service-badge"
 import type { HomeCopy, HomeLang } from "@/lib/home-copy"
 import { SERVICES } from "@/lib/services"
 
@@ -59,8 +60,11 @@ export function CapabilitiesSection({
             className="ed-card ed-card-lift group flex w-[min(85vw,22rem)] shrink-0 snap-start flex-col justify-between p-7"
           >
             <div>
-              <span className="ed-display text-[2.75rem] leading-none text-ed-accent">
-                {String(service.order).padStart(2, "0")}
+              <span className="flex items-start justify-between gap-3">
+                <span className="ed-display text-[2.75rem] leading-none text-ed-accent">
+                  {String(service.order).padStart(2, "0")}
+                </span>
+                {service.badge ? <ServiceBadge label={service.badge[language]} /> : null}
               </span>
               <h3 className="mt-6 text-[1.1875rem] font-semibold tracking-tight text-ed-ink">
                 {service.title[language]}

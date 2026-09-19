@@ -126,7 +126,7 @@ const es: HomeCopy = {
   capabilities: {
     label: "Servicios",
     title: "Soluciones digitales para crecer con estrategia.",
-    lead: "Cinco frentes que cubrimos de punta a punta: del sitio que vende a los sistemas que operan por dentro.",
+    lead: "Seis frentes que cubrimos de punta a punta: de que te encuentren en Google y en la IA a los sistemas que operan por dentro.",
     cardCta: "Hablar de esto",
   },
   process: {
@@ -276,7 +276,7 @@ const en: HomeCopy = {
   capabilities: {
     label: "Services",
     title: "Digital solutions to grow with a strategy.",
-    lead: "Five fronts we cover end to end: from the site that sells to the systems running things underneath.",
+    lead: "Six fronts we cover end to end: from getting found on Google and in AI answers to the systems running things underneath.",
     cardCta: "Talk about this",
   },
   process: {

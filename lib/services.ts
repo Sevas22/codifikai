@@ -41,6 +41,8 @@ export type Service = {
   slug: string
   /** Se muestra como "01", "02"… y define el orden. */
   order: number
+  /** Insignia comercial (p. ej. "Más solicitado"): destaca la tarjeta en todo el sitio. */
+  badge?: Localized
   title: Localized
   /** Una línea para la tarjeta del menú. */
   short: Localized
@@ -50,8 +52,6 @@ export type Service = {
   /* --- Solo subpágina --- */
   /** Etiqueta corta sobre el titular de la subpágina. */
   eyebrow: Localized
-  /** Titular propio de la subpágina; puede diferir del nombre del servicio. */
-  /** Palabras del titular que se pintan con el color de marca. */
   /** Titular del hero, partido en líneas con su tratamiento (sólido, contorno o degradado). */
   headlineLines: LocalizedKinetic
   /** Entradilla de la subpágina. */
@@ -193,10 +193,137 @@ export const SERVICES: Service[] = [
   },
 
   {
+    id: "seo-geo",
+    tier: "ai",
+    slug: "seo-geo",
+    order: 2,
+    badge: { es: "Más solicitado", en: "Most requested" },
+    title: { es: "Posicionamiento SEO y GEO", en: "SEO and GEO positioning" },
+    short: {
+      es: "Que te encuentren en Google y en las respuestas de la IA.",
+      en: "Get found on Google and in AI answers.",
+    },
+    body: {
+      es: "Posicionamiento en Google y en asistentes de IA como ChatGPT, Gemini y Perplexity: SEO técnico, SEO local y contenido que los buscadores entienden y citan.",
+      en: "Positioning on Google and in AI assistants like ChatGPT, Gemini and Perplexity: technical SEO, local SEO and content that search engines understand and cite.",
+    },
+    eyebrow: { es: "Posicionamiento SEO y GEO", en: "SEO and GEO positioning" },
+    headlineLines: {
+      es: [{ text: "Que te encuentren", tone: "solid" }, { text: "en Google", tone: "outline-accent" }, { text: "y en la IA.", tone: "gradient" }],
+      en: [{ text: "Get found", tone: "solid" }, { text: "on Google", tone: "outline-accent" }, { text: "and in AI answers.", tone: "gradient" }],
+    },
+    lead: {
+      es: "Tus clientes ya no solo buscan en Google: también le preguntan a ChatGPT, Gemini o Perplexity qué empresa contratar. Trabajamos para que la tuya aparezca en los dos lugares, con datos reales y sin prometer posiciones.",
+      en: "Your clients no longer just search on Google: they also ask ChatGPT, Gemini or Perplexity which company to hire. We work so yours shows up in both places, with real data and without promising rankings.",
+    },
+    includes: {
+      es: [
+        "Investigación de las búsquedas y preguntas que usa tu cliente real",
+        "SEO técnico: velocidad, estructura, datos estructurados e indexación",
+        "SEO local para que aparezcas en tu zona y en Google Maps",
+        "GEO: contenido y señales de entidad para que los asistentes de IA citen a tu empresa",
+        "Contenido orientado a las preguntas que la gente ya hace",
+        "Medición con datos reales de Search Console y Analytics",
+      ],
+      en: [
+        "Research into the searches and questions your real client uses",
+        "Technical SEO: speed, structure, structured data and indexing",
+        "Local SEO so you appear in your area and on Google Maps",
+        "GEO: content and entity signals so AI assistants cite your company",
+        "Content aimed at the questions people are already asking",
+        "Measurement with real Search Console and Analytics data",
+      ],
+    },
+    forWho: {
+      es: [
+        "Tu competencia aparece primero en búsquedas que deberías ganar",
+        "Le preguntas a un asistente de IA por tu sector y tu empresa no aparece",
+        "Dependes de referidos y no llega nadie nuevo por internet",
+      ],
+      en: [
+        "Competitors rank first on searches you should be winning",
+        "You ask an AI assistant about your sector and your company isn't there",
+        "You depend on referrals and nobody new arrives online",
+      ],
+    },
+    deliverables: {
+      es: [
+        "Correcciones de SEO técnico aplicadas sobre el sitio",
+        "Plan de contenidos con las búsquedas y preguntas priorizadas",
+        "Tablero de posicionamiento con datos de Google",
+      ],
+      en: [
+        "Technical SEO fixes applied to the site",
+        "A content plan with prioritised searches and questions",
+        "A positioning dashboard fed by Google data",
+      ],
+    },
+    faqs: [
+      {
+        q: {
+          es: "¿Qué es el GEO?",
+          en: "What is GEO?",
+        },
+        a: {
+          es: "Son las siglas en inglés de optimización para motores generativos. Cada vez más gente pregunta directamente a asistentes de IA en vez de revisar diez enlaces, y esos sistemas citan fuentes concretas. El GEO estructura el contenido para poder ser citado: respuestas claras, datos verificables y marcado técnico que la máquina entienda. Complementa al SEO, no lo reemplaza.",
+          en: "It stands for generative engine optimisation. More people now ask AI assistants directly instead of scanning ten links, and those systems cite specific sources. GEO structures content so it can be cited: clear answers, verifiable data and technical markup a machine can parse. It complements SEO rather than replacing it.",
+        },
+      },
+      {
+        q: {
+          es: "¿En cuánto tiempo se ven resultados?",
+          en: "How long until we see results?",
+        },
+        a: {
+          es: "El SEO no es inmediato y desconfía de quien te prometa una fecha exacta: depende de la competencia de tu sector y del estado actual del sitio. Lo que sí hacemos desde el principio es medir, para que veas el avance con datos y no con promesas.",
+          en: "SEO isn't immediate, and be wary of anyone promising an exact date: it depends on your sector's competition and the current state of the site. What we do from day one is measure, so you see progress in data rather than promises.",
+        },
+      },
+      {
+        q: {
+          es: "¿Esto reemplaza la pauta publicitaria?",
+          en: "Does this replace paid ads?",
+        },
+        a: {
+          es: "No, son cosas distintas. La pauta trae tráfico mientras pagas; el posicionamiento construye visibilidad que se queda. Lo sano suele ser combinar ambas, no elegir una.",
+          en: "No, they're different things. Ads bring traffic while you pay; positioning builds visibility that stays. The healthy approach is usually to combine both rather than pick one.",
+        },
+      },
+    ],
+    seo: {
+      title: {
+        es: "Posicionamiento SEO y GEO para empresas | Codifikai",
+        en: "SEO and GEO positioning for businesses | Codifikai",
+      },
+      description: {
+        es: "SEO técnico, SEO local y GEO para que tu empresa aparezca en Google y en las respuestas de ChatGPT, Gemini y Perplexity. Medido con datos reales.",
+        en: "Technical SEO, local SEO and GEO so your company shows up on Google and in ChatGPT, Gemini and Perplexity answers. Measured with real data.",
+      },
+      keywords: {
+        es: [
+          "posicionamiento SEO",
+          "GEO",
+          "optimización para motores generativos",
+          "agencia SEO Colombia",
+          "SEO local",
+          "aparecer en ChatGPT",
+        ],
+        en: [
+          "SEO positioning",
+          "GEO",
+          "generative engine optimization",
+          "SEO agency Colombia",
+          "local SEO",
+          "show up in ChatGPT",
+        ],
+      },
+    },
+  },
+  {
     id: "custom-software",
     tier: "build",
     slug: "custom-software",
-    order: 2,
+    order: 3,
     title: { es: "Desarrollo a la medida", en: "Custom software" },
     short: {
       es: "Sistemas hechos para tu operación real.",
@@ -321,7 +448,7 @@ export const SERVICES: Service[] = [
     id: "web",
     tier: "tech",
     slug: "web-development",
-    order: 3,
+    order: 4,
     title: { es: "Desarrollo web", en: "Web development" },
     short: {
       es: "Una web lista para vender, no solo para verse bien.",
@@ -446,132 +573,131 @@ export const SERVICES: Service[] = [
     id: "marketing",
     tier: "tech",
     slug: "digital-marketing",
-    order: 4,
+    order: 5,
     title: { es: "Marketing digital", en: "Digital marketing" },
     short: {
-      es: "Que te encuentren los que ya te están buscando.",
-      en: "Get found by the people already looking.",
+      es: "Que las visitas se conviertan en clientes.",
+      en: "Turn visits into clients.",
     },
     body: {
-      es: "Estrategias de posicionamiento y visibilidad digital para atraer tráfico de calidad, fortalecer tu presencia online y generar oportunidades comerciales sostenibles.",
-      en: "Search positioning and digital visibility strategies that bring in quality traffic, strengthen your presence and generate sustainable commercial opportunities.",
+      es: "Embudos, campañas y prospección B2B apoyados en datos e inteligencia artificial, para que el tráfico que ya llega termine en oportunidades de venta.",
+      en: "Funnels, campaigns and B2B prospecting backed by data and artificial intelligence, so the traffic you already get ends in sales opportunities.",
     },
     eyebrow: { es: "Marketing digital", en: "Digital marketing" },
     headlineLines: {
-      es: [{ text: "Ya te están buscando.", tone: "solid" }, { text: "La pregunta es si", tone: "outline-accent" }, { text: "te encuentran.", tone: "gradient" }],
-      en: [{ text: "They're already searching.", tone: "solid" }, { text: "The question is whether", tone: "outline-accent" }, { text: "they find you.", tone: "gradient" }],
+      es: [{ text: "Atraer visitas", tone: "solid" }, { text: "es la mitad.", tone: "outline-accent" }, { text: "La otra es vender.", tone: "gradient" }],
+      en: [{ text: "Getting visits", tone: "solid" }, { text: "is half the job.", tone: "outline-accent" }, { text: "The other half is selling.", tone: "gradient" }],
     },
     lead: {
-      es: "Hay gente escribiendo en Google exactamente lo que tú vendes. Si en esa búsqueda aparece tu competencia y no tú, el problema no es el producto: es la visibilidad.",
-      en: "People are typing into Google exactly what you sell. If your competitor shows up in that search and you don't, the problem isn't the product — it's visibility.",
+      es: "Llegar a la persona correcta es solo el comienzo. Diseñamos el recorrido que la lleva de la primera visita a una conversación comercial: campañas, embudos y seguimiento automatizado con datos.",
+      en: "Reaching the right person is only the start. We design the path that takes them from the first visit to a sales conversation: campaigns, funnels and automated follow-up driven by data.",
     },
     includes: {
       es: [
-        "Investigación de las búsquedas que usa tu cliente real",
-        "SEO técnico: velocidad, estructura, datos estructurados e indexación",
-        "SEO local para que aparezcas en tu zona y en Google Maps",
-        "Contenido orientado a las preguntas que la gente ya hace",
-        "Optimización para buscadores con IA, que citan fuentes en vez de listar enlaces",
-        "Medición con datos reales de Search Console y Analytics",
+        "Embudos de venta con seguimiento automatizado",
+        "Prospección B2B apoyada en inteligencia artificial",
+        "Campañas digitales con objetivos y medición claros",
+        "Páginas de aterrizaje enfocadas en conversión",
+        "Integración con tu CRM para que ningún contacto se pierda",
+        "Medición de todo el recorrido, de la visita a la venta",
       ],
       en: [
-        "Research into the searches your real client actually uses",
-        "Technical SEO: speed, structure, structured data and indexing",
-        "Local SEO so you appear in your area and on Google Maps",
-        "Content aimed at the questions people are already asking",
-        "Optimisation for AI search engines, which cite sources instead of listing links",
-        "Measurement with real Search Console and Analytics data",
+        "Sales funnels with automated follow-up",
+        "B2B prospecting backed by artificial intelligence",
+        "Digital campaigns with clear goals and measurement",
+        "Conversion-focused landing pages",
+        "CRM integration so no contact gets lost",
+        "Measurement of the whole path, from visit to sale",
       ],
     },
     forWho: {
       es: [
-        "Tu competencia aparece primero en búsquedas que deberías ganar",
-        "Dependes de referidos y no llega nadie nuevo por internet",
-        "Inviertes en anuncios pero paras la inversión y desaparece todo",
+        "Llegan visitas pero pocas se convierten en clientes",
+        "Tu equipo comercial persigue contactos a mano, uno por uno",
+        "Inviertes en anuncios pero no sabes cuáles traen ventas",
       ],
       en: [
-        "Competitors rank first on searches you should be winning",
-        "You depend on referrals and nobody new arrives online",
-        "You spend on ads, but the moment you stop, everything disappears",
+        "Visitors arrive but few become clients",
+        "Your sales team chases contacts by hand, one at a time",
+        "You spend on ads but don't know which ones bring sales",
       ],
     },
     deliverables: {
       es: [
-        "Correcciones de SEO técnico aplicadas sobre el sitio",
-        "Plan de contenidos con las búsquedas priorizadas",
-        "Tablero de posicionamiento con datos de Google",
+        "Embudo de venta configurado y conectado a tu CRM",
+        "Campañas activas con su tablero de resultados",
+        "Secuencias de seguimiento automatizadas",
       ],
       en: [
-        "Technical SEO fixes applied to the site",
-        "A content plan with prioritised searches",
-        "A positioning dashboard fed by Google data",
+        "A sales funnel set up and connected to your CRM",
+        "Live campaigns with their results dashboard",
+        "Automated follow-up sequences",
       ],
     },
     faqs: [
       {
         q: {
-          es: "¿En cuánto tiempo se ven resultados?",
-          en: "How long until results show?",
+          es: "¿En qué se diferencia del posicionamiento SEO y GEO?",
+          en: "How is this different from SEO and GEO positioning?",
         },
         a: {
-          es: "El SEO no es inmediato y desconfía de quien te prometa una fecha exacta: depende de la competencia de tu sector y del estado actual del sitio. Lo que sí hacemos desde el principio es medir, para que veas el avance con datos y no con promesas.",
-          en: "SEO isn't immediate, and be wary of anyone promising an exact date: it depends on your sector's competition and the current state of the site. What we do from day one is measure, so you see progress in data rather than promises.",
+          es: "El posicionamiento hace que te encuentren; el marketing digital convierte esas visitas en clientes con embudos, campañas y seguimiento. Funcionan mejor juntos, y se pueden contratar por separado o combinados.",
+          en: "Positioning gets you found; digital marketing turns those visits into clients with funnels, campaigns and follow-up. They work best together, and you can hire them separately or combined.",
         },
       },
       {
         q: {
-          es: "¿Esto reemplaza la pauta publicitaria?",
-          en: "Does this replace paid ads?",
+          es: "¿Qué es la prospección B2B con IA?",
+          en: "What is B2B prospecting with AI?",
         },
         a: {
-          es: "No, son cosas distintas. La pauta trae tráfico mientras pagas; el posicionamiento construye visibilidad que se queda. Lo sano suele ser combinar ambas, no elegir una.",
-          en: "No, they're different things. Ads bring traffic while you pay; positioning builds visibility that stays. The healthy approach is usually to combine both rather than pick one.",
+          es: "Usar inteligencia artificial para identificar empresas que encajan con tu cliente ideal, priorizarlas y preparar el primer contacto, para que tu equipo comercial dedique su tiempo a las conversaciones con más probabilidad de cerrar.",
+          en: "Using artificial intelligence to identify companies that match your ideal client, prioritise them and prepare the first contact, so your sales team spends its time on the conversations most likely to close.",
         },
       },
       {
         q: {
-          es: "¿Qué es eso de optimizar para buscadores con IA?",
-          en: "What does optimising for AI search engines mean?",
+          es: "¿Necesito tener un CRM?",
+          en: "Do I need a CRM?",
         },
         a: {
-          es: "Cada vez más gente pregunta directamente a asistentes de IA en vez de revisar diez enlaces. Esos sistemas citan fuentes concretas, así que el contenido se estructura para poder ser citado: respuestas claras, datos verificables y marcado técnico que la máquina entienda.",
-          en: "More people now ask AI assistants directly instead of scanning ten links. Those systems cite specific sources, so content is structured to be citable: clear answers, verifiable data and technical markup a machine can parse.",
+          es: "Ayuda, pero no es requisito. Si ya usas uno, nos conectamos a él; si no, te recomendamos una opción que encaje con el tamaño de tu equipo y lo dejamos configurado.",
+          en: "It helps, but it isn't required. If you already use one, we connect to it; if not, we recommend an option that fits your team's size and leave it set up.",
         },
       },
     ],
     seo: {
       title: {
-        es: "Marketing digital y posicionamiento SEO para empresas | Codifikai",
-        en: "Digital marketing and SEO positioning for companies | Codifikai",
+        es: "Marketing digital y embudos de venta con IA | Codifikai",
+        en: "Digital marketing and AI sales funnels | Codifikai",
       },
       description: {
-        es: "SEO técnico, SEO local y contenido orientado a lo que tu cliente busca. Medición con datos reales de Google, no con promesas de posiciones.",
-        en: "Technical SEO, local SEO and content aimed at what your client searches for. Measured with real Google data, not promises of rankings.",
+        es: "Embudos de venta, campañas y prospección B2B con inteligencia artificial para convertir visitas en clientes, conectado a tu CRM y medido de punta a punta.",
+        en: "Sales funnels, campaigns and B2B prospecting with artificial intelligence to turn visits into clients, connected to your CRM and measured end to end.",
       },
       keywords: {
         es: [
           "marketing digital",
-          "posicionamiento SEO",
-          "agencia SEO Colombia",
-          "SEO local",
-          "visibilidad en Google",
+          "embudos de venta",
+          "prospección B2B",
+          "automatización de marketing",
+          "marketing con inteligencia artificial",
         ],
         en: [
           "digital marketing",
-          "SEO positioning",
-          "SEO agency",
-          "local SEO",
-          "Google visibility",
+          "sales funnels",
+          "B2B prospecting",
+          "marketing automation",
+          "AI marketing",
         ],
       },
     },
   },
-
   {
     id: "branding",
     tier: "tech",
     slug: "brand-design",
-    order: 5,
+    order: 6,
     title: { es: "Diseño de marca", en: "Brand design" },
     short: {
       es: "Que tu empresa se vea al nivel de lo que vende.",
@@ -717,8 +843,8 @@ export const SERVICE_TIERS: Record<
     label: { es: "Núcleo · Inteligencia artificial", en: "Core · Artificial intelligence" },
     short: { es: "Núcleo IA", en: "AI core" },
     lead: {
-      es: "Lo que nos define. Agentes y automatizaciones que se hacen cargo del trabajo repetitivo de la operación.",
-      en: "What defines us. AI agents and automations that take over the repetitive work in your operation.",
+      es: "Lo que nos define: agentes que trabajan por ti y posicionamiento para que te encuentren en Google y en la IA.",
+      en: "What defines us: agents that work for you, and positioning so you're found on Google and in AI answers.",
     },
   },
   build: {
@@ -733,8 +859,8 @@ export const SERVICE_TIERS: Record<
     label: { es: "Servicios tecnológicos", en: "Technology services" },
     short: { es: "Tecnología", en: "Technology" },
     lead: {
-      es: "Lo que rodea al sistema y lo hace visible: presencia web, posicionamiento y marca.",
-      en: "What surrounds the system and makes it visible: web presence, search positioning and brand.",
+      es: "Lo que rodea al sistema y lo hace crecer: presencia web, marketing y marca.",
+      en: "What surrounds the system and helps it grow: web presence, marketing and brand.",
     },
   },
 }

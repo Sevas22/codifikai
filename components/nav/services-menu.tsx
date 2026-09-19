@@ -15,6 +15,7 @@ import { AnimatePresence, m, useReducedMotion } from "framer-motion"
 import { ArrowUpRight, ChevronDown } from "lucide-react"
 
 import { useLanguage } from "@/components/providers/language-provider"
+import { ServiceBadge } from "@/components/services/service-badge"
 import { SERVICES, SERVICES_MENU_INTRO, SERVICE_TIERS } from "@/lib/services"
 import { cn } from "@/lib/utils"
 import { useLocalePath } from "@/hooks/use-locale-path"
@@ -117,12 +118,12 @@ export function ServicesMenu({
             className="absolute left-1/2 top-[calc(100%+0.9rem)] z-50 w-[min(64rem,calc(100vw-2rem))] -translate-x-1/2"
           >
             <div className="ed-dark overflow-hidden rounded-[1.75rem] border border-white/10 bg-ed-canvas p-3 shadow-[0_32px_80px_-24px_rgba(0,0,0,0.55)]">
-              {/* Tres columnas fijas: con la tarjeta de cabecera más cinco servicios
-                  son exactamente dos filas llenas. A cuatro columnas la segunda
-                  fila quedaba a medias. */}
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.15fr)_repeat(2,minmax(0,1fr))]">
+              {/* La cabecera ocupa la primera columna de arriba abajo y los seis
+                  servicios llenan las otras dos en tres filas exactas. La
+                  primera fila es la de los destacados: la IA y el más vendido. */}
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.1fr)_repeat(2,minmax(0,1fr))]">
                 {/* Tarjeta de cabecera */}
-                <div className="flex flex-col justify-between rounded-3xl bg-white/[0.04] p-7">
+                <div className="flex flex-col justify-between rounded-3xl bg-white/[0.04] p-7 sm:col-span-2 lg:col-span-1 lg:row-span-3">
                   <div>
                     <p className="ed-label text-ed-accent">{intro.label[language]}</p>
                     <p className="ed-display mt-6 text-[1.75rem] uppercase leading-[1.05] text-ed-ink">
@@ -140,34 +141,42 @@ export function ServicesMenu({
 
                 {/* Tarjetas numeradas */}
                 {SERVICES.map((service) => {
-                  const isCore = service.tier === "ai"
+                  const badge = service.badge?.[language]
+                  const isCore = service.tier === "ai" && !badge
                   return (
                   <Link
                     key={service.id}
                     href={path(`/services/${service.slug}`)}
                     className={cn(
-                      "group flex flex-col rounded-3xl p-6 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent",
-                      // La IA es el núcleo: su tarjeta se distingue del resto para
-                      // que el panel no presente los cinco servicios como iguales.
-                      isCore
-                        ? "bg-[color-mix(in_oklch,var(--brand-violet)_22%,transparent)] ring-1 ring-[color-mix(in_oklch,var(--brand-violet)_55%,transparent)] hover:bg-[color-mix(in_oklch,var(--brand-violet)_30%,transparent)]"
-                        : "bg-white/[0.04] hover:bg-white/[0.09]"
+                      "group flex flex-col rounded-3xl p-5 transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent",
+                      // Dos tarjetas se distinguen del resto: la IA, que es el
+                      // núcleo (violeta), y el servicio con insignia comercial
+                      // (magenta), para que el panel no los presente como iguales.
+                      badge
+                        ? "bg-[color-mix(in_oklch,var(--brand-magenta)_18%,transparent)] ring-1 ring-[color-mix(in_oklch,var(--brand-magenta)_55%,transparent)] hover:bg-[color-mix(in_oklch,var(--brand-magenta)_26%,transparent)]"
+                        : isCore
+                          ? "bg-[color-mix(in_oklch,var(--brand-violet)_22%,transparent)] ring-1 ring-[color-mix(in_oklch,var(--brand-violet)_55%,transparent)] hover:bg-[color-mix(in_oklch,var(--brand-violet)_30%,transparent)]"
+                          : "bg-white/[0.04] hover:bg-white/[0.09]"
                     )}
                   >
                     <span className="flex items-center justify-between gap-3">
                       <span className="ed-label text-ed-accent tabular-nums">
                         {String(service.order).padStart(2, "0")}
                       </span>
-                      <span
-                        className={cn(
-                          "ed-label rounded-full px-2 py-0.5 text-[0.5625rem]",
-                          isCore ? "bg-ed-punch text-white" : "text-ed-ink-faint"
-                        )}
-                      >
-                        {SERVICE_TIERS[service.tier].short[language]}
-                      </span>
+                      {badge ? (
+                        <ServiceBadge label={badge} />
+                      ) : (
+                        <span
+                          className={cn(
+                            "ed-label rounded-full px-2 py-0.5 text-[0.5625rem]",
+                            isCore ? "bg-ed-punch text-white" : "text-ed-ink-faint"
+                          )}
+                        >
+                          {SERVICE_TIERS[service.tier].short[language]}
+                        </span>
+                      )}
                     </span>
-                    <span className="mt-6 text-[1.0625rem] font-semibold leading-tight tracking-tight text-ed-ink">
+                    <span className="mt-4 text-[1.0625rem] font-semibold leading-tight tracking-tight text-ed-ink">
                       {service.title[language]}
                     </span>
                     <span className="mt-3 text-[0.8125rem] leading-relaxed text-ed-ink-soft">

@@ -207,7 +207,11 @@ export function Navigation() {
               type="button"
               className="relative z-50 p-2.5 text-foreground"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
+              aria-label={
+                language === "es"
+                  ? isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"
+                  : isMobileMenuOpen ? "Close menu" : "Open menu"
+              }
               aria-expanded={isMobileMenuOpen}
             >
               <div className="relative h-6 w-6">

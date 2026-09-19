@@ -14,6 +14,7 @@ import {
 import { ParticleField } from "@/components/home/particle-field"
 import { Navigation } from "@/components/navigation"
 import { useLanguage } from "@/components/providers/language-provider"
+import { ServiceBadge } from "@/components/services/service-badge"
 import { useLocalePath } from "@/hooks/use-locale-path"
 import { WHATSAPP_URL } from "@/lib/contact"
 import { SERVICE_TIERS, getServicesByTier, type Service, type ServiceTier } from "@/lib/services"
@@ -26,7 +27,7 @@ const LABELS = {
     breadcrumbServices: "Servicios",
     kicker: "Servicios de inteligencia artificial y desarrollo a la medida",
     headlineLines: [{ text: "La IA en el centro.", tone: "gradient" }, { text: "Todo lo demás,", tone: "solid" }, { text: "a su servicio.", tone: "outline-accent" }],
-    lead: "Somos una agencia de inteligencia artificial. Construimos los agentes y automatizaciones que operan tu negocio, el software a la medida sobre el que corren y los servicios tecnológicos que los hacen crecer.",
+    lead: "Somos una agencia de inteligencia artificial. Construimos los agentes y automatizaciones que operan tu negocio, te posicionamos en Google y en las respuestas de la IA, y desarrollamos el software y los servicios tecnológicos que lo sostienen.",
     ctaHero: "Escríbenos por WhatsApp",
     seeService: "Ver el servicio",
     casesLabel: "El trabajo",
@@ -44,7 +45,7 @@ const LABELS = {
     breadcrumbServices: "Services",
     kicker: "Artificial intelligence and custom development services",
     headlineLines: [{ text: "AI at the centre.", tone: "gradient" }, { text: "Everything else", tone: "solid" }, { text: "in its service.", tone: "outline-accent" }],
-    lead: "We are an artificial intelligence agency. We build the AI agents and automations that run your business, the custom software they run on, and the technology services that help them grow.",
+    lead: "We are an artificial intelligence agency. We build the AI agents and automations that run your business, position you on Google and in AI answers, and develop the software and technology services behind it.",
     ctaHero: "Message us on WhatsApp",
     seeService: "See the service",
     casesLabel: "The work",
@@ -81,8 +82,11 @@ function ServiceCard({
         featured && "sm:p-10"
       )}
     >
-      <span className="ed-display text-[2.5rem] leading-none text-ed-accent">
-        {String(service.order).padStart(2, "0")}
+      <span className="flex items-start justify-between gap-4">
+        <span className="ed-display text-[2.5rem] leading-none text-ed-accent">
+          {String(service.order).padStart(2, "0")}
+        </span>
+        {service.badge ? <ServiceBadge label={service.badge[language]} /> : null}
       </span>
       <h3
         className={cn(
@@ -255,7 +259,12 @@ export function ServicesHubView() {
             <div
               className={cn(
                 "mt-12 grid gap-5",
-                services.length === 1 ? "grid-cols-1" : "sm:grid-cols-2 lg:grid-cols-3"
+                // El núcleo va en tarjetas grandes lado a lado; el resto, a tres.
+                services.length === 1
+                  ? "grid-cols-1"
+                  : featured
+                    ? "lg:grid-cols-2"
+                    : "sm:grid-cols-2 lg:grid-cols-3"
               )}
             >
               {services.map((service, j) => (
