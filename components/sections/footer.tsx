@@ -1,244 +1,247 @@
 "use client"
 
 import Link from "next/link"
-import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react"
-import { useLanguage } from "@/components/providers/language-provider"
-import { Tech3DAccent } from "@/components/tech/tech-3d-accent"
+import { ArrowUpRight, Facebook, Instagram, Linkedin, Mail, Phone, Youtube } from "lucide-react"
+
 import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
-import { IconSquircle } from "@/components/ui/icon-squircle"
-import { Button } from "@/components/ui/button"
-import { CONTACT_EMAIL, MAILTO_CONTACT, WHATSAPP_URL } from "@/lib/contact"
+import { useLanguage } from "@/components/providers/language-provider"
+import {
+  CONTACT_EMAIL,
+  MAILTO_CONTACT,
+  PHONE_DISPLAY,
+  PHONE_TEL_HREF,
+  WHATSAPP_URL,
+} from "@/lib/contact"
+import { SERVICES } from "@/lib/services"
+import { useLocalePath } from "@/hooks/use-locale-path"
 
-function TopoPattern({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden
-    >
-      <defs>
-        <pattern id="footer-topo" width="120" height="120" patternUnits="userSpaceOnUse">
-          <path
-            d="M0 60 Q30 45 60 60 T120 60"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.6"
-            className="text-white/25"
-          />
-          <path
-            d="M0 30 Q40 15 80 30 T120 30"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.5"
-            className="text-white/15"
-          />
-          <path
-            d="M0 90 Q35 75 70 90 T120 90"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.5"
-            className="text-white/15"
-          />
-          <path
-            d="M0 15 Q25 25 50 15 T120 15"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.35"
-            className="text-white/10"
-          />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#footer-topo)" />
-    </svg>
-  )
-}
+/**
+ * Pie de página.
+ *
+ * Se declara `ed-dark` en la raíz para que los tokens `ed-*` resuelvan en
+ * oscuro venga de donde venga: las páginas ya rediseñadas lo montan fuera de
+ * su ámbito claro, y las que siguen en oscuro lo montan tal cual.
+ *
+ * Los enlaces de servicios salen de `lib/services`, la misma fuente que la
+ * navegación y la portada, así que publicar un servicio nuevo lo añade aquí
+ * sin tocar este archivo.
+ */
 
-function HexPattern({ className }: { className?: string }) {
-  return (
-    <svg className={className} xmlns="http://www.w3.org/2000/svg" aria-hidden>
-      <defs>
-        <pattern id="footer-hex" width="28" height="49" patternUnits="userSpaceOnUse">
-          <path
-            d="M14 0 L26 7 V21 L14 28 L2 21 V7 Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.6"
-            className="text-white/[0.06]"
-          />
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#footer-hex)" />
-    </svg>
-  )
-}
+const SOCIAL = [
+  { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61578173835571", label: "Facebook" },
+  { icon: Youtube, href: "https://www.youtube.com/channel/UCO0SHacGKQSRw3eFu9HmzGA", label: "YouTube" },
+  { icon: Linkedin, href: "", label: "LinkedIn" },
+  { icon: Instagram, href: "", label: "Instagram" },
+] as const
 
-function CtaPillStrip() {
+const LABELS = {
+  es: {
+    tagline:
+      "Diseñamos sistemas de IA, automatización y presencia digital para empresas que quieren crecer sin multiplicar el equipo.",
+    services: "Servicios",
+    company: "Empresa",
+    contact: "Contacto",
+    whatsapp: "WhatsApp",
+    ctaTitle: "¿Listos para trabajar juntos?",
+    ctaButton: "Hablemos por WhatsApp",
+    rights: "Todos los derechos reservados.",
+    privacy: "Privacidad",
+    terms: "Términos",
+    about: "Sobre nosotros",
+    blog: "Blog",
+    allServices: "Todos los servicios",
+  },
+  en: {
+    tagline:
+      "We design AI systems, automation and digital presence for companies that want to grow without growing headcount.",
+    services: "Services",
+    company: "Company",
+    contact: "Contact",
+    whatsapp: "WhatsApp",
+    ctaTitle: "Ready to work together?",
+    ctaButton: "Message us on WhatsApp",
+    rights: "All rights reserved.",
+    privacy: "Privacy",
+    terms: "Terms",
+    about: "About us",
+    blog: "Blog",
+    allServices: "All services",
+  },
+} as const
+
+function FooterColumn({
+  title,
+  children,
+}: {
+  title: string
+  children: React.ReactNode
+}) {
   return (
-    <div
-      className="relative flex h-full min-h-[180px] max-h-[220px] w-[5.5rem] shrink-0 items-center justify-end gap-1.5 pr-2 sm:w-28 sm:gap-2 sm:pr-3"
-      aria-hidden
-    >
-      {[0, 1, 2].map((i) => (
-        <div
-          key={i}
-          className="relative h-[78%] w-9 overflow-hidden rounded-full border border-white/10 shadow-lg sm:w-11"
-          style={{
-            transform: `rotate(${-6 + i * 0.5}deg) translateY(${i * 2}px)`,
-            zIndex: 3 - i,
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-white/25 via-accent/40 to-accent/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-transparent to-transparent" />
-        </div>
-      ))}
+    <div>
+      <h3 className="ed-label text-ed-ink">{title}</h3>
+      <ul className="mt-6 space-y-3.5">{children}</ul>
     </div>
   )
 }
 
-const socialLinks = [
-  {
-    icon: Facebook,
-    href: "https://www.facebook.com/profile.php?id=61578173835571",
-    label: "Facebook",
-  },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  {
-    icon: Youtube,
-    href: "https://www.youtube.com/channel/UCO0SHacGKQSRw3eFu9HmzGA",
-    label: "YouTube",
-  },
-]
+function FooterLink({
+  href,
+  children,
+  external = false,
+}: {
+  href: string
+  children: React.ReactNode
+  external?: boolean
+}) {
+  return (
+    <li>
+      <Link
+        href={href}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        className="ed-link text-[0.9375rem] text-ed-ink-soft transition-colors hover:text-ed-ink"
+      >
+        {children}
+      </Link>
+    </li>
+  )
+}
 
 export function Footer() {
-  const { t } = useLanguage()
+  const path = useLocalePath()
+  const { language } = useLanguage()
+  const labels = LABELS[language] ?? LABELS.es
   const currentYear = new Date().getFullYear()
 
-  const navLinks = [
-    { label: t("footer.linkAbout"), href: "/about" },
-    { label: t("footer.linkServices"), href: "/services" },
-    { label: t("footer.linkBlog"), href: "/blog" },
-    { label: t("footer.linkSecurity"), href: "/privacy" },
-  ]
+  // Solo se pintan las redes con URL real: un icono que no lleva a ninguna
+  // parte resta credibilidad justo en el cierre de la página.
+  const social = SOCIAL.filter((item) => item.href)
 
   return (
-    <footer className="relative w-full overflow-x-hidden border-t border-border/40 bg-background">
-      <div className="relative flex w-full flex-col gap-0 lg:flex-row lg:items-start lg:gap-0 lg:pt-8">
-        {/* CTA — gradiente marca: ancho completo en móvil; desktop con sangría desde el borde izquierdo del viewport */}
-        <div className="relative z-20 -mb-6 w-full shrink-0 px-0 sm:px-6 lg:mb-0 lg:w-[400px] lg:max-w-[400px] lg:flex-shrink-0 lg:pl-6 lg:pr-0 xl:pl-10 2xl:pl-14">
-          <div className="relative h-[220px] w-full overflow-hidden rounded-b-2xl border-b border-white/10 bg-[oklch(0.36_0.14_275)] shadow-[0_20px_48px_-14px_oklch(0.28_0.10_270/0.4)] sm:h-[240px] sm:rounded-2xl sm:border sm:border-white/10 lg:h-[248px] lg:rounded-l-2xl lg:rounded-r-2xl">
-              <TopoPattern className="pointer-events-none absolute inset-0 h-full w-full text-white" />
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/30 via-transparent to-black/20" />
+    <footer className="ed-dark relative overflow-hidden border-t border-ed-rule">
+      {/* Resplandor de marca, tenue: el pie cierra, no compite. */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-0 h-64 w-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--brand-violet)_16%,transparent),transparent_70%)] blur-3xl"
+        aria-hidden
+      />
 
-              <div className="relative flex h-full flex-row items-stretch">
-                <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 px-5 py-6 text-center sm:gap-5 sm:px-7 sm:py-8 lg:text-left">
-                  <p
-                    className="text-[0.65rem] font-bold uppercase leading-snug tracking-[0.16em] text-white sm:text-[0.7rem] sm:tracking-[0.18em]"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {t("footer.ctaTitle")}
-                  </p>
-                  <Button asChild variant="cta" size="cta-sm" className="mx-auto w-fit shadow-lg lg:mx-0">
-                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-                      {t("footer.ctaButton")}
-                    </a>
-                  </Button>
-                </div>
-                <CtaPillStrip />
-              </div>
-          </div>
+      <div className="relative mx-auto w-full max-w-[80rem] px-[var(--ed-gutter)]">
+        {/* ------------------------------------------------------------- Cierre */}
+        <div className="flex flex-col items-start justify-between gap-6 border-b border-ed-rule py-12 lg:flex-row lg:items-center">
+          <p className="ed-display max-w-[18ch] text-[clamp(1.5rem,3vw,2.25rem)] text-ed-ink">
+            {labels.ctaTitle}
+          </p>
+          <Link
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ed-punch-btn group inline-flex shrink-0 items-center gap-3 rounded-full px-7 py-3.5 text-[0.9375rem] font-semibold tracking-tight"
+          >
+            {labels.ctaButton}
+            <ArrowUpRight
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden
+            />
+          </Link>
         </div>
 
-        {/* Dark panel — ocupa el resto del ancho hasta el borde derecho del viewport */}
-        <div className="relative z-10 min-h-0 w-full min-w-0 flex-1 overflow-hidden rounded-t-3xl bg-[oklch(0.13_0.01_260)] pt-20 pb-10 sm:pt-24 sm:pb-12 lg:rounded-none lg:rounded-tr-3xl lg:pt-12 lg:pb-12 lg:pl-8 lg:pr-6 xl:pl-12 xl:pr-10 2xl:pr-14">
-            <HexPattern className="pointer-events-none absolute inset-0 opacity-90" />
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.04] via-transparent to-transparent" />
-            <div className="pointer-events-none absolute bottom-6 right-4 z-0 hidden h-28 w-28 sm:block sm:w-32 sm:opacity-25">
-              <Tech3DAccent variant="prism" size="sm" />
-            </div>
+        {/* ------------------------------------------------------------ Columnas */}
+        <div className="grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr] lg:gap-10">
+          <div>
+            <Link href={path("/")} className="inline-flex">
+              <CodifikaiLogo size="sm" showCode />
+            </Link>
+            <p className="mt-6 max-w-[38ch] text-[0.9375rem] leading-relaxed text-ed-ink-soft">
+              {labels.tagline}
+            </p>
 
-            <div className="relative grid gap-12 px-6 text-center sm:px-8 lg:grid-cols-2 lg:gap-12 lg:px-0 lg:text-left xl:gap-16">
-              <div>
-                <h3 className="mb-6 text-lg font-bold heading-brand-sm">{t("footer.linksHeading")}</h3>
-                <ul className="space-y-3.5">
-                  {navLinks.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="text-sm text-muted-foreground transition-colors hover:text-accent"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="mb-6 text-lg font-bold heading-brand-sm">{t("footer.writeUs")}</h3>
-                <ul className="space-y-3 text-sm text-muted-foreground">
-                  <li>
-                    <a
-                      href={MAILTO_CONTACT}
-                      className="break-all transition-colors hover:text-accent"
-                    >
-                      {CONTACT_EMAIL}
-                    </a>
-                  </li>
-                  <li>
-                    <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      {t("footer.emailJobs")}
-                    </span>
-                    <br />
-                    <a
-                      href={MAILTO_CONTACT}
-                      className="break-all transition-colors hover:text-accent"
-                    >
-                      {CONTACT_EMAIL}
-                    </a>
-                  </li>
-                </ul>
-
-                <div className="mt-8 flex flex-wrap justify-center gap-2 lg:justify-start">
-                  {socialLinks.map((social) => {
-                    const Icon = social.icon
-                    const isExternal = social.href.startsWith("http")
-                    return (
+            {social.length > 0 ? (
+              <ul className="mt-8 flex gap-2.5">
+                {social.map((item) => {
+                  const Icon = item.icon
+                  return (
+                    <li key={item.label}>
                       <a
-                        key={social.label}
-                        href={social.href}
-                        {...(isExternal
-                          ? { target: "_blank" as const, rel: "noopener noreferrer" }
-                          : {})}
-                        className="transition-transform hover:scale-105"
-                        aria-label={social.label}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={item.label}
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-ed-rule text-ed-ink-soft transition-colors duration-300 hover:border-ed-accent hover:text-ed-accent"
                       >
-                        <IconSquircle icon={Icon} size="sm" />
+                        <Icon className="h-4 w-4" aria-hidden />
                       </a>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            ) : null}
+          </div>
 
-            <div className="relative mt-12 border-t border-white/[0.06] px-6 pt-8 text-center sm:px-8 lg:px-0">
-              <Link href="/" className="group mb-4 inline-flex items-center justify-center">
-                <CodifikaiLogo size="sm" showCode />
-              </Link>
-              <p className="text-xs text-muted-foreground sm:text-sm">
-                &copy; {currentYear} Codifikai. {t("footer.rights")}
-              </p>
-              <div className="mt-4 flex flex-wrap justify-center gap-6 text-xs text-muted-foreground">
-                <Link href="/privacy" className="hover:text-accent transition-colors">
-                  {t("footer.privacy")}
-                </Link>
-                <Link href="/terms" className="hover:text-accent transition-colors">
-                  {t("footer.terms")}
-                </Link>
-              </div>
-            </div>
+          <FooterColumn title={labels.services}>
+            {SERVICES.map((service) => (
+              <FooterLink key={service.id} href={path(`/services/${service.slug}`)}>
+                {service.title[language]}
+              </FooterLink>
+            ))}
+            <FooterLink href={path("/services")}>{labels.allServices}</FooterLink>
+          </FooterColumn>
+
+          <FooterColumn title={labels.company}>
+            <FooterLink href={path("/about")}>{labels.about}</FooterLink>
+            <FooterLink href={path("/blog")}>{labels.blog}</FooterLink>
+            <FooterLink href={path("/contact")}>{labels.contact}</FooterLink>
+            <FooterLink href={path("/privacy")}>{labels.privacy}</FooterLink>
+            <FooterLink href={path("/terms")}>{labels.terms}</FooterLink>
+          </FooterColumn>
+
+          <FooterColumn title={labels.contact}>
+            <li>
+              <a
+                href={MAILTO_CONTACT}
+                className="group flex items-start gap-3 text-[0.9375rem] text-ed-ink-soft transition-colors hover:text-ed-ink"
+              >
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-ed-accent" aria-hidden />
+                <span className="break-all">{CONTACT_EMAIL}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={PHONE_TEL_HREF}
+                className="group flex items-start gap-3 text-[0.9375rem] text-ed-ink-soft transition-colors hover:text-ed-ink"
+              >
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-ed-accent" aria-hidden />
+                <span>{PHONE_DISPLAY}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-[0.9375rem] font-semibold text-ed-punch transition-opacity hover:opacity-80"
+              >
+                {labels.whatsapp}
+                <ArrowUpRight
+                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  aria-hidden
+                />
+              </a>
+            </li>
+          </FooterColumn>
+        </div>
+
+        {/* --------------------------------------------------------- Línea final */}
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-ed-rule py-8 sm:flex-row">
+          <p className="ed-label">
+            &copy; {currentYear} Codifikai. {labels.rights}
+          </p>
+          <div className="ed-label flex items-center gap-6">
+            <Link href={path("/privacy")} className="transition-colors hover:text-ed-accent">
+              {labels.privacy}
+            </Link>
+            <Link href={path("/terms")} className="transition-colors hover:text-ed-accent">
+              {labels.terms}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

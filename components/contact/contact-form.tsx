@@ -4,8 +4,8 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { ArrowRight, CheckCircle2, AlertTriangle, MessageCircle, Mail } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { AlertTriangle, ArrowRight, CheckCircle2, Mail, MessageCircle } from "lucide-react"
+
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -22,6 +22,13 @@ const BUDGET_KEYS = [
 
 type Status = "idle" | "submitting" | "success" | "error"
 
+/**
+ * Formulario de contacto.
+ *
+ * El rediseño solo cambia la presentación: validación, honeypot, envío a
+ * `/api/contact` y la salida de emergencia a WhatsApp o correo cuando el envío
+ * falla se conservan tal cual estaban.
+ */
 export function ContactForm() {
   const { t } = useLanguage()
   const [status, setStatus] = useState<Status>("idle")
@@ -62,15 +69,18 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-accent/30 bg-background/60 p-10 text-center backdrop-blur-xl">
-        <CheckCircle2 className="mb-5 h-12 w-12 text-accent" />
-        <h3
-          className="mb-3 text-2xl font-bold heading-brand-sm"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
+      <div
+        className="ed-card flex h-full flex-col items-center justify-center p-10 text-center"
+        // Se anuncia a lectores de pantalla: el formulario desaparece y sin
+        // esto el cambio pasaría inadvertido.
+        role="status"
+        aria-live="polite"
+      >
+        <CheckCircle2 className="mb-5 h-12 w-12 text-ed-punch" aria-hidden />
+        <h3 className="ed-display text-[1.75rem] text-ed-ink">
           {t("contactPage.successTitle")}
         </h3>
-        <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-4 max-w-sm text-[0.9375rem] leading-relaxed text-ed-ink-soft">
           {t("contactPage.successDesc")}
         </p>
       </div>
@@ -78,20 +88,19 @@ export function ContactForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      noValidate
-      className="rounded-2xl border border-border/50 bg-background/60 p-6 backdrop-blur-xl sm:p-8"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="ed-card p-6 sm:p-8">
       <div className="space-y-5">
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="name">{t("contactPage.name")}</Label>
+            <Label htmlFor="name" className="ed-label">
+              {t("contactPage.name")}
+            </Label>
             <Input
               id="name"
               autoComplete="name"
               placeholder={t("contactPage.namePlaceholder")}
               aria-invalid={!!errors.name}
+              className="h-12 rounded-xl border-ed-rule-strong bg-ed-canvas text-ed-ink"
               {...register("name")}
             />
             {errors.name && (
@@ -100,13 +109,16 @@ export function ContactForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">{t("contactPage.email")}</Label>
+            <Label htmlFor="email" className="ed-label">
+              {t("contactPage.email")}
+            </Label>
             <Input
               id="email"
               type="email"
               autoComplete="email"
               placeholder={t("contactPage.emailPlaceholder")}
               aria-invalid={!!errors.email}
+              className="h-12 rounded-xl border-ed-rule-strong bg-ed-canvas text-ed-ink"
               {...register("email")}
             />
             {errors.email && (
@@ -117,21 +129,26 @@ export function ContactForm() {
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="space-y-2">
-            <Label htmlFor="company">{t("contactPage.company")}</Label>
+            <Label htmlFor="company" className="ed-label">
+              {t("contactPage.company")}
+            </Label>
             <Input
               id="company"
               autoComplete="organization"
               placeholder={t("contactPage.companyPlaceholder")}
+              className="h-12 rounded-xl border-ed-rule-strong bg-ed-canvas text-ed-ink"
               {...register("company")}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="budget">{t("contactPage.budget")}</Label>
+            <Label htmlFor="budget" className="ed-label">
+              {t("contactPage.budget")}
+            </Label>
             <select
               id="budget"
               defaultValue=""
-              className="flex h-11 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 dark:bg-input/30"
+              className="h-12 w-full rounded-xl border border-ed-rule-strong bg-ed-canvas px-3 text-sm text-ed-ink outline-none transition-colors focus-visible:border-ed-accent focus-visible:ring-[3px] focus-visible:ring-ed-accent/30"
               {...register("budget")}
             >
               <option value="" disabled>
@@ -147,12 +164,15 @@ export function ContactForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="message">{t("contactPage.message")}</Label>
+          <Label htmlFor="message" className="ed-label">
+            {t("contactPage.message")}
+          </Label>
           <Textarea
             id="message"
             rows={5}
             placeholder={t("contactPage.messagePlaceholder")}
             aria-invalid={!!errors.message}
+            className="rounded-xl border-ed-rule-strong bg-ed-canvas text-ed-ink"
             {...register("message")}
           />
           {errors.message && (
@@ -173,45 +193,49 @@ export function ContactForm() {
         </div>
 
         {status === "error" && (
-          <div className="rounded-xl border border-destructive/30 bg-destructive/10 p-4">
-            <div className="mb-2 flex items-center gap-2 text-sm font-medium text-destructive">
-              <AlertTriangle className="h-4 w-4" />
+          <div
+            className="rounded-xl border border-destructive/30 bg-destructive/10 p-4"
+            role="alert"
+          >
+            <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-destructive">
+              <AlertTriangle className="h-4 w-4" aria-hidden />
               {t("contactPage.errorTitle")}
             </div>
-            <p className="mb-3 text-sm text-muted-foreground">{t("contactPage.errorDesc")}</p>
+            <p className="mb-3 text-sm text-ed-ink-soft">{t("contactPage.errorDesc")}</p>
             <div className="flex flex-wrap gap-4 text-sm">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-medium text-accent hover:underline"
+                className="inline-flex items-center gap-1.5 font-semibold text-ed-punch hover:underline"
               >
-                <MessageCircle className="h-4 w-4" />
+                <MessageCircle className="h-4 w-4" aria-hidden />
                 WhatsApp
               </a>
               <a
                 href={MAILTO_CONTACT}
-                className="inline-flex items-center gap-1.5 font-medium text-accent hover:underline"
+                className="inline-flex items-center gap-1.5 font-semibold text-ed-accent hover:underline"
               >
-                <Mail className="h-4 w-4" />
+                <Mail className="h-4 w-4" aria-hidden />
                 {CONTACT_EMAIL}
               </a>
             </div>
           </div>
         )}
 
-        <Button
+        <button
           type="submit"
-          variant="cta"
-          size="cta"
           disabled={status === "submitting"}
-          className="group w-full"
+          className="ed-punch-btn group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-[0.9375rem] font-semibold tracking-tight disabled:pointer-events-none disabled:opacity-60"
         >
           {status === "submitting" ? t("contactPage.submitting") : t("contactPage.submit")}
           {status !== "submitting" && (
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+              aria-hidden
+            />
           )}
-        </Button>
+        </button>
       </div>
     </form>
   )

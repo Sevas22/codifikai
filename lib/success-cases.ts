@@ -51,6 +51,29 @@ export const CASE_FILTERS: CaseFilter[] = [
 
 /** Misma lista que la página Casos de éxito (portfolio real). */
 export const successCases: SuccessCase[] = [
+  // Primero a propósito: es el caso que hoy mejor representa el trabajo.
+  {
+    id: "contraste",
+    title: "Agencia Contraste",
+    subtitle: "BTL Experiential · Brand Activations",
+    description:
+      "Corporate website for a marketing agency. Modern design with fluid animations and optimized user experience.",
+    descriptionEs:
+      "Sitio web corporativo para agencia de marketing. Diseño moderno con animaciones fluidas y UX optimizada.",
+    problemEn: "Brand perception did not match the quality of their activations.",
+    problemEs: "La percepción de marca no reflejaba la calidad de sus activaciones.",
+    url: "https://www.contrasteagencia.com/",
+    image: "/images/cases/contrasteagencia.png",
+    category: "Brand Experience",
+    tags: ["React", "Next.js", "Tailwind CSS", "Motion"],
+    filters: ["saas", "enterprise"],
+    metrics: [
+      { value: "+48%", labelEn: "Inbound leads", labelEs: "Leads entrantes" },
+      { value: "+62%", labelEn: "Session depth", labelEs: "Profundidad de sesión" },
+      { value: "-29%", labelEn: "Bounce rate", labelEs: "Tasa de rebote" },
+    ],
+    featured: true,
+  },
   {
     id: "venextrading",
     title: "venextrading",
@@ -94,27 +117,6 @@ export const successCases: SuccessCase[] = [
       { value: "+34%", labelEn: "User engagement", labelEs: "Engagement de usuarios" },
     ],
     featured: true,
-  },
-  {
-    id: "contraste",
-    title: "Agencia Contraste",
-    subtitle: "BTL Experiential · Brand Activations",
-    description:
-      "Corporate website for a marketing agency. Modern design with fluid animations and optimized user experience.",
-    descriptionEs:
-      "Sitio web corporativo para agencia de marketing. Diseño moderno con animaciones fluidas y UX optimizada.",
-    problemEn: "Brand perception did not match the quality of their activations.",
-    problemEs: "La percepción de marca no reflejaba la calidad de sus activaciones.",
-    url: "https://www.contrasteagencia.com/",
-    image: "/images/cases/contrasteagencia.png",
-    category: "Brand Experience",
-    tags: ["React", "Next.js", "Tailwind CSS", "Motion"],
-    filters: ["saas", "enterprise"],
-    metrics: [
-      { value: "+48%", labelEn: "Inbound leads", labelEs: "Leads entrantes" },
-      { value: "+62%", labelEn: "Session depth", labelEs: "Profundidad de sesión" },
-      { value: "-29%", labelEn: "Bounce rate", labelEs: "Tasa de rebote" },
-    ],
   },
   {
     id: "logysan",
@@ -209,7 +211,7 @@ export const successCases: SuccessCase[] = [
     descriptionEs:
       "Integrador estratégico para pymes LATAM: importaciones, comercio internacional y logística.",
     problemEn: "Multi-market services were hard to scan for enterprise buyers.",
-    problemEs: "Servicios multi-mercado difíciles de escanear para compradores enterprise.",
+    problemEs: "Servicios multi-mercado difíciles de escanear para compradores corporativos.",
     url: "https://jinglobaltrading.com/",
     image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1200&q=80",
     category: "Global Trade",

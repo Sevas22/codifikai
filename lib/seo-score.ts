@@ -87,13 +87,13 @@ export function scoreSeo(input: SeoScoreInput): SeoScoreResult {
     },
     {
       id: "titleLength",
-      label: "Título entre 30 y 65 caracteres",
-      passed: title.length >= 30 && title.length <= 65,
+      label: "Título entre 30 y 60 caracteres",
+      passed: title.length >= 30 && title.length <= 60,
     },
     {
       id: "descriptionLength",
-      label: "Meta descripción entre 120 y 160 caracteres",
-      passed: description.length >= 120 && description.length <= 160,
+      label: "Meta descripción entre 120 y 155 caracteres",
+      passed: description.length >= 120 && description.length <= 155,
     },
     {
       id: "keywordInFirstParagraph",

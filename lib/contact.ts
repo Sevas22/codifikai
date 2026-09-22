@@ -1,13 +1,29 @@
-/** Enlace único de contacto por WhatsApp (wa.link). */
-export const WHATSAPP_URL = "https://wa.link/8x7g3p" as const
+/**
+ * Enlace único de contacto por WhatsApp, con mensaje previo ya redactado.
+ *
+ * Es la fuente única: todos los cierres de negocio del sitio (botón flotante,
+ * navegación, CTAs de sección, footer) importan esta constante, así que
+ * cambiar el número o el mensaje aquí los actualiza todos.
+ */
+export const WHATSAPP_URL =
+  "https://api.whatsapp.com/send?phone=573124162175&text=!Buen%20dia%20estoy%20interesado%20en%20tener%20mas%20informacion%20de%20sus%20servicios!" as const
 
 /**
- * Correo público de contacto. Por defecto usa el de dominio si está configurado
- * en `NEXT_PUBLIC_CONTACT_EMAIL`; si no, cae al correo actual para no romper nada.
+ * Correo de respaldo del negocio.
+ *
+ * Es la única definición literal de la dirección en el código: la usan tanto
+ * el correo que se muestra al público como el destino al que la API entrega
+ * los leads del formulario. Cambiarla aquí los mueve a los dos.
+ */
+export const DEFAULT_CONTACT_EMAIL = "codifikai@gmail.com" as const
+
+/**
+ * Correo público de contacto. Usa el de dominio si está configurado en
+ * `NEXT_PUBLIC_CONTACT_EMAIL`; si no, el de respaldo.
  * Para proyectar marca enterprise, define un correo de dominio (ej. hola@codifikai.com).
  */
 export const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "codifikai@gmail.com"
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || DEFAULT_CONTACT_EMAIL
 
 export const MAILTO_CONTACT = `mailto:${CONTACT_EMAIL}`
 
