@@ -324,9 +324,14 @@ export function Counter({ value, className }: { value: string; className?: strin
     const target = Number.parseFloat(rawNumber.replace(/,/g, ""))
     if (Number.isNaN(target)) return
 
-    const controls = animate(0, target, {
-      duration: 1.6,
-      ease: [0.22, 1, 0.36, 1],
+    // Arranca cerca del valor final (no desde 0): a media animación, o si se
+    // atrapa el frame con una captura de pantalla, nunca se ve como "0" o
+    // "1+" — solo el último tramo del conteo, que sigue leyéndose como tal.
+    const start = target * 0.7
+
+    const controls = animate(start, target, {
+      duration: 0.7,
+      ease: "easeOut",
       onUpdate: (latest) => setDisplay(`${prefix}${latest.toFixed(decimals)}${suffix}`),
       onComplete: () => setDisplay(value),
     })

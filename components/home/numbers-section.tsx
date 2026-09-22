@@ -23,6 +23,7 @@ export function NumbersSection({ copy, caseCount }: { copy: HomeCopy; caseCount:
         title={copy.numbers.title}
         highlight={copy.highlights.numbers}
         lead={copy.numbers.lead}
+        className="text-center sm:text-left"
       />
 
       <dl className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -31,7 +32,7 @@ export function NumbersSection({ copy, caseCount }: { copy: HomeCopy; caseCount:
             key={cell.label}
             delay={i * 0.09}
             y={22}
-            className="ed-card ed-card-lift group relative overflow-hidden px-7 py-8"
+            className="ed-card ed-card-lift group relative flex flex-col items-center overflow-hidden px-7 py-9 text-center sm:items-start sm:py-8 sm:text-left"
           >
             {/* Destello de marca que aparece al acercarse a la tarjeta */}
             <span
