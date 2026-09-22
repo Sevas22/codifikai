@@ -3,14 +3,14 @@
 import Link from "next/link"
 import { ArrowUpRight, Check, Gift } from "lucide-react"
 import { cn } from "@/lib/utils"
-import type { SeoPlan } from "@/lib/seo-plans"
+import type { PricingPlan } from "@/lib/pricing-plans"
 
-export function SeoPlanCard({
+export function PlanCard({
   plan,
   language,
   whatsappHref,
 }: {
-  plan: SeoPlan
+  plan: PricingPlan
   language: "es" | "en"
   whatsappHref: string
 }) {
