@@ -3,8 +3,8 @@
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 import { EdSection, Reveal, SectionHeading } from "@/components/home/ed-primitives"
-import { SeoPlanCard } from "@/components/services/seo-plan-card"
-import { SEO_PLANS } from "@/lib/seo-plans"
+import { PlanCard } from "@/components/services/plan-card"
+import type { PricingPlan } from "@/lib/pricing-plans"
 import { WHATSAPP_URL } from "@/lib/contact"
 
 const LABELS = {
@@ -22,7 +22,13 @@ const LABELS = {
   },
 }
 
-export function SeoPlansSectionView({ language }: { language: "es" | "en" }) {
+export function PlansSection({
+  plans,
+  language,
+}: {
+  plans: PricingPlan[]
+  language: "es" | "en"
+}) {
   const labels = LABELS[language]
 
   return (
@@ -34,9 +40,9 @@ export function SeoPlansSectionView({ language }: { language: "es" | "en" }) {
       </div>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-3">
-        {SEO_PLANS.map((plan, i) => (
+        {plans.map((plan, i) => (
           <Reveal key={plan.id} delay={i * 0.1} y={22}>
-            <SeoPlanCard plan={plan} language={language} whatsappHref={WHATSAPP_URL} />
+            <PlanCard plan={plan} language={language} whatsappHref={WHATSAPP_URL} />
           </Reveal>
         ))}
       </div>

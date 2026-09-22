@@ -118,12 +118,13 @@ export function ServicesMenu({
             className="absolute left-1/2 top-[calc(100%+0.9rem)] z-50 w-[min(64rem,calc(100vw-2rem))] -translate-x-1/2"
           >
             <div className="ed-dark overflow-hidden rounded-[1.75rem] border border-white/10 bg-ed-canvas p-3 shadow-[0_32px_80px_-24px_rgba(0,0,0,0.55)]">
-              {/* La cabecera ocupa la primera columna de arriba abajo y los seis
-                  servicios llenan las otras dos en tres filas exactas. La
-                  primera fila es la de los destacados: la IA y el más vendido. */}
+              {/* La cabecera ocupa la primera columna de arriba abajo y los siete
+                  servicios llenan las otras dos en cuatro filas (la última
+                  con una sola tarjeta). La primera fila es la de los
+                  destacados: la IA y el más vendido. */}
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.1fr)_repeat(2,minmax(0,1fr))]">
                 {/* Tarjeta de cabecera */}
-                <div className="flex flex-col justify-between rounded-3xl bg-white/[0.04] p-7 sm:col-span-2 lg:col-span-1 lg:row-span-3">
+                <div className="flex flex-col justify-between rounded-3xl bg-white/[0.04] p-7 sm:col-span-2 lg:col-span-1 lg:row-span-4">
                   <div>
                     <p className="ed-label text-ed-accent">{intro.label[language]}</p>
                     <p className="ed-display mt-6 text-[1.75rem] uppercase leading-[1.05] text-ed-ink">

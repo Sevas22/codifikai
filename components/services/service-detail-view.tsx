@@ -13,9 +13,10 @@ import {
 import { ParticleField } from "@/components/home/particle-field"
 import { Navigation } from "@/components/navigation"
 import { useLanguage } from "@/components/providers/language-provider"
+import { PlansSection } from "@/components/services/plans-section"
 import { ServiceBadge } from "@/components/services/service-badge"
-import { SeoPlansSectionView } from "@/components/services/seo-plans-section"
 import { WHATSAPP_URL } from "@/lib/contact"
+import { SEO_PLANS, SOCIAL_PLANS } from "@/lib/pricing-plans"
 import {
   SERVICE_PAGE_LABELS,
   SERVICE_TIERS,
@@ -178,8 +179,9 @@ export function ServiceDetailView({ service }: { service: Service }) {
         </div>
       </EdSection>
 
-      {/* --------------------------------------------------------- Planes (SEO) */}
-      {service.id === "seo-geo" && <SeoPlansSectionView language={language} />}
+      {/* ------------------------------------------------------------- Planes */}
+      {service.id === "seo-geo" && <PlansSection plans={SEO_PLANS} language={language} />}
+      {service.id === "social-media" && <PlansSection plans={SOCIAL_PLANS} language={language} />}
 
       {/* --------------------------------------------------------------- FAQ */}
       <EdSection id="faq" className="bg-ed-canvas-sunken">

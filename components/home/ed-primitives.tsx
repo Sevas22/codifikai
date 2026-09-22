@@ -9,7 +9,6 @@
 
 import * as React from "react"
 import {
-  animate,
   m,
   useInView,
   useMotionValue,
@@ -306,43 +305,16 @@ export function DrawnRule({ className }: { className?: string }) {
 /* -------------------------------------------------------------------------- */
 
 /**
- * Anima un valor como "150+", "4.2x" o "11" conservando prefijo y sufijo.
- * Si el texto no contiene número, se pinta tal cual.
+ * Pinta un valor como "150+", "4.2x" o "11" tal cual.
+ *
+ * Antes contaba desde un valor de arranque hasta el real con una animación:
+ * cualquier captura de pantalla tomada mientras corría (o justo al entrar en
+ * pantalla) mostraba un número que no era el real y se leía como un dato
+ * roto. La cifra real es lo único que importa aquí, así que se muestra
+ * directamente; el card que la envuelve ya tiene su propio fade de entrada.
  */
 export function Counter({ value, className }: { value: string; className?: string }) {
-  const ref = React.useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: "0px 0px -20% 0px" })
-  const reduced = useReducedMotion()
-  const [display, setDisplay] = React.useState<string | null>(null)
-
-  const match = value.match(/^(\D*)([\d.,]+)(.*)$/)
-
-  React.useEffect(() => {
-    if (!match || !inView || reduced) return
-    const [, prefix, rawNumber, suffix] = match
-    const decimals = rawNumber.includes(".") ? rawNumber.split(".")[1].length : 0
-    const target = Number.parseFloat(rawNumber.replace(/,/g, ""))
-    if (Number.isNaN(target)) return
-
-    // Arranca cerca del valor final (no desde 0): a media animación, o si se
-    // atrapa el frame con una captura de pantalla, nunca se ve como "0" o
-    // "1+" — solo el último tramo del conteo, que sigue leyéndose como tal.
-    const start = target * 0.7
-
-    const controls = animate(start, target, {
-      duration: 0.7,
-      ease: "easeOut",
-      onUpdate: (latest) => setDisplay(`${prefix}${latest.toFixed(decimals)}${suffix}`),
-      onComplete: () => setDisplay(value),
-    })
-    return () => controls.stop()
-  }, [inView, match, reduced, value])
-
-  return (
-    <span ref={ref} className={cn("tabular-nums", className)}>
-      {display ?? value}
-    </span>
-  )
+  return <span className={cn("tabular-nums", className)}>{value}</span>
 }
 
 /* -------------------------------------------------------------------------- */

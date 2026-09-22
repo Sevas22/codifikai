@@ -817,6 +817,130 @@ export const SERVICES: Service[] = [
       },
     },
   },
+  {
+    id: "social-media",
+    tier: "tech",
+    slug: "social-media",
+    order: 7,
+    title: { es: "Redes sociales", en: "Social media" },
+    short: {
+      es: "Presencia y ventas en tus redes sociales.",
+      en: "Presence and sales on your social channels.",
+    },
+    body: {
+      es: "Contenido, pauta y sistemas de conversión para que tu negocio se vea profesional en redes y esas visitas se conviertan en clientes.",
+      en: "Content, paid campaigns and conversion systems so your business looks professional on social media and those visits turn into clients.",
+    },
+    eyebrow: { es: "Redes sociales", en: "Social media" },
+    headlineLines: {
+      es: [{ text: "Que tu marca", tone: "solid" }, { text: "se vea", tone: "outline-accent" }, { text: "en todas partes.", tone: "gradient" }],
+      en: [{ text: "Make your brand", tone: "solid" }, { text: "show up", tone: "outline-accent" }, { text: "everywhere.", tone: "gradient" }],
+    },
+    lead: {
+      es: "Publicar sin estrategia no construye nada. Diseñamos la presencia de tu negocio en redes —contenido, pauta y sistemas de respuesta— para que se vea profesional y esas visitas terminen en una conversación comercial.",
+      en: "Posting without a strategy builds nothing. We design your business's social media presence — content, paid campaigns and response systems — so it looks professional and those visits turn into a sales conversation.",
+    },
+    includes: {
+      es: [
+        "Estrategia de contenido y parrilla para tus redes",
+        "Optimización de perfiles: bio, destacados y presencia visual",
+        "Pauta paga en redes sociales y Google Ads",
+        "Google Business Profile y presencia en Google Maps",
+        "Sistemas de respuesta automática: WhatsApp Business y chatbots",
+        "Reportes de métricas: alcance, interacción y conversión",
+      ],
+      en: [
+        "Content strategy and posting calendar for your channels",
+        "Profile optimisation: bio, highlights and visual presence",
+        "Paid campaigns on social media and Google Ads",
+        "Google Business Profile and Google Maps presence",
+        "Automated response systems: WhatsApp Business and chatbots",
+        "Metrics reports: reach, engagement and conversion",
+      ],
+    },
+    forWho: {
+      es: [
+        "Publicas de vez en cuando y no hay una estrategia detrás",
+        "Tu competencia se ve mejor en redes que tú",
+        "Recibes mensajes por Instagram o WhatsApp y se pierden entre tanto contacto",
+      ],
+      en: [
+        "You post now and then with no strategy behind it",
+        "Your competitors look better on social media than you do",
+        "You get messages on Instagram or WhatsApp and they get lost in the volume",
+      ],
+    },
+    deliverables: {
+      es: [
+        "Perfiles de redes optimizados y con parrilla de contenido activa",
+        "Campañas de pauta configuradas y en marcha",
+        "Sistema de respuesta automática conectado a WhatsApp y redes",
+      ],
+      en: [
+        "Optimised social profiles with an active content calendar",
+        "Paid campaigns set up and running",
+        "An automated response system wired to WhatsApp and social",
+      ],
+    },
+    faqs: [
+      {
+        q: {
+          es: "¿En qué se diferencia esto del marketing digital?",
+          en: "How is this different from digital marketing?",
+        },
+        a: {
+          es: "Marketing digital construye los embudos y la prospección B2B; redes sociales trabaja la presencia diaria de tu marca: contenido, pauta e interacción en esos canales. Se complementan y se pueden contratar por separado.",
+          en: "Digital marketing builds the funnels and B2B prospecting; social media works on your brand's day-to-day presence: content, paid campaigns and interaction on those channels. They complement each other and can be hired separately.",
+        },
+      },
+      {
+        q: {
+          es: "¿Necesito estar en todas las redes?",
+          en: "Do I need to be on every platform?",
+        },
+        a: {
+          es: "No. Empezamos por donde está tu cliente real, no por publicar en todas partes a la vez. Es mejor sostener dos canales bien que abandonar cinco a la mitad.",
+          en: "No. We start where your real client actually is, not by posting everywhere at once. It's better to sustain two channels well than abandon five halfway.",
+        },
+      },
+      {
+        q: {
+          es: "¿Quién responde los mensajes de mis clientes?",
+          en: "Who replies to my customers' messages?",
+        },
+        a: {
+          es: "Se configuran respuestas automáticas para las preguntas frecuentes y se define cuándo escala a una persona de tu equipo. Ninguna conversación de venta se queda sin responder por falta de tiempo.",
+          en: "Automatic responses are set up for frequent questions, and we define when it escalates to someone on your team. No sales conversation goes unanswered for lack of time.",
+        },
+      },
+    ],
+    seo: {
+      title: {
+        es: "Gestión de redes sociales para empresas | Codifikai",
+        en: "Social media management for businesses | Codifikai",
+      },
+      description: {
+        es: "Contenido, pauta y sistemas de conversión en redes sociales para que tu negocio se vea profesional y esas visitas se conviertan en clientes.",
+        en: "Content, paid campaigns and conversion systems on social media so your business looks professional and those visits turn into clients.",
+      },
+      keywords: {
+        es: [
+          "gestión de redes sociales",
+          "manejo de redes sociales para empresas",
+          "pauta en redes sociales",
+          "community management",
+          "marketing en Instagram",
+        ],
+        en: [
+          "social media management",
+          "social media marketing for business",
+          "paid social advertising",
+          "community management",
+          "Instagram marketing",
+        ],
+      },
+    },
+  },
 ]
 
 export function getServiceBySlug(slug: string): Service | undefined {
