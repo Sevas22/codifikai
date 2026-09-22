@@ -19,8 +19,8 @@ import type { LocalizedKinetic } from "@/lib/kinetic"
 
 export type ServiceLang = "es" | "en"
 
-type Localized = { es: string; en: string }
-type LocalizedList = { es: string[]; en: string[] }
+export type Localized = { es: string; en: string }
+export type LocalizedList = { es: string[]; en: string[] }
 type ServiceFaq = { q: Localized; a: Localized }
 
 /**
