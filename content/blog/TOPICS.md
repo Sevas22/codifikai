@@ -21,7 +21,7 @@ Cómo usar esta lista: al escribir un artículo nuevo, elegir el primer tema en 
 | Tema | Ciudad / Departamento | Palabra clave principal | Estado |
 |---|---|---|---|
 | Cómo elegir un desarrollador de software a medida en Soacha | Soacha, Cundinamarca | desarrollo de software Soacha | pendiente |
-| SEO local para negocios en Facatativá: guía paso a paso | Facatativá, Cundinamarca | SEO local Facatativá | pendiente |
+| SEO local para negocios en Facatativá: guía paso a paso | Facatativá, Cundinamarca | SEO local Facatativá | en revisión |
 | Automatización de inventario para comercios de Fusagasugá | Fusagasugá, Cundinamarca | automatización inventario Fusagasugá | pendiente |
 | IA para el sector agroindustrial en Girardot y el Alto Magdalena | Girardot, Cundinamarca | inteligencia artificial agroindustria Cundinamarca | pendiente |
 | Por qué tu empresa en Cajicá necesita un sistema de ventas, no solo una página web | Cajicá, Cundinamarca | sistema de ventas Cajicá | pendiente |
@@ -33,11 +33,13 @@ Cómo usar esta lista: al escribir un artículo nuevo, elegir el primer tema en 
 | Por qué las empresas de Tunja están cambiando Excel por sistemas conectados | Tunja, Boyacá | sistemas empresariales Tunja | pendiente |
 | Comercio electrónico con IA para negocios de Chiquinquirá | Chiquinquirá, Boyacá | comercio electrónico Chiquinquirá | pendiente |
 | Automatización de agenda y reservas para negocios de Paipa (turismo y bienestar) | Paipa, Boyacá | automatización reservas Paipa | pendiente |
-| Errores comunes al automatizar WhatsApp Business en pymes de Cundinamarca | Cundinamarca (general) | automatización WhatsApp Business Colombia | pendiente |
+| Errores comunes al automatizar WhatsApp Business en pymes de Cundinamarca | Cundinamarca (general) | automatización WhatsApp Business Colombia | en revisión |
 | Cómo saber si tu empresa en Boyacá está lista para adoptar IA | Boyacá (general) | inteligencia artificial empresas Boyacá | pendiente |
 | Automatización de facturación y cartera para pymes de la Sabana de Bogotá | Sabana de Bogotá, Cundinamarca | automatización facturación pymes Colombia | pendiente |
-| SEO para empresas industriales de Sogamoso: cómo aparecer primero en Google | Sogamoso, Boyacá | SEO industrial Sogamoso | pendiente |
+| SEO para empresas industriales de Sogamoso: cómo aparecer primero en Google | Sogamoso, Boyacá | SEO industrial Sogamoso | en revisión |
 | Del Excel al sistema: modernización de procesos para distribuidoras en Zipaquirá | Zipaquirá, Cundinamarca | modernización de procesos Zipaquirá | pendiente |
+| Agentes de IA para pymes en Cundinamarca: qué hacen hoy | Cundinamarca (general) | agentes de IA para empresas Cundinamarca | en revisión |
+| GEO en Boyacá: que ChatGPT y Gemini recomienden tu negocio | Tunja, Duitama y Sogamoso, Boyacá | GEO optimización para motores generativos | en revisión |
 
 Cuando este banco se acorte a menos de 5 temas pendientes, ampliar la lista agregando
 nuevos municipios (ej. Ubaté, Guaduas, Villapinzón en Cundinamarca; Garagoa, Moniquirá,
