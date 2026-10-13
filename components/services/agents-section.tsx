@@ -164,7 +164,7 @@ export function AgentsSection({ language }: { language: Lang }) {
   const teamUrl = whatsappUrl(t.teamMessage(selected.map((agent) => agent.name).join(", ")))
 
   return (
-    <EdSection id="agents" className="ed-columns">
+    <EdSection id="agents" className="ed-columns pt-8 sm:pt-12">
       <SectionHeading
         index={1}
         label={t.label}

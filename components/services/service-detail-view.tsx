@@ -53,14 +53,21 @@ export function ServiceDetailView({ service }: { service: Service }) {
   const labels = SERVICE_PAGE_LABELS
   const related = getRelatedServices(service.slug)
   // La página de agentes abre con su catálogo como sección 01: las demás bajan un puesto.
-  const offset = service.id === "ai-agents" ? 1 : 0
+  const hasCatalog = service.id === "ai-agents"
+  const offset = hasCatalog ? 1 : 0
 
   return (
     <div className="ed-light-scope relative bg-ed-canvas text-ed-ink">
       <Navigation />
 
       {/* ---------------------------------------------------------------- Hero */}
-      <section className="ed-grain relative isolate overflow-hidden pt-36 pb-[var(--ed-section-y)] sm:pt-40">
+      {/* Con catálogo debajo, el encabezado y la sección comparten fondo claro: sin
+          recortar el margen inferior se sumaban dos márgenes de sección y quedaba un hueco. */}
+      <section
+        className={`ed-grain relative isolate overflow-hidden pt-36 sm:pt-40 ${
+          hasCatalog ? "pb-10 sm:pb-12" : "pb-[var(--ed-section-y)]"
+        }`}
+      >
         <div className="ed-columns pointer-events-none absolute inset-0 -z-20" aria-hidden />
         <div
           className="pointer-events-none absolute -z-20 left-[-12%] top-[-10%] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--brand-violet)_20%,transparent),transparent_68%)] blur-3xl"
