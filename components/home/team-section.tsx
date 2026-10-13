@@ -23,9 +23,9 @@ const TEAM = [
   {
     name: "Jhon Ariza",
     role: { es: "Cofundador & Director de Estrategia", en: "Co-Founder & Strategy Director" },
-    image: "/images/team/jhon-ariza.png",
+    image: "/images/team/jhon-ariza-cofundador.webp",
     href: "/about#jhon-ariza",
-    objectPosition: "top center",
+    objectPosition: "center 20%",
   },
   {
     name: "Victor Giron",

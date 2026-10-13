@@ -33,8 +33,8 @@ export const ABOUT_TEAM: TeamMember[] = [
     anchor: "jhoan-gomez",
     role: { es: "CEO y fundador", en: "CEO & Founder" },
     bio: {
-      es: "Ingeniero de sistemas y de software. Lidera la visión de Codifikai y la arquitectura de los sistemas que construimos, pensados para seguir funcionando cuando el negocio crezca.",
-      en: "Systems and software engineer. Leads Codifikai's vision and the architecture of the systems we build, designed to keep working as the business grows.",
+      es: "Ingeniero de IA, de sistemas y de software. Lidera la visión de Codifikai y la arquitectura de los sistemas y agentes de IA que construimos, pensados para seguir funcionando cuando el negocio crezca.",
+      en: "AI, systems and software engineer. Leads Codifikai's vision and the architecture of the AI systems and agents we build, designed to keep working as the business grows.",
     },
     image: "/images/team/jhoan-gomez-ceo.webp",
     objectPosition: "center 20%",
@@ -44,11 +44,11 @@ export const ABOUT_TEAM: TeamMember[] = [
     anchor: "jhon-ariza",
     role: { es: "Cofundador y director de estrategia", en: "Co-Founder & Strategy Director" },
     bio: {
-      es: "Impulsa la estrategia, la expansión comercial y la dirección de iniciativas con impacto real y sostenible.",
-      en: "Drives strategy, commercial expansion and the direction of initiatives with real, sustainable impact.",
+      es: "Ingeniero de IA. Impulsa la estrategia, la expansión comercial y la dirección de las iniciativas de inteligencia artificial con impacto real y sostenible.",
+      en: "AI engineer. Drives strategy, commercial expansion and the direction of artificial intelligence initiatives with real, sustainable impact.",
     },
-    image: "/images/team/jhon-ariza.png",
-    objectPosition: "top center",
+    image: "/images/team/jhon-ariza-cofundador.webp",
+    objectPosition: "center 20%",
   },
   {
     name: "Victor Giron",
