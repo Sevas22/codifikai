@@ -16,9 +16,9 @@ const TEAM = [
   {
     name: "Jhoan Gomez",
     role: { es: "CEO & Fundador", en: "CEO & Founder" },
-    image: "/images/team/jhoan-gomez.png",
+    image: "/images/team/jhoan-gomez-ceo.webp",
     href: "/about#jhoan-gomez",
-    objectPosition: "center",
+    objectPosition: "center 20%",
   },
   {
     name: "Jhon Ariza",
