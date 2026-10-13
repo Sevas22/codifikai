@@ -68,13 +68,8 @@ export function TeamSection({ copy, language }: { copy: HomeCopy; language: Home
                   style={{ objectPosition: member.objectPosition }}
                   className={cn(
                     "object-cover transition-[transform,filter,opacity] duration-[900ms] ease-out group-hover:scale-[1.03]",
-                    !member.color &&
-                      "opacity-85 grayscale group-hover:opacity-100 group-hover:grayscale-0"
+                    !member.color && "grayscale group-hover:grayscale-0"
                   )}
-                />
-                <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ed-canvas/70 to-transparent"
-                  aria-hidden
                 />
               </div>
               <div className="mt-5 flex items-start justify-between gap-3 border-t border-ed-rule pt-4">

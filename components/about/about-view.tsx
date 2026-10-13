@@ -188,8 +188,7 @@ export function AboutView() {
                   style={{ objectPosition: member.objectPosition }}
                   className={cn(
                     "object-cover transition-[transform,filter,opacity] duration-[900ms] ease-out group-hover:scale-[1.03]",
-                    !member.color &&
-                      "opacity-90 grayscale group-hover:opacity-100 group-hover:grayscale-0"
+                    !member.color && "grayscale group-hover:grayscale-0"
                   )}
                 />
               </div>
