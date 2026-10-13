@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react"
 
 import { EdSection, Reveal, SectionHeading } from "@/components/home/ed-primitives"
 import type { HomeCopy, HomeLang } from "@/lib/home-copy"
+import { cn } from "@/lib/utils"
 
 /**
  * Mismas personas, imágenes y perfiles que la sección de equipo original; solo
@@ -19,6 +20,7 @@ const TEAM = [
     image: "/images/team/jhoan-gomez-ceo.webp",
     href: "/about#jhoan-gomez",
     objectPosition: "center 20%",
+    color: true,
   },
   {
     name: "Jhon Ariza",
@@ -26,6 +28,7 @@ const TEAM = [
     image: "/images/team/jhon-ariza-cofundador.webp",
     href: "/about#jhon-ariza",
     objectPosition: "center 20%",
+    color: true,
   },
   {
     name: "Victor Giron",
@@ -33,6 +36,7 @@ const TEAM = [
     image: "/images/team/victor-giron.png",
     href: "/about#victor-giron",
     objectPosition: "top center",
+    color: false,
   },
   {
     name: "Fredy Velandia",
@@ -40,6 +44,7 @@ const TEAM = [
     image: "/images/team/jairo-gomez-sales.png",
     href: "/about#jairo-gomez",
     objectPosition: "center",
+    color: false,
   },
 ] as const
 
@@ -65,7 +70,11 @@ export function TeamSection({ copy, language }: { copy: HomeCopy; language: Home
                   fill
                   sizes="(max-width: 1024px) 50vw, 25vw"
                   style={{ objectPosition: member.objectPosition }}
-                  className="object-cover opacity-85 grayscale transition-[transform,filter,opacity] duration-[900ms] ease-out group-hover:scale-[1.03] group-hover:opacity-100 group-hover:grayscale-0"
+                  className={cn(
+                    "object-cover transition-[transform,filter,opacity] duration-[900ms] ease-out group-hover:scale-[1.03]",
+                    !member.color &&
+                      "opacity-85 grayscale group-hover:opacity-100 group-hover:grayscale-0"
+                  )}
                 />
                 <div
                   className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ed-canvas/70 to-transparent"

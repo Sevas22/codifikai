@@ -25,6 +25,8 @@ export type TeamMember = {
   image: string
   /** Encuadre del retrato; varias fotos están descentradas. */
   objectPosition: string
+  /** Foto de estudio a todo color: sin el filtro gris que llevan las demás. */
+  color?: boolean
 }
 
 export const ABOUT_TEAM: TeamMember[] = [
@@ -38,6 +40,7 @@ export const ABOUT_TEAM: TeamMember[] = [
     },
     image: "/images/team/jhoan-gomez-ceo.webp",
     objectPosition: "center 20%",
+    color: true,
   },
   {
     name: "Jhon Ariza",
@@ -49,6 +52,7 @@ export const ABOUT_TEAM: TeamMember[] = [
     },
     image: "/images/team/jhon-ariza-cofundador.webp",
     objectPosition: "center 20%",
+    color: true,
   },
   {
     name: "Victor Giron",
