@@ -45,10 +45,13 @@ export const ABOUT_TEAM: TeamMember[] = [
   {
     name: "Jhon Ariza",
     anchor: "jhon-ariza",
-    role: { es: "Cofundador y director de estrategia", en: "Co-Founder & Strategy Director" },
+    role: {
+      es: "Analista de datos, ingeniero de IA y cofundador",
+      en: "Data Analyst, AI Engineer & Co-Founder",
+    },
     bio: {
-      es: "Ingeniero de IA. Impulsa la estrategia, la expansión comercial y la dirección de las iniciativas de inteligencia artificial con impacto real y sostenible.",
-      en: "AI engineer. Drives strategy, commercial expansion and the direction of artificial intelligence initiatives with real, sustainable impact.",
+      es: "Analista de datos e ingeniero de IA. Impulsa la estrategia, la expansión comercial y la dirección de las iniciativas de inteligencia artificial con impacto real y sostenible.",
+      en: "Data analyst and AI engineer. Drives strategy, commercial expansion and the direction of artificial intelligence initiatives with real, sustainable impact.",
     },
     image: "/images/team/jhon-ariza-cofundador.webp",
     objectPosition: "center 20%",

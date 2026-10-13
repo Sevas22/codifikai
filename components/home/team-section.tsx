@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
-import { EdSection, Reveal } from "@/components/home/ed-primitives"
+import { EdSection, Reveal, WordReveal } from "@/components/home/ed-primitives"
 import type { HomeCopy, HomeLang } from "@/lib/home-copy"
 import { cn } from "@/lib/utils"
 
@@ -24,7 +24,10 @@ const TEAM = [
   },
   {
     name: "Jhon Ariza",
-    role: { es: "Cofundador & Director de Estrategia", en: "Co-Founder & Strategy Director" },
+    role: {
+      es: "Analista de Datos, Ingeniero de IA y Cofundador",
+      en: "Data Analyst, AI Engineer & Co-Founder",
+    },
     image: "/images/team/jhon-ariza-cofundador.webp",
     href: "/about#jhon-ariza",
     objectPosition: "center 20%",
@@ -48,14 +51,19 @@ const TEAM = [
   },
 ] as const
 
+const TITLE = {
+  es: { text: "Nuestro equipo de trabajo.", accent: ["equipo"] },
+  en: { text: "The team behind the work.", accent: ["team"] },
+} as const
+
 export function TeamSection({ copy, language }: { copy: HomeCopy; language: HomeLang }) {
   return (
     <EdSection id="team">
-      {/* Sin titular a la vista: las fotos hablan solas. El h2 se conserva solo
-          para lectores de pantalla y para la estructura del documento. */}
-      <h2 className="sr-only">{copy.team.title}</h2>
+      <h2 className="ed-display max-w-[22ch] text-ed-ink text-[clamp(2.25rem,5.2vw,4.5rem)]">
+        <WordReveal text={TITLE[language].text} accentWords={[...TITLE[language].accent]} />
+      </h2>
 
-      <ul className="grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4 lg:gap-x-8">
+      <ul className="mt-14 grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4 lg:gap-x-8">
         {TEAM.map((member, i) => (
           <Reveal as="li" key={member.name} delay={i * 0.09} y={26}>
             <Link href={member.href} className="group block">
