@@ -3,7 +3,7 @@
 import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, Check, Plus, X } from "lucide-react"
+import { ArrowUpRight, Check, ChevronDown, Plus, X } from "lucide-react"
 
 import { EdSection, Reveal, SectionHeading } from "@/components/home/ed-primitives"
 import { AGENTS, type Agent } from "@/lib/agents"
@@ -18,9 +18,9 @@ const LABELS = {
     title: "Conoce a tu próximo equipo.",
     highlight: ["equipo."],
     lead: "Seis agentes, cada uno con su trabajo. Cotiza uno o suma varios y arma tu equipo.",
-    does: "Qué hace",
+    does: "Ver qué hace",
     connects: "Se conecta con",
-    quote: "Cotizar este agente",
+    quote: "Cotizar",
     add: "Sumar a mi equipo",
     added: "En tu equipo",
     clear: "Vaciar",
@@ -36,9 +36,9 @@ const LABELS = {
     title: "Meet your next team.",
     highlight: ["team."],
     lead: "Six agents, each with its own job. Get a quote for one or add several and build your team.",
-    does: "What it does",
+    does: "See what it does",
     connects: "Connects with",
-    quote: "Get a quote for this agent",
+    quote: "Get a quote",
     add: "Add to my team",
     added: "On your team",
     clear: "Clear",
@@ -72,49 +72,53 @@ function AgentCard({
         selected && "shadow-[0_0_0_2px_var(--agent)]"
       )}
     >
-      <div className="relative aspect-square overflow-hidden bg-ed-canvas-sunken">
+      <div className="relative aspect-[4/3] overflow-hidden bg-ed-canvas-sunken">
         <Image
           src={agent.image}
           alt={agent.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
+          className="object-cover object-[center_22%] transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
         />
       </div>
 
-      <div className="flex flex-1 flex-col p-7">
-        <h3 className="text-[1.375rem] font-semibold tracking-tight text-ed-ink">{agent.name}</h3>
-        <p className="mt-2 text-[0.9375rem] font-medium leading-snug text-ed-ink">
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="text-[1.125rem] font-semibold tracking-tight text-ed-ink">{agent.name}</h3>
+        <p className="mt-1 min-h-[2.25rem] text-[0.8125rem] leading-snug text-ed-ink-soft">
           {agent.tagline[language]}
         </p>
-        <p className="mt-3 text-[0.875rem] leading-relaxed text-ed-ink-soft">
-          {agent.description[language]}
-        </p>
 
-        <p className="ed-label mt-6 text-ed-ink-faint">{t.does}</p>
-        <ul className="mt-3 space-y-2.5">
-          {agent.does[language].map((item) => (
-            <li key={item} className="flex items-start gap-2.5">
-              <span
-                className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--agent)]"
-                aria-hidden
-              />
-              <span className="text-[0.8125rem] leading-snug text-ed-ink">{item}</span>
-            </li>
-          ))}
-        </ul>
+        <details className="group/details mt-4 border-t border-ed-rule pt-1">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-2 py-2 text-[0.8125rem] font-semibold tracking-tight text-ed-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent [&::-webkit-details-marker]:hidden">
+            {t.does}
+            <ChevronDown
+              className="h-4 w-4 text-ed-ink-faint transition-transform duration-300 group-open/details:rotate-180"
+              aria-hidden
+            />
+          </summary>
+          <ul className="mt-2 space-y-2">
+            {agent.does[language].map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <span
+                  className="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--agent)]"
+                  aria-hidden
+                />
+                <span className="text-[0.78125rem] leading-snug text-ed-ink">{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-[0.6875rem] leading-relaxed text-ed-ink-faint">
+            <span className="ed-label mr-1.5 text-ed-ink-faint">{t.connects}</span>
+            {agent.connects[language].join(" · ")}
+          </p>
+        </details>
 
-        <p className="mt-6 text-[0.75rem] leading-relaxed text-ed-ink-faint">
-          <span className="ed-label mr-1.5 text-ed-ink-faint">{t.connects}</span>
-          {agent.connects[language].join(" · ")}
-        </p>
-
-        <div className="mt-auto flex flex-col gap-2.5 pt-7">
+        <div className="mt-auto flex items-center gap-2 pt-5">
           <Link
             href={whatsappUrl(t.singleMessage(agent.name))}
             target="_blank"
             rel="noopener noreferrer"
-            className="ed-punch-btn group/btn inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.875rem] font-semibold tracking-tight"
+            className="ed-punch-btn group/btn inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-[0.8125rem] font-semibold tracking-tight"
           >
             {t.quote}
             <ArrowUpRight
@@ -126,19 +130,20 @@ function AgentCard({
             type="button"
             onClick={onToggle}
             aria-pressed={selected}
+            aria-label={selected ? t.added : t.add}
+            title={selected ? t.added : t.add}
             className={cn(
-              "inline-flex w-full items-center justify-center gap-2 rounded-full border px-6 py-3 text-[0.875rem] font-semibold tracking-tight transition-colors duration-300",
+              "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors duration-300",
               selected
-                ? "border-[var(--agent)] bg-[color-mix(in_oklch,var(--agent)_12%,transparent)] text-ed-ink"
+                ? "border-[var(--agent)] bg-[color-mix(in_oklch,var(--agent)_14%,transparent)] text-ed-ink"
                 : "border-ed-rule-strong text-ed-ink hover:border-[var(--agent)]"
             )}
           >
             {selected ? (
-              <Check className="h-3.5 w-3.5" aria-hidden />
+              <Check className="h-4 w-4" aria-hidden />
             ) : (
-              <Plus className="h-3.5 w-3.5" aria-hidden />
+              <Plus className="h-4 w-4" aria-hidden />
             )}
-            {selected ? t.added : t.add}
           </button>
         </div>
       </div>
@@ -168,7 +173,7 @@ export function AgentsSection({ language }: { language: Lang }) {
         lead={t.lead}
       />
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-14 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {AGENTS.map((agent, i) => (
           <Reveal key={agent.id} delay={(i % 3) * 0.08} y={22}>
             <AgentCard
