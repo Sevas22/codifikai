@@ -4,8 +4,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
-import { EdSection, Reveal, SectionHeading } from "@/components/home/ed-primitives"
+import { EdSection, Reveal, WordReveal } from "@/components/home/ed-primitives"
 import type { HomeCopy, HomeLang } from "@/lib/home-copy"
+import { cn } from "@/lib/utils"
 
 /**
  * Mismas personas, imágenes y perfiles que la sección de equipo original; solo
@@ -16,16 +17,21 @@ const TEAM = [
   {
     name: "Jhoan Gomez",
     role: { es: "CEO & Fundador", en: "CEO & Founder" },
-    image: "/images/team/jhoan-gomez.png",
+    image: "/images/team/jhoan-gomez-ceo.webp",
     href: "/about#jhoan-gomez",
-    objectPosition: "center",
+    objectPosition: "center 20%",
+    color: true,
   },
   {
     name: "Jhon Ariza",
-    role: { es: "Cofundador & Director de Estrategia", en: "Co-Founder & Strategy Director" },
-    image: "/images/team/jhon-ariza.png",
+    role: {
+      es: "Analista de Datos, Ingeniero de IA y Cofundador",
+      en: "Data Analyst, AI Engineer & Co-Founder",
+    },
+    image: "/images/team/jhon-ariza-cofundador.webp",
     href: "/about#jhon-ariza",
-    objectPosition: "top center",
+    objectPosition: "center 20%",
+    color: true,
   },
   {
     name: "Victor Giron",
@@ -33,6 +39,7 @@ const TEAM = [
     image: "/images/team/victor-giron.png",
     href: "/about#victor-giron",
     objectPosition: "top center",
+    color: false,
   },
   {
     name: "Fredy Velandia",
@@ -40,21 +47,23 @@ const TEAM = [
     image: "/images/team/jairo-gomez-sales.png",
     href: "/about#jairo-gomez",
     objectPosition: "center",
+    color: false,
   },
 ] as const
+
+const TITLE = {
+  es: { text: "Nuestro equipo de trabajo.", accent: ["equipo"] },
+  en: { text: "The team behind the work.", accent: ["team"] },
+} as const
 
 export function TeamSection({ copy, language }: { copy: HomeCopy; language: HomeLang }) {
   return (
     <EdSection id="team">
-      <SectionHeading
-        index={6}
-        label={copy.team.label}
-        title={copy.team.title}
-        highlight={copy.highlights.team}
-        lead={copy.team.lead}
-      />
+      <h2 className="ed-display max-w-[22ch] text-ed-ink text-[clamp(2.25rem,5.2vw,4.5rem)]">
+        <WordReveal text={TITLE[language].text} accentWords={[...TITLE[language].accent]} />
+      </h2>
 
-      <ul className="mt-20 grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4 lg:gap-x-8">
+      <ul className="mt-14 grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4 lg:gap-x-8">
         {TEAM.map((member, i) => (
           <Reveal as="li" key={member.name} delay={i * 0.09} y={26}>
             <Link href={member.href} className="group block">
@@ -65,11 +74,10 @@ export function TeamSection({ copy, language }: { copy: HomeCopy; language: Home
                   fill
                   sizes="(max-width: 1024px) 50vw, 25vw"
                   style={{ objectPosition: member.objectPosition }}
-                  className="object-cover opacity-85 grayscale transition-[transform,filter,opacity] duration-[900ms] ease-out group-hover:scale-[1.03] group-hover:opacity-100 group-hover:grayscale-0"
-                />
-                <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ed-canvas/70 to-transparent"
-                  aria-hidden
+                  className={cn(
+                    "object-cover transition-[transform,filter,opacity] duration-[900ms] ease-out group-hover:scale-[1.03]",
+                    !member.color && "grayscale group-hover:grayscale-0"
+                  )}
                 />
               </div>
               <div className="mt-5 flex items-start justify-between gap-3 border-t border-ed-rule pt-4">
