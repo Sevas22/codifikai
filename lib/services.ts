@@ -320,10 +320,155 @@ export const SERVICES: Service[] = [
     },
   },
   {
+    id: "ai-agents",
+    tier: "ai",
+    slug: "ai-agents",
+    order: 3,
+    badge: { es: "Nuevo", en: "New" },
+    title: { es: "Agentes de IA", en: "AI agents" },
+    short: {
+      es: "Un equipo de agentes de IA, listo para trabajar contigo.",
+      en: "A team of AI agents, ready to work with you.",
+    },
+    body: {
+      es: "Seis agentes de IA con un trabajo claro cada uno —atención, ventas, agenda, cobranza, pedidos e inventarios—, configurados a tu negocio y con supervisión de tu equipo.",
+      en: "Six AI agents, each with a clear job — support, sales, scheduling, collections, orders and inventory — set up for your business and supervised by your team.",
+    },
+    eyebrow: { es: "Agentes de IA", en: "AI agents" },
+    headlineLines: {
+      es: [{ text: "Delega lo repetitivo.", tone: "gradient" }, { text: "Quédate con", tone: "solid" }, { text: "lo importante.", tone: "outline-accent" }],
+      en: [{ text: "Delegate the repetitive.", tone: "gradient" }, { text: "Keep what", tone: "solid" }, { text: "matters.", tone: "outline-accent" }],
+    },
+    lead: {
+      es: "Tu negocio crece y las tareas también: mensajes, citas, pedidos, cobros. Cada agente se hace cargo de una de ellas y tu equipo se queda con lo que necesita criterio. Elige uno o arma el equipo completo.",
+      en: "Your business grows and so do the tasks: messages, appointments, orders, payments. Each agent takes care of one of them and your team keeps what needs judgement. Pick one or build the full team.",
+    },
+    includes: {
+      es: [
+        "Configurado a tus procesos, no una plantilla genérica",
+        "Conexión con WhatsApp y las herramientas que ya usas",
+        "Reglas claras de cuándo pasa la conversación a una persona de tu equipo",
+        "Supervisión de tu equipo: ves qué hace cada agente y puedes corregirlo",
+        "Registro de las conversaciones para revisar y ajustar",
+        "Puedes empezar con un agente y sumar los demás después",
+      ],
+      en: [
+        "Set up around your processes, not a generic template",
+        "Connection to WhatsApp and the tools you already use",
+        "Clear rules for when a conversation goes to a person on your team",
+        "Supervised by your team: you see what each agent does and can correct it",
+        "A log of conversations to review and tune",
+        "Start with one agent and add the others later",
+      ],
+    },
+    forWho: {
+      es: [
+        "Tu equipo responde los mismos mensajes todos los días",
+        "Se te escapan citas, cotizaciones o pagos por falta de seguimiento",
+        "Quieres crecer sin sumar una persona por cada tarea repetitiva",
+      ],
+      en: [
+        "Your team answers the same messages every day",
+        "Appointments, quotes or payments slip through for lack of follow-up",
+        "You want to grow without adding a person for every repetitive task",
+      ],
+    },
+    deliverables: {
+      es: [
+        "Los agentes que elijas, configurados y funcionando en tus canales",
+        "Reglas de escalamiento a una persona de tu equipo",
+        "Guía breve de qué hace cada agente y cómo ajustarlo o apagarlo",
+      ],
+      en: [
+        "The agents you choose, set up and running on your channels",
+        "Escalation rules to a person on your team",
+        "A short guide to what each agent does and how to tune or switch it off",
+      ],
+    },
+    faqs: [
+      {
+        q: {
+          es: "¿En qué se diferencia de Automatización con IA?",
+          en: "How is this different from AI automation?",
+        },
+        a: {
+          es: "Automatización con IA es el trabajo a medida: mapeamos tus procesos y construimos flujos específicos. Los agentes son piezas ya diseñadas para una tarea concreta —atención, ventas, agenda, cobranza, pedidos o inventarios— que se configuran a tu negocio. Puedes empezar por uno y, si hace falta algo más específico, lo construimos a medida.",
+          en: "AI automation is bespoke work: we map your processes and build specific workflows. The agents are pieces already designed for one concrete task — support, sales, scheduling, collections, orders or inventory — that get set up for your business. You can start with one and, if you need something more specific, we build it to measure.",
+        },
+      },
+      {
+        q: {
+          es: "¿Puedo empezar con un solo agente?",
+          en: "Can I start with a single agent?",
+        },
+        a: {
+          es: "Sí. Cada agente funciona por separado. Lo habitual es empezar por el que más tiempo le quita a tu equipo y sumar otros cuando el primero esté estable.",
+          en: "Yes. Each agent works on its own. The usual path is to start with the one that takes the most time from your team and add others once the first is stable.",
+        },
+      },
+      {
+        q: {
+          es: "¿Los agentes responden sin supervisión?",
+          en: "Do the agents reply without supervision?",
+        },
+        a: {
+          es: "Solo hasta donde tú decidas. Se define qué resuelve cada agente por su cuenta y en qué momento pasa la conversación a una persona de tu equipo, con el resumen de lo conversado. Tú puedes ver y corregir lo que hacen.",
+          en: "Only as far as you decide. We define what each agent resolves on its own and when the conversation goes to a person on your team, with a summary of what was said. You can see and correct what they do.",
+        },
+      },
+      {
+        q: {
+          es: "¿Cuánto cuesta?",
+          en: "How much does it cost?",
+        },
+        a: {
+          es: "Depende de cuántos agentes elijas, de los canales y de las herramientas que haya que conectar. Te enviamos una cotización clara después de conocer tu operación.",
+          en: "It depends on how many agents you choose, the channels and the tools that need connecting. We send a clear quote after getting to know your operation.",
+        },
+      },
+      {
+        q: {
+          es: "¿Qué necesito para empezar?",
+          en: "What do I need to get started?",
+        },
+        a: {
+          es: "Un canal activo, por ejemplo WhatsApp Business, y la información que hoy usa tu equipo para responder: precios, horarios, políticas. Del resto nos encargamos nosotros.",
+          en: "An active channel, such as WhatsApp Business, and the information your team uses today to reply: prices, hours, policies. We take care of the rest.",
+        },
+      },
+    ],
+    seo: {
+      title: {
+        es: "Agentes de IA para empresas: cotiza tu equipo | Codifikai",
+        en: "AI agents for business: get a quote | Codifikai",
+      },
+      description: {
+        es: "Agentes de IA para atención, ventas, agenda, cobranza, pedidos e inventarios, configurados a tu negocio y supervisados por tu equipo. Cotiza el tuyo.",
+        en: "AI agents for support, sales, scheduling, collections, orders and inventory, set up for your business and supervised by your team. Get a quote.",
+      },
+      keywords: {
+        es: [
+          "agentes de IA para empresas",
+          "agentes de inteligencia artificial",
+          "agente de IA para WhatsApp",
+          "automatizar atención al cliente",
+          "asistente virtual para empresas",
+        ],
+        en: [
+          "AI agents for business",
+          "artificial intelligence agents",
+          "WhatsApp AI agent",
+          "automate customer support",
+          "virtual assistant for business",
+        ],
+      },
+    },
+  },
+  {
     id: "custom-software",
     tier: "build",
     slug: "custom-software",
-    order: 3,
+    order: 4,
     title: { es: "Desarrollo a la medida", en: "Custom software" },
     short: {
       es: "Sistemas hechos para tu operación real.",
@@ -448,7 +593,7 @@ export const SERVICES: Service[] = [
     id: "web",
     tier: "tech",
     slug: "web-development",
-    order: 4,
+    order: 5,
     title: { es: "Desarrollo web", en: "Web development" },
     short: {
       es: "Una web lista para vender, no solo para verse bien.",
@@ -573,7 +718,7 @@ export const SERVICES: Service[] = [
     id: "marketing",
     tier: "tech",
     slug: "digital-marketing",
-    order: 5,
+    order: 6,
     title: { es: "Marketing digital", en: "Digital marketing" },
     short: {
       es: "Que las visitas se conviertan en clientes.",
@@ -697,7 +842,7 @@ export const SERVICES: Service[] = [
     id: "branding",
     tier: "tech",
     slug: "brand-design",
-    order: 6,
+    order: 7,
     title: { es: "Diseño de marca", en: "Brand design" },
     short: {
       es: "Que tu empresa se vea al nivel de lo que vende.",
@@ -821,7 +966,7 @@ export const SERVICES: Service[] = [
     id: "social-media",
     tier: "tech",
     slug: "social-media",
-    order: 7,
+    order: 8,
     title: { es: "Redes sociales", en: "Social media" },
     short: {
       es: "Presencia y ventas en tus redes sociales.",

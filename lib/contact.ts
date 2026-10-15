@@ -1,3 +1,6 @@
+/** Número de WhatsApp del negocio, sin signos: única definición del número para los enlaces. */
+export const WHATSAPP_PHONE = "573124162175" as const
+
 /**
  * Enlace único de contacto por WhatsApp, con mensaje previo ya redactado.
  *
@@ -5,8 +8,12 @@
  * navegación, CTAs de sección, footer) importan esta constante, así que
  * cambiar el número o el mensaje aquí los actualiza todos.
  */
-export const WHATSAPP_URL =
-  "https://api.whatsapp.com/send?phone=573124162175&text=!Buen%20dia%20estoy%20interesado%20en%20tener%20mas%20informacion%20de%20sus%20servicios!" as const
+export const WHATSAPP_URL = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=!Buen%20dia%20estoy%20interesado%20en%20tener%20mas%20informacion%20de%20sus%20servicios!`
+
+/** Enlace de WhatsApp con un mensaje propio, p. ej. para cotizar un agente concreto. */
+export function whatsappUrl(message: string): string {
+  return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(message)}`
+}
 
 /**
  * Correo de respaldo del negocio.

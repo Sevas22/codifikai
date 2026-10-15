@@ -13,6 +13,7 @@ import {
 import { ParticleField } from "@/components/home/particle-field"
 import { Navigation } from "@/components/navigation"
 import { useLanguage } from "@/components/providers/language-provider"
+import { AgentsSection } from "@/components/services/agents-section"
 import { PlansSection } from "@/components/services/plans-section"
 import { ServiceBadge } from "@/components/services/service-badge"
 import { WHATSAPP_URL } from "@/lib/contact"
@@ -51,13 +52,22 @@ export function ServiceDetailView({ service }: { service: Service }) {
   const { language } = useLanguage()
   const labels = SERVICE_PAGE_LABELS
   const related = getRelatedServices(service.slug)
+  // La página de agentes abre con su catálogo como sección 01: las demás bajan un puesto.
+  const hasCatalog = service.id === "ai-agents"
+  const offset = hasCatalog ? 1 : 0
 
   return (
     <div className="ed-light-scope relative bg-ed-canvas text-ed-ink">
       <Navigation />
 
       {/* ---------------------------------------------------------------- Hero */}
-      <section className="ed-grain relative isolate overflow-hidden pt-36 pb-[var(--ed-section-y)] sm:pt-40">
+      {/* Con catálogo debajo, el encabezado y la sección comparten fondo claro: sin
+          recortar el margen inferior se sumaban dos márgenes de sección y quedaba un hueco. */}
+      <section
+        className={`ed-grain relative isolate overflow-hidden pt-36 sm:pt-40 ${
+          hasCatalog ? "pb-10 sm:pb-12" : "pb-[var(--ed-section-y)]"
+        }`}
+      >
         <div className="ed-columns pointer-events-none absolute inset-0 -z-20" aria-hidden />
         <div
           className="pointer-events-none absolute -z-20 left-[-12%] top-[-10%] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,color-mix(in_oklch,var(--brand-violet)_20%,transparent),transparent_68%)] blur-3xl"
@@ -139,10 +149,12 @@ export function ServiceDetailView({ service }: { service: Service }) {
         </div>
       </section>
 
+      {service.id === "ai-agents" && <AgentsSection language={language} />}
+
       {/* ------------------------------------------------------------ Incluye */}
       <EdSection id="includes" tone="dark">
         <SectionHeading
-          index={1}
+          index={1 + offset}
           label={labels.includes[language]}
           title={service.title[language]}
         />
@@ -151,14 +163,14 @@ export function ServiceDetailView({ service }: { service: Service }) {
 
       {/* ---------------------------------------------------------- Para quién */}
       <EdSection id="for-who" className="bg-ed-canvas-sunken">
-        <SectionHeading index={2} label={labels.forWho[language]} title={labels.forWho[language]} />
+        <SectionHeading index={2 + offset} label={labels.forWho[language]} title={labels.forWho[language]} />
         <TickList items={service.forWho[language]} tone="dot" />
       </EdSection>
 
       {/* ------------------------------------------------------- Entregables */}
       <EdSection id="deliverables" className="ed-columns">
         <SectionHeading
-          index={3}
+          index={3 + offset}
           label={labels.deliverables[language]}
           title={labels.deliverables[language]}
         />
@@ -187,7 +199,7 @@ export function ServiceDetailView({ service }: { service: Service }) {
       <EdSection id="faq" className="bg-ed-canvas-sunken">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-24">
           <SectionHeading
-            index={4}
+            index={4 + offset}
             label={labels.faq[language]}
             title={labels.faq[language]}
             className="lg:sticky lg:top-32 lg:self-start"
@@ -226,7 +238,7 @@ export function ServiceDetailView({ service }: { service: Service }) {
 
       {/* -------------------------------------------------- Otros servicios */}
       <EdSection id="related">
-        <SectionHeading index={5} label={labels.related[language]} title={labels.related[language]} />
+        <SectionHeading index={5 + offset} label={labels.related[language]} title={labels.related[language]} />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {related.map((item, i) => (
             <Reveal key={item.id} delay={i * 0.07} y={20}>

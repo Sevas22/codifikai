@@ -25,6 +25,8 @@ export type TeamMember = {
   image: string
   /** Encuadre del retrato; varias fotos están descentradas. */
   objectPosition: string
+  /** Foto de estudio a todo color: sin el filtro gris que llevan las demás. */
+  color?: boolean
 }
 
 export const ABOUT_TEAM: TeamMember[] = [
@@ -33,22 +35,27 @@ export const ABOUT_TEAM: TeamMember[] = [
     anchor: "jhoan-gomez",
     role: { es: "CEO y fundador", en: "CEO & Founder" },
     bio: {
-      es: "Lidera la visión de Codifikai con foco en crecimiento, ejecución y soluciones digitales alineadas al negocio.",
-      en: "Leads Codifikai's vision with a focus on growth, execution and digital solutions aligned with the business.",
+      es: "Ingeniero de IA, de sistemas y de software. Lidera la visión de Codifikai y la arquitectura de los sistemas y agentes de IA que construimos, pensados para seguir funcionando cuando el negocio crezca.",
+      en: "AI, systems and software engineer. Leads Codifikai's vision and the architecture of the AI systems and agents we build, designed to keep working as the business grows.",
     },
-    image: "/images/team/jhoan-gomez.png",
-    objectPosition: "center",
+    image: "/images/team/jhoan-gomez-ceo.webp",
+    objectPosition: "center 20%",
+    color: true,
   },
   {
     name: "Jhon Ariza",
     anchor: "jhon-ariza",
-    role: { es: "Cofundador y director de estrategia", en: "Co-Founder & Strategy Director" },
-    bio: {
-      es: "Impulsa la estrategia, la expansión comercial y la dirección de iniciativas con impacto real y sostenible.",
-      en: "Drives strategy, commercial expansion and the direction of initiatives with real, sustainable impact.",
+    role: {
+      es: "Analista de datos, ingeniero de IA y cofundador",
+      en: "Data Analyst, AI Engineer & Co-Founder",
     },
-    image: "/images/team/jhon-ariza.png",
-    objectPosition: "top center",
+    bio: {
+      es: "Analista de datos e ingeniero de IA. Impulsa la estrategia, la expansión comercial y la dirección de las iniciativas de inteligencia artificial con impacto real y sostenible.",
+      en: "Data analyst and AI engineer. Drives strategy, commercial expansion and the direction of artificial intelligence initiatives with real, sustainable impact.",
+    },
+    image: "/images/team/jhon-ariza-cofundador.webp",
+    objectPosition: "center 20%",
+    color: true,
   },
   {
     name: "Victor Giron",

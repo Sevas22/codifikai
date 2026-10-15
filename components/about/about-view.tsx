@@ -16,6 +16,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { ABOUT_TEAM, aboutCopy } from "@/lib/about-copy"
 import { WHATSAPP_URL } from "@/lib/contact"
 import { useLocalePath } from "@/hooks/use-locale-path"
+import { cn } from "@/lib/utils"
 
 export function AboutView() {
   const path = useLocalePath()
@@ -168,7 +169,7 @@ export function AboutView() {
           highlight={copy.team.highlight[language]}
           lead={copy.team.lead[language]}
         />
-        <ul className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2">
           {ABOUT_TEAM.map((member, i) => (
             <Reveal
               as="li"
@@ -176,19 +177,22 @@ export function AboutView() {
               id={member.anchor}
               delay={i * 0.08}
               y={24}
-              className="ed-card ed-card-lift group overflow-hidden"
+              className="ed-card ed-card-lift group flex flex-col overflow-hidden lg:flex-row"
             >
-              <div className="relative aspect-[4/5] overflow-hidden">
+              <div className="relative aspect-[4/5] overflow-hidden lg:w-[44%] lg:shrink-0">
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   style={{ objectPosition: member.objectPosition }}
-                  className="object-cover opacity-90 grayscale transition-[transform,filter,opacity] duration-[900ms] ease-out group-hover:scale-[1.03] group-hover:opacity-100 group-hover:grayscale-0"
+                  className={cn(
+                    "object-cover transition-[transform,filter,opacity] duration-[900ms] ease-out group-hover:scale-[1.03]",
+                    !member.color && "grayscale group-hover:grayscale-0"
+                  )}
                 />
               </div>
-              <div className="p-6">
+              <div className="flex flex-col justify-center p-6 lg:p-8">
                 <h3 className="text-[1.0625rem] font-semibold tracking-tight text-ed-ink">
                   {member.name}
                 </h3>
