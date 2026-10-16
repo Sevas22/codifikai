@@ -56,7 +56,6 @@ export function Navigation() {
   }, [isMobileMenuOpen])
 
   const navLinks = [
-    { href: "/", label: t("nav.home"), highlight: false },
     { href: "/about", label: t("nav.about"), highlight: false },
     { href: "/services", label: t("nav.services"), highlight: true },
     { href: "/blog", label: t("nav.blog"), highlight: false },
@@ -101,6 +100,7 @@ export function Navigation() {
         >
           <Link
             href={localePath(language, "/")}
+            aria-label={language === "es" ? "Codifikai, ir al inicio" : "Codifikai, go to home"}
             className="group relative flex shrink-0 items-center rounded-lg px-1 py-0.5 outline-none ring-offset-background transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-accent"
           >
             <CodifikaiLogo size="sm" showCode className="relative" />
@@ -182,6 +182,7 @@ export function Navigation() {
           <div className="flex min-w-0 flex-1 justify-center px-1">
             <Link
               href={localePath(language, "/")}
+              aria-label={language === "es" ? "Codifikai, ir al inicio" : "Codifikai, go to home"}
               className="group relative z-10 flex max-w-full items-center justify-center"
             >
               {/* -inset-4 en móvil empuja el glow encima de los iconos; solo desde md */}

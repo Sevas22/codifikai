@@ -20,7 +20,6 @@ type LanguageProviderState = {
 // Diccionario de traducciones
 const translations: Record<Language, Record<string, string>> = {
   es: {
-    "nav.home": "Plataforma",
     "nav.about": "Sobre nosotros",
     "nav.services": "Servicios",
     "nav.blog": "Blog",
@@ -97,7 +96,6 @@ const translations: Record<Language, Record<string, string>> = {
     "contactPage.directPhone": "Teléfono",
   },
   en: {
-    "nav.home": "Platform",
     "nav.about": "About us",
     "nav.services": "Services",
     "nav.blog": "Blog",
