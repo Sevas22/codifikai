@@ -48,7 +48,6 @@ export type HomeCopy = {
     title: string
     lead: string
     viewCase: string
-    allCases: string
     liveSite: string
   }
   stack: {
@@ -157,7 +156,6 @@ const es: HomeCopy = {
     title: "Sistemas que ya están en vivo.",
     lead: "Marketplaces, telemedicina, logística y comercio exterior. Cada uno con su sitio público, abierto a inspección.",
     viewCase: "Ver caso",
-    allCases: "Ver todos los casos",
     liveSite: "Sitio en vivo",
   },
   stack: {
@@ -226,7 +224,6 @@ const es: HomeCopy = {
     "Cifras",
     "Servicios",
     "Cómo lo hacemos",
-    "El trabajo",
     "Integraciones",
     "Equipo",
     "Preguntas",
@@ -307,7 +304,6 @@ const en: HomeCopy = {
     title: "Systems already live.",
     lead: "Marketplaces, telehealth, logistics and cross-border trade, each with a public site that is open to inspection.",
     viewCase: "View case",
-    allCases: "View all cases",
     liveSite: "Live site",
   },
   stack: {
@@ -376,7 +372,6 @@ const en: HomeCopy = {
     "Numbers",
     "Services",
     "How we work",
-    "The work",
     "Stack",
     "Team",
     "FAQ",
@@ -392,7 +387,6 @@ export const HOME_SECTION_IDS = [
   "numbers",
   "capabilities",
   "process",
-  "work",
   "stack",
   "team",
   "faq",

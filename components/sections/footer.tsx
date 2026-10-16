@@ -48,6 +48,7 @@ const LABELS = {
     privacy: "Privacidad",
     terms: "Términos",
     about: "Sobre nosotros",
+    projects: "Proyectos",
     blog: "Blog",
     allServices: "Todos los servicios",
   },
@@ -64,6 +65,7 @@ const LABELS = {
     privacy: "Privacy",
     terms: "Terms",
     about: "About us",
+    projects: "Projects",
     blog: "Blog",
     allServices: "All services",
   },
@@ -187,6 +189,7 @@ export function Footer() {
 
           <FooterColumn title={labels.company}>
             <FooterLink href={path("/about")}>{labels.about}</FooterLink>
+            <FooterLink href={path("/projects")}>{labels.projects}</FooterLink>
             <FooterLink href={path("/blog")}>{labels.blog}</FooterLink>
             <FooterLink href={path("/contact")}>{labels.contact}</FooterLink>
             <FooterLink href={path("/privacy")}>{labels.privacy}</FooterLink>

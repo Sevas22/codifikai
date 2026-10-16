@@ -22,9 +22,10 @@ const translations: Record<Language, Record<string, string>> = {
   es: {
     "nav.about": "Sobre nosotros",
     "nav.services": "Servicios",
+    "nav.projects": "Proyectos",
     "nav.blog": "Blog",
     "nav.contact": "Contacto",
-    "nav.getStarted": "Agendar demo",
+    "nav.getStarted": "Demo AI Agents",
     "nav.languageLabel": "Idioma",
     "nav.languageEs": "Español",
     "nav.languageEn": "English",
@@ -98,9 +99,10 @@ const translations: Record<Language, Record<string, string>> = {
   en: {
     "nav.about": "About us",
     "nav.services": "Services",
+    "nav.projects": "Projects",
     "nav.blog": "Blog",
     "nav.contact": "Contact",
-    "nav.getStarted": "Book a Demo",
+    "nav.getStarted": "Demo AI Agents",
     "nav.languageLabel": "Language",
     "nav.languageEs": "Español",
     "nav.languageEn": "English",

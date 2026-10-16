@@ -9,7 +9,6 @@ import { ProcessSection } from "@/components/home/process-section"
 import { SectionIndex } from "@/components/home/section-index"
 import { StackSection } from "@/components/home/stack-section"
 import { TeamSection } from "@/components/home/team-section"
-import { WorkSection } from "@/components/home/work-section"
 import { useLanguage } from "@/components/providers/language-provider"
 import { WHATSAPP_URL } from "@/lib/contact"
 import { homeCopy } from "@/lib/home-copy"
@@ -35,7 +34,6 @@ export function HomeExperience() {
       <NumbersSection copy={copy} caseCount={successCases.length} />
       <CapabilitiesSection copy={copy} language={language} whatsappHref={WHATSAPP_URL} />
       <ProcessSection copy={copy} />
-      <WorkSection copy={copy} language={language} />
       <StackSection copy={copy} />
       <TeamSection copy={copy} language={language} />
       <FaqSection copy={copy} />

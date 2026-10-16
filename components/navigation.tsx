@@ -9,7 +9,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
 import { ServicesMenu } from "@/components/nav/services-menu"
 import { IconSquircle } from "@/components/ui/icon-squircle"
-import { WHATSAPP_URL } from "@/lib/contact"
+import { whatsappUrl } from "@/lib/contact"
 import { isBlogPostPath } from "@/lib/blog-paths"
 import { localePath, otherLocale, stripLocale } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
@@ -19,6 +19,13 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const { language, t } = useLanguage()
+
+  // El botón promete una demo de los agentes: el mensaje de WhatsApp la pide.
+  const demoUrl = whatsappUrl(
+    language === "es"
+      ? "¡Buen día! Quiero ver una demo de los agentes de IA de Codifikai."
+      : "Hello! I would like to see a demo of Codifikai's AI agents."
+  )
 
   // Cambiar de idioma es navegar, no traducir en el sitio: se calcula la URL
   // equivalente de la página actual en el otro idioma. Si el visitante está en
@@ -58,6 +65,7 @@ export function Navigation() {
   const navLinks = [
     { href: "/about", label: t("nav.about"), highlight: false },
     { href: "/services", label: t("nav.services"), highlight: true },
+    { href: "/projects", label: t("nav.projects"), highlight: false },
     { href: "/blog", label: t("nav.blog"), highlight: false },
     { href: "/contact", label: t("nav.contact"), highlight: false },
   ] as const
@@ -159,7 +167,7 @@ export function Navigation() {
             </Link>
 
             <Button asChild variant="cta" size="cta-sm" className="ml-0.5 shrink-0">
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <a href={demoUrl} target="_blank" rel="noopener noreferrer">
                 {t("nav.getStarted")}
               </a>
             </Button>
@@ -285,7 +293,7 @@ export function Navigation() {
               className="group w-full py-6 text-lg"
             >
               <a
-                href={WHATSAPP_URL}
+                href={demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}

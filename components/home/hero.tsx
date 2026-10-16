@@ -6,6 +6,7 @@ import { ArrowDown, ArrowUpRight } from "lucide-react"
 
 import { Marquee, WordReveal, useMagnetic } from "@/components/home/ed-primitives"
 import { ParticleField } from "@/components/home/particle-field"
+import { useLocalePath } from "@/hooks/use-locale-path"
 import type { HomeCopy } from "@/lib/home-copy"
 
 /** Botón de golpe que se inclina hacia el cursor. */
@@ -43,6 +44,7 @@ function MagneticCta({
 
 export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: string }) {
   const reduced = useReducedMotion()
+  const path = useLocalePath()
 
   return (
     <section
@@ -128,7 +130,7 @@ export function Hero({ copy, whatsappHref }: { copy: HomeCopy; whatsappHref: str
               {copy.hero.ctaPrimary}
             </MagneticCta>
             <Link
-              href="#work"
+              href={path("/projects")}
               className="inline-flex items-center gap-2 rounded-full border border-ed-rule-strong bg-ed-canvas-raised px-7 py-4 text-[0.9375rem] font-semibold tracking-tight text-ed-ink transition-colors duration-300 hover:border-ed-accent hover:text-ed-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-accent"
             >
               {copy.hero.ctaSecondary}

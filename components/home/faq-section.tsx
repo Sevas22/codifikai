@@ -15,7 +15,7 @@ export function FaqSection({ copy }: { copy: HomeCopy }) {
     <EdSection id="faq" className="bg-ed-canvas-sunken">
       <div className="grid gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-24">
         <SectionHeading
-          index={7}
+          index={5}
           label={copy.faq.label}
           title={copy.faq.title}
         highlight={copy.highlights.faq}
