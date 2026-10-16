@@ -9,7 +9,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
 import { ServicesMenu } from "@/components/nav/services-menu"
 import { IconSquircle } from "@/components/ui/icon-squircle"
-import { whatsappUrl } from "@/lib/contact"
+import { DEMO_MESSAGE, whatsappUrl } from "@/lib/contact"
 import { isBlogPostPath } from "@/lib/blog-paths"
 import { localePath, otherLocale, stripLocale } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
@@ -21,11 +21,7 @@ export function Navigation() {
   const { language, t } = useLanguage()
 
   // El botón promete una demo de los agentes: el mensaje de WhatsApp la pide.
-  const demoUrl = whatsappUrl(
-    language === "es"
-      ? "¡Buen día! Quiero ver una demo de los agentes de IA de Codifikai."
-      : "Hello! I would like to see a demo of Codifikai's AI agents."
-  )
+  const demoUrl = whatsappUrl(DEMO_MESSAGE[language])
 
   // Cambiar de idioma es navegar, no traducir en el sitio: se calcula la URL
   // equivalente de la página actual en el otro idioma. Si el visitante está en

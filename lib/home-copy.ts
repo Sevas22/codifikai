@@ -217,6 +217,7 @@ const es: HomeCopy = {
   indexLabel: "En esta página",
   sectionIndex: [
     "Inicio",
+    "Agentes",
     "Cifras",
     "Servicios",
     "Cómo lo hacemos",
@@ -360,6 +361,7 @@ const en: HomeCopy = {
   indexLabel: "On this page",
   sectionIndex: [
     "Top",
+    "Agents",
     "Numbers",
     "Services",
     "How we work",
@@ -374,6 +376,7 @@ export const homeCopy: Record<HomeLang, HomeCopy> = { es, en }
 /** Ids de sección: alimentan el índice lateral y los anclajes del scroll. */
 export const HOME_SECTION_IDS = [
   "top",
+  "agents",
   "numbers",
   "capabilities",
   "process",

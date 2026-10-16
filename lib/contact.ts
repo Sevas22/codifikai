@@ -10,6 +10,12 @@ export const WHATSAPP_PHONE = "573124162175" as const
  */
 export const WHATSAPP_URL = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=!Buen%20dia%20estoy%20interesado%20en%20tener%20mas%20informacion%20de%20sus%20servicios!`
 
+/** Mensaje con el que se pide la demo de los agentes (botón del menú y portada). */
+export const DEMO_MESSAGE = {
+  es: "¡Buen día! Quiero ver una demo de los agentes de IA de Codifikai.",
+  en: "Hello! I would like to see a demo of Codifikai's AI agents.",
+} as const
+
 /** Enlace de WhatsApp con un mensaje propio, p. ej. para cotizar un agente concreto. */
 export function whatsappUrl(message: string): string {
   return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(message)}`

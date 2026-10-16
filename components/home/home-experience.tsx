@@ -1,5 +1,6 @@
 "use client"
 
+import { AgentsSection } from "@/components/home/agents-section"
 import { CapabilitiesSection } from "@/components/home/capabilities-section"
 import { ClosingSection } from "@/components/home/closing-section"
 import { Hero } from "@/components/home/hero"
@@ -30,6 +31,7 @@ export function HomeExperience() {
       <SectionIndex labels={copy.sectionIndex} title={copy.indexLabel} />
 
       <Hero copy={copy} whatsappHref={WHATSAPP_URL} />
+      <AgentsSection language={language} />
       <NumbersSection copy={copy} caseCount={successCases.length} />
       <CapabilitiesSection copy={copy} language={language} whatsappHref={WHATSAPP_URL} />
       <ProcessSection copy={copy} />
