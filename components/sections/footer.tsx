@@ -41,6 +41,7 @@ const LABELS = {
     services: "Servicios",
     company: "Empresa",
     contact: "Contacto",
+    diagnosis: "Diagnóstico",
     whatsapp: "WhatsApp",
     ctaTitle: "¿Listos para trabajar juntos?",
     ctaButton: "Hablemos por WhatsApp",
@@ -59,6 +60,7 @@ const LABELS = {
     services: "Services",
     company: "Company",
     contact: "Contact",
+    diagnosis: "Diagnostic",
     whatsapp: "WhatsApp",
     ctaTitle: "Ready to work together?",
     ctaButton: "Message us on WhatsApp",
@@ -194,7 +196,7 @@ export function Footer() {
             <FooterLink href={path("/projects")}>{labels.projects}</FooterLink>
             <FooterLink href={path("/blog")}>{labels.blog}</FooterLink>
             <FooterLink href={path("/faq")}>{labels.faq}</FooterLink>
-            <FooterLink href={path("/contact")}>{labels.contact}</FooterLink>
+            <FooterLink href={path("/contact")}>{labels.diagnosis}</FooterLink>
             <FooterLink href={path("/privacy")}>{labels.privacy}</FooterLink>
             <FooterLink href={path("/terms")}>{labels.terms}</FooterLink>
           </FooterColumn>

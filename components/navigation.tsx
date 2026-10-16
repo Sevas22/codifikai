@@ -68,7 +68,7 @@ export function Navigation() {
     { href: "/projects", label: t("nav.projects"), highlight: false },
     { href: "/blog", label: t("nav.blog"), highlight: false },
     { href: "/faq", label: t("nav.faq"), highlight: false },
-    { href: "/contact", label: t("nav.contact"), highlight: false },
+    { href: "/contact", label: t("nav.diagnosis"), highlight: false },
   ] as const
 
   // La comparación se hace sobre la ruta sin prefijo, para que /en/services
