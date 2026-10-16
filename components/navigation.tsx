@@ -67,6 +67,7 @@ export function Navigation() {
     { href: "/services", label: t("nav.services"), highlight: true },
     { href: "/projects", label: t("nav.projects"), highlight: false },
     { href: "/blog", label: t("nav.blog"), highlight: false },
+    { href: "/faq", label: t("nav.faq"), highlight: false },
     { href: "/contact", label: t("nav.contact"), highlight: false },
   ] as const
 
@@ -100,7 +101,7 @@ export function Navigation() {
         />
         <nav
           className={cn(
-            "pointer-events-auto flex max-w-[min(100%,56rem)] items-center gap-1 px-2 py-2 pl-3 sm:gap-1.5 sm:pl-4",
+            "pointer-events-auto flex max-w-[min(100%,64rem)] items-center gap-1 px-2 py-2 pl-3 sm:gap-1.5 sm:pl-4",
             pillSurface,
             isScrolled && "scale-[0.99] transition-transform duration-300"
           )}

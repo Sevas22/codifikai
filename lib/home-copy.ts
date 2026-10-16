@@ -16,7 +16,7 @@ export type HomeLang = "es" | "en"
 
 type Metric = { value: string; label: string; note: string }
 type Step = { title: string; body: string }
-type Faq = { q: string; a: string }
+export type Faq = { q: string; a: string }
 
 export type HomeCopy = {
   hero: {
@@ -60,7 +60,7 @@ export type HomeCopy = {
     industries: string[]
   }
   team: { label: string; title: string; lead: string; viewProfile: string }
-  faq: { label: string; title: string; items: Faq[] }
+  faq: { items: Faq[] }
   closing: {
     label: string
     title: string
@@ -76,7 +76,7 @@ export type HomeCopy = {
    * Van aparte del texto para no partir las cadenas traducibles en trozos.
    */
   highlights: Record<
-    "numbers" | "capabilities" | "process" | "work" | "stack" | "team" | "faq" | "closing",
+    "numbers" | "capabilities" | "process" | "stack" | "team" | "closing",
     string[]
   >
   indexLabel: string
@@ -174,8 +174,6 @@ const es: HomeCopy = {
     viewProfile: "Ver perfil",
   },
   faq: {
-    label: "Antes de escribir",
-    title: "Lo que suelen preguntarnos.",
     items: [
       {
         q: "¿Qué hace exactamente Codifikai?",
@@ -195,7 +193,7 @@ const es: HomeCopy = {
       },
       {
         q: "¿Puedo ver el trabajo antes de decidir?",
-        a: "Sí, y es lo que recomendamos. Todos los casos de la sección de trabajo tienen su sitio público en vivo: entra, navégalos y juzga por ti.",
+        a: "Sí, y es lo que recomendamos. Todos los proyectos de la página de Proyectos tienen su sitio público en vivo: entra, navégalos y juzga por ti.",
       },
     ],
   },
@@ -212,10 +210,8 @@ const es: HomeCopy = {
     numbers: ["trabajo"],
     capabilities: ["estrategia"],
     process: ["producción"],
-    work: ["vivo"],
     stack: ["conecta"],
     team: ["responde"],
-    faq: ["preguntarnos"],
     closing: ["rompiendo"],
   },
   indexLabel: "En esta página",
@@ -226,7 +222,6 @@ const es: HomeCopy = {
     "Cómo lo hacemos",
     "Integraciones",
     "Equipo",
-    "Preguntas",
     "Contacto",
   ],
 }
@@ -322,8 +317,6 @@ const en: HomeCopy = {
     viewProfile: "View profile",
   },
   faq: {
-    label: "Before you write",
-    title: "What people usually ask.",
     items: [
       {
         q: "What exactly does Codifikai do?",
@@ -343,7 +336,7 @@ const en: HomeCopy = {
       },
       {
         q: "Can I see the work before deciding?",
-        a: "Yes, and we recommend it. Every case in the work section has a live public site: open them, click around and judge for yourself.",
+        a: "Yes, and we recommend it. Every project on the Projects page has a live public site: open them, click around and judge for yourself.",
       },
     ],
   },
@@ -360,10 +353,8 @@ const en: HomeCopy = {
     numbers: ["work"],
     capabilities: ["strategy"],
     process: ["production"],
-    work: ["live"],
     stack: ["plugs"],
     team: ["answers"],
-    faq: ["ask"],
     closing: ["breaking"],
   },
   indexLabel: "On this page",
@@ -374,7 +365,6 @@ const en: HomeCopy = {
     "How we work",
     "Stack",
     "Team",
-    "FAQ",
     "Contact",
   ],
 }
@@ -389,7 +379,6 @@ export const HOME_SECTION_IDS = [
   "process",
   "stack",
   "team",
-  "faq",
   "contact",
 ] as const
 

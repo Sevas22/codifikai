@@ -50,6 +50,7 @@ const LABELS = {
     about: "Sobre nosotros",
     projects: "Proyectos",
     blog: "Blog",
+    faq: "FAQ",
     allServices: "Todos los servicios",
   },
   en: {
@@ -67,6 +68,7 @@ const LABELS = {
     about: "About us",
     projects: "Projects",
     blog: "Blog",
+    faq: "FAQ",
     allServices: "All services",
   },
 } as const
@@ -191,6 +193,7 @@ export function Footer() {
             <FooterLink href={path("/about")}>{labels.about}</FooterLink>
             <FooterLink href={path("/projects")}>{labels.projects}</FooterLink>
             <FooterLink href={path("/blog")}>{labels.blog}</FooterLink>
+            <FooterLink href={path("/faq")}>{labels.faq}</FooterLink>
             <FooterLink href={path("/contact")}>{labels.contact}</FooterLink>
             <FooterLink href={path("/privacy")}>{labels.privacy}</FooterLink>
             <FooterLink href={path("/terms")}>{labels.terms}</FooterLink>

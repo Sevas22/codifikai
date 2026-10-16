@@ -2,7 +2,6 @@
 
 import { CapabilitiesSection } from "@/components/home/capabilities-section"
 import { ClosingSection } from "@/components/home/closing-section"
-import { FaqSection } from "@/components/home/faq-section"
 import { Hero } from "@/components/home/hero"
 import { NumbersSection } from "@/components/home/numbers-section"
 import { ProcessSection } from "@/components/home/process-section"
@@ -36,7 +35,6 @@ export function HomeExperience() {
       <ProcessSection copy={copy} />
       <StackSection copy={copy} />
       <TeamSection copy={copy} language={language} />
-      <FaqSection copy={copy} />
       <ClosingSection copy={copy} whatsappHref={WHATSAPP_URL} />
     </div>
   )

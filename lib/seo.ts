@@ -231,6 +231,21 @@ const PAGES = {
       en: ["artificial intelligence projects", "Codifikai case studies", "custom software Colombia", "systems in production"],
     },
   },
+  faq: {
+    path: "/faq",
+    title: {
+      es: "Preguntas frecuentes sobre IA y automatización",
+      en: "Frequently asked questions about AI and automation",
+    },
+    description: {
+      es: "Respuestas directas sobre qué hace Codifikai, cómo arranca un proyecto, si hay que cambiar tus herramientas y si trabajamos fuera de Colombia.",
+      en: "Straight answers on what Codifikai does, how a project starts, whether you need to replace your tools and whether we work outside Colombia.",
+    },
+    keywords: {
+      es: ["preguntas frecuentes Codifikai", "cómo funciona la automatización con IA", "agencia de inteligencia artificial Colombia"],
+      en: ["Codifikai FAQ", "how AI automation works", "artificial intelligence agency Colombia"],
+    },
+  },
   blog: {
     path: "/blog",
     title: {
