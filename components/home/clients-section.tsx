@@ -1,12 +1,13 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
 import { EdSection, Reveal, WordReveal } from "@/components/home/ed-primitives"
 import { useLocalePath } from "@/hooks/use-locale-path"
 import type { HomeLang } from "@/lib/home-copy"
-import { successCases } from "@/lib/success-cases"
+import { successCases, type CaseLogo } from "@/lib/success-cases"
 
 const TEXT = {
   es: {
@@ -27,21 +28,38 @@ const TEXT = {
   },
 } as const
 
+type Brand = { name: string; logo?: CaseLogo }
+
+/**
+ * Tamaño de un logo en pantalla. Por área, no por altura: así una marca ancha
+ * (Contraste) y una casi cuadrada (TH Global) pesan parecido a la vista.
+ */
+function logoSize({ width, height }: CaseLogo) {
+  const ratio = width / height
+  let h = Math.min(66, Math.sqrt(9000 / ratio))
+  let w = h * ratio
+  if (w > 220) {
+    w = 220
+    h = w / ratio
+  }
+  return { width: Math.round(w), height: Math.round(h) }
+}
+
 /**
  * Una fila de la marquesina. El carril se anima a -50%, así que cada mitad
  * tiene que cubrir el ancho de la pantalla por sí sola: se repite la fila hasta
  * que lo hace, y la segunda mitad es copia exacta de la primera.
  */
 function LogoRow({
-  names,
+  brands,
   reverse,
   durationSeconds,
 }: {
-  names: string[]
+  brands: Brand[]
   reverse?: boolean
   durationSeconds: number
 }) {
-  const half = [...names, ...names]
+  const half = [...brands, ...brands]
   const lane = [...half, ...half]
 
   return (
@@ -54,14 +72,29 @@ function LogoRow({
         data-direction={reverse ? "reverse" : "forward"}
         style={{ ["--ed-marquee-duration" as string]: `${durationSeconds}s` }}
       >
-        {lane.map((name, i) => (
-          <span
-            key={`${name}-${i}`}
-            className="ed-display whitespace-nowrap px-8 text-[clamp(1.375rem,2.4vw,2rem)] text-ed-ink-faint transition-colors duration-300 hover:text-ed-ink sm:px-12"
-          >
-            {name}
-          </span>
-        ))}
+        {lane.map(({ name, logo }, i) =>
+          logo ? (
+            <span key={`${name}-${i}`} className="flex shrink-0 items-center px-8 sm:px-12">
+              <Image
+                src={logo.src}
+                alt=""
+                {...logoSize(logo)}
+                unoptimized
+                // Archivos de ~10 KB que se repiten: cargarlos ya evita que aparezcan de golpe al entrar en la marquesina.
+                loading="eager"
+                fetchPriority="low"
+                className="max-w-none opacity-60 transition-opacity duration-300 hover:opacity-100"
+              />
+            </span>
+          ) : (
+            <span
+              key={`${name}-${i}`}
+              className="ed-display whitespace-nowrap px-8 text-[clamp(1.375rem,2.4vw,2rem)] text-ed-ink opacity-60 transition-opacity duration-300 hover:opacity-100 sm:px-12"
+            >
+              {name}
+            </span>
+          )
+        )}
       </div>
     </div>
   )
@@ -69,15 +102,15 @@ function LogoRow({
 
 /**
  * Prueba social: los proyectos del portafolio en dos filas que corren en
- * sentidos contrarios. Los nombres salen de `successCases` —la misma fuente de
- * /projects—, así que no hay lista aparte que mantener ni cifras escritas a mano.
- * Mientras no haya logos limpios, cada marca va como texto.
+ * sentidos contrarios. Salen de `successCases` —la misma fuente de /projects—,
+ * así que no hay lista aparte que mantener ni cifras escritas a mano. Cada marca
+ * va con su logo en blanco; si aún no hay uno limpio, con su nombre en texto.
  */
 export function ClientsSection({ language }: { language: HomeLang }) {
   const path = useLocalePath()
   const t = TEXT[language]
-  const names = successCases.map((item) => item.title)
-  const middle = Math.ceil(names.length / 2)
+  const brands: Brand[] = successCases.map((item) => ({ name: item.title, logo: item.logo }))
+  const middle = Math.ceil(brands.length / 2)
 
   return (
     <EdSection id="clients" tone="dark" className="pt-0">
@@ -95,7 +128,7 @@ export function ClientsSection({ language }: { language: HomeLang }) {
         </div>
 
         <Reveal delay={0.12} y={14} className="flex shrink-0 flex-col items-start gap-3 lg:items-end">
-          <p className="text-[0.875rem] text-ed-ink-soft">{t.count(names.length)}</p>
+          <p className="text-[0.875rem] text-ed-ink-soft">{t.count(brands.length)}</p>
           <Link
             href={path("/projects")}
             className="group inline-flex items-center gap-1.5 text-[0.875rem] font-semibold text-ed-ink transition-colors hover:text-ed-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-accent"
@@ -111,14 +144,14 @@ export function ClientsSection({ language }: { language: HomeLang }) {
 
       {/* Lector de pantalla: la lista una sola vez; la marquesina es decorativa. */}
       <ul className="sr-only" aria-label={t.listLabel}>
-        {names.map((name) => (
+        {brands.map(({ name }) => (
           <li key={name}>{name}</li>
         ))}
       </ul>
 
       <div className="-mx-[var(--ed-gutter)] mt-12 flex flex-col gap-6 sm:mt-14 sm:gap-8">
-        <LogoRow names={names.slice(0, middle)} durationSeconds={70} />
-        <LogoRow names={names.slice(middle)} durationSeconds={78} reverse />
+        <LogoRow brands={brands.slice(0, middle)} durationSeconds={70} />
+        <LogoRow brands={brands.slice(middle)} durationSeconds={78} reverse />
       </div>
     </EdSection>
   )
