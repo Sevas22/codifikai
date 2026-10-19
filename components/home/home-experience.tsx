@@ -2,6 +2,7 @@
 
 import { AgentsSection } from "@/components/home/agents-section"
 import { CapabilitiesSection } from "@/components/home/capabilities-section"
+import { ClientsSection } from "@/components/home/clients-section"
 import { ClosingSection } from "@/components/home/closing-section"
 import { Hero } from "@/components/home/hero"
 import { NumbersSection } from "@/components/home/numbers-section"
@@ -33,6 +34,7 @@ export function HomeExperience() {
       <Hero copy={copy} whatsappHref={WHATSAPP_URL} />
       <AgentsSection language={language} />
       <NumbersSection copy={copy} caseCount={successCases.length} />
+      <ClientsSection language={language} />
       <CapabilitiesSection copy={copy} language={language} whatsappHref={WHATSAPP_URL} />
       <ProcessSection copy={copy} />
       <StackSection copy={copy} />
