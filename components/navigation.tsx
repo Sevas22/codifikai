@@ -97,7 +97,7 @@ export function Navigation() {
         />
         <nav
           className={cn(
-            "pointer-events-auto flex max-w-[min(100%,64rem)] items-center gap-1 px-2 py-2 pl-3 sm:gap-1.5 sm:pl-4",
+            "pointer-events-auto relative flex max-w-[min(100%,64rem)] items-center gap-1 px-2 py-2 pl-3 sm:gap-1.5 sm:pl-4",
             pillSurface,
             isScrolled && "scale-[0.99] transition-transform duration-300"
           )}

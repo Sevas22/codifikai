@@ -12,10 +12,24 @@
 import * as React from "react"
 import Link from "next/link"
 import { AnimatePresence, m, useReducedMotion } from "framer-motion"
-import { ArrowUpRight, ChevronDown } from "lucide-react"
+import Image from "next/image"
+import {
+  ArrowUpRight,
+  Bot,
+  ChevronDown,
+  Code,
+  Globe,
+  Megaphone,
+  Palette,
+  Search,
+  Sparkles,
+  Workflow,
+  type LucideIcon,
+} from "lucide-react"
 
 import { useLanguage } from "@/components/providers/language-provider"
 import { ServiceBadge } from "@/components/services/service-badge"
+import { AGENTS } from "@/lib/agents"
 import {
   SERVICES,
   SERVICES_MENU_INTRO,
@@ -65,6 +79,99 @@ function buildEntries(services: Service[]): MenuEntry[] {
     entries.push({ kind: "group", title: group.title, short: group.short, services: members })
   }
   return entries
+}
+
+/** Un icono por servicio para escanear el panel de un vistazo; Sparkles cubre uno nuevo. */
+const SERVICE_ICONS: Record<string, LucideIcon> = {
+  "ai-automation": Workflow,
+  "seo-geo": Search,
+  "ai-agents": Bot,
+  "custom-software": Code,
+  web: Globe,
+  branding: Palette,
+}
+const iconFor = (id: string): LucideIcon => SERVICE_ICONS[id] ?? Sparkles
+
+function IconTile({ icon: Icon, featured }: { icon: LucideIcon; featured?: boolean }) {
+  return (
+    <span
+      className={cn(
+        "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors duration-200",
+        featured
+          ? "bg-ed-canvas-raised text-ed-accent shadow-sm ring-1 ring-ed-rule group-hover:bg-ed-accent group-hover:text-white"
+          : "bg-ed-canvas-sunken text-ed-ink-soft group-hover:bg-ed-accent/10 group-hover:text-ed-accent"
+      )}
+    >
+      <Icon className="h-[1.125rem] w-[1.125rem]" aria-hidden />
+    </span>
+  )
+}
+
+/** Fila del panel: icono, título (con insignia si la hay) y una línea de contexto. */
+function MenuRow({
+  href,
+  icon,
+  title,
+  short,
+  badge,
+  featured,
+  children,
+}: {
+  href: string
+  icon: LucideIcon
+  title: string
+  short: string
+  badge?: string
+  featured?: boolean
+  children?: React.ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "group flex items-start gap-3 rounded-2xl p-3 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent",
+        featured ? "hover:bg-ed-canvas-raised/85" : "hover:bg-ed-canvas-sunken"
+      )}
+    >
+      <IconTile icon={icon} featured={featured} />
+      <span className="min-w-0 flex-1">
+        <span className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+          <span className="whitespace-nowrap text-[0.9375rem] font-semibold leading-tight tracking-tight text-ed-ink">
+            {title}
+          </span>
+          {badge ? <ServiceBadge label={badge} /> : null}
+        </span>
+        <span className="mt-1 block text-[0.78rem] leading-snug text-ed-ink-soft">{short}</span>
+        {children}
+      </span>
+    </Link>
+  )
+}
+
+/** Caritas de los seis agentes, superpuestas: anticipan lo que hay detrás del enlace. */
+function AgentFaces() {
+  return (
+    <span className="mt-2.5 flex items-center" aria-hidden>
+      {AGENTS.map((agent, i) => (
+        <span
+          key={agent.id}
+          className={cn(
+            "relative h-6 w-6 overflow-hidden rounded-full bg-ed-canvas-raised ring-2 ring-ed-canvas-raised",
+            i > 0 && "-ml-1.5"
+          )}
+          style={{ zIndex: AGENTS.length - i }}
+        >
+          <Image
+            src={agent.image}
+            alt=""
+            fill
+            sizes="24px"
+            className="origin-[45%_36%] scale-[1.7] object-cover"
+          />
+        </span>
+      ))}
+    </span>
+  )
 }
 
 export function ServicesMenu({
@@ -120,7 +227,6 @@ export function ServicesMenu({
   return (
     <div
       ref={containerRef}
-      className="relative"
       onMouseEnter={() => {
         cancelClose()
         setOpen(true)
@@ -165,81 +271,72 @@ export function ServicesMenu({
             // no desbordar en portátiles estrechos.
             className="absolute left-1/2 top-[calc(100%+0.9rem)] z-50 w-[min(48rem,calc(100vw-2rem))] -translate-x-1/2"
           >
-            <div className="ed-dark overflow-hidden rounded-[1.5rem] border border-white/10 bg-ed-canvas p-2 shadow-[0_32px_80px_-24px_rgba(0,0,0,0.55)]">
+            <div className="ed-light-scope overflow-hidden rounded-[1.75rem] border border-ed-rule bg-ed-canvas-raised/95 p-2 shadow-[0_28px_70px_-24px_rgba(24,20,48,0.38)] backdrop-blur-xl">
               <div className="grid grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-2">
-                {/* Núcleo de IA: lo que nos define, resaltado en violeta. */}
-                <div className="rounded-2xl bg-[color-mix(in_oklch,var(--brand-violet)_14%,transparent)] p-2">
-                  <p className="ed-label px-3 pb-1.5 pt-2 text-ed-accent">
+                {/* Núcleo de IA: lo que nos define, sobre un fondo de marca suave. */}
+                <div className="rounded-3xl bg-[linear-gradient(160deg,color-mix(in_oklch,var(--brand-violet)_15%,transparent),color-mix(in_oklch,var(--brand-magenta)_6%,transparent)_65%,transparent)] p-2 ring-1 ring-inset ring-[color-mix(in_oklch,var(--brand-violet)_22%,transparent)]">
+                  <p className="ed-label px-3 pb-1 pt-2.5 text-ed-accent">
                     {SERVICE_TIERS.ai.label[language]}
                   </p>
                   <ul>
-                    {core.map((service) => {
-                      const badge = service.badge?.[language]
-                      return (
-                        <li key={service.id}>
-                          <Link
-                            href={path(`/services/${service.slug}`)}
-                            className="group flex flex-col rounded-xl px-3 py-3 transition-colors duration-200 hover:bg-white/[0.07] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent"
-                          >
-                            <span className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
-                              <span className="whitespace-nowrap text-[0.9375rem] font-semibold leading-tight tracking-tight text-ed-ink">
-                                {service.title[language]}
-                              </span>
-                              {badge ? <ServiceBadge label={badge} /> : null}
-                            </span>
-                            <span className="mt-1 text-[0.78rem] leading-snug text-ed-ink-soft">
-                              {service.short[language]}
-                            </span>
-                          </Link>
-                        </li>
-                      )
-                    })}
+                    {core.map((service) => (
+                      <li key={service.id}>
+                        <MenuRow
+                          featured
+                          href={path(`/services/${service.slug}`)}
+                          icon={iconFor(service.id)}
+                          title={service.title[language]}
+                          short={service.short[language]}
+                          badge={service.badge?.[language]}
+                        >
+                          {service.id === "ai-agents" ? <AgentFaces /> : null}
+                        </MenuRow>
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
                 {/* Lo que rodea al núcleo. */}
-                <div className="p-2">
-                  <p className="ed-label px-3 pb-1.5 pt-2 text-ed-ink-faint">{intro.rest[language]}</p>
+                <div className="p-1">
+                  <p className="ed-label px-3 pb-1 pt-2.5 text-ed-ink-faint">{intro.rest[language]}</p>
                   <ul>
                     {others.map((entry) =>
                       entry.kind === "service" ? (
                         <li key={entry.service.id}>
-                          <Link
+                          <MenuRow
                             href={path(`/services/${entry.service.slug}`)}
-                            className="group flex flex-col rounded-xl px-3 py-3 transition-colors duration-200 hover:bg-white/[0.07] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent"
-                          >
-                            <span className="text-[0.9375rem] font-semibold leading-tight tracking-tight text-ed-ink">
-                              {entry.service.title[language]}
-                            </span>
-                            <span className="mt-1 text-[0.78rem] leading-snug text-ed-ink-soft">
-                              {entry.service.short[language]}
-                            </span>
-                          </Link>
+                            icon={iconFor(entry.service.id)}
+                            title={entry.service.title[language]}
+                            short={entry.service.short[language]}
+                          />
                         </li>
                       ) : (
                         <li key={entry.services.map((service) => service.id).join("+")}>
                           {/* Entrada fusionada: el título no es un enlace, cada página tiene el suyo. */}
-                          <div className="rounded-xl px-3 py-3">
-                            <span className="block text-[0.9375rem] font-semibold leading-tight tracking-tight text-ed-ink">
-                              {entry.title[language]}
-                            </span>
-                            <span className="mt-1 block text-[0.78rem] leading-snug text-ed-ink-soft">
-                              {entry.short[language]}
-                            </span>
-                            <span className="mt-2.5 flex flex-wrap gap-2">
-                              {entry.services.map((service) => (
-                                <Link
-                                  key={service.id}
-                                  href={path(`/services/${service.slug}`)}
-                                  className="group/chip inline-flex items-center gap-1 rounded-full border border-white/15 px-3 py-1 text-[0.75rem] font-medium text-ed-ink transition-colors duration-200 hover:border-ed-accent hover:text-ed-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent"
-                                >
-                                  {service.title[language]}
-                                  <ArrowUpRight
-                                    className="h-3 w-3 text-ed-ink-faint transition-colors group-hover/chip:text-ed-accent"
-                                    aria-hidden
-                                  />
-                                </Link>
-                              ))}
+                          <div className="flex items-start gap-3 rounded-2xl p-3">
+                            <IconTile icon={Megaphone} />
+                            <span className="min-w-0 flex-1">
+                              <span className="block text-[0.9375rem] font-semibold leading-tight tracking-tight text-ed-ink">
+                                {entry.title[language]}
+                              </span>
+                              <span className="mt-1 block text-[0.78rem] leading-snug text-ed-ink-soft">
+                                {entry.short[language]}
+                              </span>
+                              <span className="mt-2.5 flex flex-wrap gap-2">
+                                {entry.services.map((service) => (
+                                  <Link
+                                    key={service.id}
+                                    href={path(`/services/${service.slug}`)}
+                                    className="group/chip inline-flex items-center gap-1 rounded-full border border-ed-rule-strong bg-ed-canvas-raised px-3 py-1 text-[0.75rem] font-medium text-ed-ink transition-colors duration-200 hover:border-ed-accent hover:text-ed-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent"
+                                  >
+                                    {service.title[language]}
+                                    <ArrowUpRight
+                                      className="h-3 w-3 text-ed-ink-faint transition-colors group-hover/chip:text-ed-accent"
+                                      aria-hidden
+                                    />
+                                  </Link>
+                                ))}
+                              </span>
                             </span>
                           </div>
                         </li>
@@ -249,7 +346,7 @@ export function ServicesMenu({
                 </div>
               </div>
 
-              <div className="mt-1 flex items-center justify-between gap-4 border-t border-white/10 px-4 pb-2 pt-3">
+              <div className="flex items-center justify-between gap-4 px-4 pb-2.5 pt-3.5">
                 <p className="ed-label text-ed-ink-faint">{intro.label[language]}</p>
                 <Link
                   href={path("/services")}
