@@ -1,15 +1,15 @@
 "use client"
 
+import { AgentsSection } from "@/components/home/agents-section"
 import { CapabilitiesSection } from "@/components/home/capabilities-section"
+import { ClientsSection } from "@/components/home/clients-section"
 import { ClosingSection } from "@/components/home/closing-section"
-import { FaqSection } from "@/components/home/faq-section"
 import { Hero } from "@/components/home/hero"
 import { NumbersSection } from "@/components/home/numbers-section"
 import { ProcessSection } from "@/components/home/process-section"
 import { SectionIndex } from "@/components/home/section-index"
 import { StackSection } from "@/components/home/stack-section"
 import { TeamSection } from "@/components/home/team-section"
-import { WorkSection } from "@/components/home/work-section"
 import { useLanguage } from "@/components/providers/language-provider"
 import { WHATSAPP_URL } from "@/lib/contact"
 import { homeCopy } from "@/lib/home-copy"
@@ -32,13 +32,13 @@ export function HomeExperience() {
       <SectionIndex labels={copy.sectionIndex} title={copy.indexLabel} />
 
       <Hero copy={copy} whatsappHref={WHATSAPP_URL} />
+      <AgentsSection language={language} />
       <NumbersSection copy={copy} caseCount={successCases.length} />
+      <ClientsSection language={language} />
       <CapabilitiesSection copy={copy} language={language} whatsappHref={WHATSAPP_URL} />
       <ProcessSection copy={copy} />
-      <WorkSection copy={copy} language={language} />
       <StackSection copy={copy} />
       <TeamSection copy={copy} language={language} />
-      <FaqSection copy={copy} />
       <ClosingSection copy={copy} whatsappHref={WHATSAPP_URL} />
     </div>
   )

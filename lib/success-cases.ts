@@ -19,6 +19,17 @@ export type CaseMetric = {
   labelEs: string
 }
 
+/** Logo monocromo (blanco sobre transparente), pensado para fondos oscuros. */
+export type CaseLogo = {
+  src: string
+  width: number
+  height: number
+}
+
+function logo(id: string, width: number, height: number): CaseLogo {
+  return { src: `/images/clients/${id}.webp`, width, height }
+}
+
 export type SuccessCase = {
   id: string
   title: string
@@ -29,6 +40,8 @@ export type SuccessCase = {
   problemEs: string
   url: string
   image: string
+  /** Si falta, la portada muestra el nombre del proyecto como texto. */
+  logo?: CaseLogo
   category: string
   tags: string[]
   filters: Exclude<CaseFilter, "all">[]
@@ -63,6 +76,7 @@ export const successCases: SuccessCase[] = [
     problemEn: "Brand perception did not match the quality of their activations.",
     problemEs: "La percepción de marca no reflejaba la calidad de sus activaciones.",
     url: "https://www.contrasteagencia.com/",
+    logo: logo("contraste", 640, 86),
     image: "/images/cases/contrasteagencia.png",
     category: "Brand Experience",
     tags: ["React", "Next.js", "Tailwind CSS", "Motion"],
@@ -85,6 +99,7 @@ export const successCases: SuccessCase[] = [
     problemEn: "Fragmented vendor onboarding and low conversion on mobile.",
     problemEs: "Onboarding de vendedores fragmentado y baja conversión en móvil.",
     url: "https://www.venextrading.shop/",
+    logo: logo("venextrading", 594, 117),
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80",
     category: "Marketplace",
     tags: ["Next.js", "React", "E-commerce", "UI/UX"],
@@ -97,6 +112,25 @@ export const successCases: SuccessCase[] = [
     featured: true,
   },
   {
+    id: "dalizas",
+    title: "Daliza Pastelería Fina",
+    subtitle: "Pastry & Bakery · Bogotá",
+    description:
+      "Website for a pastry shop in Bosa, Bogotá: custom cakes, desserts and artisan bread, with a 3-step cake designer, four branches and ordering through WhatsApp.",
+    descriptionEs:
+      "Sitio web de una pastelería en Bosa, Bogotá: tortas personalizadas, postres y pan artesanal, con diseñador de tortas en 3 pasos, cuatro sedes y pedidos por WhatsApp.",
+    problemEn: "Custom cake orders needed a simple path from idea to request.",
+    problemEs: "Los pedidos de tortas personalizadas necesitaban un camino simple de la idea al pedido.",
+    url: "https://www.dalizas.com/",
+    logo: logo("dalizas", 172, 200),
+    image: "/images/cases/dalizas.webp",
+    category: "Food · Commerce",
+    tags: ["Next.js", "React", "WhatsApp", "SEO"],
+    filters: ["commerce"],
+    // Sin cifras publicadas todavía: no se muestran métricas hasta tenerlas medidas.
+    metrics: [],
+  },
+  {
     id: "th-global",
     title: "TH Global",
     subtitle: "Telehealth · Teleradiology",
@@ -107,6 +141,7 @@ export const successCases: SuccessCase[] = [
     problemEn: "Complex clinical workflows without a unified digital experience.",
     problemEs: "Flujos clínicos complejos sin una experiencia digital unificada.",
     url: "https://thglobal.com.co/",
+    logo: logo("th-global", 206, 200),
     image: "/images/cases/thglobal.png",
     category: "Health · SaaS",
     tags: ["Next.js", "React", "TypeScript", "SEO"],
@@ -129,6 +164,7 @@ export const successCases: SuccessCase[] = [
     problemEn: "Manual quoting and disconnected service communication.",
     problemEs: "Cotizaciones manuales y comunicación de servicios desconectada.",
     url: "https://logysan.com.co/",
+    logo: logo("logysan", 500, 169),
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80",
     category: "Logistics",
     tags: ["Next.js", "React", "TypeScript", "SEO"],
@@ -150,6 +186,7 @@ export const successCases: SuccessCase[] = [
     problemEn: "Low visibility across export programs and container coordination.",
     problemEs: "Baja visibilidad en programas de exportación y coordinación de contenedores.",
     url: "https://www.mercaderustrading.com/",
+    logo: logo("mercaderus", 640, 91),
     image: "/images/cases/mercaderus.png",
     category: "Commerce · Logistics",
     tags: ["Next.js", "React", "TypeScript", "SEO"],
@@ -171,6 +208,7 @@ export const successCases: SuccessCase[] = [
     problemEn: "Global buyers lacked trust signals and structured service paths.",
     problemEs: "Compradores globales sin señales de confianza ni rutas de servicio claras.",
     url: "https://www.jibalamericastrading.com/",
+    logo: logo("jibal-americas", 640, 104),
     image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80",
     category: "Global Trade",
     tags: ["Next.js", "React", "Tailwind", "SEO"],
@@ -234,6 +272,7 @@ export const successCases: SuccessCase[] = [
     problemEn: "Technical catalog was difficult to navigate for distributors.",
     problemEs: "Catálogo técnico difícil de navegar para distribuidores.",
     url: "https://www.fibraca.com/",
+    logo: logo("fibraca", 246, 200),
     image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80",
     category: "Industrial · Commerce",
     tags: ["Next.js", "React", "E-commerce", "SEO"],
@@ -255,6 +294,7 @@ export const successCases: SuccessCase[] = [
     problemEn: "Segmented offerings reduced clarity for global procurement teams.",
     problemEs: "Ofertas segmentadas reducían claridad para equipos de compras globales.",
     url: "https://www.tradermarketer.online/",
+    logo: logo("trader-marketer", 383, 200),
     image: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200&q=80",
     category: "B2B Trade",
     tags: ["Next.js", "React", "Trading", "SEO"],

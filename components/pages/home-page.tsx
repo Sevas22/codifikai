@@ -8,10 +8,8 @@ import { getSiteUrl, siteName } from "@/lib/site"
 /**
  * Datos estructurados de la portada.
  *
- * Incluye `FAQPage` con las mismas cinco preguntas que la página muestra en su
- * acordeón. El marcado solo es legítimo si el texto está en la página —lo
- * está—, y es la pieza que permite que un asistente de IA cite una respuesta
- * concreta en vez de resumir la web entera por encima.
+ * El `FAQPage` vive ahora en /faq, donde están las preguntas a la vista: el
+ * marcado solo es legítimo en la página que muestra ese texto.
  */
 function HomeJsonLd({ locale }: { locale: Locale }) {
   const site = getSiteUrl()
@@ -29,16 +27,6 @@ function HomeJsonLd({ locale }: { locale: Locale }) {
       isPartOf: { "@id": `${site}#website` },
       about: { "@id": `${site}#organization` },
       primaryImageOfPage: `${site}/opengraph-image`,
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${url}#faq`,
-      inLanguage: locale === "es" ? "es-CO" : "en",
-      mainEntity: copy.faq.items.map((item) => ({
-        "@type": "Question",
-        name: item.q,
-        acceptedAnswer: { "@type": "Answer", text: item.a },
-      })),
     },
   ]
 

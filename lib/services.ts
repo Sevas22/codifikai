@@ -1146,10 +1146,8 @@ export function getServicesByTier(): { tier: ServiceTier; services: Service[] }[
 /** Texto de cabecera del panel de servicios de la navegación. */
 export const SERVICES_MENU_INTRO = {
   label: { es: "Agencia de inteligencia artificial", en: "Artificial intelligence agency" },
-  title: {
-    es: "IA que opera tu negocio, y todo lo que la sostiene.",
-    en: "AI that runs your business, and everything that holds it up.",
-  },
+  /** Encabezado de la segunda columna: lo que rodea al núcleo de IA. */
+  rest: { es: "Y todo lo que la sostiene", en: "And everything that holds it up" },
   cta: { es: "Ver todos los servicios", en: "See all services" },
 } as const
 

@@ -30,7 +30,7 @@ export function StackSection({ copy }: { copy: HomeCopy }) {
   return (
     <EdSection id="stack" className="ed-columns border-y border-ed-rule">
       <SectionHeading
-        index={5}
+        index={4}
         label={copy.stack.label}
         title={copy.stack.title}
         highlight={copy.highlights.stack}

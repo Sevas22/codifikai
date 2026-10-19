@@ -20,12 +20,13 @@ type LanguageProviderState = {
 // Diccionario de traducciones
 const translations: Record<Language, Record<string, string>> = {
   es: {
-    "nav.home": "Plataforma",
     "nav.about": "Sobre nosotros",
     "nav.services": "Servicios",
+    "nav.projects": "Proyectos",
     "nav.blog": "Blog",
-    "nav.contact": "Contacto",
-    "nav.getStarted": "Agendar demo",
+    "nav.faq": "FAQ",
+    "nav.diagnosis": "Diagnóstico",
+    "nav.getStarted": "Demo AI Agents",
     "nav.languageLabel": "Idioma",
     "nav.languageEs": "Español",
     "nav.languageEn": "English",
@@ -97,12 +98,13 @@ const translations: Record<Language, Record<string, string>> = {
     "contactPage.directPhone": "Teléfono",
   },
   en: {
-    "nav.home": "Platform",
     "nav.about": "About us",
     "nav.services": "Services",
+    "nav.projects": "Projects",
     "nav.blog": "Blog",
-    "nav.contact": "Contact",
-    "nav.getStarted": "Book a Demo",
+    "nav.faq": "FAQ",
+    "nav.diagnosis": "Diagnostic",
+    "nav.getStarted": "Demo AI Agents",
     "nav.languageLabel": "Language",
     "nav.languageEs": "Español",
     "nav.languageEn": "English",

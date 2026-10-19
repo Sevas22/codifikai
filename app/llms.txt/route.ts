@@ -47,8 +47,10 @@ Trabaja con empresas en Colombia y Latinoamérica, y con clientes de comercio ex
 
 - [Inicio](${site}/): Qué hace ${siteName} y para quién.
 - [Servicios](${site}/services): Los servicios organizados por niveles, con la inteligencia artificial como núcleo.
+- [Proyectos](${site}/projects): Sistemas de IA y software en producción, cada uno con su sitio público.
 - [Sobre nosotros](${site}/about): Equipo fundador y enfoque de trabajo.
 - [Blog](${site}/blog): Guías prácticas de inteligencia artificial y automatización para empresas de Colombia.
+- [Preguntas frecuentes](${site}/faq): Respuestas a lo que más nos preguntan antes de empezar un proyecto.
 - [Contacto](${site}/contact): Cómo iniciar un proyecto con ${siteName}.
 
 ## Idiomas

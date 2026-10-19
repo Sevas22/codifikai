@@ -4,13 +4,15 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
-import { DrawnRule, EdSection, Reveal, SectionHeading } from "@/components/home/ed-primitives"
 import type { HomeCopy, HomeLang } from "@/lib/home-copy"
-import { isLogoPosterPath, successCases, type SuccessCase } from "@/lib/success-cases"
+import { isLogoPosterPath, type SuccessCase } from "@/lib/success-cases"
 import { cn } from "@/lib/utils"
-import { useLocalePath } from "@/hooks/use-locale-path"
 
-function CaseCard({
+/**
+ * Tarjeta de un proyecto en producción. "lead" es la grande, con métricas;
+ * "row" es la compacta del resto del listado.
+ */
+export function CaseCard({
   item,
   language,
   copy,
@@ -110,53 +112,5 @@ function CaseCard({
         ) : null}
       </div>
     </Link>
-  )
-}
-
-export function WorkSection({ copy, language }: { copy: HomeCopy; language: HomeLang }) {
-  const path = useLocalePath()
-  const featured = successCases.filter((c) => c.featured).slice(0, 2)
-  const featuredIds = new Set(featured.map((c) => c.id))
-  const rest = successCases.filter((c) => !featuredIds.has(c.id)).slice(0, 6)
-
-  return (
-    <EdSection id="work" tone="dark">
-      <SectionHeading
-        index={4}
-        label={copy.work.label}
-        title={copy.work.title}
-        highlight={copy.highlights.work}
-        lead={copy.work.lead}
-        align="wide"
-      />
-
-      <div className="mt-20 grid gap-14 lg:grid-cols-2 lg:gap-12">
-        {featured.map((item, i) => (
-          <Reveal key={item.id} delay={i * 0.12} y={30}>
-            <CaseCard item={item} language={language} copy={copy} size="lead" priority={i === 0} />
-          </Reveal>
-        ))}
-      </div>
-
-      <DrawnRule className="my-16" />
-
-      <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
-        {rest.map((item, i) => (
-          <Reveal key={item.id} delay={(i % 3) * 0.1} y={26}>
-            <CaseCard item={item} language={language} copy={copy} size="row" />
-          </Reveal>
-        ))}
-      </div>
-
-      <Reveal delay={0.1} className="mt-16">
-        <Link
-          href={path("/services#cases")}
-          className="ed-link inline-flex items-center gap-2 text-[0.9375rem] font-medium tracking-tight text-ed-ink transition-colors hover:text-ed-accent"
-        >
-          {copy.work.allCases}
-          <ArrowUpRight className="h-4 w-4" aria-hidden />
-        </Link>
-      </Reveal>
-    </EdSection>
   )
 }

@@ -16,7 +16,7 @@ export type HomeLang = "es" | "en"
 
 type Metric = { value: string; label: string; note: string }
 type Step = { title: string; body: string }
-type Faq = { q: string; a: string }
+export type Faq = { q: string; a: string }
 
 export type HomeCopy = {
   hero: {
@@ -48,7 +48,6 @@ export type HomeCopy = {
     title: string
     lead: string
     viewCase: string
-    allCases: string
     liveSite: string
   }
   stack: {
@@ -61,7 +60,7 @@ export type HomeCopy = {
     industries: string[]
   }
   team: { label: string; title: string; lead: string; viewProfile: string }
-  faq: { label: string; title: string; items: Faq[] }
+  faq: { items: Faq[] }
   closing: {
     label: string
     title: string
@@ -77,7 +76,7 @@ export type HomeCopy = {
    * Van aparte del texto para no partir las cadenas traducibles en trozos.
    */
   highlights: Record<
-    "numbers" | "capabilities" | "process" | "work" | "stack" | "team" | "faq" | "closing",
+    "numbers" | "capabilities" | "process" | "stack" | "team" | "closing",
     string[]
   >
   indexLabel: string
@@ -157,7 +156,6 @@ const es: HomeCopy = {
     title: "Sistemas que ya están en vivo.",
     lead: "Marketplaces, telemedicina, logística y comercio exterior. Cada uno con su sitio público, abierto a inspección.",
     viewCase: "Ver caso",
-    allCases: "Ver todos los casos",
     liveSite: "Sitio en vivo",
   },
   stack: {
@@ -176,8 +174,6 @@ const es: HomeCopy = {
     viewProfile: "Ver perfil",
   },
   faq: {
-    label: "Antes de escribir",
-    title: "Lo que suelen preguntarnos.",
     items: [
       {
         q: "¿Qué hace exactamente Codifikai?",
@@ -197,7 +193,7 @@ const es: HomeCopy = {
       },
       {
         q: "¿Puedo ver el trabajo antes de decidir?",
-        a: "Sí, y es lo que recomendamos. Todos los casos de la sección de trabajo tienen su sitio público en vivo: entra, navégalos y juzga por ti.",
+        a: "Sí, y es lo que recomendamos. Todos los proyectos de la página de Proyectos tienen su sitio público en vivo: entra, navégalos y juzga por ti.",
       },
     ],
   },
@@ -214,22 +210,20 @@ const es: HomeCopy = {
     numbers: ["trabajo"],
     capabilities: ["estrategia"],
     process: ["producción"],
-    work: ["vivo"],
     stack: ["conecta"],
     team: ["responde"],
-    faq: ["preguntarnos"],
     closing: ["rompiendo"],
   },
   indexLabel: "En esta página",
   sectionIndex: [
     "Inicio",
+    "Agentes",
     "Cifras",
+    "Casos",
     "Servicios",
     "Cómo lo hacemos",
-    "El trabajo",
     "Integraciones",
     "Equipo",
-    "Preguntas",
     "Contacto",
   ],
 }
@@ -307,7 +301,6 @@ const en: HomeCopy = {
     title: "Systems already live.",
     lead: "Marketplaces, telehealth, logistics and cross-border trade, each with a public site that is open to inspection.",
     viewCase: "View case",
-    allCases: "View all cases",
     liveSite: "Live site",
   },
   stack: {
@@ -326,8 +319,6 @@ const en: HomeCopy = {
     viewProfile: "View profile",
   },
   faq: {
-    label: "Before you write",
-    title: "What people usually ask.",
     items: [
       {
         q: "What exactly does Codifikai do?",
@@ -347,7 +338,7 @@ const en: HomeCopy = {
       },
       {
         q: "Can I see the work before deciding?",
-        a: "Yes, and we recommend it. Every case in the work section has a live public site: open them, click around and judge for yourself.",
+        a: "Yes, and we recommend it. Every project on the Projects page has a live public site: open them, click around and judge for yourself.",
       },
     ],
   },
@@ -364,22 +355,20 @@ const en: HomeCopy = {
     numbers: ["work"],
     capabilities: ["strategy"],
     process: ["production"],
-    work: ["live"],
     stack: ["plugs"],
     team: ["answers"],
-    faq: ["ask"],
     closing: ["breaking"],
   },
   indexLabel: "On this page",
   sectionIndex: [
     "Top",
+    "Agents",
     "Numbers",
+    "Cases",
     "Services",
     "How we work",
-    "The work",
     "Stack",
     "Team",
-    "FAQ",
     "Contact",
   ],
 }
@@ -389,13 +378,13 @@ export const homeCopy: Record<HomeLang, HomeCopy> = { es, en }
 /** Ids de sección: alimentan el índice lateral y los anclajes del scroll. */
 export const HOME_SECTION_IDS = [
   "top",
+  "agents",
   "numbers",
+  "clients",
   "capabilities",
   "process",
-  "work",
   "stack",
   "team",
-  "faq",
   "contact",
 ] as const
 

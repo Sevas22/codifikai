@@ -9,7 +9,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import { CodifikaiLogo } from "@/components/brand/codifikai-logo"
 import { ServicesMenu } from "@/components/nav/services-menu"
 import { IconSquircle } from "@/components/ui/icon-squircle"
-import { WHATSAPP_URL } from "@/lib/contact"
+import { DEMO_MESSAGE, whatsappUrl } from "@/lib/contact"
 import { isBlogPostPath } from "@/lib/blog-paths"
 import { localePath, otherLocale, stripLocale } from "@/lib/i18n"
 import { cn } from "@/lib/utils"
@@ -19,6 +19,9 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const { language, t } = useLanguage()
+
+  // El botón promete una demo de los agentes: el mensaje de WhatsApp la pide.
+  const demoUrl = whatsappUrl(DEMO_MESSAGE[language])
 
   // Cambiar de idioma es navegar, no traducir en el sitio: se calcula la URL
   // equivalente de la página actual en el otro idioma. Si el visitante está en
@@ -56,11 +59,12 @@ export function Navigation() {
   }, [isMobileMenuOpen])
 
   const navLinks = [
-    { href: "/", label: t("nav.home"), highlight: false },
     { href: "/about", label: t("nav.about"), highlight: false },
     { href: "/services", label: t("nav.services"), highlight: true },
+    { href: "/projects", label: t("nav.projects"), highlight: false },
     { href: "/blog", label: t("nav.blog"), highlight: false },
-    { href: "/contact", label: t("nav.contact"), highlight: false },
+    { href: "/faq", label: t("nav.faq"), highlight: false },
+    { href: "/contact", label: t("nav.diagnosis"), highlight: false },
   ] as const
 
   // La comparación se hace sobre la ruta sin prefijo, para que /en/services
@@ -93,7 +97,7 @@ export function Navigation() {
         />
         <nav
           className={cn(
-            "pointer-events-auto flex max-w-[min(100%,56rem)] items-center gap-1 px-2 py-2 pl-3 sm:gap-1.5 sm:pl-4",
+            "pointer-events-auto relative flex max-w-[min(100%,64rem)] items-center gap-1 px-2 py-2 pl-3 sm:gap-1.5 sm:pl-4",
             pillSurface,
             isScrolled && "scale-[0.99] transition-transform duration-300"
           )}
@@ -101,6 +105,7 @@ export function Navigation() {
         >
           <Link
             href={localePath(language, "/")}
+            aria-label={language === "es" ? "Codifikai, ir al inicio" : "Codifikai, go to home"}
             className="group relative flex shrink-0 items-center rounded-lg px-1 py-0.5 outline-none ring-offset-background transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-accent"
           >
             <CodifikaiLogo size="sm" showCode className="relative" />
@@ -159,7 +164,7 @@ export function Navigation() {
             </Link>
 
             <Button asChild variant="cta" size="cta-sm" className="ml-0.5 shrink-0">
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+              <a href={demoUrl} target="_blank" rel="noopener noreferrer">
                 {t("nav.getStarted")}
               </a>
             </Button>
@@ -182,6 +187,7 @@ export function Navigation() {
           <div className="flex min-w-0 flex-1 justify-center px-1">
             <Link
               href={localePath(language, "/")}
+              aria-label={language === "es" ? "Codifikai, ir al inicio" : "Codifikai, go to home"}
               className="group relative z-10 flex max-w-full items-center justify-center"
             >
               {/* -inset-4 en móvil empuja el glow encima de los iconos; solo desde md */}
@@ -284,7 +290,7 @@ export function Navigation() {
               className="group w-full py-6 text-lg"
             >
               <a
-                href={WHATSAPP_URL}
+                href={demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}

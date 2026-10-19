@@ -216,6 +216,36 @@ const PAGES = {
       ],
     },
   },
+  projects: {
+    path: "/projects",
+    title: {
+      es: "Proyectos: sistemas de IA y software en producción",
+      en: "Projects: AI systems and software in production",
+    },
+    description: {
+      es: "Proyectos de Codifikai en producción: marketplaces, telemedicina, logística y comercio exterior, cada uno con su sitio público abierto a inspección.",
+      en: "Codifikai projects in production: marketplaces, telehealth, logistics and cross-border trade, each with a public site open to inspection.",
+    },
+    keywords: {
+      es: ["proyectos de inteligencia artificial", "casos de éxito Codifikai", "software a la medida Colombia", "sistemas en producción"],
+      en: ["artificial intelligence projects", "Codifikai case studies", "custom software Colombia", "systems in production"],
+    },
+  },
+  faq: {
+    path: "/faq",
+    title: {
+      es: "Preguntas frecuentes sobre IA y automatización",
+      en: "Frequently asked questions about AI and automation",
+    },
+    description: {
+      es: "Respuestas directas sobre qué hace Codifikai, cómo arranca un proyecto, si hay que cambiar tus herramientas y si trabajamos fuera de Colombia.",
+      en: "Straight answers on what Codifikai does, how a project starts, whether you need to replace your tools and whether we work outside Colombia.",
+    },
+    keywords: {
+      es: ["preguntas frecuentes Codifikai", "cómo funciona la automatización con IA", "agencia de inteligencia artificial Colombia"],
+      en: ["Codifikai FAQ", "how AI automation works", "artificial intelligence agency Colombia"],
+    },
+  },
   blog: {
     path: "/blog",
     title: {
