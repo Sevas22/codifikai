@@ -198,7 +198,7 @@ export const SERVICES: Service[] = [
     slug: "seo-geo",
     order: 2,
     badge: { es: "Más solicitado", en: "Most requested" },
-    title: { es: "Posicionamiento SEO y GEO", en: "SEO and GEO positioning" },
+    title: { es: "Posicionamiento SEO, GEO y AEO", en: "SEO, GEO and AEO positioning" },
     short: {
       es: "Que te encuentren en Google y en las respuestas de la IA.",
       en: "Get found on Google and in AI answers.",
@@ -207,7 +207,7 @@ export const SERVICES: Service[] = [
       es: "Posicionamiento en Google y en asistentes de IA como ChatGPT, Gemini y Perplexity: SEO técnico, SEO local y contenido que los buscadores entienden y citan.",
       en: "Positioning on Google and in AI assistants like ChatGPT, Gemini and Perplexity: technical SEO, local SEO and content that search engines understand and cite.",
     },
-    eyebrow: { es: "Posicionamiento SEO y GEO", en: "SEO and GEO positioning" },
+    eyebrow: { es: "Posicionamiento SEO, GEO y AEO", en: "SEO, GEO and AEO positioning" },
     headlineLines: {
       es: [{ text: "Que te encuentren", tone: "solid" }, { text: "en Google", tone: "outline-accent" }, { text: "y en la IA.", tone: "gradient" }],
       en: [{ text: "Get found", tone: "solid" }, { text: "on Google", tone: "outline-accent" }, { text: "and in AI answers.", tone: "gradient" }],
@@ -222,6 +222,7 @@ export const SERVICES: Service[] = [
         "SEO técnico: velocidad, estructura, datos estructurados e indexación",
         "SEO local para que aparezcas en tu zona y en Google Maps",
         "GEO: contenido y señales de entidad para que los asistentes de IA citen a tu empresa",
+        "AEO: respuestas directas y marcado técnico para que tu empresa salga en las respuestas destacadas",
         "Contenido orientado a las preguntas que la gente ya hace",
         "Medición con datos reales de Search Console y Analytics",
       ],
@@ -230,6 +231,7 @@ export const SERVICES: Service[] = [
         "Technical SEO: speed, structure, structured data and indexing",
         "Local SEO so you appear in your area and on Google Maps",
         "GEO: content and entity signals so AI assistants cite your company",
+        "AEO: direct answers and technical markup so your company appears in featured answers",
         "Content aimed at the questions people are already asking",
         "Measurement with real Search Console and Analytics data",
       ],
@@ -292,17 +294,18 @@ export const SERVICES: Service[] = [
     ],
     seo: {
       title: {
-        es: "Posicionamiento SEO y GEO para empresas | Codifikai",
-        en: "SEO and GEO positioning for businesses | Codifikai",
+        es: "Posicionamiento SEO, GEO y AEO para empresas | Codifikai",
+        en: "SEO, GEO and AEO positioning for businesses | Codifikai",
       },
       description: {
-        es: "SEO técnico, SEO local y GEO para que tu empresa aparezca en Google y en las respuestas de ChatGPT, Gemini y Perplexity. Medido con datos reales.",
-        en: "Technical SEO, local SEO and GEO so your company shows up on Google and in ChatGPT, Gemini and Perplexity answers. Measured with real data.",
+        es: "SEO técnico, SEO local, GEO y AEO para que tu empresa aparezca en Google y en las respuestas de ChatGPT, Gemini y Perplexity. Medido con datos reales.",
+        en: "Technical SEO, local SEO, GEO and AEO so your company shows up on Google and in ChatGPT, Gemini and Perplexity answers. Measured with real data.",
       },
       keywords: {
         es: [
           "posicionamiento SEO",
           "GEO",
+          "AEO",
           "optimización para motores generativos",
           "agencia SEO Colombia",
           "SEO local",
@@ -311,6 +314,7 @@ export const SERVICES: Service[] = [
         en: [
           "SEO positioning",
           "GEO",
+          "AEO",
           "generative engine optimization",
           "SEO agency Colombia",
           "local SEO",
@@ -782,8 +786,8 @@ export const SERVICES: Service[] = [
     faqs: [
       {
         q: {
-          es: "¿En qué se diferencia del posicionamiento SEO y GEO?",
-          en: "How is this different from SEO and GEO positioning?",
+          es: "¿En qué se diferencia del posicionamiento SEO, GEO y AEO?",
+          en: "How is this different from SEO, GEO and AEO positioning?",
         },
         a: {
           es: "El posicionamiento hace que te encuentren; el marketing digital convierte esas visitas en clientes con embudos, campañas y seguimiento. Funcionan mejor juntos, y se pueden contratar por separado o combinados.",

@@ -42,6 +42,9 @@ import { useLocalePath } from "@/hooks/use-locale-path"
 
 const CLOSE_DELAY_MS = 140
 
+/** Servicios de la franja de IA que el menú pone en la columna derecha. */
+const MENU_RIGHT_IDS = new Set(["seo-geo"])
+
 /**
  * Servicios que el panel presenta como una sola entrada con un acceso a cada
  * página. Solo cambia el menú: cada servicio conserva su propia URL.
@@ -129,7 +132,7 @@ function MenuRow({
     <Link
       href={href}
       className={cn(
-        "group flex items-start gap-3 rounded-2xl p-3 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent",
+        "group flex items-start gap-3 rounded-2xl p-2.5 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent",
         featured ? "hover:bg-ed-canvas-raised/85" : "hover:bg-ed-canvas-sunken"
       )}
     >
@@ -148,16 +151,22 @@ function MenuRow({
   )
 }
 
+/** Texto de la franja de agentes (los seis nombres salen de la misma lista que la portada). */
+const AGENTS_LINE = {
+  es: "Seis agentes: atención, ventas, agenda, cobranza, pedidos e inventarios.",
+  en: "Six agents: support, sales, scheduling, collections, orders and inventory.",
+} as const
+
 /** Caritas de los seis agentes, superpuestas: anticipan lo que hay detrás del enlace. */
 function AgentFaces() {
   return (
-    <span className="mt-2.5 flex items-center" aria-hidden>
+    <span className="flex items-center" aria-hidden>
       {AGENTS.map((agent, i) => (
         <span
           key={agent.id}
           className={cn(
-            "relative h-6 w-6 overflow-hidden rounded-full bg-ed-canvas-raised ring-2 ring-ed-canvas-raised",
-            i > 0 && "-ml-1.5"
+            "relative h-7 w-7 overflow-hidden rounded-full bg-ed-canvas-raised ring-2 ring-ed-canvas-raised",
+            i > 0 && "-ml-2"
           )}
           style={{ zIndex: AGENTS.length - i }}
         >
@@ -165,7 +174,7 @@ function AgentFaces() {
             src={agent.image}
             alt=""
             fill
-            sizes="24px"
+            sizes="28px"
             className="origin-[45%_36%] scale-[1.7] object-cover"
           />
         </span>
@@ -221,8 +230,10 @@ export function ServicesMenu({
 
   const intro = SERVICES_MENU_INTRO
   // El núcleo de IA va aparte; el resto, con los grupos ya fusionados.
-  const core = SERVICES.filter((service) => service.tier === "ai")
-  const others = buildEntries(SERVICES.filter((service) => service.tier !== "ai"))
+  const core = SERVICES.filter((service) => service.tier === "ai" && !MENU_RIGHT_IDS.has(service.id))
+  const others = buildEntries(
+    SERVICES.filter((service) => service.tier !== "ai" || MENU_RIGHT_IDS.has(service.id))
+  )
 
   return (
     <div
@@ -271,10 +282,10 @@ export function ServicesMenu({
             // no desbordar en portátiles estrechos.
             className="absolute left-1/2 top-[calc(100%+0.9rem)] z-50 w-[min(48rem,calc(100vw-2rem))] -translate-x-1/2"
           >
-            <div className="ed-light-scope overflow-hidden rounded-[1.75rem] border border-ed-rule bg-ed-canvas-raised/95 p-2 shadow-[0_28px_70px_-24px_rgba(24,20,48,0.38)] backdrop-blur-xl">
-              <div className="grid grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-2">
+            <div className="ed-light-scope max-h-[calc(100dvh-6.5rem)] overflow-y-auto overscroll-contain [scrollbar-width:thin] rounded-[1.75rem] border border-ed-rule bg-ed-canvas-raised/95 p-2 shadow-[0_28px_70px_-24px_rgba(24,20,48,0.38)] backdrop-blur-xl">
+              <div className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-2">
                 {/* Núcleo de IA: lo que nos define, sobre un fondo de marca suave. */}
-                <div className="rounded-3xl bg-[linear-gradient(160deg,color-mix(in_oklch,var(--brand-violet)_15%,transparent),color-mix(in_oklch,var(--brand-magenta)_6%,transparent)_65%,transparent)] p-2 ring-1 ring-inset ring-[color-mix(in_oklch,var(--brand-violet)_22%,transparent)]">
+                <div className="rounded-3xl bg-[linear-gradient(160deg,color-mix(in_oklch,var(--brand-violet)_15%,transparent),color-mix(in_oklch,var(--brand-magenta)_6%,transparent)_65%,transparent)] p-2 ring-1 ring-inset ring-[color-mix(in_oklch,var(--brand-violet)_22%,transparent)] flex flex-col">
                   <p className="ed-label px-3 pb-1 pt-2.5 text-ed-accent">
                     {SERVICE_TIERS.ai.label[language]}
                   </p>
@@ -288,12 +299,21 @@ export function ServicesMenu({
                           title={service.title[language]}
                           short={service.short[language]}
                           badge={service.badge?.[language]}
-                        >
-                          {service.id === "ai-agents" ? <AgentFaces /> : null}
-                        </MenuRow>
+                        />
                       </li>
                     ))}
                   </ul>
+
+                  {/* Franja de agentes: rellena la base del bloque y anticipa lo que hay detrás. */}
+                  <Link
+                    href={path("/services/ai-agents")}
+                    className="group mt-auto flex flex-col gap-2.5 rounded-2xl bg-ed-canvas-raised/70 p-3 ring-1 ring-inset ring-ed-rule transition-colors duration-200 hover:bg-ed-canvas-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ed-accent"
+                  >
+                    <AgentFaces />
+                    <span className="text-[0.78rem] leading-snug text-ed-ink-soft">
+                      {AGENTS_LINE[language]}
+                    </span>
+                  </Link>
                 </div>
 
                 {/* Lo que rodea al núcleo. */}
@@ -308,12 +328,13 @@ export function ServicesMenu({
                             icon={iconFor(entry.service.id)}
                             title={entry.service.title[language]}
                             short={entry.service.short[language]}
+                            badge={entry.service.badge?.[language]}
                           />
                         </li>
                       ) : (
                         <li key={entry.services.map((service) => service.id).join("+")}>
                           {/* Entrada fusionada: el título no es un enlace, cada página tiene el suyo. */}
-                          <div className="flex items-start gap-3 rounded-2xl p-3">
+                          <div className="flex items-start gap-3 rounded-2xl p-2.5">
                             <IconTile icon={Megaphone} />
                             <span className="min-w-0 flex-1">
                               <span className="block text-[0.9375rem] font-semibold leading-tight tracking-tight text-ed-ink">
