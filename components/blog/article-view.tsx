@@ -3,7 +3,7 @@
 import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, ArrowUpRight, Clock, MapPin } from "lucide-react"
+import { ArrowLeft, ArrowUpRight, Clock, MapPin, Tag } from "lucide-react"
 
 import { EdSection, Reveal, SectionHeading } from "@/components/home/ed-primitives"
 import { Navigation } from "@/components/navigation"
@@ -13,6 +13,8 @@ import type { BlogPost, BlogPostMeta } from "@/lib/blog"
 import { WHATSAPP_URL } from "@/lib/contact"
 import { useLocalePath } from "@/hooks/use-locale-path"
 import { blogPostPath } from "@/lib/blog-paths"
+import { BLOG_PILLARS } from "@/lib/blog-pillars"
+import { SERVICES } from "@/lib/services"
 
 const LABELS = {
   es: {
@@ -24,6 +26,7 @@ const LABELS = {
     ctaLead:
       "Si algo de lo que leíste te suena a tu operación, cuéntanoslo. Te decimos sin rodeos si hay algo que se pueda automatizar.",
     cta: "Escríbenos por WhatsApp",
+    service: "Conoce el servicio",
     updated: "Actualizado",
   },
   en: {
@@ -35,6 +38,7 @@ const LABELS = {
     ctaLead:
       "If any of this sounds like your operation, tell us. We'll tell you straight whether there's something worth automating.",
     cta: "Message us on WhatsApp",
+    service: "Learn about the service",
     updated: "Updated",
   },
 } as const
@@ -168,6 +172,10 @@ export function ArticleView({
   const articleRef = React.useRef<HTMLElement>(null)
   // Solo se anuncia la actualización cuando de verdad difiere de la publicación.
   const wasUpdated = new Date(post.updatedAt) > new Date(post.date)
+  // Cada tema tiene su servicio: cierra el artículo con el enlace a esa página.
+  const service = post.pillar
+    ? SERVICES.find((item) => item.slug === BLOG_PILLARS[post.pillar!].serviceSlug)
+    : undefined
 
   return (
     <div className="ed-light-scope relative bg-ed-canvas text-ed-ink">
@@ -194,6 +202,12 @@ export function ArticleView({
             </Link>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
+              {post.pillar ? (
+                <span className="ed-label inline-flex items-center gap-2 rounded-full border border-ed-accent/40 bg-ed-canvas-raised px-3.5 py-1.5 text-ed-accent">
+                  <Tag className="h-3 w-3" aria-hidden />
+                  {BLOG_PILLARS[post.pillar].label}
+                </span>
+              ) : null}
               <span className="ed-label inline-flex items-center gap-2 rounded-full border border-ed-rule bg-ed-canvas-raised px-3.5 py-1.5 text-ed-accent">
                 <MapPin className="h-3 w-3" aria-hidden />
                 {post.city || post.department}
@@ -282,6 +296,17 @@ export function ArticleView({
               aria-hidden
             />
           </Link>
+          {service ? (
+            <p className="mt-6">
+              <Link
+                href={path(`/services/${service.slug}`)}
+                className="inline-flex items-center gap-1.5 text-[0.875rem] font-semibold text-ed-ink transition-colors hover:text-ed-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ed-accent"
+              >
+                {labels.service}: {service.title[language]}
+                <ArrowUpRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </p>
+          ) : null}
         </div>
       </EdSection>
 
@@ -297,8 +322,12 @@ export function ArticleView({
                   className="ed-card ed-card-lift group flex h-full flex-col p-6"
                 >
                   <span className="ed-label inline-flex items-center gap-2 text-ed-accent">
-                    <MapPin className="h-3 w-3" aria-hidden />
-                    {item.city || item.department}
+                    {item.pillar ? (
+                      <Tag className="h-3 w-3" aria-hidden />
+                    ) : (
+                      <MapPin className="h-3 w-3" aria-hidden />
+                    )}
+                    {item.pillar ? BLOG_PILLARS[item.pillar].label : item.city || item.department}
                   </span>
                   <h3 className="mt-4 text-[1.0625rem] font-semibold leading-snug tracking-tight text-ed-ink">
                     {item.title}

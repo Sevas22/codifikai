@@ -5,10 +5,15 @@ import { marked } from "marked"
 import { isSupabaseConfigured } from "@/lib/supabase/server"
 import { createPublicClient } from "@/lib/supabase/public"
 import { extractFaqs, type Faq } from "@/lib/faq-extract"
+import { isBlogPillar, type BlogPillar } from "@/lib/blog-pillars"
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog", "posts")
 
-export type BlogDepartment = "Cundinamarca" | "Boyacá"
+/**
+ * "Colombia" es para artículos de alcance nacional y solo existe en los
+ * archivos: la tabla `blog_posts` limita el departamento a los otros dos.
+ */
+export type BlogDepartment = "Cundinamarca" | "Boyacá" | "Colombia"
 
 export type BlogPostMeta = {
   slug: string
@@ -21,6 +26,8 @@ export type BlogPostMeta = {
   keywords: string[]
   author: string
   coverImage?: string
+  /** Tema del artículo: agrupa el listado y enlaza al servicio correspondiente. */
+  pillar?: BlogPillar
   draft: boolean
 }
 
@@ -41,12 +48,15 @@ function readPostFile(fileName: string): BlogPost {
     title: data.title ?? slug,
     description: data.description ?? "",
     date,
-    updatedAt: date,
+    // `updated` solo se escribe cuando el texto cambió de verdad: cambiar la
+    // fecha sin una revisión real es justo lo que Google penaliza.
+    updatedAt: data.updated ? new Date(data.updated).toISOString() : date,
     department: (data.department as BlogDepartment) ?? "Cundinamarca",
     city: data.city ?? "",
     keywords: Array.isArray(data.keywords) ? data.keywords : [],
     author: data.author ?? "Equipo Codifikai",
     coverImage: data.coverImage || undefined,
+    pillar: isBlogPillar(data.pillar) ? data.pillar : undefined,
     draft: Boolean(data.draft),
     html: marked.parse(content, { async: false }) as string,
     faqs: extractFaqs(content),

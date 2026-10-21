@@ -1,45 +1,50 @@
 # Calendario editorial — Blog Codifikai
 
-Banco de temas para posicionamiento local (SEO/GEO) en Cundinamarca y Boyacá.
-Cruza ciudades/municipios de la región con los servicios de Codifikai (IA, automatización,
-desarrollo de software, marketing digital).
+Organizado por los tres temas de [`STRATEGY.md`](./STRATEGY.md): **SEO/GEO/AEO**, **agentes de IA** y
+**automatización con IA**. Reglas de redacción en [`AGENT_INSTRUCTIONS.md`](./AGENT_INSTRUCTIONS.md).
 
-Cómo usar esta lista: al escribir un artículo nuevo, elegir el primer tema en estado
-`pendiente`, escribirlo siguiendo `AGENT_INSTRUCTIONS.md`, y cambiar su estado a `publicado`
-(o `en revisión` mientras espera aprobación humana) en esta misma tabla.
+Estados: `publicado` · `en revisión` (borrador listo, `draft: true`) · `por reescribir` · `pendiente`.
 
-## Ya publicados
+## Primera ola
 
-| Tema | Ciudad / Departamento | Palabra clave principal | Estado |
-|---|---|---|---|
-| Automatización con IA para pymes | Chía y Zipaquirá | automatización IA Chía | publicado |
-| Transformación digital en el corredor industrial | Tunja, Duitama y Sogamoso | transformación digital Boyacá | publicado |
-| Atención al cliente con IA, guía práctica | Cundinamarca (general) | atención al cliente IA Cundinamarca | publicado |
+| Artículo | Tema | Estado |
+|---|---|---|
+| SEO, GEO y AEO: qué son y cómo se complementan (**pilar**) | seo-geo | en revisión |
+| Cómo aparecer en ChatGPT, Gemini y Perplexity | seo-geo | en revisión |
+| Auditoría GEO: checklist para medir tu visibilidad en IA | seo-geo | en revisión |
+| Datos estructurados para empresas: qué marcar y validar | seo-geo | en revisión |
+| SEO local en Colombia: guía de Google Business Profile | seo-geo | en revisión |
+| Agentes de IA para empresas: guía completa 2026 (**pilar**) | agentes-ia | en revisión |
+| Agente de IA, chatbot o automatización: cuál elegir | agentes-ia | en revisión |
+| WhatsApp Business con IA: errores y buenas prácticas (slug `whatsapp-business-con-ia-errores-y-buenas-practicas`) | agentes-ia | pendiente de redactar |
+| Automatización de procesos con IA: por dónde empezar (**pilar**, slug `automatizacion-de-procesos-con-ia-por-donde-empezar`) | automatizacion | pendiente de redactar |
+| Cómo elegir una agencia de IA y SEO en Colombia: 10 preguntas (slug `como-elegir-agencia-de-ia-y-seo-en-colombia`) | transversal | pendiente de redactar |
+| SEO industrial en Sogamoso (salvar del borrador `blog/semana-2026-10-12`, enlazando al pilar) | seo-geo | pendiente de redactar |
+| Atención al cliente con IA para empresas de Cundinamarca (slug actual, publicado) | agentes-ia | por reescribir |
+| Automatización con IA en Chía y Zipaquirá (slug actual, publicado) | automatizacion | por reescribir |
+| Transformación digital en Tunja, Duitama y Sogamoso (slug actual, publicado) | automatizacion | por reescribir |
 
-## Banco de temas pendientes
+**Dependencias de enlaces:** la guía de agentes enlaza a los artículos de WhatsApp y de automatización, y el de
+agente vs. chatbot enlaza a este último. No publicar la guía de agentes ni ese artículo hasta que existan
+sus destinos. Los tres artículos publicados conservan su URL; al reescribirlos se usa `updated` con la fecha real.
 
-| Tema | Ciudad / Departamento | Palabra clave principal | Estado |
-|---|---|---|---|
-| Cómo elegir un desarrollador de software a medida en Soacha | Soacha, Cundinamarca | desarrollo de software Soacha | pendiente |
-| SEO local para negocios en Facatativá: guía paso a paso | Facatativá, Cundinamarca | SEO local Facatativá | pendiente |
-| Automatización de inventario para comercios de Fusagasugá | Fusagasugá, Cundinamarca | automatización inventario Fusagasugá | pendiente |
-| IA para el sector agroindustrial en Girardot y el Alto Magdalena | Girardot, Cundinamarca | inteligencia artificial agroindustria Cundinamarca | pendiente |
-| Por qué tu empresa en Cajicá necesita un sistema de ventas, no solo una página web | Cajicá, Cundinamarca | sistema de ventas Cajicá | pendiente |
-| Automatización para logística y transporte en Mosquera y Funza | Mosquera y Funza, Cundinamarca | automatización logística Cundinamarca | pendiente |
-| Cómo digitalizar un negocio familiar en Madrid, Cundinamarca sin arriesgar la operación | Madrid, Cundinamarca | digitalización pymes Madrid Cundinamarca | pendiente |
-| Marketing digital con IA para negocios turísticos de Villa de Leyva | Villa de Leyva, Boyacá | marketing digital Villa de Leyva | pendiente |
-| Software a medida para empresas manufactureras de Duitama | Duitama, Boyacá | software a medida Duitama | pendiente |
-| Automatización de cotizaciones para el sector siderúrgico en Sogamoso | Sogamoso, Boyacá | automatización de cotizaciones Sogamoso | pendiente |
-| Por qué las empresas de Tunja están cambiando Excel por sistemas conectados | Tunja, Boyacá | sistemas empresariales Tunja | pendiente |
-| Comercio electrónico con IA para negocios de Chiquinquirá | Chiquinquirá, Boyacá | comercio electrónico Chiquinquirá | pendiente |
-| Automatización de agenda y reservas para negocios de Paipa (turismo y bienestar) | Paipa, Boyacá | automatización reservas Paipa | pendiente |
-| Errores comunes al automatizar WhatsApp Business en pymes de Cundinamarca | Cundinamarca (general) | automatización WhatsApp Business Colombia | pendiente |
-| Cómo saber si tu empresa en Boyacá está lista para adoptar IA | Boyacá (general) | inteligencia artificial empresas Boyacá | pendiente |
-| Automatización de facturación y cartera para pymes de la Sabana de Bogotá | Sabana de Bogotá, Cundinamarca | automatización facturación pymes Colombia | pendiente |
-| SEO para empresas industriales de Sogamoso: cómo aparecer primero en Google | Sogamoso, Boyacá | SEO industrial Sogamoso | pendiente |
-| Del Excel al sistema: modernización de procesos para distribuidoras en Zipaquirá | Zipaquirá, Cundinamarca | modernización de procesos Zipaquirá | pendiente |
+La rama `blog/semana-2026-10-12` queda **superada** por esta serie: no se fusiona.
 
-Cuando este banco se acorte a menos de 5 temas pendientes, ampliar la lista agregando
-nuevos municipios (ej. Ubaté, Guaduas, Villapinzón en Cundinamarca; Garagoa, Moniquirá,
-Puerto Boyacá en Boyacá) o nuevos ángulos de servicio (mantenimiento de sistemas, integración
-de IA con ERPs existentes, casos de uso por sector).
+## Banco de temas (por tema)
+
+**SEO, GEO y AEO:** SEO técnico para pymes (checklist) · Search Console para empresas: informes clave ·
+Cómo medir el tráfico que llega desde asistentes de IA · Reseñas de Google sin romper las reglas ·
+SEO para clínicas y consultorios · SEO para comercio electrónico en Colombia.
+
+**Agentes de IA:** Agente de IA de ventas: reglas y guion · Agente de IA para agendar citas ·
+Agentes de IA y cobranza: límites de la Ley 2300 de 2023 · Agente de IA para pedidos e inventarios ·
+Cómo evaluar un agente antes de lanzarlo · Privacidad y datos en agentes de IA (Ley 1581 de 2012).
+
+**Automatización con IA:** Automatización de cotizaciones · Automatización de facturación y cartera ·
+Integrar IA con tu ERP o CRM · Cómo calcular el retorno de una automatización con tus propios números.
+
+**Decisión:** Qué factores determinan el costo de un agente de IA (sin cifras inventadas) ·
+Qué incluye un servicio de SEO, GEO y AEO · Caso de estudio real (requiere datos y permiso del cliente).
+
+**Capa local (secundaria):** Automatización de inventario en Fusagasugá · IA en agroindustria en Girardot ·
+Marketing con IA en Villa de Leyva · Automatización de cotizaciones en Sogamoso · Software a medida en Duitama.

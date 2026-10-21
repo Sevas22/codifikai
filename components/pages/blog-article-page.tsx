@@ -5,6 +5,7 @@ import { Footer } from "@/components/sections/footer"
 import { estimateReadingMinutes, withHeadingIds } from "@/lib/blog-toc"
 import { getAllPosts, getPostBySlug } from "@/lib/blog"
 import { BLOG_LOCALE, blogPostPath } from "@/lib/blog-paths"
+import { BLOG_PILLARS } from "@/lib/blog-pillars"
 import { LOCALE_TAGS, localePath } from "@/lib/i18n"
 import { getSiteUrl, siteName } from "@/lib/site"
 
@@ -22,14 +23,18 @@ export async function BlogArticlePage({ slug }: { slug: string }) {
   const { html, toc } = withHeadingIds(post.html)
   const readingMinutes = estimateReadingMinutes(post.html)
 
-  // Se priorizan los artículos del mismo departamento: el blog es local y esa
-  // es la relación más útil para el lector.
+  // Primero los del mismo tema (así el lector sigue en el mismo hilo y los
+  // artículos se enlazan entre sí), después los de la misma zona.
   const others = (await getAllPosts()).filter((p) => p.slug !== post.slug)
-  const sameArea = others.filter((p) => p.department === post.department)
-  const related = [...sameArea, ...others.filter((p) => !sameArea.includes(p))].slice(
-    0,
-    RELATED_COUNT
+  const sameTopic = others.filter((p) => post.pillar && p.pillar === post.pillar)
+  const sameArea = others.filter(
+    (p) => p.department === post.department && !sameTopic.includes(p)
   )
+  const related = [
+    ...sameTopic,
+    ...sameArea,
+    ...others.filter((p) => !sameTopic.includes(p) && !sameArea.includes(p)),
+  ].slice(0, RELATED_COUNT)
 
   const siteUrl = getSiteUrl()
   const articleUrl = `${siteUrl}${blogPostPath(post.slug)}`
@@ -45,11 +50,11 @@ export async function BlogArticlePage({ slug }: { slug: string }) {
     author: { "@type": "Organization", name: post.author },
     publisher: { "@id": `${siteUrl}#organization` },
     mainEntityOfPage: articleUrl,
-    about: post.department,
+    about: post.pillar ? { "@type": "Thing", name: BLOG_PILLARS[post.pillar].label } : post.department,
     // Minutos de lectura: los buscadores lo usan para previsualizar el esfuerzo.
     timeRequired: `PT${readingMinutes}M`,
     spatialCoverage: {
-      "@type": "AdministrativeArea",
+      "@type": post.department === "Colombia" ? "Country" : "AdministrativeArea",
       name: post.city || post.department,
     },
   }

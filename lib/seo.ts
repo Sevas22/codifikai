@@ -253,11 +253,11 @@ const PAGES = {
       en: "Artificial intelligence blog for businesses",
     },
     description: {
-      es: "Guías prácticas de inteligencia artificial, automatización y software a medida para empresas de Cundinamarca y Boyacá.",
+      es: "Guías prácticas de posicionamiento SEO, GEO y AEO, agentes de IA y automatización con IA para empresas de Colombia.",
       en: "Practical guides on artificial intelligence, automation and custom software for companies in Colombia.",
     },
     keywords: {
-      es: ["blog IA Colombia", "automatización Cundinamarca", "inteligencia artificial pymes"],
+      es: ["blog IA Colombia", "SEO GEO AEO", "agentes de IA para empresas", "automatización con IA", "inteligencia artificial pymes"],
       en: ["AI blog", "business automation", "AI for small business"],
     },
   },

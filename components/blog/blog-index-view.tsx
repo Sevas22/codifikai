@@ -3,7 +3,7 @@
 import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, MapPin } from "lucide-react"
+import { ArrowUpRight, MapPin, Tag } from "lucide-react"
 
 import { EdSection, Reveal, WordReveal } from "@/components/home/ed-primitives"
 import { ParticleField } from "@/components/home/particle-field"
@@ -12,6 +12,7 @@ import { useLanguage } from "@/components/providers/language-provider"
 import type { BlogPostMeta } from "@/lib/blog"
 import { WHATSAPP_URL } from "@/lib/contact"
 import { BLOG_LOCALE, blogPostPath } from "@/lib/blog-paths"
+import { BLOG_PILLARS } from "@/lib/blog-pillars"
 import { cn } from "@/lib/utils"
 import { useLocalePath } from "@/hooks/use-locale-path"
 
@@ -22,7 +23,7 @@ const LABELS = {
     eyebrow: "Blog de inteligencia artificial para empresas",
     headline: "Lo que aprendemos, en abierto.",
     highlight: ["abierto"],
-    lead: "Guías prácticas de inteligencia artificial, automatización y presencia digital para empresas de Colombia. Sin humo y sin tecnicismos innecesarios.",
+    lead: "Guías prácticas de agentes de IA, automatización y posicionamiento SEO, GEO y AEO para empresas de Colombia. Sin humo y sin tecnicismos innecesarios.",
     featured: "Destacado",
     all: "Todos",
     read: "Leer artículo",
@@ -37,7 +38,7 @@ const LABELS = {
     eyebrow: "Artificial intelligence blog for businesses",
     headline: "What we learn, in the open.",
     highlight: ["open."],
-    lead: "Practical guides on artificial intelligence, automation and digital presence for companies in Colombia. No smoke, no needless jargon. Articles are written in Spanish.",
+    lead: "Practical guides on AI agents, automation and SEO, GEO and AEO positioning for companies in Colombia. No smoke, no needless jargon. Articles are written in Spanish.",
     featured: "Featured",
     all: "All",
     read: "Read article",
@@ -54,6 +55,11 @@ function formatDate(date: string, language: "es" | "en") {
     month: "short",
     year: "numeric",
   })
+}
+
+/** Etiqueta con la que se agrupa y filtra un artículo: su tema o, si no tiene, su zona. */
+function topicOf(post: BlogPostMeta) {
+  return post.pillar ? BLOG_PILLARS[post.pillar].label : post.city || post.department
 }
 
 function PostCard({
@@ -106,8 +112,12 @@ function PostCard({
       <div className={cn("flex flex-1 flex-col p-6", featured && "sm:p-9")}>
         <span className="flex flex-wrap items-center justify-between gap-2">
           <span className="ed-label inline-flex items-center gap-2 text-ed-accent">
-            <MapPin className="h-3 w-3" aria-hidden />
-            {post.city || post.department}
+            {post.pillar ? (
+              <Tag className="h-3 w-3" aria-hidden />
+            ) : (
+              <MapPin className="h-3 w-3" aria-hidden />
+            )}
+            {topicOf(post)}
           </span>
           {foreign ? (
             <span className="ed-label rounded-full border border-ed-rule px-2.5 py-1 text-[0.5625rem]">
@@ -159,16 +169,20 @@ export function BlogIndexView({ posts }: { posts: BlogPostMeta[] }) {
   const labels = LABELS[language] ?? LABELS.es
   const [place, setPlace] = React.useState<string>("__all")
 
-  // Filtro por ciudad o departamento: el blog es local y esa es la forma
-  // natural de buscar en él.
+  // Filtro por tema (los tres pilares del blog, en su orden) y, para los
+  // artículos sin tema, por ciudad o departamento.
   const places = React.useMemo(() => {
-    const set = new Set<string>()
-    posts.forEach((post) => set.add(post.city || post.department))
-    return [...set].sort((a, b) => a.localeCompare(b, "es"))
+    const set = new Set(posts.map(topicOf))
+    const pillarLabels: string[] = Object.values(BLOG_PILLARS).map((pillar) => pillar.label)
+    const pillars = pillarLabels.filter((label) => set.has(label))
+    const others = [...set]
+      .filter((label) => !pillarLabels.includes(label))
+      .sort((a, b) => a.localeCompare(b, "es"))
+    return [...pillars, ...others]
   }, [posts])
 
   const visible = React.useMemo(
-    () => (place === "__all" ? posts : posts.filter((p) => (p.city || p.department) === place)),
+    () => (place === "__all" ? posts : posts.filter((p) => topicOf(p) === place)),
     [posts, place]
   )
 
